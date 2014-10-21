@@ -7,8 +7,6 @@ public class LOTRBiomeGenAngmarMountains extends LOTRBiomeGenAngmar
 		super(i);
 		
 		spawnableCreatureList.clear();
-		
-		decorator.generateWater = false;
 	}
 	
 	@Override

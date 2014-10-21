@@ -17,7 +17,7 @@ public class LOTRBiomeGenEriadorWoodlands extends LOTRBiomeGenEriador
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityRabbit.class, 6, 4, 4));
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityBird.class, 12, 4, 4));
 
-		decorator.treesPerChunk = 8;
+		decorator.treesPerChunk = 6;
 		decorator.flowersPerChunk = 4;
 		decorator.doubleFlowersPerChunk = 1;
 		decorator.doubleGrassPerChunk = 2;

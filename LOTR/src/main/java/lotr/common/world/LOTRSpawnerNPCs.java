@@ -73,7 +73,7 @@ public class LOTRSpawnerNPCs
 
 		ChunkCoordinates spawnPointCoords = world.getSpawnPoint();
 		int totalSpawnCountValue = countNPCs(world);
-		int maxSpawnCountValue = LOTRDimension.getCurrentDimension(world).maxSpawnedNPCs * eligibleChunksForSpawning.size() / 256;
+		int maxSpawnCountValue = LOTRDimension.getCurrentDimension(world).spawnCap * eligibleChunksForSpawning.size() / 256;
 		if (totalSpawnCountValue <= maxSpawnCountValue)
 		{
 			ArrayList<ChunkCoordIntPair> tmp = new ArrayList(eligibleChunksForSpawning.keySet());

@@ -52,7 +52,7 @@ public class LOTRRenderPlayer
 		EntityPlayer entityplayer = event.entityPlayer;
 		float tick = event.partialRenderTick;
 		
-		if (shouldRenderAlignment(entityplayer) && (mc.theWorld.provider instanceof LOTRWorldProvider || LOTRMod.alwaysShowAlignment))
+		if (shouldRenderAlignment(entityplayer) && (mc.theWorld.provider instanceof LOTRWorldProvider || LOTRConfig.alwaysShowAlignment))
 		{
 			int alignment = LOTRLevelData.getData(entityplayer).getAlignment(LOTRTickHandlerClient.currentAlignmentFaction);
             double dist = entityplayer.getDistanceSqToEntity(renderManager.livingPlayer);
@@ -87,7 +87,7 @@ public class LOTRRenderPlayer
 				}
 				
 				mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);
-				LOTRTickHandlerClient.drawTexturedModalRect(-MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -19, 0, 18, 16, 16);
+				LOTRTickHandlerClient.drawTexturedModalRect(-MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -19, 0, 36, 16, 16);
 				LOTRTickHandlerClient.drawTextWithShadow(fr, 18 - MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -12, s, 1F);
 				
 				GL11.glColor4f(1F, 1F, 1F, 1F);
@@ -119,7 +119,7 @@ public class LOTRRenderPlayer
 		{
 			return false;
 		}
-		if (!LOTRMod.displayAlignmentAboveHead)
+		if (!LOTRConfig.displayAlignmentAboveHead)
 		{
 			return false;
 		}

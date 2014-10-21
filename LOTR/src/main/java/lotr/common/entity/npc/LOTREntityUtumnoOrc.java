@@ -1,7 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -79,6 +78,12 @@ public class LOTREntityUtumnoOrc extends LOTREntityOrc
 	public LOTRFaction getFaction()
 	{
 		return LOTRFaction.UTUMNO;
+	}
+	
+	@Override
+	protected LOTRAchievement getKillAchievement()
+	{
+		return LOTRAchievement.killUtumnoOrc;
 	}
 	
 	@Override

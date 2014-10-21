@@ -44,6 +44,11 @@ public class LOTRBannerProtection
 
 	public static boolean isProtectedByBanner(World world, int i, int j, int k, IFilter protectFilter, boolean sendMessage, double range)
 	{
+		if (!LOTRConfig.allowBannerProtection)
+		{
+			return false;
+		}
+		
 		String protectorName = null;
 		
 		List banners = world.getEntitiesWithinAABB(LOTREntityBanner.class, AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1).expand(range, range, range));
@@ -129,7 +134,7 @@ public class LOTRBannerProtection
 				}
 				else
 				{
-					if (banner.playerSpecificProtection)
+					if (banner.isPlayerSpecificProtection())
 					{
 						if (!banner.isPlayerWhitelisted(entityplayer))
 						{
@@ -152,12 +157,33 @@ public class LOTRBannerProtection
 			@Override
 			public void warnProtection(IChatComponent message)
 			{
-				if (entityplayer instanceof EntityPlayerMP)
+				if (entityplayer instanceof EntityPlayerMP && !entityplayer.worldObj.isRemote)
 				{
 					EntityPlayerMP entityplayermp = (EntityPlayerMP)entityplayer;
 					entityplayermp.addChatMessage(message);
 					entityplayermp.sendContainerToPlayer(entityplayer.inventoryContainer);
 				}
+			}
+		};
+	}
+	
+	public static IFilter forPlayer_returnMessage(final EntityPlayer entityplayer, final IChatComponent[] protectionMessage)
+	{
+		return new IFilter()
+		{
+			private IFilter internalPlayerFilter = forPlayer(entityplayer);
+			
+			@Override
+			public ProtectType protects(LOTREntityBanner banner)
+			{
+				return internalPlayerFilter.protects(banner);
+			}
+
+			@Override
+			public void warnProtection(IChatComponent message)
+			{
+				internalPlayerFilter.warnProtection(message);
+				protectionMessage[0] = message;
 			}
 		};
 	}

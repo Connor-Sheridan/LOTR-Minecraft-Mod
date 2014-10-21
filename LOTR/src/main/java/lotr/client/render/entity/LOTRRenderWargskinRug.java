@@ -20,11 +20,11 @@ public class LOTRRenderWargskinRug extends Render
     protected ResourceLocation getEntityTexture(Entity entity)
     {
         LOTREntityWargskinRug rug = (LOTREntityWargskinRug)entity;
-		String s = String.valueOf(rug.getRugType());
+		String s = rug.getRugType().textureName();
 		ResourceLocation r = (ResourceLocation)rugSkins.get(s);
 		if (r == null)
 		{
-			r = new ResourceLocation("lotr:item/wargskinRug_" + s + ".png");
+			r = new ResourceLocation("lotr:mob/warg/" + s + ".png");
 			rugSkins.put(s, r);
 		}
 		return r;
@@ -35,7 +35,7 @@ public class LOTRRenderWargskinRug extends Render
     {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
-        GL11.glTranslatef((float)d, (float)d1 + 1.5F, (float)d2);
+        GL11.glTranslatef((float)d, (float)d1, (float)d2);
         bindEntityTexture(entity);
         GL11.glScalef(-1F, -1F, 1F);
 		GL11.glRotatef(180F - entity.rotationYaw, 0F, 1F, 0F);

@@ -1,5 +1,6 @@
 package lotr.common.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCake;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
@@ -37,6 +38,8 @@ public class LOTRBlockPlaceableFood extends BlockCake
 		super();
 		foodHalfWidth = f;
 		foodHeight = f1;
+		setHardness(0.5F);
+		setStepSound(Block.soundTypeCloth);
 	}
 
 	@Override

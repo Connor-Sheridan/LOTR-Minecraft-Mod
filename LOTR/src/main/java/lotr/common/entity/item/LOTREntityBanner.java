@@ -3,6 +3,7 @@ package lotr.common.entity.item;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
+import java.util.List;
 import java.util.UUID;
 
 import lotr.common.*;
@@ -30,13 +31,14 @@ public class LOTREntityBanner extends Entity
 {
 	public static double PROTECTION_RANGE = 32D;
 
-	public boolean playerSpecificProtection;
+	private boolean playerSpecificProtection;
+	private boolean selfProtection = true;
 	
 	public static int ALIGNMENT_PROTECTION_MIN = 1;
 	public static int ALIGNMENT_PROTECTION_MAX = 1000;
 	private int alignmentProtection = ALIGNMENT_PROTECTION_MIN;
 	
-	public static int MAX_PLAYERS = 5;
+	public static int MAX_PLAYERS = 24;
 	private UUID[] allowedPlayers = new UUID[MAX_PLAYERS];
 	
 	public LOTREntityBanner(World world)
@@ -73,10 +75,49 @@ public class LOTREntityBanner extends Entity
 	
 	public boolean isProtectingTerritory()
 	{
+		if (!LOTRConfig.allowBannerProtection)
+		{
+			return false;
+		}
+		
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(boundingBox.minY);
 		int k = MathHelper.floor_double(posZ);
 		return worldObj.getBlock(i, j - 1, k) == Blocks.gold_block;
+	}
+	
+	public boolean isPlayerSpecificProtection()
+	{
+		return playerSpecificProtection;
+	}
+	
+	public void setPlayerSpecificProtection(boolean flag)
+	{
+		playerSpecificProtection = flag;
+		
+		if (!worldObj.isRemote)
+		{
+			sendBannerToAllPlayers(worldObj);
+		}
+	}
+	
+	public boolean isSelfProtection()
+	{
+		if (!LOTRConfig.allowSelfProtectingBanners)
+		{
+			return false;
+		}
+		return selfProtection;
+	}
+	
+	public void setSelfProtection(boolean flag)
+	{
+		selfProtection = flag;
+		
+		if (!worldObj.isRemote)
+		{
+			sendBannerToAllPlayers(worldObj);
+		}
 	}
 	
 	public int getAlignmentProtection()
@@ -87,11 +128,16 @@ public class LOTREntityBanner extends Entity
 	public void setAlignmentProtection(int i)
 	{
 		alignmentProtection = MathHelper.clamp_int(i, ALIGNMENT_PROTECTION_MIN, ALIGNMENT_PROTECTION_MAX);
+		
+		if (!worldObj.isRemote)
+		{
+			sendBannerToAllPlayers(worldObj);
+		}
 	}
 	
 	public void setPlacingPlayer(EntityPlayer player)
 	{
-		allowedPlayers[0] = player.getUniqueID();
+		whitelistPlayer(0, player.getUniqueID());
 	}
 	
 	public UUID getPlacingPlayer()
@@ -102,6 +148,11 @@ public class LOTREntityBanner extends Entity
 	public void whitelistPlayer(int index, UUID player)
 	{
 		allowedPlayers[index] = player;
+		
+		if (!worldObj.isRemote)
+		{
+			sendBannerToAllPlayers(worldObj);
+		}
 	}
 	
 	public boolean isPlayerWhitelisted(EntityPlayer entityplayer)
@@ -161,6 +212,7 @@ public class LOTREntityBanner extends Entity
     {
 		nbt.setByte("BannerType", (byte)getBannerType());
 		nbt.setBoolean("PlayerProtection", playerSpecificProtection);
+		nbt.setBoolean("SelfProtection", selfProtection);
         nbt.setInteger("AlignmentProtection", alignmentProtection);
         
         NBTTagList allowedPlayersTags = new NBTTagList();
@@ -186,6 +238,15 @@ public class LOTREntityBanner extends Entity
     	setBannerType(nbt.getByte("BannerType"));
     	playerSpecificProtection = nbt.getBoolean("PlayerProtection");
     	
+    	if (nbt.hasKey("SelfProtection"))
+    	{
+    		selfProtection = nbt.getBoolean("SelfProtection");
+    	}
+    	else
+    	{
+    		selfProtection = true;
+    	}
+    	
     	setAlignmentProtection(nbt.getInteger("AlignmentProtection"));
     	
     	NBTTagList allowedPlayersTags = nbt.getTagList("AllowedPlayers", Constants.NBT.TAG_COMPOUND);
@@ -207,49 +268,10 @@ public class LOTREntityBanner extends Entity
     	{
     		if (isProtectingTerritory() && entityplayer.getUniqueID().equals(allowedPlayers[0]))
     		{
-    			ByteBuf data = Unpooled.buffer();
-    			
-    			data.writeInt(getEntityId());
-    			data.writeBoolean(playerSpecificProtection);
-    			data.writeInt(getAlignmentProtection());
-
-    			for (int i = 0; i < allowedPlayers.length; i++)
-    			{
-    				UUID uuid = allowedPlayers[i];
-    				if (uuid != null)
-    				{
-    					GameProfile profile = MinecraftServer.getServer().func_152358_ax().func_152652_a(uuid);
-    					if (StringUtils.isEmpty(profile.getName()))
-						{
-							MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
-						}
-    					
-    					String username = profile.getName();
-    					if (!StringUtils.isEmpty(username))
-    					{
-	    					data.writeInt(i);
-	    					data.writeByte(username.length());
-	    					data.writeBytes(username.getBytes(Charsets.UTF_8));
-    					}
-    				}
-    			}
-    			data.writeInt(-1);
-    			
-    			Packet packet = new S3FPacketCustomPayload("lotr.bannerGui", data);
-    			((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(packet);
+    			sendBannerToPlayer(entityplayer, true);
     		}
     	}
     	return true;
-    }
-	
-	@Override
-    public boolean hitByEntity(Entity entity)
-    {
-		if (entity instanceof EntityPlayer)
-		{
-			return attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)entity), 0F);
-		}
-		return false;
     }
 
     @Override
@@ -266,9 +288,17 @@ public class LOTREntityBanner extends Entity
 				if (damagesource.getEntity() instanceof EntityPlayer)
 				{
 					EntityPlayer entityplayer = (EntityPlayer)damagesource.getEntity();
-					if (!isProtectingTerritory() && LOTRBannerProtection.isProtectedByBanner(worldObj, this, LOTRBannerProtection.forPlayer(entityplayer), true))
+					if (LOTRBannerProtection.isProtectedByBanner(worldObj, this, LOTRBannerProtection.forPlayer(entityplayer), true))
 					{
-						return false;
+						boolean protecting = isProtectingTerritory();
+						if (protecting && selfProtection)
+						{
+							return false;
+						}
+						else if (!protecting)
+						{
+							return false;
+						}
 					}
 				}
 				
@@ -302,4 +332,60 @@ public class LOTREntityBanner extends Entity
     {
         return new ItemStack(LOTRMod.banner, 1, getBannerType());
     }
+	
+	public void sendBannerToPlayer(EntityPlayer entityplayer, boolean openGui)
+	{
+		sendBannerData(new EntityPlayer[] {entityplayer}, openGui);
+	}
+	
+	public void sendBannerToAllPlayers(World world)
+	{
+		List<EntityPlayer> players = world.playerEntities;
+		sendBannerData(players.toArray(new EntityPlayer[0]), false);
+	}
+	
+	private void sendBannerData(EntityPlayer[] players, boolean openGui)
+	{
+		ByteBuf data = Unpooled.buffer();
+		
+		data.writeInt(getEntityId());
+		
+		data.writeBoolean(openGui);
+		
+		data.writeBoolean(playerSpecificProtection);
+		data.writeBoolean(selfProtection);
+		data.writeInt(getAlignmentProtection());
+
+		for (int i = 0; i < allowedPlayers.length; i++)
+		{
+			UUID uuid = allowedPlayers[i];
+			if (uuid != null)
+			{
+				GameProfile profile = MinecraftServer.getServer().func_152358_ax().func_152652_a(uuid);
+				if (StringUtils.isEmpty(profile.getName()))
+				{
+					MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
+				}
+				
+				String username = profile.getName();
+				if (!StringUtils.isEmpty(username))
+				{
+					data.writeInt(i);
+					
+					data.writeLong(uuid.getMostSignificantBits());
+					data.writeLong(uuid.getLeastSignificantBits());
+					
+					data.writeByte(username.length());
+					data.writeBytes(username.getBytes(Charsets.UTF_8));
+				}
+			}
+		}
+		data.writeInt(-1);
+		
+		for (EntityPlayer entityplayer : players)
+		{
+			Packet packet = new S3FPacketCustomPayload("lotr.bannerData", data);
+			((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(packet);
+		}
+	}
 }

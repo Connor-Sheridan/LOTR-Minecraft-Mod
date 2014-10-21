@@ -2,21 +2,15 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRWaypoint;
-import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
+import lotr.common.*;
+import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.world.gen.feature.*;
 
 public class LOTRBiomeGenBrownLands extends LOTRBiome
 {
@@ -81,6 +75,19 @@ public class LOTRBiomeGenBrownLands extends LOTRBiome
     {
 		return LOTRWorldGenDeadTrees.newOak();
     }
+	
+	@Override
+	public WorldGenerator getRandomWorldGenForGrass(Random random)
+	{
+		if (random.nextInt(3) == 0)
+		{
+			return new WorldGenTallGrass(Blocks.tallgrass, 1);
+		}
+		else
+		{
+			return new WorldGenTallGrass(LOTRMod.tallGrass, 0);
+		}
+	}
 	
 	@Override
 	public float getTreeIncreaseChance()

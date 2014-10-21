@@ -1,19 +1,18 @@
 package lotr.common.entity.item;
 
 import lotr.common.LOTRMod;
+import lotr.common.entity.LOTRBannerProtectable;
+import lotr.common.entity.npc.LOTREntityWarg.WargType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class LOTREntityWargskinRug extends Entity
+public class LOTREntityWargskinRug extends Entity implements LOTRBannerProtectable
 {
 	private int timeSinceLastGrowl = 1200;
 	
@@ -29,14 +28,15 @@ public class LOTREntityWargskinRug extends Entity
 		dataWatcher.addObject(18, Byte.valueOf((byte)0));
 	}
 	
-	public int getRugType()
+	public WargType getRugType()
 	{
-		return dataWatcher.getWatchableObjectByte(18);
+		int i = dataWatcher.getWatchableObjectByte(18);
+		return WargType.forID(i);
 	}
 	
-	public void setRugType(int i)
+	public void setRugType(WargType w)
 	{
-		dataWatcher.updateObject(18, Byte.valueOf((byte)i));
+		dataWatcher.updateObject(18, Byte.valueOf((byte)w.wargID));
 	}
 	
 	@Override
@@ -98,13 +98,13 @@ public class LOTREntityWargskinRug extends Entity
 	@Override
     public void writeEntityToNBT(NBTTagCompound nbt)
     {
-        nbt.setByte("RugType", (byte)getRugType());
+        nbt.setByte("RugType", (byte)getRugType().wargID);
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt)
     {
-		setRugType(nbt.getByte("RugType"));
+		setRugType(WargType.forID(nbt.getByte("RugType")));
     }
 	
 	public void dropRugAsItem(boolean creative)
@@ -112,7 +112,7 @@ public class LOTREntityWargskinRug extends Entity
 		worldObj.playSoundAtEntity(this, Blocks.wool.stepSound.getBreakSound(), (Blocks.wool.stepSound.getVolume() + 1F) / 2F, Blocks.wool.stepSound.getPitch() * 0.8F);
 		if (!creative)
 		{
-			entityDropItem(new ItemStack(LOTRMod.wargskinRug, 1, getRugType()), 0F);
+			entityDropItem(new ItemStack(LOTRMod.wargskinRug, 1, getRugType().wargID), 0F);
 		}
 		setDead();
 	}
@@ -126,6 +126,6 @@ public class LOTREntityWargskinRug extends Entity
 	@Override
     public ItemStack getPickedResult(MovingObjectPosition target)
     {
-        return new ItemStack(LOTRMod.wargskinRug, 1, getRugType());
+        return new ItemStack(LOTRMod.wargskinRug, 1, getRugType().wargID);
     }
 }

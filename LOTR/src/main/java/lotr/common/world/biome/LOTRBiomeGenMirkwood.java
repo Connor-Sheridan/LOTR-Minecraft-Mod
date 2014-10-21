@@ -49,6 +49,7 @@ public class LOTRBiomeGenMirkwood extends LOTRBiome
 			hasPodzol = true;
 			decorator.treesPerChunk = 8;
 			decorator.vinesPerChunk = 20;
+			decorator.logsPerChunk = 3;
 			decorator.flowersPerChunk = 0;
 			decorator.grassPerChunk = 12;
 			decorator.doubleGrassPerChunk = 6;
@@ -168,13 +169,13 @@ public class LOTRBiomeGenMirkwood extends LOTRBiome
 			{
 				return super.func_150567_a(random);
 			}
-			else if (random.nextInt(5) == 0)
+			else if (random.nextInt(10) == 0)
 			{
 				return new LOTRWorldGenMirkOak(false, 20, 30, 2, 12);
 			}
 			else
 			{
-				if (random.nextInt(30) == 0)
+				if (random.nextInt(20) == 0)
 				{
 					return new LOTRWorldGenMirkOak(false, 12, 6, 1, 6).setRed().disableDecay();
 				}

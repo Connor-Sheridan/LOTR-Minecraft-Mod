@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 
 import lotr.client.fx.*;
 import lotr.client.gui.LOTRGuiMap;
-import lotr.client.model.*;
 import lotr.client.render.LOTRRenderBlocks;
 import lotr.client.render.LOTRRenderPlayer;
 import lotr.client.render.entity.*;
@@ -25,7 +24,8 @@ import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.tileentity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
@@ -58,12 +58,6 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	
 	public static int TESSELLATOR_MAX_BRIGHTNESS = 15728880;
 
-	public static LOTRModelWingedHelmet modelWingedHelmet = new LOTRModelWingedHelmet(1F);
-	public static LOTRModelLeatherHat modelLeatherHat = new LOTRModelLeatherHat();
-	public static LOTRModelMorgulHelmet modelMorgulHelmet = new LOTRModelMorgulHelmet(1F);
-	public static LOTRModelGemsbokHelmet modelGemsbokHelmet = new LOTRModelGemsbokHelmet(1F);
-	public static LOTRModelElvenHelmet modelHighElvenHelmet = new LOTRModelElvenHelmet(1F);
-	
 	public static LOTREffectRenderer customEffectRenderer;
 	public static LOTRRenderPlayer specialPlayerRenderer = new LOTRRenderPlayer();
 	public static LOTRTickHandlerClient tickHandler = new LOTRTickHandlerClient();

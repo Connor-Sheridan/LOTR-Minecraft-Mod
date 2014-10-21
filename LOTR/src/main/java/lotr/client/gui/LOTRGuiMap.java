@@ -43,7 +43,7 @@ public class LOTRGuiMap extends LOTRGuiMenu
 	private static final int MAX_ZOOM = 4;
 	private static final int mapXSize = 256;
 	private static final int mapYSize = 200;
-	private static final int borderWidth = 4;
+	private static final int mapBorder = 4;
 	
 	private static final int addWPButtonX = mapXSize - 16;
 	private static final int addWPButtonY = 6;
@@ -156,6 +156,22 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		{
 			nameWaypointTextField.updateCursorCounter();
 		}
+		
+		if (hasOverlay && (canCreateWaypoint && !creatingWaypoint) || (creatingWaypoint))
+		{
+			IChatComponent[] protectionMessage = new IChatComponent[1];
+			if (LOTRBannerProtection.isProtectedByBanner(mc.theWorld, mc.thePlayer, LOTRBannerProtection.forPlayer_returnMessage(mc.thePlayer, protectionMessage), true))
+			{
+				hasOverlay = true;
+				canCreateWaypoint = false;
+				creatingWaypoint = false;
+				overlayDisplayString = new String[]
+				{
+					StatCollector.translateToLocalFormatted("lotr.gui.map.customWaypoint.protected.1", protectionMessage[0].getFormattedText()),
+					StatCollector.translateToLocal("lotr.gui.map.customWaypoint.protected.2")
+				};
+			}
+		}
     }
 	
 	@Override
@@ -171,10 +187,10 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		int zoomScaleX = Math.round(mapXSize / zoomPower);
 		int zoomScaleY = Math.round(mapYSize / zoomPower);
 		
-		int i1 = guiLeft + borderWidth;
-		int i2 = guiLeft + mapXSize - borderWidth;
-		int j1 = guiTop + borderWidth;
-		int j2 = guiTop + mapYSize - borderWidth;
+		int i1 = guiLeft + mapBorder;
+		int i2 = guiLeft + mapXSize - mapBorder;
+		int j1 = guiTop + mapBorder;
+		int j2 = guiTop + mapYSize - mapBorder;
 		isMouseWithinMap = i >= i1 && i < i2 && j >= j1 && j < j2;
 		
         if (!hasOverlay && Mouse.isButtonDown(0))
@@ -242,6 +258,17 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		tessellator.addVertexWithUV(guiLeft + mapXSize, guiTop, zLevel, maxU, minV);
 		tessellator.addVertexWithUV(guiLeft, guiTop, zLevel, minU, minV);
 		tessellator.draw();
+		
+		zLevel += 150F;
+		mc.getTextureManager().bindTexture(borderTexture);
+		int compassWidth = 32;
+		int compassHeight = 32;
+		int compassU = 224;
+		int compassV = 200;
+		int compassX = guiLeft + mapBorder + 6;
+		int compassY = guiTop + mapYSize - mapBorder - 6 - compassHeight;
+		drawTexturedModalRect(compassX, compassY, compassU, compassV, compassWidth, compassHeight);
+		zLevel -= 150F;
 		
         mc.getTextureManager().bindTexture(overlayTexture);
         GL11.glEnable(GL11.GL_BLEND);
@@ -351,11 +378,11 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		{
 			renderPlayer(mc.thePlayer.getUniqueID(), mc.thePlayer.getCommandSenderName(), mc.thePlayer.posX, mc.thePlayer.posZ, i, j);
 		}
-		
+
 		renderMiniQuests(mc.thePlayer, i, j);
 		
 		renderWaypoints();
-		
+
 		zLevel = 100F;
         mc.getTextureManager().bindTexture(borderTexture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, mapXSize, mapYSize);
@@ -377,10 +404,10 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		
 		if (hasOverlay)
 		{
-			int x = guiLeft + borderWidth;
-			int y = guiTop + borderWidth;
-			int x1 = guiLeft + mapXSize - borderWidth;
-			int y1 = guiTop + mapYSize - borderWidth;
+			int x = guiLeft + mapBorder;
+			int y = guiTop + mapBorder;
+			int x1 = guiLeft + mapXSize - mapBorder;
+			int y1 = guiTop + mapYSize - mapBorder;
 			drawRect(x, y, x1, y1, 0xC0000000);
 			
 			if (overlayDisplayString != null)
@@ -414,12 +441,12 @@ public class LOTRGuiMap extends LOTRGuiMenu
     	int playerZ = pos[1];
 		
 		int iconWidthHalf = 4;
-		int border = borderWidth + iconWidthHalf + 1;
+		int iconBorder = mapBorder + iconWidthHalf + 1;
 		
-		playerX = Math.max(guiLeft + border, playerX);
-		playerX = Math.min(guiLeft + mapXSize - border - 1, playerX);
-		playerZ = Math.max(guiTop + border, playerZ);
-		playerZ = Math.min(guiTop + mapYSize - border - 1, playerZ);
+		playerX = Math.max(guiLeft + iconBorder, playerX);
+		playerX = Math.min(guiLeft + mapXSize - iconBorder - 1, playerX);
+		playerZ = Math.max(guiTop + iconBorder, playerZ);
+		playerZ = Math.min(guiTop + mapYSize - iconBorder - 1, playerZ);
 
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		
@@ -464,13 +491,27 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		{
 			int stringWidth = mc.fontRenderer.getStringWidth(playerName);
 			int stringHeight = mc.fontRenderer.FONT_HEIGHT;
-			int stringBorder = 3;
 			
-			int x = guiLeft + mapXSize / 2 - stringWidth / 2 - stringBorder;
-			int y = guiTop + mapYSize - 4 - stringHeight - stringBorder * 3;
+			int x = playerX;
+			int y = playerZ;
 			
-			drawRect(x, y, x + stringWidth + stringBorder * 2, y + stringHeight + stringBorder * 2, 0xC0000000);
-			mc.fontRenderer.drawString(playerName, x + stringBorder, y + stringBorder, 0xFFFFFF);
+			y += iconWidthHalf + 3;
+			
+			int border = 3;
+			int rectWidth = stringWidth + border * 2;
+			x -= rectWidth / 2;
+			int rectHeight = stringHeight + border * 2;
+			
+			int mapBorder2 = mapBorder + 2;
+			x = Math.max(x, guiLeft + mapBorder2);
+			x = Math.min(x, guiLeft + mapXSize - mapBorder2 - rectWidth);
+			y = Math.max(y, guiTop + mapBorder2);
+			y = Math.min(y, guiTop + mapYSize - mapBorder2 - rectHeight);
+			
+			GL11.glTranslatef(0F, 0F, 300F);
+			drawRect(x, y, x + rectWidth, y + rectHeight, 0xC0000000);
+			mc.fontRenderer.drawString(playerName, x + border, y + border, 0xFFFFFF);
+			GL11.glTranslatef(0F, 0F, -300F);
 		}
     }
     
@@ -497,12 +538,12 @@ public class LOTRGuiMap extends LOTRGuiMenu
     			IIcon icon = questBookIcon.getIconIndex();
     			int iconWidthHalf = icon.getIconWidth() / 2;
     			iconWidthHalf *= scale;
-    			int border = borderWidth + iconWidthHalf + 1;
+    			int iconBorder = mapBorder + iconWidthHalf + 1;
     			
-    			questX = Math.max(guiLeft + border, questX);
-    			questX = Math.min(guiLeft + mapXSize - border - 1, questX);
-    			questZ = Math.max(guiTop + border, questZ);
-    			questZ = Math.min(guiTop + mapYSize - border - 1, questZ);
+    			questX = Math.max(guiLeft + iconBorder, questX);
+    			questX = Math.min(guiLeft + mapXSize - iconBorder - 1, questX);
+    			questZ = Math.max(guiTop + iconBorder, questZ);
+    			questZ = Math.min(guiTop + mapYSize - iconBorder - 1, questZ);
     			
     			int iconX = Math.round((float)questX * invScale);
     			int iconZ = Math.round((float)questZ * invScale);
@@ -521,16 +562,29 @@ public class LOTRGuiMap extends LOTRGuiMenu
     			if (!hasOverlay && mouseX >= questX - iconWidthHalf && mouseX < questX + iconWidthHalf && mouseY >= questZ - iconWidthHalf && mouseY < questZ + iconWidthHalf)
     			{
     				String name = quest.entityName;
-    				
     				int stringWidth = mc.fontRenderer.getStringWidth(name);
     				int stringHeight = mc.fontRenderer.FONT_HEIGHT;
-    				int stringBorder = 3;
     				
-    				int x = guiLeft + mapXSize / 2 - stringWidth / 2 - stringBorder;
-    				int y = guiTop + mapYSize - 4 - stringHeight - stringBorder * 3;
+    				int x = questX;
+    				int y = questZ;
     				
-    				drawRect(x, y, x + stringWidth + stringBorder * 2, y + stringHeight + stringBorder * 2, 0xC0000000);
-    				mc.fontRenderer.drawString(name, x + stringBorder, y + stringBorder, 0xFFFFFF);
+    				y += iconWidthHalf + 3;
+    				
+    				int border = 3;
+    				int rectWidth = stringWidth + border * 2;
+    				x -= rectWidth / 2;
+    				int rectHeight = stringHeight + border * 2;
+    				
+    				int mapBorder2 = mapBorder + 2;
+    				x = Math.max(x, guiLeft + mapBorder2);
+    				x = Math.min(x, guiLeft + mapXSize - mapBorder2 - rectWidth);
+    				y = Math.max(y, guiTop + mapBorder2);
+    				y = Math.min(y, guiTop + mapYSize - mapBorder2 - rectHeight);
+
+    				GL11.glTranslatef(0F, 0F, 300F);
+    				drawRect(x, y, x + rectWidth, y + rectHeight, 0xC0000000);
+    				mc.fontRenderer.drawString(name, x + border, y + border, 0xFFFFFF);
+    				GL11.glTranslatef(0F, 0F, -300F);
     			}
     		}
     	}
@@ -581,18 +635,20 @@ public class LOTRGuiMap extends LOTRGuiMenu
 			x -= rectWidth / 2;
 			int rectHeight = border * 3 + stringHeight * 2;
 			
-			x = Math.max(x, guiLeft + 6);
-			x = Math.min(x, guiLeft + mapXSize - 6 - rectWidth);
-			y = Math.max(y, guiTop + 6);
-			y = Math.min(y, guiTop + mapYSize - 6 - rectHeight);
-			
-			drawRect(x, y, x + rectWidth, y + rectHeight, 0xC0000000);
+			int mapBorder2 = mapBorder + 2;
+			x = Math.max(x, guiLeft + mapBorder2);
+			x = Math.min(x, guiLeft + mapXSize - mapBorder2 - rectWidth);
+			y = Math.max(y, guiTop + mapBorder2);
+			y = Math.min(y, guiTop + mapYSize - mapBorder2 - rectHeight);
 			
 			int stringX = x + rectWidth / 2;
 			int stringY = y + border;
-			drawCenteredString(name, stringX, stringY, 0xFFFFFF);
 			
+			GL11.glTranslatef(0F, 0F, 300F);
+			drawRect(x, y, x + rectWidth, y + rectHeight, 0xC0000000);
+			drawCenteredString(name, stringX, stringY, 0xFFFFFF);
 			drawCenteredString(coords, stringX, stringY + stringHeight + border, 0xFFFFFF);	
+			GL11.glTranslatef(0F, 0F, -300F);
 		}
     }
     

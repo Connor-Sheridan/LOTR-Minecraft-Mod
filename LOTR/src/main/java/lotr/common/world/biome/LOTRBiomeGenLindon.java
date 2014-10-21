@@ -120,6 +120,12 @@ public class LOTRBiomeGenLindon extends LOTRBiome
 	}
 	
 	@Override
+	public float getChanceToSpawnLavaLakes()
+	{
+		return 0F;
+	}
+	
+	@Override
 	public int spawnCountMultiplier()
 	{
 		return 5;

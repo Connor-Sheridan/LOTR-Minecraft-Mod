@@ -79,7 +79,8 @@ public class LOTRBiomeDecorator
 	public boolean generateOrcDungeon = false;
 	public boolean generateTrollHoard = false;
 	
-	private List randomStructures = new ArrayList();
+	private Random structureRand = new Random();
+	private List<RandomStructure> randomStructures = new ArrayList();
 
     public LOTRBiomeDecorator(LOTRBiome lotrbiome)
     {
@@ -166,15 +167,18 @@ public class LOTRBiomeDecorator
 		
 		if (Math.abs(chunkX) > 4 && Math.abs(chunkZ) > 4)
 		{
-			for (Object obj : randomStructures)
+			long seed = (long)(chunkX * 1879267) ^ (long)chunkZ * 67209689L;
+            seed = seed * seed * 5829687L + seed * 2876L;
+            structureRand.setSeed(seed);
+            
+			for (RandomStructure randomstructure : randomStructures)
 			{
-				RandomStructure randomstructure = (RandomStructure)obj;
-				if (rand.nextInt(randomstructure.chunkChance) == 0)
+				if (structureRand.nextInt(randomstructure.chunkChance) == 0)
 				{
 					int i = chunkX + rand.nextInt(16) + 8;
 					int k = chunkZ + rand.nextInt(16) + 8;
 					int j = worldObj.getTopSolidOrLiquidBlock(i, k);
-					randomstructure.structure.generate(worldObj, rand, i, j, k);
+					randomstructure.structureGen.generate(worldObj, rand, i, j, k);
 				}
 			}
 		}
@@ -378,7 +382,8 @@ public class LOTRBiomeDecorator
 
         if (generateWater)
         {
-			WorldGenerator waterGen = new WorldGenLiquids(Blocks.flowing_water);
+			WorldGenerator waterGen = new LOTRWorldGenStreams(Blocks.flowing_water);
+
             for (int l = 0; l < 50; l++)
             {
                 int i = chunkX + rand.nextInt(16) + 8;
@@ -386,32 +391,35 @@ public class LOTRBiomeDecorator
                 int k = chunkZ + rand.nextInt(16) + 8;
                 waterGen.generate(worldObj, rand, i, j, k);
             }
+            
+            if (biome.rootHeight > 1F)
+			{
+            	for (int l = 0; l < 50; l++)
+                {
+                    int i = chunkX + rand.nextInt(16) + 8;
+                    int j = 100 + rand.nextInt(150);
+                    int k = chunkZ + rand.nextInt(16) + 8;
+                    waterGen.generate(worldObj, rand, i, j, k);
+                }
+			}
 		}
 		
 		if (generateLava)
 		{
-			WorldGenerator lavaGen;
+			WorldGenerator lavaGen = new LOTRWorldGenStreams(Blocks.flowing_lava);
+			
+			int lava = 20;
 			if (biome instanceof LOTRBiomeGenMordor)
 			{
-				lavaGen = new LOTRWorldGenMordorLava();
-				for (int l = 0; l < 50; l++)
-				{
-					int i = chunkX + rand.nextInt(16) + 8;
-					int j = rand.nextInt(rand.nextInt(rand.nextInt(112) + 8) + 8);
-					int k = chunkZ + rand.nextInt(16) + 8;
-					lavaGen.generate(worldObj, rand, i, j, k);
-				}
+				lava = 50;
 			}
-			else
+			
+			for (int l = 0; l < lava; l++)
 			{
-				lavaGen = new WorldGenLiquids(Blocks.flowing_lava);
-				for (int l = 0; l < 20; l++)
-				{
-					int i = chunkX + rand.nextInt(16) + 8;
-					int j = rand.nextInt(rand.nextInt(rand.nextInt(112) + 8) + 8);
-					int k = chunkZ + rand.nextInt(16) + 8;
-					lavaGen.generate(worldObj, rand, i, j, k);
-				}
+				int i = chunkX + rand.nextInt(16) + 8;
+				int j = rand.nextInt(rand.nextInt(rand.nextInt(112) + 8) + 8);
+				int k = chunkZ + rand.nextInt(16) + 8;
+				lavaGen.generate(worldObj, rand, i, j, k);
 			}
         }
 		
@@ -508,12 +516,12 @@ public class LOTRBiomeDecorator
 	
 	private class RandomStructure
 	{
-		public WorldGenerator structure;
+		public WorldGenerator structureGen;
 		public int chunkChance;
 		
 		public RandomStructure(WorldGenerator w, int i)
 		{
-			structure = w;
+			structureGen = w;
 			chunkChance = i;
 		}
 	}

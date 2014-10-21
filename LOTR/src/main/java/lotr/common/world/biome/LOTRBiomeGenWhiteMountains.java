@@ -22,7 +22,6 @@ public class LOTRBiomeGenWhiteMountains extends LOTRBiomeGenGondor
 		decorator.flowersPerChunk = 2;
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 2;
-		decorator.generateWater = false;
 		
 		decorator.clearRandomStructures();
 		decorator.addRandomStructure(new LOTRWorldGenBeaconTower(false), 50);

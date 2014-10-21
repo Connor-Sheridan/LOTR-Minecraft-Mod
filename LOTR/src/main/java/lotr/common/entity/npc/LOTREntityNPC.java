@@ -968,7 +968,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		
 		if (!worldObj.isRemote && recentlyHit > 0 && canDropPouch() && LOTRMod.canDropLoot(worldObj))
 		{
-			if (rand.nextInt(10) == 0)
+			if (rand.nextInt(50) == 0)
 			{
 				ItemStack pouch = new ItemStack(LOTRMod.pouch, 1, LOTRItemPouch.getRandomPouchSize(rand));
 				List<ItemStack> pouchContents = new ArrayList();
@@ -1028,6 +1028,16 @@ public abstract class LOTREntityNPC extends EntityCreature
 						LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.killLargeMobWithSlingshot);
 					}
 				}
+			}
+			
+			if (this instanceof LOTREntityOrc)
+			{
+				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.killOrc);
+			}
+			
+			if (this instanceof LOTREntityWarg)
+			{
+				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.killWarg);
 			}
 			
 			if (getKillAchievement() != null)
@@ -1228,7 +1238,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 				else
 				{
 					List<LOTRMiniQuest> questsForFaction = playerData.getMiniQuestsForFaction(getFaction(), true);
-					if (rand.nextInt(5) == 0 && questsForFaction.size() < LOTRMiniQuest.MAX_MINIQUESTS_PER_FACTION)
+					if (rand.nextInt(8) == 0 && questsForFaction.size() < LOTRMiniQuest.MAX_MINIQUESTS_PER_FACTION)
 					{
 						LOTRMiniQuest quest = createMiniQuest(entityplayer);
 						if (quest != null)

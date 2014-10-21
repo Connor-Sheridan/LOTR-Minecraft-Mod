@@ -77,7 +77,7 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 			{
 				for (int k1 = -2; k1 <= 2; k1++)
 				{
-					for (int j1 = j; !isOpaque(world, i1, j1, k1) && j1 >= 0; j1--)
+					for (int j1 = 0; !isOpaque(world, i1, j1, k1) && getY(j1) >= 0; j1--)
 					{
 						setBlockAndMetadata(world, i1, j1, k1, LOTRMod.wood, 1);
 					}
@@ -126,6 +126,18 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 				}
 				setBlockAndMetadata(world, i1, 0, k1, LOTRMod.planks, 1);
 			}
+		}
+		
+		for (int i1 = -5; i1 <= 5; i1++)
+		{
+			setBlockAndMetadata(world, i1, 0, -6, LOTRMod.planks, 1);
+			setBlockAndMetadata(world, i1, 0, 6, LOTRMod.planks, 1);
+		}
+		
+		for (int k1 = -5; k1 <= 5; k1++)
+		{
+			setBlockAndMetadata(world, -6, 0, k1, LOTRMod.planks, 1);
+			setBlockAndMetadata(world, 6, 0, k1, LOTRMod.planks, 1);
 		}
 		
 		for (int i1 = -3; i1 <= 3; i1++)
@@ -208,40 +220,40 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 		setBlockAndMetadata(world, 6, 4, 1, LOTRMod.woodSlabSingle, 9);
 		setBlockAndMetadata(world, 6, 4, 2, LOTRMod.stairsMallorn, 6);
 		
-		setBlockAndMetadata(world, -2, 4, -6, LOTRMod.stairsMallorn, 5);
+		setBlockAndMetadata(world, -2, 4, -6, LOTRMod.stairsMallorn, 4);
 		setBlockAndMetadata(world, -1, 4, -6, LOTRMod.woodSlabSingle, 9);
 		setBlockAndMetadata(world, 0, 4, -6, LOTRMod.woodSlabSingle, 9);
 		setBlockAndMetadata(world, 1, 4, -6, LOTRMod.woodSlabSingle, 9);
-		setBlockAndMetadata(world, 2, 4, -6, LOTRMod.stairsMallorn, 4);
+		setBlockAndMetadata(world, 2, 4, -6, LOTRMod.stairsMallorn, 5);
 		
-		setBlockAndMetadata(world, -2, 4, 6, LOTRMod.stairsMallorn, 5);
+		setBlockAndMetadata(world, -2, 4, 6, LOTRMod.stairsMallorn, 4);
 		setBlockAndMetadata(world, -1, 4, 6, LOTRMod.woodSlabSingle, 9);
 		setBlockAndMetadata(world, 0, 4, 6, LOTRMod.woodSlabSingle, 9);
 		setBlockAndMetadata(world, 1, 4, 6, LOTRMod.woodSlabSingle, 9);
-		setBlockAndMetadata(world, 2, 4, 6, LOTRMod.stairsMallorn, 4);
+		setBlockAndMetadata(world, 2, 4, 6, LOTRMod.stairsMallorn, 5);
 		
-		for (int i1 = -5; i1 <= -4; i1++)
+		for (int i1 = -6; i1 <= -4; i1++)
 		{
 			setBlockAndMetadata(world, i1, 4, -6, LOTRMod.stairsMallorn, 6);
 			setBlockAndMetadata(world, i1, 4, 6, LOTRMod.stairsMallorn, 7);
 		}
 		
-		for (int i1 = 4; i1 <= 5; i1++)
+		for (int i1 = 4; i1 <= 6; i1++)
 		{
 			setBlockAndMetadata(world, i1, 4, -6, LOTRMod.stairsMallorn, 6);
 			setBlockAndMetadata(world, i1, 4, 6, LOTRMod.stairsMallorn, 7);
 		}
 		
-		for (int k1 = -5; k1 <= -4; k1++)
+		for (int k1 = -6; k1 <= -4; k1++)
 		{
-			setBlockAndMetadata(world, -5, 4, k1, LOTRMod.stairsMallorn, 4);
-			setBlockAndMetadata(world, 5, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, -6, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, 6, 4, k1, LOTRMod.stairsMallorn, 4);
 		}
 		
-		for (int k1 = 4; k1 <= 5; k1++)
+		for (int k1 = 4; k1 <= 6; k1++)
 		{
-			setBlockAndMetadata(world, -6, 4, k1, LOTRMod.stairsMallorn, 4);
-			setBlockAndMetadata(world, 6, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, -6, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, 6, 4, k1, LOTRMod.stairsMallorn, 4);
 		}
 		
 		for (int i1 = -4; i1 <= 4; i1++)
@@ -260,8 +272,8 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 			{
 				continue;
 			}
-			setBlockAndMetadata(world, -5, 4, k1, LOTRMod.stairsMallorn, 5);
-			setBlockAndMetadata(world, 5, 4, k1, LOTRMod.stairsMallorn, 4);
+			setBlockAndMetadata(world, -5, 4, k1, LOTRMod.stairsMallorn, 4);
+			setBlockAndMetadata(world, 5, 4, k1, LOTRMod.stairsMallorn, 5);
 		}
 		
 		for (int i1 = -6; i1 <= 6; i1++)
@@ -292,70 +304,6 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 			setBlockAndMetadata(world, 7, 5, k1, LOTRMod.planks, 1);
 		}
 		
-		for (int i1 = -8; i1 <= 8; i1++)
-		{
-			int k1;
-			int i2 = Math.abs(i1);
-			if (i2 == 8)
-			{
-				k1 = 3;
-			}
-			else if (i2 == 7)
-			{
-				k1 = 5;
-			}
-			else if (i2 > 4)
-			{
-				k1 = 6;
-			}
-			else
-			{
-				k1 = 7;
-			}
-			
-			setBlockAndMetadata(world, i1, 5, -k1, LOTRMod.stairsMallorn, 2);
-			setBlockAndMetadata(world, i1, 5, k1, LOTRMod.stairsMallorn, 3);
-		}
-		
-		for (int k1 = -8; k1 <= 8; k1++)
-		{
-			int i1;
-			int k2 = Math.abs(k1);
-			if (k2 == 8)
-			{
-				i1 = 3;
-			}
-			else if (k2 == 7)
-			{
-				i1 = 5;
-			}
-			else if (k2 > 4)
-			{
-				i1 = 6;
-			}
-			else
-			{
-				i1 = 7;
-			}
-			
-			setBlockAndMetadata(world, -i1, 5, k1, LOTRMod.stairsMallorn, 0);
-			setBlockAndMetadata(world, i1, 5, k1, LOTRMod.stairsMallorn, 1);
-		}
-		
-		setBlockAndMetadata(world, -4, 5, -7, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -6, 5, -6, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -7, 5, -4, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -7, 5, 4, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, -6, 5, 6, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, -4, 5, 7, LOTRMod.stairsMallorn, 3);
-		
-		setBlockAndMetadata(world, 4, 5, -7, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 6, 5, -6, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 7, 5, -4, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 7, 5, 4, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, 6, 5, 6, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, 4, 5, 7, LOTRMod.stairsMallorn, 3);
-		
 		for (int i1 = -5; i1 <= 5; i1++)
 		{
 			for (int k1 = -5; k1 <= 5; k1++)
@@ -384,69 +332,71 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 			setBlockAndMetadata(world, 6, 6, k1, LOTRMod.planks, 1);
 		}
 		
-		for (int i1 = -7; i1 <= 7; i1++)
+		for (int i1 = -8; i1 <= 8; i1++)
 		{
-			int k1;
+			int stairZ = 0;
+			int stairX = i1;
+			
 			int i2 = Math.abs(i1);
-			if (i2 == 7)
+			if (i2 <= 3)
 			{
-				k1 = 2;
+				stairZ = 8;
 			}
-			else if (i2 == 6)
+			else if (i2 <= 5)
 			{
-				k1 = 4;
+				stairZ = 7;
 			}
-			else if (i2 > 3)
+			else if (i2 <= 7)
 			{
-				k1 = 5;
+				stairZ = 6;
 			}
 			else
 			{
-				k1 = 6;
+				stairZ = 4;
 			}
 			
-			setBlockAndMetadata(world, i1, 6, -k1, LOTRMod.stairsMallorn, 2);
-			setBlockAndMetadata(world, i1, 6, k1, LOTRMod.stairsMallorn, 3);
+			setBlockAndMetadata(world, stairX, 5, -stairZ, LOTRMod.stairsMallorn, 2);
+			setBlockAndMetadata(world, stairX, 5, stairZ, LOTRMod.stairsMallorn, 3);
+			
+			stairZ--;
+			stairX = Integer.signum(stairX) * (Math.abs(stairX) - 1);
+			
+			setBlockAndMetadata(world, stairX, 6, -stairZ, LOTRMod.stairsMallorn, 2);
+			setBlockAndMetadata(world, stairX, 6, stairZ, LOTRMod.stairsMallorn, 3);
 		}
 		
-		for (int k1 = -7; k1 <= 7; k1++)
+		for (int k1 = -8; k1 <= 8; k1++)
 		{
-			int i1;
+			int stairX = 0;
+			int stairZ = k1;
+			
 			int k2 = Math.abs(k1);
-			if (k2 == 7)
+			if (k2 <= 3)
 			{
-				i1 = 2;
+				stairX = 8;
 			}
-			else if (k2 == 6)
+			else if (k2 <= 5)
 			{
-				i1 = 4;
+				stairX = 7;
 			}
-			else if (k2 > 3)
+			else if (k2 <= 7)
 			{
-				i1 = 5;
+				stairX = 6;
 			}
 			else
 			{
-				i1 = 6;
+				stairX = 4;
 			}
 			
-			setBlockAndMetadata(world, -i1, 6, k1, LOTRMod.stairsMallorn, 0);
-			setBlockAndMetadata(world, i1, 6, k1, LOTRMod.stairsMallorn, 1);
+			setBlockAndMetadata(world, -stairX, 5, stairZ, LOTRMod.stairsMallorn, 1);
+			setBlockAndMetadata(world, stairX, 5, stairZ, LOTRMod.stairsMallorn, 0);
+			
+			stairX--;
+			stairZ = Integer.signum(stairZ) * (Math.abs(stairZ) - 1);
+			
+			setBlockAndMetadata(world, -stairX, 6, stairZ, LOTRMod.stairsMallorn, 1);
+			setBlockAndMetadata(world, stairX, 6, stairZ, LOTRMod.stairsMallorn, 0);
 		}
-		
-		setBlockAndMetadata(world, -3, 6, -6, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -5, 6, -5, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -6, 6, -3, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, -6, 6, 3, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, -5, 6, 5, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, -3, 6, 6, LOTRMod.stairsMallorn, 3);
-		
-		setBlockAndMetadata(world, 3, 6, -6, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 5, 6, -5, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 6, 6, -3, LOTRMod.stairsMallorn, 2);
-		setBlockAndMetadata(world, 6, 6, 3, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, 5, 6, 5, LOTRMod.stairsMallorn, 3);
-		setBlockAndMetadata(world, 3, 6, 6, LOTRMod.stairsMallorn, 3);
 		
 		for (int i1 = -3; i1 <= 3; i1++)
 		{
@@ -456,90 +406,45 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 		
 		for (int k1 = -2; k1 <= 2; k1++)
 		{
-			setBlockAndMetadata(world, -3, 4, k1, LOTRMod.stairsMallorn, 4);
-			setBlockAndMetadata(world, 3, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, -3, 4, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndMetadata(world, 3, 4, k1, LOTRMod.stairsMallorn, 4);
+		}
+		
+		for (int bough = 0; bough <= 2; bough++)
+		{
+			int j1 = -3 + bough;
+			int i1 = 0 + bough;
+			int k1 = 3 + bough;
+			
+			for (int i2 = -i1; i2 <= i1; i2++)
+			{
+				for (int k2 = -k1; k2 <= k1; k2++)
+				{
+					setBlockAndMetadata(world, i2, j1, k2, LOTRMod.wood, 13);
+					setBlockAndMetadata(world, k2, j1, i2, LOTRMod.wood, 13);
+				}
+			}
 		}
 
-		
-		
-		int ladderX = 0;
-		int ladderZ = 0;
-		int ladderMeta = 0;
-		int table1X = 0;
-		int table1Z = 0;
-		int wood1Meta = 0;
-		int table2X = 0;
-		int table2Z = 0;
-		int wood2Meta = 0;
-		int chestX = 0;
-		int chestZ = 0;
-		int wood3Meta = 0;
-		
-		switch (rotation)
+		for (int j1 = 3; j1 >= -3 || (!isOpaque(world, 0, j1, -3) && getY(j1) >= 0); j1--)
 		{
-			case 0:
-				ladderZ = -3;
-				ladderMeta = 2;
-				table1X = -2;
-				wood1Meta = 5;
-				table2X = 2;
-				wood2Meta = 5;
-				chestZ = 2;
-				wood3Meta = 9;
-				break;
-			case 1:
-				ladderX = 3;
-				ladderMeta = 5;
-				table1Z = -2;
-				wood1Meta = 9;
-				table2Z = 2;
-				wood2Meta = 9;
-				chestX = -2;
-				wood3Meta = 5;
-				break;
-			case 2:
-				ladderZ = 3;
-				ladderMeta = 3;
-				table1X = -2;
-				wood1Meta = 5;
-				table2X = 2;
-				wood2Meta = 5;
-				chestZ = -2;
-				wood3Meta = 9;
-				break;
-			case 3:
-				ladderX = -3;
-				ladderMeta = 4;
-				table1Z = -2;
-				wood1Meta = 9;
-				table2Z = 2;
-				wood2Meta = 9;
-				chestX = 2;
-				wood3Meta = 5;
-				break;
+			setBlockAndMetadata(world, 0, j1, -3, LOTRMod.mallornLadder, 2);
 		}
 		
-		for (int j1 = 3; j1 >= -3 || (!isOpaque(world, ladderX, j1, ladderZ) && getY(j1) >= 0); j1--)
-		{
-			setBlockAndMetadata(world, ladderX, j1, ladderZ, LOTRMod.mallornLadder, ladderMeta);
-		}
+		setBlockAndMetadata(world, -2, 1, 0, LOTRMod.elvenTable, 0);
+		setBlockAndMetadata(world, -2, 2, 0, Blocks.air, 0);
+		setBlockAndMetadata(world, -2, 3, 0, Blocks.air, 0);
+		setBlockAndMetadata(world, -2, 4, 0, LOTRMod.wood, 5);
 		
-		setBlockAndMetadata(world, table1X, 1, table1Z, LOTRMod.elvenTable, 0);
-		setBlockAndMetadata(world, table1X, 2, table1Z, Blocks.air, 0);
-		setBlockAndMetadata(world, table1X, 3, table1Z, Blocks.air, 0);
-		setBlockAndMetadata(world, table1X, 4, table1Z, LOTRMod.wood, wood1Meta);
+		setBlockAndMetadata(world, 2, 1, 0, LOTRMod.elvenTable, 0);
+		setBlockAndMetadata(world, 2, 2, 0, Blocks.air, 0);
+		setBlockAndMetadata(world, 2, 3, 0, Blocks.air, 0);
+		setBlockAndMetadata(world, 2, 4, 0, LOTRMod.wood, 5);
 		
-		setBlockAndMetadata(world, table2X, 1, table2Z, LOTRMod.elvenTable, 0);
-		setBlockAndMetadata(world, table2X, 2, table2Z, Blocks.air, 0);
-		setBlockAndMetadata(world, table2X, 3, table2Z, Blocks.air, 0);
-		setBlockAndMetadata(world, table2X, 4, table2Z, LOTRMod.wood, wood2Meta);
-		
-		setBlockAndMetadata(world, chestX, 1, chestZ, Blocks.chest, 0);
-		setBlockAndMetadata(world, chestX, 2, chestZ, Blocks.air, 0);
-		setBlockAndMetadata(world, chestX, 3, chestZ, Blocks.air, 0);
-		setBlockAndMetadata(world, chestX, 4, chestZ, LOTRMod.wood, wood3Meta);
-		
-		LOTRChestContents.fillChest(world, random, chestX, 1, chestZ, LOTRChestContents.ELF_HOUSE);
+		placeChest(world, random, 0, 1, 2, 0, LOTRChestContents.ELF_HOUSE);
+		setBlockAndMetadata(world, 0, 2, 2, Blocks.air, 0);
+		setBlockAndMetadata(world, 0, 3, 2, Blocks.air, 0);
+		setBlockAndMetadata(world, 0, 4, 2, LOTRMod.wood, 9);
 		
 		tryPlaceLight(world, -7, -1, -3, random);
 		tryPlaceLight(world, -7, -1, 3, random);
@@ -559,8 +464,8 @@ public class LOTRWorldGenElfHouse extends LOTRWorldGenStructureBase2
 		placeFlowerPot(world, 5, 1, 4, getRandomPlant(random));
 		placeFlowerPot(world, 4, 1, 5, getRandomPlant(random));
 		
-		setBlockAndMetadata(world, -2, 1, 5, LOTRMod.elvenBed, 1);
-		setBlockAndMetadata(world, -3, 1, 5, LOTRMod.elvenBed, 9);
+		setBlockAndMetadata(world, -2, 1, 5, LOTRMod.elvenBed, 3);
+		setBlockAndMetadata(world, -3, 1, 5, LOTRMod.elvenBed, 11);
 
 		LOTREntityElf elf = new LOTREntityGaladhrimElf(world);
 		elf.spawnRidingHorse = false;

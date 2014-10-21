@@ -34,7 +34,7 @@ public class LOTRRenderWarg extends RenderLiving
     protected ResourceLocation getEntityTexture(Entity entity)
     {
         LOTREntityWarg warg = (LOTREntityWarg)entity;
-		String s = String.valueOf(warg.getWargType());
+		String s = warg.getWargType().textureName();
 		ResourceLocation wargSkin = (ResourceLocation)wargSkins.get(s);
 		if (wargSkin == null)
 		{

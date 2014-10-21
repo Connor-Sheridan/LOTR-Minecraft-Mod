@@ -485,6 +485,10 @@ public abstract class LOTRWorldGenStructureBase2 extends WorldGenerator
 			{
 				LOTRTileEntityPlate plate = (LOTRTileEntityPlate)tileentity;
 				ItemStack food = foodList.getRandomFood(random);
+				if (random.nextInt(4) == 0)
+				{
+					food.stackSize += 1 + random.nextInt(3);
+				}
 				plate.setFoodItem(food);
 			}
 		}

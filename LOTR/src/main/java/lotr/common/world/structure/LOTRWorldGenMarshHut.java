@@ -150,13 +150,17 @@ public class LOTRWorldGenMarshHut extends LOTRWorldGenStructureBase
 	
 	public static boolean generatesAt(World world, int i, int k)
 	{
-		long seed = world.getSeed();
+		/*long seed = world.getSeed();
 		generateRand.setSeed(seed * 2L);
 		generateRand.setSeed(generateRand.nextLong() * seed ^ 2L + 5393056L);
 		generateRand.setSeed(generateRand.nextLong() ^ 2860262L * 198702867L * seed);
 		
 		int x = MathHelper.getRandomIntegerInRange(generateRand, 600, 620);
 		int z = MathHelper.getRandomIntegerInRange(generateRand, 380, 400);
+		*/
+		
+		int x = 610;
+		int z = 390;
 
 		return i == x * LOTRGenLayerWorld.scale && k == z * LOTRGenLayerWorld.scale;
 	}

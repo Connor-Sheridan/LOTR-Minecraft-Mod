@@ -1,5 +1,6 @@
 package lotr.client.render.entity;
 
+import lotr.client.LOTRClientProxy;
 import lotr.client.model.LOTRModelPortal;
 import lotr.common.entity.item.LOTREntityPortal;
 import net.minecraft.client.model.ModelBase;
@@ -13,11 +14,11 @@ import org.lwjgl.opengl.GL12;
 
 public class LOTRRenderPortal extends Render
 {
-	private static ResourceLocation ringTexture = new ResourceLocation("lotr:misc/portal.png");
-	private static ResourceLocation writingTexture = new ResourceLocation("lotr:misc/portal_writing.png");
-	private static ModelBase ringModel = new LOTRModelPortal(0);
-	private static ModelBase writingModelOuter = new LOTRModelPortal(1);
-	private static ModelBase writingModelInner = new LOTRModelPortal(1);
+	public static ResourceLocation ringTexture = new ResourceLocation("lotr:misc/portal.png");
+	public static ResourceLocation writingTexture = new ResourceLocation("lotr:misc/portal_writing.png");
+	public static ModelBase ringModel = new LOTRModelPortal(0);
+	public static ModelBase writingModelOuter = new LOTRModelPortal(1);
+	public static ModelBase writingModelInner = new LOTRModelPortal(1);
 	
 	@Override
     protected ResourceLocation getEntityTexture(Entity entity)
@@ -49,7 +50,7 @@ public class LOTRRenderPortal extends Render
 		ringModel.render(null, 0F, 0F, 0F, 0F, 0F, scale);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		Tessellator.instance.setBrightness(15728880);
+		Tessellator.instance.setBrightness(LOTRClientProxy.TESSELLATOR_MAX_BRIGHTNESS);
 		bindTexture(writingTexture);
 		writingModelOuter.render(null, 0F, 0F, 0F, 0F, 0F, scale * 1.05F);
 		bindTexture(writingTexture);

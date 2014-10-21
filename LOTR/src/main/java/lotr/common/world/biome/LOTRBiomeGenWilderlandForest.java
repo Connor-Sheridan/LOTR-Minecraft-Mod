@@ -21,7 +21,7 @@ public class LOTRBiomeGenWilderlandForest extends LOTRBiomeGenWilderland
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityRabbit.class, 6, 4, 4));
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityBird.class, 10, 4, 4));
 		
-		decorator.treesPerChunk = 10;
+		decorator.treesPerChunk = 8;
 		decorator.flowersPerChunk = 4;
 		decorator.doubleFlowersPerChunk = 2;
 		decorator.grassPerChunk = 12;
@@ -33,9 +33,9 @@ public class LOTRBiomeGenWilderlandForest extends LOTRBiomeGenWilderland
 	@Override
 	public WorldGenAbstractTree func_150567_a(Random random)
 	{
-		if (random.nextInt(5) == 0)
+		if (random.nextInt(4) == 0)
 		{
-			return func_150567_a(random);
+			return super.func_150567_a(random);
 		}
 		return new WorldGenTaiga2(false);
 	}

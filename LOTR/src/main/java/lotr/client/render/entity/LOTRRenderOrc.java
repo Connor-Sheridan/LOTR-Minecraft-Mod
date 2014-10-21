@@ -14,12 +14,14 @@ public class LOTRRenderOrc extends LOTRRenderBiped
 {
 	private static List orcSkins;
 	private static List urukSkins;
+	private static List blackUrukSkins;
 	
 	public LOTRRenderOrc()
 	{
 		super(new LOTRModelOrc(), 0.5F);
 		orcSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/orc/orc");
 		urukSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/orc/urukHai");
+		blackUrukSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/orc/blackUruk");
 	}
 	
 	@Override
@@ -33,11 +35,19 @@ public class LOTRRenderOrc extends LOTRRenderBiped
 	public ResourceLocation getEntityTexture(Entity entity)
     {
 		LOTREntityOrc orc = (LOTREntityOrc)entity;
-        if (entity instanceof LOTREntityUrukHai)
+		
+        if (orc instanceof LOTREntityUrukHai)
 		{
 			return LOTRRandomSkins.getRandomSkin(urukSkins, orc);
 		}
-        return LOTRRandomSkins.getRandomSkin(orcSkins, orc);
+        else if (orc instanceof LOTREntityBlackUruk)
+		{
+			return LOTRRandomSkins.getRandomSkin(blackUrukSkins, orc);
+		}
+        else
+        {
+        	return LOTRRandomSkins.getRandomSkin(orcSkins, orc);
+        }
     }
 	
 	@Override

@@ -124,7 +124,7 @@ public class LOTRItemBanner extends Item
 			
 			if (world.getBlock(i, j - 1, k).isSideSolid(world, i, j - 1, k, ForgeDirection.UP))
 			{
-				if (!entityplayer.capabilities.isCreativeMode && world.getBlock(i, j - 1, k) == Blocks.gold_block)
+				if (LOTRConfig.allowBannerProtection && !entityplayer.capabilities.isCreativeMode && world.getBlock(i, j - 1, k) == Blocks.gold_block)
 				{
 					if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction(itemstack)) < 1)
 					{
@@ -153,6 +153,12 @@ public class LOTRItemBanner extends Item
 						banner.setBannerFaction(getFaction(itemstack));
 						banner.setPlacingPlayer(entityplayer);
 						world.spawnEntityInWorld(banner);
+						
+						if (banner.isProtectingTerritory())
+						{
+							LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.bannerProtect);
+						}
+						
 						world.playSoundAtEntity(banner, Blocks.planks.stepSound.func_150496_b(), (Blocks.planks.stepSound.getVolume() + 1F) / 2F, Blocks.planks.stepSound.getPitch() * 0.8F);
 						itemstack.stackSize--;
 						return true;

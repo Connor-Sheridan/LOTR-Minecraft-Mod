@@ -62,7 +62,7 @@ public class LOTRGuiRedBook extends LOTRGuiScreenBase
     private GuiButton buttonQuestDelete;
     private GuiButton buttonQuestDeleteCancel;
     
-    private int textColor = 0x7A5D43;
+    private static final int textColor = 0x7A5D43;
     
     private static Page page;
     
@@ -373,8 +373,8 @@ public class LOTRGuiRedBook extends LOTRGuiScreenBase
     public void handleMouseInput()
     {
         super.handleMouseInput();
+        
         int i = Mouse.getEventDWheel();
-
         if (i != 0 && canScroll())
         {
             int j = getMiniQuests().size() - maxDisplayedMiniQuests;

@@ -10,6 +10,7 @@ import lotr.common.entity.animal.LOTREntityWildBoar;
 import lotr.common.entity.npc.LOTREntityGundabadOrc;
 import lotr.common.entity.npc.LOTREntityGundabadOrcArcher;
 import lotr.common.world.LOTRBanditSpawner;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.*;
@@ -162,6 +163,8 @@ public class LOTRBiome extends BiomeGenBase
 	public static BiomeGenBase nearHaradFertileForest;
 	public static BiomeGenBase anduinVale;
 	public static BiomeGenBase anduinValeWoodlands;
+	public static BiomeGenBase shireMoors;
+	public static BiomeGenBase shireMarshes;
 	
 	public static BiomeGenBase utumno;
 	
@@ -170,7 +173,7 @@ public class LOTRBiome extends BiomeGenBase
 		river = new LOTRBiomeGenRiver(0).setMinMaxHeight(-0.5F, 0F).setColor(0x007DEA).setBiomeName("river");
 		rohan = new LOTRBiomeGenRohan(1, false).setTemperatureRainfall(1F, 0.2F).setMinMaxHeight(0.2F, 0.3F).setColor(0x9DA152).setBiomeName("rohan");
 		mistyMountains = new LOTRBiomeGenMistyMountains(2).setTemperatureRainfall(0.2F, 0.5F).setMinMaxHeight(2F, 2F).setColor(0xB8BCC1).setBiomeName("mistyMountains");
-		shire = new LOTRBiomeGenShire(3).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.3F).setColor(0x36A01E).setBiomeName("shire");
+		shire = new LOTRBiomeGenShire(3).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.3F).setColor(0x419E22).setBiomeName("shire");
 		shireWoodlands = new LOTRBiomeGenShireWoodlands(4).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.3F, 0.5F).setColor(0x2B631F).setBiomeName("shireWoodlands");
 		mordor = new LOTRBiomeGenMordor(5).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0.3F, 0.6F).setColor(0x000000).setBiomeName("mordor");
 		mordorMountains = new LOTRBiomeGenMordorMountains(6).setTemperatureRainfall(2F, 0F).setMinMaxHeight(2F, 3F).setColor(0x444444).setBiomeName("mordorMountains");
@@ -188,20 +191,20 @@ public class LOTRBiome extends BiomeGenBase
 		ithilien = new LOTRBiomeGenIthilien(18).setTemperatureRainfall(0.7F, 0.9F).setMinMaxHeight(0.15F, 0.5F).setColor(0xA9B542).setBiomeName("ithilien");
 		mordorRiver = new LOTRBiomeGenMordorRiver(19).setTemperatureRainfall(2F, 0F).setMinMaxHeight(-0.5F, 0F).setColor(0x000070).setBiomeName("mordorRiver");
 		deadMarshesRiver = new LOTRBiomeGenDeadMarshes(20).setTemperatureRainfall(0.4F, 1F).setMinMaxHeight(-0.5F, 0F).setColor(0x4E5C60).setBiomeName("deadMarshesRiver");
-		loneLands = new LOTRBiomeGenLoneLands(21).setTemperatureRainfall(0.6F, 0.5F).setMinMaxHeight(0.15F, 0.4F).setColor(0xBAA748).setBiomeName("loneLands");
-		loneLandsHills = new LOTRBiomeGenLoneLandsHills(22).setTemperatureRainfall(0.6F, 0.5F).setMinMaxHeight(0.6F, 0.8F).setColor(0xA59648).setBiomeName("loneLandsHills");
-		dunland = new LOTRBiomeGenDunland(23).setTemperatureRainfall(0.5F, 0.7F).setMinMaxHeight(0.3F, 0.5F).setColor(0x327238).setBiomeName("dunland");
+		loneLands = new LOTRBiomeGenLoneLands(21).setTemperatureRainfall(0.6F, 0.5F).setMinMaxHeight(0.15F, 0.4F).setColor(0x9DAD4D).setBiomeName("loneLands");
+		loneLandsHills = new LOTRBiomeGenLoneLandsHills(22).setTemperatureRainfall(0.6F, 0.5F).setMinMaxHeight(0.6F, 0.8F).setColor(0x909E45).setBiomeName("loneLandsHills");
+		dunland = new LOTRBiomeGenDunland(23).setTemperatureRainfall(0.5F, 0.7F).setMinMaxHeight(0.3F, 0.5F).setColor(0x67914B).setBiomeName("dunland");
 		fangorn = new LOTRBiomeGenFangorn(24).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.4F).setColor(0x2C892D).setBiomeName("fangorn");
 		mirkwoodRiver = new LOTRBiomeGenMirkwoodRiver(25).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(-0.5F, 0F).setColor(0x2C21A8).setBiomeName("mirkwoodRiver");
 		ettenmoors = new LOTRBiomeGenEttenmoors(26).setTemperatureRainfall(0.2F, 0.6F).setMinMaxHeight(0.5F, 0.8F).setColor(0x7A6C52).setBiomeName("ettenmoors");
 		oldForest = new LOTRBiomeGenOldForest(27).setTemperatureRainfall(0.5F, 1F).setMinMaxHeight(0.2F, 0.3F).setColor(0x21301D).setBiomeName("oldForest");
 		harondor = new LOTRBiomeGenHarondor(28).setTemperatureRainfall(1F, 0.4F).setMinMaxHeight(0.2F, 0.3F).setColor(0xC9BA66).setBiomeName("harondor");
-		eriador = new LOTRBiomeGenEriador(29).setTemperatureRainfall(0.7F, 0.7F).setMinMaxHeight(0.1F, 0.2F).setColor(0x6AAA42).setBiomeName("eriador");
-		eriadorDowns = new LOTRBiomeGenEriadorDowns(30).setTemperatureRainfall(0.6F, 0.7F).setMinMaxHeight(0.5F, 0.3F).setColor(0x638E4E).setBiomeName("eriadorDowns");
+		eriador = new LOTRBiomeGenEriador(29).setTemperatureRainfall(0.7F, 0.7F).setMinMaxHeight(0.1F, 0.2F).setColor(0x6DAD43).setBiomeName("eriador");
+		eriadorDowns = new LOTRBiomeGenEriadorDowns(30).setTemperatureRainfall(0.6F, 0.7F).setMinMaxHeight(0.5F, 0.5F).setColor(0x72A354).setBiomeName("eriadorDowns");
 		eriadorWoodlands = new LOTRBiomeGenEriadorWoodlands(31).setTemperatureRainfall(0.7F, 0.9F).setMinMaxHeight(0.1F, 0.4F).setColor(0x629944).setBiomeName("eriadorWoodlands");
 		greyMountains = new LOTRBiomeGenGreyMountains(32).setTemperatureRainfall(0.28F, 0.2F).setMinMaxHeight(1.8F, 2F).setColor(0x777B7F).setBiomeName("greyMountains");
 		midgewater = new LOTRBiomeGenMidgewater(33).setTemperatureRainfall(0.6F, 1F).setMinMaxHeight(0.05F, 0.2F).setColor(0x377755).setBiomeName("midgewater");
-		brownLands = new LOTRBiomeGenBrownLands(34).setTemperatureRainfall(0.6F, 0.2F).setMinMaxHeight(0.2F, 0.2F).setColor(0x775438).setBiomeName("brownLands");
+		brownLands = new LOTRBiomeGenBrownLands(34).setTemperatureRainfall(0.6F, 0.2F).setMinMaxHeight(0.2F, 0.2F).setColor(0x806C4B).setBiomeName("brownLands");
 		ocean = new LOTRBiomeGenOcean(35).setTemperatureRainfall(0.5F, 0.5F).setMinMaxHeight(-1F, 0.3F).setColor(0x0055A0).setBiomeName("ocean");
 		anduinHills = new LOTRBiomeGenAnduin(36).setTemperatureRainfall(0.7F, 0.7F).setMinMaxHeight(0.6F, 0.4F).setColor(0x30AD75).setBiomeName("anduinHills");
 		anduinHillsWoodlands = new LOTRBiomeGenAnduinWoodlands(37).setTemperatureRainfall(0.7F, 0.9F).setMinMaxHeight(0.7F, 0.4F).setColor(0x2DAD5E).setBiomeName("anduinHillsWoodlands");
@@ -214,7 +217,7 @@ public class LOTRBiome extends BiomeGenBase
 		lindon = new LOTRBiomeGenLindon(44).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.15F, 0.2F).setColor(0x71BC45).setBiomeName("lindon");
 		lindonWoodlands = new LOTRBiomeGenLindonWoodlands(45).setTemperatureRainfall(0.9F, 1F).setMinMaxHeight(0.2F, 0.5F).setColor(0x4DD151).setBiomeName("lindonWoodlands");
 		eregionForest = new LOTRBiomeGenEregionForest(46).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.4F).setColor(0x39704C).setBiomeName("eregionForest");
-		blueMountains = new LOTRBiomeGenBlueMountains(47).setTemperatureRainfall(0.22F, 0.8F).setMinMaxHeight(1.5F, 2F).setColor(0x8DB7D3).setBiomeName("blueMountains");
+		blueMountains = new LOTRBiomeGenBlueMountains(47).setTemperatureRainfall(0.22F, 0.8F).setMinMaxHeight(0.9F, 2.5F).setColor(0x8DB7D3).setBiomeName("blueMountains");
 		mirkwoodMountains = new LOTRBiomeGenMirkwoodMountains(48).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(1.5F, 2F).setColor(0x334430).setBiomeName("mirkwoodMountains");
 		wilderland = new LOTRBiomeGenWilderland(49).setTemperatureRainfall(0.9F, 0.4F).setMinMaxHeight(0.2F, 0.4F).setColor(0x93A850).setBiomeName("wilderland");
 		dagorlad = new LOTRBiomeGenDagorlad(50).setTemperatureRainfall(1F, 0.2F).setMinMaxHeight(0.1F, 0.05F).setColor(0x6B6048).setBiomeName("dagorlad");
@@ -247,7 +250,7 @@ public class LOTRBiome extends BiomeGenBase
 		minhiriath = new LOTRBiomeGenMinhiriath(77).setTemperatureRainfall(0.7F, 0.4F).setMinMaxHeight(0.1F, 0.2F).setColor(0x7DAD5D).setBiomeName("minhiriath");
 		minhiriathWoodlands = new LOTRBiomeGenMinhiriathWoodlands(78).setTemperatureRainfall(0.8F, 0.7F).setMinMaxHeight(0.1F, 0.3F).setColor(0x5D8E3D).setBiomeName("minhiriathWoodlands");
 		minhiriathWasteland = new LOTRBiomeGenMinhiriathWasteland(79).setTemperatureRainfall(0.6F, 0.2F).setMinMaxHeight(0.1F, 0.1F).setColor(0xADAD87).setBiomeName("minhiriathWasteland");
-		dunlandForest = new LOTRBiomeGenDunlandForest(80).setTemperatureRainfall(0.6F, 0.8F).setMinMaxHeight(0.3F, 0.5F).setColor(0x235928).setBiomeName("dunlandForest");
+		dunlandForest = new LOTRBiomeGenDunlandForest(80).setTemperatureRainfall(0.6F, 0.8F).setMinMaxHeight(0.3F, 0.5F).setColor(0x5D873B).setBiomeName("dunlandForest");
 		nanUngol = new LOTRBiomeGenNanUngol(81).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0.1F, 0.4F).setColor(0x1E1811).setBiomeName("nanUngol");
 		gondorHills = new LOTRBiomeGenGondorHills(82).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.5F, 0.5F).setColor(0xB6B75B).setBiomeName("gondorHills");
 		island = new LOTRBiomeGenOcean(83).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0F, 0.3F).setColor(0x39B57B).setBiomeName("island");
@@ -298,6 +301,8 @@ public class LOTRBiome extends BiomeGenBase
 		nearHaradFertileForest = new LOTRBiomeGenNearHaradFertileForest(128).setTemperatureRainfall(1.2F, 1F).setMinMaxHeight(0.2F, 0.4F).setColor(0x708E34).setBiomeName("nearHaradFertileForest");
 		anduinVale = new LOTRBiomeGenAnduinVale(129).setTemperatureRainfall(0.9F, 1.1F).setMinMaxHeight(0.05F, 0.05F).setColor(0x39A360).setBiomeName("anduinVale");
 		anduinValeWoodlands = new LOTRBiomeGenAnduinValeWoodlands(130).setTemperatureRainfall(1F, 1.2F).setMinMaxHeight(0.1F, 0.2F).setColor(0x34AF59).setBiomeName("anduinValeWoodlands");
+		shireMoors = new LOTRBiomeGenShireMoors(131).setTemperatureRainfall(0.6F, 1.6F).setMinMaxHeight(0.4F, 0.6F).setColor(0x52A04B).setBiomeName("shireMoors");
+		shireMarshes = new LOTRBiomeGenShireMarshes(132).setTemperatureRainfall(0.8F, 1.2F).setMinMaxHeight(0F, 0.1F).setColor(0x37932F).setBiomeName("shireMarshes");
 		
 		utumno = new LOTRBiomeGenUtumno(0).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0F, 0F).setColor(0x000000).setBiomeName("utumno");
 	}
@@ -617,6 +622,281 @@ public class LOTRBiome extends BiomeGenBase
 	}
 	
 	@Override
+	public void genTerrainBlocks(World world, Random random, Block[] blocks, byte[] meta, int i, int k, double stoneNoise)
+	{
+		int seaLevel = 63;
+		
+		int fillerDepthBase = (int)(stoneNoise / 4D + 5D + rand.nextDouble() * 0.25D);
+        int fillerDepth = -1;
+        Block top = topBlock;
+        byte topMeta = 0;
+        Block filler = fillerBlock;
+        byte fillerMeta = 0;
+		
+		if (hasPodzol)
+		{
+			if (stoneNoise > 1.75D)
+            {
+				top = Blocks.dirt;
+				topMeta = 1;
+            }
+            else if (stoneNoise > -0.95D)
+            {
+            	top = Blocks.dirt;
+            	topMeta = 2;
+            }
+		}
+		
+        int chunkX = i & 15;
+        int chunkZ = k & 15;
+        int ySize = blocks.length / (16 * 16);
+		
+        for (int j = ySize - 1; j >= 0; j--)
+        {
+            int index = (chunkZ * 16 + chunkX) * ySize + j;
+            if (j <= 0 + rand.nextInt(5))
+            {
+                blocks[index] = Blocks.bedrock;
+            }
+            else
+            {
+                Block block = blocks[index];
+                if (block == Blocks.air)
+                {
+                	fillerDepth = -1;
+                }
+                else if (block == Blocks.stone)
+                {
+                    if (fillerDepth == -1)
+                    {
+                        if (fillerDepthBase <= 0)
+                        {
+                        	top = Blocks.air;
+                        	filler = Blocks.stone;
+                        }
+                        else if (j >= seaLevel - 4 && j <= seaLevel + 1)
+                        {
+                        	top = topBlock;
+                        	filler = fillerBlock;
+                        }
+                        if (j < seaLevel && top == Blocks.air)
+                        {
+                        	top = Blocks.water;
+                        }
+                        
+                        fillerDepth = fillerDepthBase;
+                        
+                        if (j >= seaLevel - 1)
+                        {
+                        	blocks[index] = top;
+                        	meta[index] = topMeta;
+                        }
+                        else
+                        {
+                            blocks[index] = filler;
+                            meta[index] = fillerMeta;
+                        }
+                    }
+                    else if (fillerDepth > 0)
+                    {
+                    	fillerDepth--;
+                        blocks[index] = filler;
+						meta[index] = fillerMeta;
+						
+                        if (fillerDepth == 0 && filler == Blocks.sand)
+                        {
+                        	fillerDepth = 10 + rand.nextInt(4);
+                            filler = Blocks.sandstone;
+                        }
+						
+                        if ((this instanceof LOTRBiomeGenGondor || this instanceof LOTRBiomeGenIthilien) && fillerDepth == 0 && filler == Blocks.dirt)
+                        {
+                        	fillerDepth = fillerDepthBase + 8 + rand.nextInt(3);
+                            filler = LOTRMod.rock;
+							fillerMeta = 1;
+                        }
+						
+                        else if (this instanceof LOTRBiomeGenRohan && fillerDepth == 0 && filler == Blocks.dirt)
+                        {
+                        	fillerDepth = fillerDepthBase + 8 + rand.nextInt(3);
+                            filler = LOTRMod.rock;
+                            fillerMeta = 2;
+                        }
+                    }
+                }
+            }
+        }
+        
+        int mountainRockDepth = (int)(stoneNoise * 6D + 2D + rand.nextDouble() * 0.25D);
+		
+		if (this instanceof LOTRBiomeGenMistyMountains && ((LOTRBiomeGenMistyMountains)this).isSnowCovered() && this != LOTRBiome.mistyMountainsFoothills)
+		{
+			int snowHeight = 120 - mountainRockDepth;
+			int stoneHeight = snowHeight - 30;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (j >= snowHeight && block == topBlock)
+				{
+					blocks[index] = Blocks.snow;
+				}
+				else if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = Blocks.stone;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenGreyMountains && this != LOTRBiome.greyMountainsFoothills)
+		{
+			int snowHeight = 150 - mountainRockDepth;
+			int stoneHeight = snowHeight - 40;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (j >= snowHeight && block == topBlock)
+				{
+					blocks[index] = Blocks.snow;
+				}
+				else if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = Blocks.stone;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenAngmarMountains)
+		{
+			int snowHeight = 130 - mountainRockDepth;
+			int stoneHeight = snowHeight - 20;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (j >= snowHeight && block == topBlock)
+				{
+					blocks[index] = Blocks.snow;
+				}
+				else if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = Blocks.stone;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenBlueMountains && this != LOTRBiome.blueMountainsFoothills)
+		{
+			int snowHeight = 110 - mountainRockDepth;
+			int stoneHeight = snowHeight - 20;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (j >= snowHeight && block == topBlock)
+				{
+					blocks[index] = Blocks.snow;
+				}
+				else if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = LOTRMod.rock;
+					meta[index] = 3;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenWhiteMountains && this != LOTRBiome.whiteMountainsFoothills)
+		{
+			int height = 100 - mountainRockDepth;
+			for (int j = 255; j >= height; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+
+				if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = LOTRMod.rock;
+					meta[index] = 1;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenTolfalas)
+		{
+			int stoneHeight = 90 - mountainRockDepth;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = Blocks.stone;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenMordor)
+		{
+			for (int j = 255; j >= 0; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+
+				if (block == Blocks.stone)
+				{
+					blocks[index] = LOTRMod.rock;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenHaradMountains)
+		{
+			int stoneHeight = 100 - mountainRockDepth;
+			for (int j = 255; j >= stoneHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (block == topBlock || block == fillerBlock)
+				{
+					blocks[index] = Blocks.stone;
+				}
+			}
+		}
+		
+		if (this instanceof LOTRBiomeGenRedMountains && this != LOTRBiome.redMountainsFoothills)
+		{
+			int stoneHeight = 110 - mountainRockDepth;
+			int sandHeight = stoneHeight - 6;
+			for (int j = 255; j >= sandHeight; j--)
+			{
+				int index = (chunkZ * 16 + chunkX) * ySize + j;
+				Block block = blocks[index];
+				
+				if (block == topBlock || block == fillerBlock)
+				{
+					if (j >= stoneHeight)
+					{
+						blocks[index] = LOTRMod.rock;
+						meta[index] = 4;
+					}
+					else
+					{
+						blocks[index] = Blocks.sand;
+						meta[index] = 1;
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
     public void decorate(World world, Random random, int i, int k)
     {
         decorator.decorate(world, random, i, k);
@@ -692,21 +972,39 @@ public class LOTRBiome extends BiomeGenBase
 		return 0.1F;
 	}
 	
+	public static class GrassBlockAndMeta
+	{
+		public final Block block;
+		public final int meta;
+		
+		public GrassBlockAndMeta(Block b, int i)
+		{
+			block = b;
+			meta = i;
+		}
+	}
+	
 	@Override
 	public WorldGenerator getRandomWorldGenForGrass(Random random)
+	{
+		GrassBlockAndMeta obj = getRandomGrass(random);
+		return new WorldGenTallGrass(obj.block, obj.meta);
+	}
+	
+	public GrassBlockAndMeta getRandomGrass(Random random)
 	{
 		boolean fern = decorator.enableFern;
 		boolean special = decorator.enableSpecialGrasses;
 				
 		if (fern && random.nextInt(3) == 0)
 		{
-			return new WorldGenTallGrass(Blocks.tallgrass, 2);
+			return new GrassBlockAndMeta(Blocks.tallgrass, 2);
 		}
 		else
 		{
 			if (special && random.nextInt(500) == 0)
 			{
-				return new WorldGenTallGrass(LOTRMod.flaxPlant, 0);
+				return new GrassBlockAndMeta(LOTRMod.flaxPlant, 0);
 			}
 			else if (random.nextInt(4) > 0)
 			{
@@ -714,26 +1012,26 @@ public class LOTRBiome extends BiomeGenBase
 				{
 					if (random.nextInt(50) == 0)
 					{
-						return new WorldGenTallGrass(LOTRMod.tallGrass, 3);
+						return new GrassBlockAndMeta(LOTRMod.tallGrass, 3);
 					}
 					if (random.nextInt(16) == 0)
 					{
-						return new WorldGenTallGrass(LOTRMod.tallGrass, 1);
+						return new GrassBlockAndMeta(LOTRMod.tallGrass, 1);
 					}
 					if (random.nextInt(10) == 0)
 					{
-						return new WorldGenTallGrass(LOTRMod.tallGrass, 2);
+						return new GrassBlockAndMeta(LOTRMod.tallGrass, 2);
 					}
 				}
-				return new WorldGenTallGrass(LOTRMod.tallGrass, 0);
+				return new GrassBlockAndMeta(LOTRMod.tallGrass, 0);
 			}
 			else if (random.nextInt(3) == 0)
 			{
-				return new WorldGenTallGrass(LOTRMod.clover, 0);
+				return new GrassBlockAndMeta(LOTRMod.clover, 0);
 			}
 			else
 			{
-				return new WorldGenTallGrass(Blocks.tallgrass, 1);
+				return new GrassBlockAndMeta(Blocks.tallgrass, 1);
 			}
 		}
 	}

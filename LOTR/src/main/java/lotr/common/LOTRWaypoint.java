@@ -453,6 +453,52 @@ public enum LOTRWaypoint implements LOTRAbstractWaypoint
 		return waypoints;
 	}
 	
+	public static void writeWaypointToNBT(LOTRAbstractWaypoint waypoint, NBTTagCompound nbt, UUID player)
+	{
+		if (waypoint instanceof Custom)
+		{
+			nbt.setBoolean("Custom", true);
+			
+			nbt.setString("PlayerUUID", player.toString());
+			nbt.setInteger("WaypointID", waypoint.getID());
+		}
+		else if (waypoint instanceof LOTRWaypoint)
+		{
+			nbt.setBoolean("Custom", false);
+			
+			LOTRWaypoint wp = (LOTRWaypoint)waypoint;
+			nbt.setString("WaypointName", wp.name());
+		}
+	}
+	
+	public static LOTRAbstractWaypoint loadWaypointFromNBT(NBTTagCompound nbt, UUID player)
+	{
+		boolean custom = nbt.getBoolean("Custom");
+		
+		if (custom)
+		{
+			String playerUUID = nbt.getString("PlayerUUID");
+			if (playerUUID.equals(player.toString()))
+			{
+				int ID = nbt.getInteger("WaypointID");
+				return Custom.waypointForPlayerForID(player, ID);
+			}
+		}
+		else
+		{
+			String waypointName = nbt.getString("WaypointName");
+			for (LOTRWaypoint wp : LOTRWaypoint.values())
+			{
+				if (wp.name().equals(waypointName))
+				{
+					return wp;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 	public static class Custom implements LOTRAbstractWaypoint
 	{
 		public static int INITIAL_CUSTOM = 5;
@@ -539,11 +585,16 @@ public enum LOTRWaypoint implements LOTRAbstractWaypoint
 		
 		public static List<Custom> getWaypointList(EntityPlayer entityplayer)
 		{
-			List waypoints = playerCustomWaypoints.get(entityplayer.getUniqueID());
+			return getWaypointList(entityplayer.getUniqueID());
+		}
+		
+		public static List<Custom> getWaypointList(UUID player)
+		{
+			List waypoints = playerCustomWaypoints.get(player);
 			if (waypoints == null)
 			{
 				waypoints = new ArrayList();
-				playerCustomWaypoints.put(entityplayer.getUniqueID(), waypoints);
+				playerCustomWaypoints.put(player, waypoints);
 			}
 			return waypoints;
 		}
@@ -614,7 +665,12 @@ public enum LOTRWaypoint implements LOTRAbstractWaypoint
 		
 		public static Custom waypointForPlayerForID(EntityPlayer entityplayer, int ID)
 		{
-			List<Custom> list = getWaypointList(entityplayer);
+			return waypointForPlayerForID(entityplayer.getUniqueID(), ID);
+		}
+		
+		public static Custom waypointForPlayerForID(UUID player, int ID)
+		{
+			List<Custom> list = getWaypointList(player);
 			for (int l = 0; l < list.size(); l++)
 			{
 				Custom waypoint = list.get(l);

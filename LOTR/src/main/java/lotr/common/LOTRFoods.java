@@ -77,7 +77,9 @@ public class LOTRFoods
 		new ItemStack(LOTRMod.appleGreen),
 		new ItemStack(LOTRMod.pear),
 		new ItemStack(Items.bread),
-		new ItemStack(LOTRMod.rabbitCooked)
+		new ItemStack(LOTRMod.rabbitCooked),
+		new ItemStack(LOTRMod.blueberry),
+		new ItemStack(LOTRMod.blackberry)
 	});
 	
 	public static LOTRFoods GONDOR_DRINK = new LOTRFoods(new ItemStack[]

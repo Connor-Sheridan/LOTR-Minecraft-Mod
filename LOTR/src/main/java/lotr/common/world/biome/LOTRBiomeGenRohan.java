@@ -62,8 +62,8 @@ public class LOTRBiomeGenRohan extends LOTRBiome
 			
 			setGoodEvilWeight(70, 30);
 			
-			decorator.addRandomStructure(new LOTRWorldGenRohanWatchtower(false), 300);
-			decorator.addRandomStructure(new LOTRWorldGenMeadHall(false), 600);
+			decorator.addRandomStructure(new LOTRWorldGenRohanWatchtower(false), 400);
+			decorator.addRandomStructure(new LOTRWorldGenMeadHall(false), 800);
 			decorator.addRandomStructure(new LOTRWorldGenRohanFortress(false), 800);
 			
 			registerTravellingTrader(LOTREntityElvenTrader.class);
@@ -75,7 +75,7 @@ public class LOTRBiomeGenRohan extends LOTRBiome
 			invasionSpawns.add(new BiomeInvasionListEntry(LOTRFaction.URUK_HAI, LOTRInvasionSpawner.UNCOMMON));
 		}
 		
-		decorator.setTreeCluster(12, 20);
+		decorator.setTreeCluster(12, 30);
 		decorator.flowersPerChunk = 4;
         decorator.grassPerChunk = 15;
 		decorator.doubleGrassPerChunk = 5;

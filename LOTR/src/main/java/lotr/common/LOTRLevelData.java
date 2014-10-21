@@ -25,7 +25,7 @@ import com.mojang.authlib.GameProfile;
 
 public class LOTRLevelData
 {
-	private static int FAST_TRAVEL_COOLDOWN_DEFAULT = 72000;
+	private static int FAST_TRAVEL_COOLDOWN_DEFAULT = 36000;
 	
 	public static int madePortal;
 	public static int madeMiddleEarthPortal;

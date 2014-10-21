@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import lotr.common.block.LOTRBlockCraftingTable;
+import lotr.common.entity.npc.LOTREntityGollum;
 import lotr.common.entity.npc.LOTREntityNPC;
 import lotr.common.inventory.LOTRSlotAlignmentReward;
 import lotr.common.quest.LOTRMiniQuest;
@@ -16,6 +17,7 @@ import lotr.common.world.biome.LOTRBiome;
 import lotr.common.world.biome.LOTRBiomeGenMistyMountains;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.*;
@@ -68,6 +70,10 @@ public class LOTRPlayerData
 	private LOTRTitle.PlayerTitle playerTitle;
 	
 	private int fastTravelTimer;
+	private LOTRAbstractWaypoint targetFTWaypoint;
+	private int ticksUntilFT;
+	private static int ticksUntilFT_max = 10 * 20;
+	
 	private boolean structuresBanned = false;
 	private boolean askedForGandalf = false;
 	
@@ -109,7 +115,7 @@ public class LOTRPlayerData
 			int alignment = entry.getValue();
 			
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setString("Faction", faction.name());
+			nbt.setString("Faction", faction.codeName());
 			nbt.setInteger("Alignment", alignment);
 			alignmentTags.appendTag(nbt);
 		}
@@ -126,7 +132,7 @@ public class LOTRPlayerData
 		for (LOTRFaction faction : takenAlignmentRewards)
 		{
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setString("Faction", faction.name());
+			nbt.setString("Faction", faction.codeName());
 			takenRewardsTags.appendTag(nbt);
 		}
 		playerData.setTag("TakenAlignmentRewards", takenRewardsTags);
@@ -181,7 +187,7 @@ public class LOTRPlayerData
 			int completed = entry.getValue();
 			
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setString("Faction", faction.name());
+			nbt.setString("Faction", faction.codeName());
 			nbt.setInteger("Completed", completed);
 			completedMiniquestTags.appendTag(nbt);
 		}
@@ -207,6 +213,14 @@ public class LOTRPlayerData
 		}
 		
 		playerData.setInteger("FTTimer", fastTravelTimer);
+		if (targetFTWaypoint != null)
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			LOTRWaypoint.writeWaypointToNBT(targetFTWaypoint, nbt, playerUUID);
+			playerData.setTag("TargetFTWaypoint", nbt);
+		}
+		playerData.setInteger("FTTicks", ticksUntilFT);
+		
 		playerData.setBoolean("StructuresBanned", structuresBanned);
 		playerData.setBoolean("AskedForGandalf", askedForGandalf);
 	}
@@ -333,6 +347,13 @@ public class LOTRPlayerData
 		}
 		
 		fastTravelTimer = playerData.getInteger("FTTimer");
+		if (playerData.hasKey("TargetFTWaypoint"))
+		{
+			NBTTagCompound nbt = playerData.getCompoundTag("TargetFTWaypoint");
+			targetFTWaypoint = LOTRWaypoint.loadWaypointFromNBT(nbt, playerUUID);
+		}
+		ticksUntilFT = playerData.getInteger("FTTicks");
+		
 		structuresBanned = playerData.getBoolean("StructuresBanned");
 		askedForGandalf = playerData.getBoolean("AskedForGandalf");
 	}
@@ -361,20 +382,81 @@ public class LOTRPlayerData
 		}
 	}
 	
+	private boolean firstUpdate = true;
+	private double prevPlayerX;
+	private double prevPlayerY;
+	private double prevPlayerZ;
+	
 	public void onUpdate(EntityPlayerMP entityplayer, World world)
 	{
+		if (firstUpdate)
+		{
+			firstUpdate = false;
+			prevPlayerX = entityplayer.posX;
+			prevPlayerY = entityplayer.posY;
+			prevPlayerZ = entityplayer.posZ;
+		}
+		
 		runAchievementChecks(entityplayer, world);
 		
 		if (playerTitle != null && !playerTitle.getTitle().canPlayerUse(entityplayer))
 		{
 			setPlayerTitle(null);
 		}
-		
-		int ftInterval = 20;
-		if (fastTravelTimer > 0 && world.getWorldTime() % ftInterval == 0L)
+
+		if (fastTravelTimer > 0)
 		{
-			fastTravelTimer -= ftInterval;
-			setFTTimer(fastTravelTimer);
+			int ftInterval = 20;
+			if (world.getWorldTime() % ftInterval == 0)
+			{
+				fastTravelTimer -= ftInterval;
+				setFTTimer(fastTravelTimer);
+			}
+		}
+		
+		if (targetFTWaypoint != null)
+		{
+			if (ticksUntilFT > 0)
+			{
+				double dx = entityplayer.posX - prevPlayerX;
+				double dy = entityplayer.posY - prevPlayerY;
+				double dz = entityplayer.posZ - prevPlayerZ;
+				double motionSq = (dx * dx) + (dy * dy) + (dz * dz);
+				
+				double maxVel = 0.04D;
+				if (motionSq > maxVel * maxVel)
+				{
+					entityplayer.addChatMessage(new ChatComponentTranslation("lotr.fastTravel.motion"));
+					setTargetFTWaypoint(null);
+				}
+				else
+				{
+					int interval = 20;
+					if (world.getWorldTime() % interval == 0)
+					{
+						if (ticksUntilFT == ticksUntilFT_max)
+						{
+							entityplayer.addChatMessage(new ChatComponentTranslation("lotr.fastTravel.travelTicksStart", new Object[] {(ticksUntilFT / 20)}));
+						}
+						else if (ticksUntilFT / 20 <= 5)
+						{
+							entityplayer.addChatMessage(new ChatComponentTranslation("lotr.fastTravel.travelTicks", new Object[] {(ticksUntilFT / 20)}));
+						}
+						
+						ticksUntilFT -= interval;
+						setTicksUntilFT(ticksUntilFT);
+					}
+				}
+			}
+			else
+			{
+				fastTravelTo(targetFTWaypoint);
+				setTargetFTWaypoint(null);
+			}
+		}
+		else
+		{
+			setTicksUntilFT(0);
 		}
 		
 		if (world.getWorldTime() % (long)(10 * 60 * 20) == 0L)
@@ -397,6 +479,10 @@ public class LOTRPlayerData
 				entityplayer.playerNetServerHandler.sendPacket(new S3FPacketCustomPayload("lotr.promptAl", Unpooled.buffer(0)));
 			}
 		}
+		
+		prevPlayerX = entityplayer.posX;
+		prevPlayerY = entityplayer.posY;
+		prevPlayerZ = entityplayer.posZ;
 	}
 	
 	public int getAlignment(LOTRFaction faction)
@@ -823,9 +909,19 @@ public class LOTRPlayerData
 			addAchievement(LOTRAchievement.wearFullOrc);
 		}
 		
+		if (isPlayerWearingFull(entityplayer, LOTRMod.armorBlackUruk))
+		{
+			addAchievement(LOTRAchievement.wearFullBlackUruk);
+		}
+		
 		if (isPlayerWearingFull(entityplayer, LOTRMod.armorNearHarad))
 		{
 			addAchievement(LOTRAchievement.wearFullNearHarad);
+		}
+		
+		if (isPlayerWearingFull(entityplayer, LOTRMod.armorUtumno))
+		{
+			addAchievement(LOTRAchievement.wearFullUtumno);
 		}
 	}
 	
@@ -978,6 +1074,118 @@ public class LOTRPlayerData
 		}
 	}
 	
+	public void fastTravelTo(LOTRAbstractWaypoint waypoint)
+	{
+		EntityPlayer player = getPlayer();
+		if (player != null && player instanceof EntityPlayerMP)
+		{
+			EntityPlayerMP entityplayer = (EntityPlayerMP)player;
+			World world = entityplayer.worldObj;
+			
+			double range = 256D;
+			List entities = world.getEntitiesWithinAABB(LOTREntityNPC.class, entityplayer.boundingBox.expand(range, range, range));
+			List hiredUnitsToTransport = new ArrayList();
+			List hiredMountsToTransport = new ArrayList();
+			
+			for (int l = 0; l < entities.size(); l++)
+			{
+				LOTREntityNPC npc = (LOTREntityNPC)entities.get(l);
+				if (npc.hiredNPCInfo.isActive && npc.hiredNPCInfo.getHiringPlayer() == entityplayer && npc.hiredNPCInfo.shouldFollowPlayer())
+				{
+					if (npc.ridingEntity instanceof EntityLiving)
+					{
+						hiredMountsToTransport.add(npc.ridingEntity);
+					}
+					else
+					{
+						hiredUnitsToTransport.add(npc);
+					}
+				}
+				if (npc instanceof LOTREntityGollum && ((LOTREntityGollum)npc).getGollumOwner() == entityplayer && !((LOTREntityGollum)npc).isGollumSitting())
+				{
+					hiredUnitsToTransport.add(npc);
+				}
+			}
+			
+			int i = waypoint.getXCoord();
+			int k = waypoint.getZCoord();
+			int j = world.getTopSolidOrLiquidBlock(i, k);
+			
+			Entity playerMount = entityplayer.ridingEntity;
+			if (playerMount != null)
+			{
+				entityplayer.mountEntity(null);
+				playerMount.setLocationAndAngles(i + 0.5D, j, k + 0.5D, playerMount.rotationYaw, playerMount.rotationPitch);
+			}
+			entityplayer.setPositionAndUpdate(i + 0.5D, j, k + 0.5D);
+			
+			for (int l = 0; l < hiredUnitsToTransport.size(); l++)
+			{
+				LOTREntityNPC npc = (LOTREntityNPC)hiredUnitsToTransport.get(l);
+				npc.setLocationAndAngles(i + 0.5D, j, k + 0.5D, npc.rotationYaw, npc.rotationPitch);
+				npc.fallDistance = 0F;
+				npc.getNavigator().clearPathEntity();
+				npc.setAttackTarget(null);
+			}
+			
+			for (int l = 0; l < hiredMountsToTransport.size(); l++)
+			{
+				EntityLiving mount = (EntityLiving)hiredMountsToTransport.get(l);
+				mount.setLocationAndAngles(i + 0.5D, j, k + 0.5D, mount.rotationYaw, mount.rotationPitch);
+				mount.fallDistance = 0F;
+				mount.getNavigator().clearPathEntity();
+				mount.setAttackTarget(null);
+				
+				if (mount.riddenByEntity instanceof LOTREntityNPC)
+				{
+					LOTREntityNPC npc = (LOTREntityNPC)mount.riddenByEntity;
+					npc.fallDistance = 0F;
+					npc.getNavigator().clearPathEntity();
+					npc.setAttackTarget(null);
+				}
+			}
+			
+			if (!entityplayer.capabilities.isCreativeMode)
+			{
+				LOTRLevelData.getData(entityplayer).setFTTimer(LOTRLevelData.fastTravelCooldown);
+			}
+			
+			ByteBuf data = Unpooled.buffer();
+			
+			data.writeBoolean(waypoint instanceof LOTRWaypoint.Custom);
+			data.writeInt(waypoint.getID());
+			
+			entityplayer.playerNetServerHandler.sendPacket(new S3FPacketCustomPayload("lotr.ftGui", data));
+		}
+	}
+	
+	public boolean canFastTravel()
+	{
+		EntityPlayer entityplayer = getPlayer();
+		if (entityplayer != null)
+		{
+			World world = entityplayer.worldObj;
+			
+			if (!entityplayer.capabilities.isCreativeMode)
+			{
+				double range = 16D;
+				List entities = world.getEntitiesWithinAABB(EntityLiving.class, entityplayer.boundingBox.expand(range, range, range));
+				for (int l = 0; l < entities.size(); l++)
+				{
+					EntityLiving entityliving = (EntityLiving)entities.get(l);
+					if (entityliving.getAttackTarget() == entityplayer)
+					{
+						return false;
+					}
+				}
+			}
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public int getFTTimer()
 	{
 		return fastTravelTimer;
@@ -1002,6 +1210,37 @@ public class LOTRPlayerData
 				((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(packet);
 			}
 		}
+	}
+	
+	public LOTRAbstractWaypoint getTargetFTWaypoint()
+	{
+		return targetFTWaypoint;
+	}
+	
+	public void setTargetFTWaypoint(LOTRAbstractWaypoint wp)
+	{
+		targetFTWaypoint = wp;
+		LOTRLevelData.markDirty();
+		
+		if (wp != null)
+		{
+			setTicksUntilFT(ticksUntilFT_max);
+		}
+		else
+		{
+			setTicksUntilFT(0);
+		}
+	}
+	
+	public int getTicksUntilFT()
+	{
+		return ticksUntilFT;
+	}
+	
+	public void setTicksUntilFT(int i)
+	{
+		ticksUntilFT = i;
+		LOTRLevelData.markDirty();
 	}
 	
 	public LOTRFaction getViewingFaction()

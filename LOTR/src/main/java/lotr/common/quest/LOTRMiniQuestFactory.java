@@ -162,8 +162,17 @@ public enum LOTRMiniQuestFactory
 		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("uncleBirthday").setCollectItem(new ItemStack(LOTRMod.cherryPieItem), 1, 3).setRewardFactor(5F));
 		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("uncleBirthday").setCollectItem(new ItemStack(Items.bread), 4, 12).setRewardFactor(1F));
 		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("uncleBirthday").setCollectItem(new ItemStack(Items.cooked_chicken), 4, 8).setRewardFactor(2F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("uncleBirthday").setCollectItem(new ItemStack(Items.cooked_porkchop), 4, 8).setRewardFactor(2F));
 		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("farmingTool").setCollectItem(new ItemStack(Items.iron_hoe), 1, 3).setRewardFactor(4F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("farmingTool").setCollectItem(new ItemStack(LOTRMod.hoeBronze), 1, 3).setRewardFactor(4F));
 		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("farmingTool").setCollectItem(new ItemStack(Items.bucket), 1, 4).setRewardFactor(3F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("firewood").setCollectItem(new ItemStack(Blocks.log, 1, 0), 10, 30).setRewardFactor(0.5F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("kitchenware").setCollectItem(new ItemStack(LOTRMod.plate), 5, 12).setRewardFactor(1.5F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("kitchenware").setCollectItem(new ItemStack(LOTRMod.mug), 5, 15).setRewardFactor(1F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("books").setCollectItem(new ItemStack(Items.book), 4, 10).setRewardFactor(2F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("pastries").setCollectItem(new ItemStack(LOTRMod.appleCrumbleItem), 3, 5).setRewardFactor(4F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("pastries").setCollectItem(new ItemStack(LOTRMod.cherryPieItem), 3, 5).setRewardFactor(4F));
+		HOBBIT.addQuest(new LOTRMiniQuestCollect.QuestFactory("pastries").setCollectItem(new ItemStack(Items.cake), 3, 5).setRewardFactor(4F));
 		
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWood").setCollectItem(new ItemStack(Blocks.log, 1, 0), 30, 60).setRewardFactor(0.25F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWood").setCollectItem(new ItemStack(Blocks.log, 1, 1), 30, 60).setRewardFactor(0.25F));
@@ -216,7 +225,7 @@ public enum LOTRMiniQuestFactory
 
 		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collect").setCollectItem(new ItemStack(Blocks.sapling, 1, 2), 5, 20).setRewardFactor(1F));
 		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collect").setCollectItem(new ItemStack(LOTRMod.sapling2, 1, 1), 5, 20).setRewardFactor(1F));
-		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectBirchWood").setCollectItem(new ItemStack(Blocks.log, 1, 1), 10, 50).setRewardFactor(0.5F));
+		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectBirchWood").setCollectItem(new ItemStack(Blocks.log, 1, 2), 10, 50).setRewardFactor(0.5F));
 		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectGoldenLeaves").setCollectItem(new ItemStack(LOTRMod.leaves, 1, 1), 10, 20).setRewardFactor(1F));
 		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectMallornSapling").setCollectItem(new ItemStack(LOTRMod.sapling, 1, 1), 3, 10).setRewardFactor(2F));
 		HIGH_ELF.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectMallornNut").setCollectItem(new ItemStack(LOTRMod.mallornNut), 1, 3).setRewardFactor(5F));

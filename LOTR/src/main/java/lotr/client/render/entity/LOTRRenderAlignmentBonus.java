@@ -64,7 +64,7 @@ public class LOTRRenderAlignmentBonus extends Render
 		String s1 = alignmentBonus.name;
 		
 		bindEntityTexture(entity);
-		LOTRTickHandlerClient.drawTexturedModalRect(-MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -19, 0, 18, 16, 16);
+		LOTRTickHandlerClient.drawTexturedModalRect(-MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -19, 0, 36, 16, 16);
 		
 		LOTRTickHandlerClient.drawTextWithShadow(fr, 18 - MathHelper.floor_double((fr.getStringWidth(s) + 18) / 2D), -12, s, transparency);
 		

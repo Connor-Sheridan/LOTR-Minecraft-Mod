@@ -6,6 +6,7 @@ import lotr.common.LOTRMod;
 import lotr.common.entity.npc.LOTREntityElf;
 import lotr.common.entity.npc.LOTREntityGaladhrimLord;
 import lotr.common.world.feature.LOTRWorldGenMallornLarge;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -29,7 +30,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				{
 					for (int k1 = k - 14; k1 <= k + 14; k1++)
 					{
-						if (Math.abs(i1 - i) <= 1 && Math.abs(k1 - k) <= 1)
+						if (Math.abs(i1 - i) <= 2 && Math.abs(k1 - k) <= 2)
 						{
 							continue;
 						}
@@ -43,11 +44,11 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 			
 			int totalGrass = 0;
 			int numGrass = 0;
-			for (int i1 = i - 4; i1 <= i + 4; i1++)
+			for (int i1 = i - 5; i1 <= i + 5; i1++)
 			{
-				for (int k1 = k - 4; k1 <= k + 4; k1++)
+				for (int k1 = k - 5; k1 <= k + 5; k1++)
 				{
-					if (Math.abs(i1 - i) <= 1 && Math.abs(k1 - k) <= 1)
+					if (Math.abs(i1 - i) <= 2 && Math.abs(k1 - k) <= 2)
 					{
 						continue;
 					}
@@ -65,11 +66,11 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 			}
 			
 			int lowestGrass = totalGrass / numGrass;
-			for (int i1 = i - 4; i1 <= i + 4; i1++)
+			for (int i1 = i - 5; i1 <= i + 5; i1++)
 			{
-				for (int k1 = k - 4; k1 <= k + 4; k1++)
+				for (int k1 = k - 5; k1 <= k + 5; k1++)
 				{
-					if (Math.abs(i1 - i) <= 1 && Math.abs(k1 - k) <= 1)
+					if (Math.abs(i1 - i) <= 2 && Math.abs(k1 - k) <= 2)
 					{
 						continue;
 					}
@@ -84,9 +85,9 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 		}
 		else if (usingPlayer != null)
 		{
-			for (int i1 = i - 1; i1 <= i + 1; i1++)
+			for (int i1 = i - 2; i1 <= i + 2; i1++)
 			{
-				for (int k1 = k - 1; k1 <= k + 1; k1++)
+				for (int k1 = k - 2; k1 <= k + 2; k1++)
 				{
 					for (int j1 = j; !LOTRMod.isOpaque(world, i1, j1, k1) && j1 >= 0; j1--)
 					{
@@ -115,11 +116,11 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 			}
 		}
 		
-		for (int i1 = i - 1; i1 <= i + 1; i1++)
+		for (int i1 = i - 2; i1 <= i + 2; i1++)
 		{
 			for (int j1 = j; j1 <= j + 7; j1++)
 			{
-				for (int k1 = k - 1; k1 <= k + 1; k1++)
+				for (int k1 = k - 2; k1 <= k + 2; k1++)
 				{
 					setBlockAndNotifyAdequately(world, i1, j1, k1, LOTRMod.wood, 1);
 				}
@@ -132,7 +133,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 			{
 				int i2 = i1 - i;
 				int k2 = k1 - k;
-				if (Math.abs(i2) > 1 || Math.abs(k2) > 1)
+				if (Math.abs(i2) > 2 || Math.abs(k2) > 2)
 				{
 					int distSq = i2 * i2 + k2 * k2;
 					if (distSq < 100)
@@ -158,7 +159,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				int i2 = i1 - i;
 				int k2 = k1 - k;
 				int distSq = i2 * i2 + k2 * k2;
-				if ((Math.abs(i2) > 1 || Math.abs(k2) > 1) && distSq < 169)
+				if ((Math.abs(i2) > 2 || Math.abs(k2) > 2) && distSq < 169)
 				{
 					setBlockAndNotifyAdequately(world, i1, j + 6, k1, LOTRMod.planks, 1);
 					int i3 = i1;
@@ -189,21 +190,21 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 		buildStairCircle(world, i, j + 6, k, 13, false, false);
 		buildStairCircle(world, i, j + 7, k, 12, false, false);
 		
-		setBlockAndNotifyAdequately(world, i + 2, j + 3, k, LOTRMod.mallornTorch, 1);
-		setBlockAndNotifyAdequately(world, i - 2, j + 3, k, LOTRMod.mallornTorch, 2);
-		setBlockAndNotifyAdequately(world, i, j + 3, k + 2, LOTRMod.mallornTorch, 3);
-		setBlockAndNotifyAdequately(world, i, j + 3, k - 2, LOTRMod.mallornTorch, 4);
+		setBlockAndNotifyAdequately(world, i + 3, j + 3, k, LOTRMod.mallornTorch, 1);
+		setBlockAndNotifyAdequately(world, i - 3, j + 3, k, LOTRMod.mallornTorch, 2);
+		setBlockAndNotifyAdequately(world, i, j + 3, k + 3, LOTRMod.mallornTorch, 3);
+		setBlockAndNotifyAdequately(world, i, j + 3, k - 3, LOTRMod.mallornTorch, 4);
 		
-		for (int i1 = i - 2; i1 <= i + 2; i1++)
+		for (int i1 = i - 3; i1 <= i + 3; i1++)
 		{
-			setBlockAndNotifyAdequately(world, i1, j + 5, k - 2, LOTRMod.stairsMallorn, 6);
-			setBlockAndNotifyAdequately(world, i1, j + 5, k + 2, LOTRMod.stairsMallorn, 7);
+			setBlockAndNotifyAdequately(world, i1, j + 5, k - 3, LOTRMod.stairsMallorn, 6);
+			setBlockAndNotifyAdequately(world, i1, j + 5, k + 3, LOTRMod.stairsMallorn, 7);
 		}
 		
-		for (int k1 = k - 1; k1 <= k + 1; k1++)
+		for (int k1 = k - 2; k1 <= k + 2; k1++)
 		{
-			setBlockAndNotifyAdequately(world, i - 2, j + 5, k1, LOTRMod.stairsMallorn, 4);
-			setBlockAndNotifyAdequately(world, i + 2, j + 5, k1, LOTRMod.stairsMallorn, 5);
+			setBlockAndNotifyAdequately(world, i - 3, j + 5, k1, LOTRMod.stairsMallorn, 4);
+			setBlockAndNotifyAdequately(world, i + 3, j + 5, k1, LOTRMod.stairsMallorn, 5);
 		}
 		
 		for (int i1 = i - 4; i1 <= i + 4; i1 += 8)
@@ -357,13 +358,13 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 		tryPlaceLight(world, i - 2, j, k - 12, random);
 		tryPlaceLight(world, i - 9, j, k - 9, random);
 		
-		for (int i1 = i - 3; i1 <= i - 2; i1++)
+		for (int i1 = i - 4; i1 <= i - 3; i1++)
 		{
-			for (int k1 = k - 2; k1 <= k + 1; k1++)
+			for (int k1 = k - 3; k1 <= k; k1++)
 			{
 				setBlockAndNotifyAdequately(world, i1, j, k1, Blocks.air, 0);
 			}
-			setBlockAndNotifyAdequately(world, i1, j, k - 2, LOTRMod.stairsMallorn, 3);
+			setBlockAndNotifyAdequately(world, i1, j, k - 3, LOTRMod.stairsMallorn, 3);
 		}
 
 		LOTREntityElf elfLord = new LOTREntityGaladhrimLord(world);
@@ -378,14 +379,20 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 	
 	private void buildStaircase(World world, int i, int j, int k)
 	{
-		int i1 = i - 2;
+		int i1 = i - 3;
 		int j1 = j - 1;
-		int k1 = k - 1;
+		int k1 = k - 2;
 		
-		for (int l = 0; !LOTRMod.isOpaque(world, i1, j1, k1) && j1 >= 0; l++)
+		for (int l = 0; j1 >= 0; l++)
 		{
-			int l1 = l % 16;
-			if (l1 < 3)
+			Block block = world.getBlock(i1, j1, k1);
+			if (block.isOpaqueCube() && !block.isWood(world, i1, j1, k1))
+			{
+				break;
+			}
+			
+			int l1 = l % 24;
+			if (l1 < 5)
 			{
 				for (int i2 = i1; i2 >= i1 - 2; i2--)
 				{
@@ -405,7 +412,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				j1--;
 				k1++;
 			}
-			else if (l1 == 3)
+			else if (l1 == 5)
 			{
 				for (int i2 = i1; i2 >= i1 - 2; i2--)
 				{
@@ -438,7 +445,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1 - 2, j1 + 2, k1 + 2, LOTRMod.mallornTorch, 5);
 				i1++;
 			}
-			else if (l1 < 7)
+			else if (l1 < 11)
 			{
 				for (int k2 = k1; k2 <= k1 + 2; k2++)
 				{
@@ -451,14 +458,14 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1, j1, k1 + 1, LOTRMod.stairsMallorn, 1);
 				setBlockAndNotifyAdequately(world, i1, j1, k1 + 2, LOTRMod.stairsMallorn, 7);
 				setBlockAndNotifyAdequately(world, i1, j1 + 1, k1 + 2, LOTRMod.fence, 1);
-				if (l1 > 4)
+				if (l1 > 6)
 				{
 					setBlockAndNotifyAdequately(world, i1, j1 + 2, k1 + 2, LOTRMod.fence, 1);
 				}
 				j1--;
 				i1++;
 			}
-			else if (l1 == 7)
+			else if (l1 == 11)
 			{
 				for (int i2 = i1; i2 <= i1 + 2; i2++)
 				{
@@ -491,7 +498,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1 + 2, j1 + 2, k1 + 2, LOTRMod.mallornTorch, 5);
 				k1--;
 			}
-			else if (l1 < 11)
+			else if (l1 < 17)
 			{
 				for (int i2 = i1; i2 <= i1 + 2; i2++)
 				{
@@ -504,14 +511,14 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1 + 1, j1, k1, LOTRMod.stairsMallorn, 2);
 				setBlockAndNotifyAdequately(world, i1 + 2, j1, k1, LOTRMod.stairsMallorn, 5);
 				setBlockAndNotifyAdequately(world, i1 + 2, j1 + 1, k1, LOTRMod.fence, 1);
-				if (l1 > 8)
+				if (l1 > 12)
 				{
 					setBlockAndNotifyAdequately(world, i1 + 2, j1 + 2, k1, LOTRMod.fence, 1);
 				}
 				j1--;
 				k1--;
 			}
-			else if (l1 == 11)
+			else if (l1 == 17)
 			{
 				for (int i2 = i1; i2 <= i1 + 2; i2++)
 				{
@@ -544,7 +551,7 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1 + 2, j1 + 2, k1 - 2, LOTRMod.mallornTorch, 5);
 				i1--;
 			}
-			else if (l1 < 15)
+			else if (l1 < 23)
 			{
 				for (int k2 = k1; k2 >= k1 - 2; k2--)
 				{
@@ -557,14 +564,14 @@ public class LOTRWorldGenElfLordHouse extends LOTRWorldGenStructureBase
 				setBlockAndNotifyAdequately(world, i1, j1, k1 - 1, LOTRMod.stairsMallorn, 0);
 				setBlockAndNotifyAdequately(world, i1, j1, k1 - 2, LOTRMod.stairsMallorn, 6);
 				setBlockAndNotifyAdequately(world, i1, j1 + 1, k1 - 2, LOTRMod.fence, 1);
-				if (l1 > 12)
+				if (l1 > 18)
 				{
 					setBlockAndNotifyAdequately(world, i1, j1 + 2, k1 - 2, LOTRMod.fence, 1);
 				}
 				j1--;
 				i1--;
 			}
-			else if (l1 == 15)
+			else if (l1 == 23)
 			{
 				for (int i2 = i1; i2 >= i1 - 2; i2--)
 				{

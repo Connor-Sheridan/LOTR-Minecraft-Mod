@@ -59,7 +59,7 @@ public abstract class LOTRMiniQuest implements Comparable<LOTRMiniQuest>
 		nbt.setLong("UUIDMost", entityUUID.getMostSignificantBits());
 		nbt.setLong("UUIDLeast", entityUUID.getLeastSignificantBits());
 		nbt.setString("Owner", entityName);
-		nbt.setString("Faction", entityFaction.name());
+		nbt.setString("Faction", entityFaction.codeName());
 		nbt.setBoolean("OwnerDead", entityDead);
 		
 		nbt.setBoolean("Completed", completed);

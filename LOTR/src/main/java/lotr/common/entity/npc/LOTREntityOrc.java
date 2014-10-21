@@ -201,12 +201,6 @@ public abstract class LOTREntityOrc extends LOTREntityNPC
     }
 	
 	@Override
-	protected LOTRAchievement getKillAchievement()
-	{
-		return LOTRAchievement.killOrc;
-	}
-	
-	@Override
 	public boolean canPickUpLoot()
 	{
 		return !(this instanceof IRangedAttackMob);

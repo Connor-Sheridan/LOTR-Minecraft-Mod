@@ -19,15 +19,18 @@ import org.lwjgl.opengl.GL12;
 
 public class LOTRGuiAchievementDisplay extends Gui
 {
-	private static ResourceLocation guiTexture = new ResourceLocation("textures/gui/achievement/achievement_background.png");
+	private static ResourceLocation guiTexture = new ResourceLocation("lotr:gui/achievements/icons.png");
+	private static int guiXSize = 190;
+	private static int guiYSize = 32;
+	
     private Minecraft mc;
+    private RenderItem itemRenderer;
+    
     private int achievementWindowWidth;
     private int achievementWindowHeight;
     private String achievementGetLocalText;
-    private Map achievements = new HashMap();
-    private Set achievementsToRemove = new HashSet();
-    private RenderItem itemRenderer;
-    private boolean hasAchievement;
+    private Map<LOTRAchievement, Long> achievements = new HashMap();
+    private Set<LOTRAchievement> achievementsToRemove = new HashSet();
 
     public LOTRGuiAchievementDisplay()
     {
@@ -39,7 +42,6 @@ public class LOTRGuiAchievementDisplay extends Gui
     {
 		achievements.put(achievement, Minecraft.getSystemTime());
         achievementGetLocalText = StatCollector.translateToLocal("achievement.get");
-        hasAchievement = true;
     }
 
     private void updateAchievementWindowScale()
@@ -67,63 +69,68 @@ public class LOTRGuiAchievementDisplay extends Gui
     {
         if (!achievements.isEmpty())
         {
-			int l = 0;
-			for (Object obj : achievements.keySet())
+			int index = 0;
+			for (LOTRAchievement achievement : achievements.keySet())
 			{
-				LOTRAchievement achievement = (LOTRAchievement)obj;
-				long achievementTime = (Long)achievements.get(achievement);
+				long achievementTime = achievements.get(achievement);
 				double d0 = (double)(Minecraft.getSystemTime() - achievementTime) / 3000D;
 				
-				if (hasAchievement && (d0 < 0D || d0 > 1D))
+				if (d0 < 0D || d0 > 1D)
 				{
 					achievementsToRemove.add(achievement);
 				}
 				else
 				{
 					updateAchievementWindowScale();
-					GL11.glDisable(GL11.GL_DEPTH_TEST);
-					GL11.glDepthMask(false);
-					double d1 = d0 * 2D;
-
-					if (d1 > 1D)
+					
+					if (Minecraft.isGuiEnabled())
 					{
-						d1 = 2D - d1;
+						GL11.glEnable(GL11.GL_ALPHA_TEST);
+						GL11.glDisable(GL11.GL_DEPTH_TEST);
+						GL11.glDepthMask(false);
+						double d1 = d0 * 2D;
+	
+						if (d1 > 1D)
+						{
+							d1 = 2D - d1;
+						}
+	
+						d1 *= 4D;
+						d1 = 1D - d1;
+	
+						if (d1 < 0D)
+						{
+							d1 = 0D;
+						}
+	
+						d1 *= d1;
+						d1 *= d1;
+						int i = achievementWindowWidth - guiXSize;
+						int j = 0 - (int)(d1 * 36D);
+						j += index * (guiYSize + 8);
+						GL11.glColor4f(1F, 1F, 1F, 1F);
+						GL11.glEnable(GL11.GL_TEXTURE_2D);
+						mc.getTextureManager().bindTexture(guiTexture);
+						GL11.glDisable(GL11.GL_LIGHTING);
+						drawTexturedModalRect(i, j, 0, 148, guiXSize, guiYSize);
+	
+						mc.fontRenderer.drawString(achievementGetLocalText, i + 30, j + 7, 0x7A5D43);
+						mc.fontRenderer.drawString(achievement.getTitle(), i + 30, j + 18, 0x7A5D43);
+	
+						RenderHelper.enableGUIStandardItemLighting();
+						GL11.glDisable(GL11.GL_LIGHTING);
+						GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+						GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+						GL11.glEnable(GL11.GL_LIGHTING);
+						itemRenderer.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), achievement.icon, i + 8, j + 8);
+						GL11.glDisable(GL11.GL_LIGHTING);
+						GL11.glDepthMask(true);
+						GL11.glEnable(GL11.GL_DEPTH_TEST);
+						GL11.glDisable(GL11.GL_ALPHA_TEST);
 					}
-
-					d1 *= 4D;
-					d1 = 1D - d1;
-
-					if (d1 < 0D)
-					{
-						d1 = 0D;
-					}
-
-					d1 *= d1;
-					d1 *= d1;
-					int i = achievementWindowWidth - 160;
-					int j = 0 - (int)(d1 * 36D);
-					j += l * 40;
-					GL11.glColor4f(1F, 1F, 1F, 1F);
-					GL11.glEnable(GL11.GL_TEXTURE_2D);
-					mc.getTextureManager().bindTexture(guiTexture);
-					GL11.glDisable(GL11.GL_LIGHTING);
-					drawTexturedModalRect(i, j, 96, 202, 160, 32);
-
-					mc.fontRenderer.drawString(achievementGetLocalText, i + 30, j + 7, -256);
-					mc.fontRenderer.drawString(achievement.getTitle(), i + 30, j + 18, -1);
-
-					RenderHelper.enableGUIStandardItemLighting();
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-					GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-					GL11.glEnable(GL11.GL_LIGHTING);
-					itemRenderer.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.getTextureManager(), achievement.icon, i + 8, j + 8);
-					GL11.glDisable(GL11.GL_LIGHTING);
-					GL11.glDepthMask(true);
-					GL11.glEnable(GL11.GL_DEPTH_TEST);
 				}
 				
-				l++;
+				index++;
 			}
 		}
 		

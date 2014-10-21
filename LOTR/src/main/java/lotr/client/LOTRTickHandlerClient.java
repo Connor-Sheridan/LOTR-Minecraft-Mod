@@ -7,7 +7,9 @@ import java.util.*;
 
 import lotr.client.fx.LOTREntityDeadMarshFace;
 import lotr.client.gui.*;
+import lotr.client.model.LOTRModelCompass;
 import lotr.client.render.tileentity.LOTRTileEntityMobSpawnerRenderer;
+import lotr.client.sound.LOTRAmbience;
 import lotr.common.*;
 import lotr.common.block.LOTRBlockLeavesBase;
 import lotr.common.entity.item.LOTREntityPortal;
@@ -229,7 +231,7 @@ public class LOTRTickHandlerClient
 					LOTRBiome.updateWaterColor(i, j, k);
 					LOTRBiomeGenUtumno.updateFogColor(i, j, k);
 					
-					if (LOTRMod.enableMistyMountainsMist)
+					if (LOTRConfig.enableMistyMountainsMist)
 					{
 						BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 						if (entityplayer.posY >= 72 && biome instanceof LOTRBiomeGenMistyMountains && biome != LOTRBiome.mistyMountainsFoothills && world.canBlockSeeTheSky(i, j, k) && world.getSavedLightValue(EnumSkyBlock.Block, i, j, k) < 7)
@@ -286,6 +288,11 @@ public class LOTRTickHandlerClient
 					if (newDate > 0)
 					{
 						newDate--;
+					}
+					
+					if (LOTRConfig.enableAmbience)
+					{
+						LOTRAmbience.update(world, entityplayer);
 					}
 				}
 			}
@@ -346,7 +353,7 @@ public class LOTRTickHandlerClient
 			
 			if (entityplayer != null && world != null)
 			{
-				if (world.provider instanceof LOTRWorldProvider || LOTRMod.alwaysShowAlignment)
+				if (world.provider instanceof LOTRWorldProvider || LOTRConfig.alwaysShowAlignment)
 				{
 					alignmentXPosCurrent = alignmentXPosBase;
 					int interval = (int)(((float)alignmentYPosBase + 20F) / 10F);
@@ -373,6 +380,53 @@ public class LOTRTickHandlerClient
 						}
 					}
 					renderAlignment(minecraft);
+					
+					if (LOTRConfig.enableOnscreenCompass && minecraft.currentScreen == null && !minecraft.gameSettings.showDebugInfo)
+					{
+						GL11.glPushMatrix();
+						
+						ScaledResolution resolution = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+						int i = resolution.getScaledWidth();
+						int j = resolution.getScaledHeight();
+						
+						int compassX = i - 60;
+						int compassY = 40;
+						
+						GL11.glTranslatef((float)compassX, compassY, 0F);
+						
+						float rotation = entityplayer.prevRotationYaw + (entityplayer.rotationYaw - entityplayer.prevRotationYaw) * event.renderTickTime;
+						rotation = 180F - rotation;
+						LOTRModelCompass.compassModel.render(1F, rotation);
+						
+						GL11.glPopMatrix();
+						
+						if (LOTRConfig.compassExtraInfo)
+						{
+							GL11.glColor4f(1F, 1F, 1F, 1F);
+							
+							float scale = 0.5F;
+							float invScale = 1F / scale;
+							
+							compassX *= invScale;
+							compassY *= invScale;
+							
+							GL11.glScalef(scale, scale, scale);
+							
+							String coords = Math.round(entityplayer.posX) + ", " + MathHelper.floor_double(entityplayer.boundingBox.minY) + ", " + Math.round(entityplayer.posZ);
+							
+							FontRenderer fontRenderer = minecraft.fontRenderer;
+							fontRenderer.drawString(coords, compassX - fontRenderer.getStringWidth(coords) / 2, compassY + 70, 0xFFFFFF);
+							
+							BiomeGenBase biome = world.getBiomeGenForCoords(MathHelper.floor_double(entityplayer.posX), MathHelper.floor_double(entityplayer.posZ));
+							if (biome instanceof LOTRBiome)
+							{
+								String biomeName = ((LOTRBiome)biome).getBiomeDisplayName();
+								fontRenderer.drawString(biomeName, compassX - fontRenderer.getStringWidth(biomeName) / 2, compassY - 70, 0xFFFFFF);
+							}
+							
+							GL11.glScalef(invScale, invScale, invScale);
+						}
+					}
 				}
 				
 				if (entityplayer.dimension == LOTRDimension.MIDDLE_EARTH.dimensionID && minecraft.currentScreen == null)
@@ -559,7 +613,7 @@ public class LOTRTickHandlerClient
 					}
 				}
 				
-				if (LOTRMod.enableMistyMountainsMist)
+				if (LOTRConfig.enableMistyMountainsMist)
 				{
 					if (mistTick > 0)
 					{
@@ -763,12 +817,6 @@ public class LOTRTickHandlerClient
 		ScaledResolution resolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 		int i = resolution.getScaledWidth();
 		int j = resolution.getScaledHeight();
-        GL11.glColor4f(1F, 1F, 1F, 1F);
-        mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);
-		
-		boolean boss = BossStatus.bossName != null && BossStatus.statusBarTime > 0;
-		alignmentXPosBase = (i / 2) + LOTRMod.alignmentXOffset;
-		alignmentYPosBase = (boss ? 22 : 2) + LOTRMod.alignmentYOffset;
 		
 		if (firstAlignmentRender)
 		{
@@ -777,14 +825,21 @@ public class LOTRTickHandlerClient
 			firstAlignmentRender = false;
 		}
 		
-        drawTexturedModalRect(alignmentXPosCurrent - 116, alignmentYPosCurrent, 0, 0, 232, 18);
+		boolean boss = BossStatus.bossName != null && BossStatus.statusBarTime > 0;
+		alignmentXPosBase = (i / 2) + LOTRConfig.alignmentXOffset;
+		alignmentYPosBase = (boss ? 22 : 2) + LOTRConfig.alignmentYOffset;
+
+        GL11.glColor4f(1F, 1F, 1F, 1F);
+        mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);
         
         float[] factionColors = currentAlignmentFaction.factionColor.getColorComponents(null);
         GL11.glColor4f(factionColors[0], factionColors[1], factionColors[2], 1F);
-        drawTexturedModalRect(alignmentXPosCurrent - 116, alignmentYPosCurrent, 0, 34, 232, 18);
+        drawTexturedModalRect(alignmentXPosCurrent - 116, alignmentYPosCurrent, 0, 18, 232, 18);
+		
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+        drawTexturedModalRect(alignmentXPosCurrent - 116, alignmentYPosCurrent, 0, 0, 232, 18);
 
-        GL11.glColor4f(1F, 1F, 1F, 1F);
-		drawTexturedModalRect(alignmentXPosCurrent - 8 + calculateAlignmentDisplay(alignment), alignmentYPosCurrent + 1, 16 * Math.round(alignmentChange / 3), 18, 16, 16);
+		drawTexturedModalRect(alignmentXPosCurrent - 8 + calculateAlignmentDisplay(alignment), alignmentYPosCurrent + 1, 16 * Math.round(alignmentChange / 3), 36, 16, 16);
 		
 		if (alignmentYPosCurrent == alignmentYPosBase)
 		{
@@ -792,8 +847,8 @@ public class LOTRTickHandlerClient
 			int x = alignmentXPosCurrent;
 			int y = alignmentYPosCurrent + 22;
 			
-			String s = currentAlignmentFaction.factionName();
-			drawTextWithShadow(f, x - f.getStringWidth(s) / 2, y, s, 1F);
+			String name = currentAlignmentFaction.factionName();
+			drawTextWithShadow(f, x - f.getStringWidth(name) / 2, y, name, 1F);
 		
 			int max = calculateMaxDisplayValue(alignment);
 			String sMax = "+" + String.valueOf(max);
@@ -808,12 +863,12 @@ public class LOTRTickHandlerClient
 			y /= 2;
 
 			y += f.FONT_HEIGHT + 4;
-			s = String.valueOf(alignment);
+			String value = String.valueOf(alignment);
 			if (alignment > 0)
 			{
-				s = "+" + s;
+				value = "+" + value;
 			}
-			drawTextWithShadow(f, x - f.getStringWidth(s) / 2, y, s, 1F);
+			drawTextWithShadow(f, x - f.getStringWidth(value) / 2, y, value, 1F);
 		}
 	}
 	

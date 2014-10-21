@@ -70,7 +70,6 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 		NetworkRegistry.INSTANCE.newChannel("lotr.mqAccept", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.mqDelete", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.titleSelect", this);
-		NetworkRegistry.INSTANCE.newChannel("lotr.editBannerAlignment", this);
 	}
 	
 	@Override
@@ -670,7 +669,8 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 				if (entity instanceof EntityPlayerMP)
 				{
 					EntityPlayerMP entityplayer = (EntityPlayerMP)entity;
-					if (LOTRLevelData.getData(entityplayer).getFTTimer() <= 0)
+					LOTRPlayerData playerData = LOTRLevelData.getData(entityplayer);
+					if (playerData.getFTTimer() <= 0)
 					{
 						boolean isCustom = data.readBoolean();
 						int waypointID = data.readInt();
@@ -686,103 +686,16 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 						
 						if (waypoint != null && waypoint.hasPlayerUnlocked(entityplayer))
 						{
-							boolean canTravel = true;
-							
-							if (!entityplayer.capabilities.isCreativeMode)
-							{
-								double range = 16D;
-								List entities = world.getEntitiesWithinAABB(EntityLiving.class, entityplayer.boundingBox.expand(range, range, range));
-								for (int l = 0; l < entities.size(); l++)
-								{
-									EntityLiving entityliving = (EntityLiving)entities.get(l);
-									if (entityliving.getAttackTarget() == entityplayer)
-									{
-										canTravel = false;
-										break;
-									}
-								}
-							}
+							boolean canTravel = playerData.canFastTravel();
 							
 							if (!canTravel)
 							{
 								entityplayer.closeScreen();
-								entityplayer.addChatMessage(new ChatComponentTranslation("chat.lotr.fastTravel.underAttack"));
+								entityplayer.addChatMessage(new ChatComponentTranslation("lotr.fastTravel.underAttack"));
 							}
 							else
 							{
-								List entities = world.getEntitiesWithinAABB(LOTREntityNPC.class, entityplayer.boundingBox.expand(256D, 256D, 256D));
-								List hiredUnitsToTransport = new ArrayList();
-								List hiredMountsToTransport = new ArrayList();
-								
-								for (int l = 0; l < entities.size(); l++)
-								{
-									LOTREntityNPC npc = (LOTREntityNPC)entities.get(l);
-									if (npc.hiredNPCInfo.isActive && npc.hiredNPCInfo.getHiringPlayer() == entityplayer && npc.hiredNPCInfo.shouldFollowPlayer())
-									{
-										if (npc.ridingEntity instanceof EntityLiving)
-										{
-											hiredMountsToTransport.add(npc.ridingEntity);
-										}
-										else
-										{
-											hiredUnitsToTransport.add(npc);
-										}
-									}
-									if (npc instanceof LOTREntityGollum && ((LOTREntityGollum)npc).getGollumOwner() == entityplayer && !((LOTREntityGollum)npc).isGollumSitting())
-									{
-										hiredUnitsToTransport.add(npc);
-									}
-								}
-								
-								int i = waypoint.getXCoord();
-								int k = waypoint.getZCoord();
-								int j = world.getTopSolidOrLiquidBlock(i, k);
-								
-								Entity playerMount = entityplayer.ridingEntity;
-								if (playerMount != null)
-								{
-									entityplayer.mountEntity(null);
-									playerMount.setLocationAndAngles(i + 0.5D, j, k + 0.5D, playerMount.rotationYaw, playerMount.rotationPitch);
-								}
-								entityplayer.setPositionAndUpdate(i + 0.5D, j, k + 0.5D);
-								
-								for (int l = 0; l < hiredUnitsToTransport.size(); l++)
-								{
-									LOTREntityNPC npc = (LOTREntityNPC)hiredUnitsToTransport.get(l);
-									npc.setLocationAndAngles(i + 0.5D, j, k + 0.5D, npc.rotationYaw, npc.rotationPitch);
-									npc.fallDistance = 0F;
-									npc.getNavigator().clearPathEntity();
-									npc.setAttackTarget(null);
-								}
-								
-								for (int l = 0; l < hiredMountsToTransport.size(); l++)
-								{
-									EntityLiving mount = (EntityLiving)hiredMountsToTransport.get(l);
-									mount.setLocationAndAngles(i + 0.5D, j, k + 0.5D, mount.rotationYaw, mount.rotationPitch);
-									mount.fallDistance = 0F;
-									mount.getNavigator().clearPathEntity();
-									mount.setAttackTarget(null);
-									
-									if (mount.riddenByEntity instanceof LOTREntityNPC)
-									{
-										LOTREntityNPC npc = (LOTREntityNPC)mount.riddenByEntity;
-										npc.fallDistance = 0F;
-										npc.getNavigator().clearPathEntity();
-										npc.setAttackTarget(null);
-									}
-								}
-								
-								if (!entityplayer.capabilities.isCreativeMode)
-								{
-									LOTRLevelData.getData(entityplayer).setFTTimer(LOTRLevelData.fastTravelCooldown);
-								}
-								
-								ByteBuf data1 = Unpooled.buffer();
-								
-								data1.writeBoolean(isCustom);
-								data1.writeInt(waypointID);
-								
-								entityplayer.playerNetServerHandler.sendPacket(new S3FPacketCustomPayload("lotr.ftGui", data1));
+								playerData.setTargetFTWaypoint(waypoint);
 							}
 						}
 					}
@@ -866,7 +779,11 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 					int waypoints = LOTRWaypoint.Custom.getWaypointList(entityplayer).size();
 					if (waypoints <= LOTRWaypoint.Custom.getMaxAvailableToPlayer(entityplayer))
 					{
-						LOTRWaypoint.Custom.addCustomWaypoint(entityplayer, new LOTRWaypoint.Custom(waypointName, entityplayer.posX, entityplayer.posZ));
+						boolean protection = LOTRBannerProtection.isProtectedByBanner(world, entityplayer, LOTRBannerProtection.forPlayer(entityplayer), true);
+						if (!protection)
+						{
+							LOTRWaypoint.Custom.addCustomWaypoint(entityplayer, new LOTRWaypoint.Custom(waypointName, entityplayer.posX, entityplayer.posZ));
+						}
 					}
 				}
 			}
@@ -925,17 +842,26 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 				if (entity instanceof LOTREntityBanner)
 				{
 					LOTREntityBanner banner = (LOTREntityBanner)entity;
-					banner.playerSpecificProtection = data.readBoolean();
+					banner.setPlayerSpecificProtection(data.readBoolean());
+					banner.setSelfProtection(data.readBoolean());
+					banner.setAlignmentProtection(data.readInt());
 					
 					int index = 0;
 					while ((index = data.readInt()) > 0)
 					{
 						int length = data.readByte();
-						String name = data.readBytes(length).toString(Charsets.UTF_8);
-						UUID uuid = UUID.fromString(PreYggdrasilConverter.func_152719_a(name));
-						if (uuid != null)
+						if (length == -1)
 						{
-							banner.whitelistPlayer(index, uuid);
+							banner.whitelistPlayer(index, null);
+						}
+						else
+						{
+							String name = data.readBytes(length).toString(Charsets.UTF_8);
+							UUID uuid = UUID.fromString(PreYggdrasilConverter.func_152719_a(name));
+							if (uuid != null)
+							{
+								banner.whitelistPlayer(index, uuid);
+							}
 						}
 					}
 				}
@@ -1034,22 +960,6 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 							playerData.setPlayerTitle(new LOTRTitle.PlayerTitle(title, color));
 						}
 					}
-				}
-			}
-		}
-		
-		else if (channel.equals("lotr.editBannerAlignment"))
-		{
-			int id = data.readInt();
-			World world = DimensionManager.getWorld(data.readByte());
-			if (world != null)
-			{
-				Entity entity = world.getEntityByID(id);
-				if (entity instanceof LOTREntityBanner)
-				{
-					LOTREntityBanner banner = (LOTREntityBanner)entity;
-					int alignment = data.readInt();
-					banner.setAlignmentProtection(alignment);
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import io.netty.channel.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.Arrays;
 
 import lotr.client.fx.LOTREntityAlignmentBonus;
 import lotr.client.fx.LOTREntityGandalfFireballExplodeFX;
@@ -70,7 +71,7 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 		NetworkRegistry.INSTANCE.newChannel("lotr.rewardItem", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.hearts", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.eatFood", this);
-		NetworkRegistry.INSTANCE.newChannel("lotr.bannerGui", this);
+		NetworkRegistry.INSTANCE.newChannel("lotr.bannerData", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.npcUUID", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.smokes", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.miniquest", this);
@@ -478,26 +479,42 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 			}
 		}
 		
-		else if (channel.equals("lotr.bannerGui"))
+		else if (channel.equals("lotr.bannerData"))
 		{
 			Entity entity = world.getEntityByID(data.readInt());
 			if (entity instanceof LOTREntityBanner)
 			{
 				LOTREntityBanner banner = (LOTREntityBanner)entity;
-				banner.playerSpecificProtection = data.readBoolean();
+				
+				boolean openGui = data.readBoolean();
+				
+				banner.setPlayerSpecificProtection(data.readBoolean());
+				banner.setSelfProtection(data.readBoolean());
 				banner.setAlignmentProtection(data.readInt());
-				
-				LOTRGuiBanner gui = new LOTRGuiBanner(banner);
-				
+
+				String[] usernames = new String[LOTREntityBanner.MAX_PLAYERS];
 				int index = 0;
 				while ((index = data.readInt()) >= 0)
 				{
+					UUID player = new UUID(data.readLong(), data.readLong());
+					banner.whitelistPlayer(index, player);
+					
 					int length = data.readByte();
-					String name = data.readBytes(length).toString(Charsets.UTF_8);
-					gui.usernamesReceived[index] = name;
+					ByteBuf nameData = data.readBytes(length);
+					
+					if (openGui)
+					{
+						String name = nameData.toString(Charsets.UTF_8);
+						usernames[index] = name;
+					}
 				}
-				
-				mc.displayGuiScreen(gui);
+
+				if (openGui)
+				{
+					LOTRGuiBanner gui = new LOTRGuiBanner(banner);
+					System.arraycopy(usernames, 0, gui.usernamesReceived, 0, usernames.length);
+					mc.displayGuiScreen(gui);
+				}
 			}
 		}
 		

@@ -79,7 +79,7 @@ public class LOTREntityInvasionSpawner extends Entity
 	@Override
     public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		nbt.setString("Faction", invasionFaction.name());
+		nbt.setString("Faction", invasionFaction.codeName());
 		nbt.setInteger("MobsRemaining", mobsRemaining);
 		nbt.setInteger("TimeSinceSpawn", timeSinceLastSpawn);
 	}

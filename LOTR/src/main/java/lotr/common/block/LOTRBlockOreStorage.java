@@ -1,17 +1,10 @@
 package lotr.common.block;
 
 import java.util.Arrays;
-import java.util.List;
 
-import lotr.common.LOTRCreativeTabs;
 import lotr.common.LOTRMod;
 import lotr.common.tileentity.LOTRTileEntityGulduril;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -20,22 +13,19 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LOTRBlockOreStorage extends Block
+public class LOTRBlockOreStorage extends LOTRBlockOreStorageBase
 {
-	@SideOnly(Side.CLIENT)
-	private IIcon[] oreStorageIcons;
 	@SideOnly(Side.CLIENT)
 	private IIcon orcSteelSideIcon;
 	@SideOnly(Side.CLIENT)
 	private IIcon morgulSteelSideIcon;
 	@SideOnly(Side.CLIENT)
 	private IIcon[] mithrilCTMIcons;
-	private String[] oreStorageNames = {"copper", "tin", "bronze", "silver", "mithril", "orcSteel", "quendite", "dwarfSteel", "galvorn", "urukSteel", "naurite", "gulduril", "morgulSteel", "sulfur", "saltpeter", "blueDwarfSteel"};
 
 	public LOTRBlockOreStorage()
 	{
-		super(Material.iron);
-		setCreativeTab(LOTRCreativeTabs.tabBlock);
+		super();
+		setOreStorageNames("copper", "tin", "bronze", "silver", "mithril", "orcSteel", "quendite", "dwarfSteel", "galvorn", "urukSteel", "naurite", "gulduril", "morgulSteel", "sulfur", "saltpeter", "blueDwarfSteel");
 	}
 	
 	@Override
@@ -48,7 +38,7 @@ public class LOTRBlockOreStorage extends Block
 			int[] mithril = surroundingMithril(world, i, j, k, side);
 			if (Arrays.equals(mithril, new int[]{0, 0, 0, 0}))
 			{
-				return oreStorageIcons[4];
+				return getIcon(side, meta);
 			}
 			if (Arrays.equals(mithril, new int[]{0, 1, 1, 0}))
 			{
@@ -111,18 +101,13 @@ public class LOTRBlockOreStorage extends Block
 				return mithrilCTMIcons[14];
 			}
 		}
-		return getIcon(side, meta);
+		return super.getIcon(world, i, j, k, side);
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int i, int j)
 	{
-		if (j >= oreStorageNames.length)
-		{
-			j = 0;
-		}
-		
 		if (j == 5 && i > 1)
 		{
 			return orcSteelSideIcon;
@@ -133,29 +118,7 @@ public class LOTRBlockOreStorage extends Block
 			return morgulSteelSideIcon;
 		}
 		
-		return oreStorageIcons[j];
-	}
-	
-	@Override
-	public int damageDropped(int i)
-	{
-		return i;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, List list)
-    {
-		for (int j = 0; j <= 15; j++)
-		{
-			list.add(new ItemStack(item, 1, j));
-		}
-    }
-	
-	@Override
-    public boolean isBeaconBase(IBlockAccess world, int i, int j, int k, int beaconX, int beaconY, int beaconZ)
-    {
-		return true;
+		return super.getIcon(i, j);
 	}
 	
 	@Override
@@ -189,13 +152,7 @@ public class LOTRBlockOreStorage extends Block
         }
         return null;
     }
-	
-	@Override
-	protected boolean canSilkHarvest()
-	{
-		return true;
-	}
-	
+
 	private int[] surroundingMithril(IBlockAccess world, int i, int j, int k, int side)
 	{
 		int[] mithril = new int[4];
@@ -253,11 +210,7 @@ public class LOTRBlockOreStorage extends Block
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister)
     {
-        oreStorageIcons = new IIcon[oreStorageNames.length];
-        for (int i = 0; i < oreStorageNames.length; i++)
-        {
-            oreStorageIcons[i] = iconregister.registerIcon(getTextureName() + "_" + oreStorageNames[i]);
-        }
+        super.registerBlockIcons(iconregister);
 		
 		orcSteelSideIcon = iconregister.registerIcon(getTextureName() + "_orcSteel_side");
 		morgulSteelSideIcon = iconregister.registerIcon(getTextureName() + "_morgulSteel_side");

@@ -59,19 +59,19 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 		
 		if (rand.nextInt(500) == 0)
 		{
-			setWargType(3);
+			setWargType(WargType.WHITE);
 		}
 		else if (rand.nextInt(20) == 0)
 		{
-			setWargType(2);
+			setWargType(WargType.BLACK);
 		}
 		else if (rand.nextInt(3) == 0)
 		{
-			setWargType(1);
+			setWargType(WargType.GREY);
 		}
 		else
 		{
-			setWargType(0);
+			setWargType(WargType.BROWN);
 		}
 	}
 	
@@ -96,14 +96,15 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
     	dataWatcher.updateObject(17, Byte.valueOf(flag ? (byte)1 : (byte)0));
     }
 	
-	public int getWargType()
+	public WargType getWargType()
 	{
-		return dataWatcher.getWatchableObjectByte(18);
+		int i = dataWatcher.getWatchableObjectByte(18);
+		return WargType.forID(i);
 	}
 	
-	public void setWargType(int i)
+	public void setWargType(WargType w)
 	{
-		dataWatcher.updateObject(18, Byte.valueOf((byte)i));
+		dataWatcher.updateObject(18, Byte.valueOf((byte)w.wargID));
 	}
 	
 	public ItemStack getWargArmorWatched()
@@ -287,7 +288,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
     public void writeEntityToNBT(NBTTagCompound nbt)
     {
         super.writeEntityToNBT(nbt);
-        nbt.setByte("WargType", (byte)getWargType());
+        nbt.setByte("WargType", (byte)getWargType().wargID);
         
         if (wargInventory.getStackInSlot(0) != null)
         {
@@ -304,7 +305,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
     public void readEntityFromNBT(NBTTagCompound nbt)
     {
         super.readEntityFromNBT(nbt);
-		setWargType(nbt.getByte("WargType"));
+		setWargType(WargType.forID(nbt.getByte("WargType")));
 		
         if (nbt.hasKey("WargSaddleItem"))
         {
@@ -470,7 +471,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 			dropItem(LOTRMod.wargFur, 1);
 		}
 		
-		j = rand.nextInt(2) + rand.nextInt(i + 1);
+		j = 2 + rand.nextInt(2) + rand.nextInt(i + 1);
 		for (int k = 0; k < j; k++)
 		{
 			dropItem(LOTRMod.wargBone, 1);
@@ -478,7 +479,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 		
 		if (flag && rand.nextInt(50) == 0)
 		{
-			entityDropItem(new ItemStack(LOTRMod.wargskinRug, 1, getWargType()), 0F);
+			entityDropItem(new ItemStack(LOTRMod.wargskinRug, 1, getWargType().wargID), 0F);
 		}
 	}
 	
@@ -486,12 +487,6 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 	public boolean canDropPouch()
 	{
 		return false;
-	}
-	
-	@Override
-	protected LOTRAchievement getKillAchievement()
-	{
-		return LOTRAchievement.killWarg;
 	}
 	
 	@Override
@@ -550,5 +545,38 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 	public boolean allowLeashing()
 	{
 		return isNPCTamed();
+	}
+	
+	public static enum WargType
+	{
+		BROWN(0),
+		GREY(1),
+		BLACK(2),
+		WHITE(3),
+		RED(4);
+		
+		public final int wargID;
+
+		private WargType(int i)
+		{
+			wargID = i;
+		}
+		
+		public String textureName()
+		{
+			return String.valueOf(wargID);
+		}
+		
+		public static WargType forID(int ID)
+		{
+			for (WargType w : values())
+			{
+				if (w.wargID == ID)
+				{
+					return w;
+				}
+			}
+			return BROWN;
+		}
 	}
 }

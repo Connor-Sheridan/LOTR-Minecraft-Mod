@@ -87,30 +87,26 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
             }
             return FIRE;
 		}
-		
-		private static boolean createdSpawnLists = false;
-		
-		public static void createSpawnLists()
+
+		private static void createSpawnLists()
 		{
-			if (createdSpawnLists)
+			if (!ICE.npcSpawnList.isEmpty())
 			{
 				return;
 			}
 			
-			createdSpawnLists = true;
-			
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 20, 4, 4));
+			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoIceWarg.class, 20, 4, 4));
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoIceSpider.class, 10, 4, 4));
 			
 			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 20, 4, 4));
+			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoObsidianWarg.class, 20, 4, 4));
 			
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 20, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoFireWarg.class, 20, 4, 4));
 		}
 	}
 	

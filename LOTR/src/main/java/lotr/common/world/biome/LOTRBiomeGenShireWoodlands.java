@@ -46,6 +46,6 @@ public class LOTRBiomeGenShireWoodlands extends LOTRBiomeGenShire
 	@Override
 	public int spawnCountMultiplier()
 	{
-		return 3;
+		return super.spawnCountMultiplier() * 2;
 	}
 }

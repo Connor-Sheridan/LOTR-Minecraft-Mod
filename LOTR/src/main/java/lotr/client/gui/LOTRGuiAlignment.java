@@ -80,14 +80,15 @@ public class LOTRGuiAlignment extends LOTRGuiMenu
 			
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 			mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);
-	        drawTexturedModalRect(x - 116, y, 0, 0, 232, 18);
-	        
-	        float[] factionColors = faction.factionColor.getColorComponents(null);
+			
+			float[] factionColors = faction.factionColor.getColorComponents(null);
 	        GL11.glColor4f(factionColors[0], factionColors[1], factionColors[2], 1F);
-	        drawTexturedModalRect(x - 116, y, 0, 34, 232, 18);
-
+	        drawTexturedModalRect(x - 116, y, 0, 18, 232, 18);
+			
 	        GL11.glColor4f(1F, 1F, 1F, 1F);
-			drawTexturedModalRect(x - 8 + LOTRTickHandlerClient.calculateAlignmentDisplay(alignment), y + 1, 0, 18, 16, 16);
+	        drawTexturedModalRect(x - 116, y, 0, 0, 232, 18);
+
+			drawTexturedModalRect(x - 8 + LOTRTickHandlerClient.calculateAlignmentDisplay(alignment), y + 1, 0, 36, 16, 16);
 			
 			y += 22;
 			s = faction.factionName();
@@ -139,8 +140,8 @@ public class LOTRGuiAlignment extends LOTRGuiMenu
     public void handleMouseInput()
     {
         super.handleMouseInput();
+        
         int i = Mouse.getEventDWheel();
-
         if (i != 0)
         {
             if (i < 0)

@@ -29,7 +29,7 @@ public enum LOTRDimension
 	
 	public List<LOTRFaction> factionList = new ArrayList();
 	
-	public int maxSpawnedNPCs;
+	public int spawnCap;
 	
 	private LOTRDimension(String s, int i, Class c, boolean flag, int spawns)
 	{
@@ -37,7 +37,7 @@ public enum LOTRDimension
 		defaultID = i;
 		providerClass = c;
 		loadSpawn = flag;
-		maxSpawnedNPCs = spawns;
+		spawnCap = spawns;
 	}
 	
 	public String getDimensionName()
@@ -45,11 +45,11 @@ public enum LOTRDimension
 		return StatCollector.translateToLocal("lotr.dimension." + dimensionName);
 	}
 	
-	public static void configureDimensions(Configuration config)
+	public static void configureDimensions(Configuration config, String category)
 	{
 		for (LOTRDimension dim : values())
 		{
-			dim.dimensionID = config.get(Configuration.CATEGORY_GENERAL, dim.dimensionName + " Dimension ID", dim.defaultID).getInt();
+			dim.dimensionID = config.get(category, "Dimension ID: " + dim.dimensionName, dim.defaultID).getInt();
 		}
 	}
 	

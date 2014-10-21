@@ -3,6 +3,7 @@ package lotr.common.entity.item;
 import lotr.common.LOTRAchievement;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
+import lotr.common.entity.LOTRBannerProtectable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LOTREntityStoneTroll extends Entity
+public class LOTREntityStoneTroll extends Entity implements LOTRBannerProtectable
 {
 	private float trollHealth = 40F;
 	public boolean placedByPlayer;

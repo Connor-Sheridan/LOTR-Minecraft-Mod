@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotr.common.LOTRCreativeTabs;
 import lotr.common.entity.item.LOTREntityWargskinRug;
+import lotr.common.entity.npc.LOTREntityWarg.WargType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -46,7 +47,7 @@ public class LOTRItemWargskinRug extends Item
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconregister)
     {
-        rugIcons = new IIcon[4];
+        rugIcons = new IIcon[WargType.values().length];
         for (int i = 0; i < rugIcons.length; i++)
         {
             rugIcons[i] = iconregister.registerIcon(getIconString() + "_" + i);
@@ -100,7 +101,7 @@ public class LOTRItemWargskinRug extends Item
 				rug.setLocationAndAngles((double)i + f, (double)j, (double)k + f2, 180F - (entityplayer.rotationYaw % 360F), 0F);
 				if (world.checkNoEntityCollision(rug.boundingBox) && world.getCollidingBoundingBoxes(rug, rug.boundingBox).size() == 0 && !world.isAnyLiquid(rug.boundingBox))
 				{
-					rug.setRugType(itemstack.getItemDamage());
+					rug.setRugType(WargType.forID(itemstack.getItemDamage()));
 					world.spawnEntityInWorld(rug);
 					world.playSoundAtEntity(rug, Blocks.wool.stepSound.func_150496_b(), (Blocks.wool.stepSound.getVolume() + 1F) / 2F, Blocks.wool.stepSound.getPitch() * 0.8F);
 					itemstack.stackSize--;
@@ -116,7 +117,7 @@ public class LOTRItemWargskinRug extends Item
 	@SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List list)
     {
-        for (int j = 0; j <= 3; j++)
+        for (int j = 0; j < WargType.values().length; j++)
         {
             list.add(new ItemStack(item, 1, j));
         }

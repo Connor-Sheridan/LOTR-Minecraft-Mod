@@ -2,7 +2,7 @@ package lotr.common.item;
 
 import java.util.List;
 
-import lotr.client.LOTRClientProxy;
+import lotr.client.model.LOTRArmorModels;
 import lotr.client.model.LOTRModelLeatherHat;
 import lotr.common.LOTRCreativeTabs;
 import lotr.common.LOTRMod;
@@ -158,7 +158,7 @@ public class LOTRItemLeatherHat extends LOTRItemArmor
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack itemstack, int slot)
     {
-        LOTRModelLeatherHat hat = LOTRClientProxy.modelLeatherHat;
+        LOTRModelLeatherHat hat = LOTRArmorModels.leatherHat;
 		hat.setHatItem(itemstack);
 		return hat;
     }

@@ -92,7 +92,7 @@ public class LOTRRenderBanner extends Render
 			GL11.glRotatef(180F - entity.rotationYaw, 0F, 1F, 0F);
 			GL11.glTranslatef(0F, 0.01F, 0F);
 			bindTexture(getStandTexture(entity));
-	        model.renderStand(0.0625F);
+			model.renderStand(0.0625F);
 	        model.renderPost(0.0625F);
 			bindTexture(getBannerTexture(entity));
 			model.renderBanner(0.0625F);

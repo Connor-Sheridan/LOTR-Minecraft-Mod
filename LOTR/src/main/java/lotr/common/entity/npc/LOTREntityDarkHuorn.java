@@ -1,7 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
+import lotr.common.*;
 import lotr.common.entity.ai.LOTREntityAINearestAttackableTargetHuorn;
 import lotr.common.world.biome.LOTRBiomeGenOldForest;
 import net.minecraft.world.World;
@@ -25,7 +24,13 @@ public class LOTREntityDarkHuorn extends LOTREntityHuornBase
 	@Override
 	public LOTRFaction getFaction()
 	{
-		return LOTRFaction.HOSTILE;
+		return LOTRFaction.DARK_HUORN;
+	}
+	
+	@Override
+	public int getAlignmentBonus()
+	{
+		return LOTRAlignmentValues.Bonuses.DARK_HUORN;
 	}
 	
 	@Override

@@ -109,7 +109,7 @@ public class LOTRBiomeGenShire extends LOTRBiome
 			new WorldGenFlowers(LOTRMod.pipeweedPlant).generate(world, random, i1, j1, k1);
 		}
 		
-        if (random.nextInt(6) == 0)
+        if (decorator.doubleFlowersPerChunk > 0 && random.nextInt(6) == 0)
         {
             int i1 = i + random.nextInt(16) + 8;
             int j1 = random.nextInt(128);

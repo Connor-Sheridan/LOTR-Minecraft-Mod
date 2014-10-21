@@ -1,12 +1,13 @@
 package lotr.common.entity.npc;
 
+import lotr.common.LOTRAchievement;
 import lotr.common.LOTRFaction;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.world.World;
 
-public class LOTREntityUtumnoWarg extends LOTREntityWarg
+public abstract class LOTREntityUtumnoWarg extends LOTREntityWarg
 {
 	public LOTREntityUtumnoWarg(World world)
 	{
@@ -43,5 +44,11 @@ public class LOTREntityUtumnoWarg extends LOTREntityWarg
 	public LOTRFaction getFaction()
 	{
 		return LOTRFaction.UTUMNO;
+	}
+	
+	@Override
+	protected LOTRAchievement getKillAchievement()
+	{
+		return LOTRAchievement.killUtumnoWarg;
 	}
 }

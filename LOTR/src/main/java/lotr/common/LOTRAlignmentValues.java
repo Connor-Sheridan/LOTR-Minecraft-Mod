@@ -28,6 +28,8 @@ public class LOTRAlignmentValues
 		public static int HOBBIT_ORCHARDER = 2;
 		public static int HOBBIT_FARMER = 2;
 		
+		public static int DARK_HUORN = 1;
+		
 		public static int RANGER_NORTH = 2;
 		public static int RANGER_NORTH_CAPTAIN = 5;
 		
@@ -104,6 +106,8 @@ public class LOTRAlignmentValues
 		public static int MORDOR_WARG = 1;
 		public static int OLOG_HAI = 3;
 		public static int MORDOR_SPIDER = 1;
+		
+		public static int BLACK_URUK = 2;
 		
 		public static int NEAR_HARADRIM = 1;
 		public static int NEAR_HARADRIM_WARRIOR = 2;

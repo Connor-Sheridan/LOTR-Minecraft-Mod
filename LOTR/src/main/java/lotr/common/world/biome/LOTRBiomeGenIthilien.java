@@ -10,11 +10,7 @@ import lotr.common.entity.animal.LOTREntityBird;
 import lotr.common.entity.animal.LOTREntityButterfly;
 import lotr.common.entity.animal.LOTREntityHorse;
 import lotr.common.entity.animal.LOTREntityRabbit;
-import lotr.common.entity.npc.LOTREntityElvenTrader;
-import lotr.common.entity.npc.LOTREntityMordorOrc;
-import lotr.common.entity.npc.LOTREntityMordorOrcArcher;
-import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
-import lotr.common.entity.npc.LOTREntityRangerIthilien;
+import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
@@ -26,6 +22,7 @@ import lotr.common.world.structure.LOTRWorldGenRuinedBeaconTower;
 import lotr.common.world.structure.LOTRWorldGenRuinedGondorTower;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenDoublePlant;
@@ -50,6 +47,7 @@ public class LOTRBiomeGenIthilien extends LOTRBiome
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorOrc.class, 20, 4, 6));
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorOrcArcher.class, 10, 4, 6));
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorOrcBombardier.class, 3, 1, 2));
+		spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorWarg.class, 5, 1, 3));
 		
 		setGoodEvilWeight(5, 95);
 		

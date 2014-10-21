@@ -10,14 +10,21 @@ import net.minecraft.world.WorldServer;
 
 public class LOTRTeleporterUtumno extends Teleporter
 {
-	private static int COORDINATE_RANGE = 1000000;
-	
 	private WorldServer worldObj;
+	
+	private int targetX;
+	private int targetZ;
 	
     public LOTRTeleporterUtumno(WorldServer worldserver)
     {
 		super(worldserver);
 		worldObj = worldserver;
+    }
+    
+    public void setTargetCoords(int x, int z)
+    {
+    	targetX = x;
+    	targetZ = z;
     }
 
 	@Override
@@ -31,8 +38,8 @@ public class LOTRTeleporterUtumno extends Teleporter
 		{
 			while (true)
 			{
-				int x = MathHelper.getRandomIntegerInRange(worldObj.rand, -COORDINATE_RANGE, COORDINATE_RANGE);
-				int z = MathHelper.getRandomIntegerInRange(worldObj.rand, -COORDINATE_RANGE, COORDINATE_RANGE);
+				int x = targetX;
+				int z = targetZ;
 				int y = UtumnoLevel.ICE.corridorBaseLevels[UtumnoLevel.ICE.corridorBaseLevels.length - 1];
 				
 				int x1 = MathHelper.getRandomIntegerInRange(worldObj.rand, x - 128, x + 128);

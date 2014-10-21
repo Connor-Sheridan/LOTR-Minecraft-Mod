@@ -50,6 +50,11 @@ public class LOTRTileEntityOrcForge extends LOTRTileEntityAlloyForge
 			return new ItemStack(LOTRMod.morgulSteel);
 		}
 		
+		if (isOrcSteel(itemstack) && alloyItem.getItem() == LOTRMod.nauriteGem)
+		{
+			return new ItemStack(LOTRMod.blackUrukSteel);
+		}
+		
 		return super.getAlloySmeltingResult(itemstack, alloyItem);
 	}
 }

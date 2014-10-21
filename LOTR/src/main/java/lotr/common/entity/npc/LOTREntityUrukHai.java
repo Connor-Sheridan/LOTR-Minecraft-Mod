@@ -112,6 +112,12 @@ public class LOTREntityUrukHai extends LOTREntityOrc
 	}
 	
 	@Override
+	protected LOTRAchievement getKillAchievement()
+	{
+		return LOTRAchievement.killUrukHai;
+	}
+	
+	@Override
 	protected float getSoundPitch()
 	{
 		return super.getSoundPitch() * 0.75F;
@@ -119,6 +125,12 @@ public class LOTREntityUrukHai extends LOTREntityOrc
 	
 	@Override
 	public boolean canPickUpLoot()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean canOrcSkirmish()
 	{
 		return false;
 	}

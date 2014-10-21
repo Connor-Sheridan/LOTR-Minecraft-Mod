@@ -3,25 +3,12 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.*;
-import lotr.common.entity.npc.LOTREntityMordorOrc;
-import lotr.common.entity.npc.LOTREntityMordorOrcArcher;
-import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
-import lotr.common.entity.npc.LOTREntityMordorWarg;
-import lotr.common.entity.npc.LOTREntityOlogHai;
+import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
-import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
 import lotr.common.world.feature.*;
-import lotr.common.world.structure.LOTRWorldGenMordorCamp;
-import lotr.common.world.structure.LOTRWorldGenMordorTower;
-import lotr.common.world.structure.LOTRWorldGenMordorWargPit;
-import net.minecraft.util.Vec3;
+import lotr.common.world.structure.*;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.world.gen.feature.*;
 
 public class LOTRBiomeGenMordor extends LOTRBiome
 {
@@ -47,8 +34,11 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 		
 		if (isGorgoroth())
 		{
-			spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorWarg.class, 15, 1, 3));
-			spawnableEvilList.add(new SpawnListEntry(LOTREntityOlogHai.class, 15, 1, 3));
+			spawnableEvilList.add(new SpawnListEntry(LOTREntityMordorWarg.class, 20, 1, 3));
+			spawnableEvilList.add(new SpawnListEntry(LOTREntityOlogHai.class, 20, 1, 3));
+			
+			spawnableEvilList.add(new SpawnListEntry(LOTREntityBlackUruk.class, 5, 4, 6));
+			spawnableEvilList.add(new SpawnListEntry(LOTREntityBlackUrukArcher.class, 2, 4, 6));
 			
 			setDisableRain();
 		}

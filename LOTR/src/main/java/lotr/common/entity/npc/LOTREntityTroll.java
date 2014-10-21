@@ -399,7 +399,7 @@ public class LOTREntityTroll extends LOTREntityNPC
 	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
-		int j = 1 + rand.nextInt(2) + rand.nextInt(i + 1);
+		int j = 2 + rand.nextInt(3) + rand.nextInt(i + 1);
 		for (int k = 0; k < j; k++)
 		{
 			dropItem(LOTRMod.trollBone, 1);

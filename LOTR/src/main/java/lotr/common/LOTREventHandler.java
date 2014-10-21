@@ -20,6 +20,7 @@ import lotr.common.tileentity.LOTRTileEntityPlate;
 import lotr.common.world.LOTRTeleporterUtumno;
 import lotr.common.world.LOTRWorldProviderUtumno;
 import lotr.common.world.biome.*;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
@@ -80,7 +81,7 @@ public class LOTREventHandler implements IFuelHandler
 	{
         if (event.modID.equals(LOTRMod.getModID()))
         {
-        	LOTRMod.loadConfig();
+        	LOTRConfig.load();
         }
     }
 	
@@ -241,6 +242,11 @@ public class LOTREventHandler implements IFuelHandler
 			{
 				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.smeltOrcSteel);
 			}
+			
+			if (itemstack.getItem() == LOTRMod.blackUrukSteel)
+			{
+				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.smeltBlackUrukSteel);
+			}
 		}
 	}
 	
@@ -371,19 +377,82 @@ public class LOTREventHandler implements IFuelHandler
 	public void onUseBonemeal(BonemealEvent event)
 	{
 		World world = event.world;
+		Random rand = world.rand;
 		int i = event.x;
 		int j = event.y;
 		int k = event.z;
+		
 		if (!world.isRemote)
 		{
 			if (event.block instanceof LOTRBlockSaplingBase)
 			{
 				LOTRBlockSaplingBase blockSapling = (LOTRBlockSaplingBase)event.block;
-				if (world.rand.nextFloat() < 0.45D)
+				if (rand.nextFloat() < 0.45D)
 				{
-					blockSapling.incrementGrowth(world, i, j, k, world.rand);
+					blockSapling.incrementGrowth(world, i, j, k, rand);
 				}
+				
 				event.setResult(Result.ALLOW);
+				return;
+			}
+			
+			if (event.block == Blocks.grass)
+			{
+				BiomeGenBase biomegenbase = world.getBiomeGenForCoords(i, k);
+				if (biomegenbase instanceof LOTRBiome)
+				{
+					LOTRBiome biome = (LOTRBiome)biomegenbase;
+					
+			        int attempts = 0;
+			        while (attempts < 128)
+			        {
+			            int i1 = i;
+			            int j1 = j + 1;
+			            int k1 = k;
+			            int subAttempts = 0;
+
+			            growBlock:
+			            while (true)
+			            {
+			                if (subAttempts < attempts / 16)
+			                {
+			                    i1 += rand.nextInt(3) - 1;
+			                    j1 += (rand.nextInt(3) - 1) * rand.nextInt(3) / 2;
+			                    k1 += rand.nextInt(3) - 1;
+
+			                    if (world.getBlock(i1, j1 - 1, k1) == Blocks.grass && !world.getBlock(i1, j1, k1).isNormalCube())
+			                    {
+			                    	subAttempts++;
+			                        continue growBlock;
+			                    }
+			                }
+			                else if (world.getBlock(i1, j1, k1).getMaterial() == Material.air)
+			                {
+			                    if (rand.nextInt(8) > 0)
+			                    {
+			                    	GrassBlockAndMeta obj = biome.getRandomGrass(rand);
+			                    	Block block = obj.block;
+			                    	int meta = obj.meta;
+			                    	
+			                        if (block.canBlockStay(world, i1, j1, k1))
+			                        {
+			                            world.setBlock(i1, j1, k1, block, meta, 3);
+			                        }
+			                    }
+			                    else
+			                    {
+			                    	biome.plantFlower(world, rand, i1, j1, k1);
+			                    }
+			                }
+
+			                attempts++;
+			                break growBlock;
+			            }
+			        }
+			        
+			        event.setResult(Result.ALLOW);
+			        return;
+				}
 			}
 		}
 	}
@@ -449,10 +518,12 @@ public class LOTREventHandler implements IFuelHandler
 				if (tileentity instanceof LOTRTileEntityPlate)
 				{
 					LOTRTileEntityPlate plate = (LOTRTileEntityPlate)tileentity;
-					if (plate.getFoodItem() != null)
+					ItemStack plateItem = plate.getFoodItem();
+					if (plateItem != null)
 					{
-						((LOTRBlockPlate)LOTRMod.plateBlock).dropPlateItem(plate);
-						plate.setFoodItem(null);
+						((LOTRBlockPlate)LOTRMod.plateBlock).dropOnePlateItem(plate);
+						plateItem.stackSize--;
+						plate.setFoodItem(plateItem);
 						event.setCanceled(true);
 						return;
 					}
@@ -647,6 +718,11 @@ public class LOTREventHandler implements IFuelHandler
 			
 			Packet packet = new S3FPacketCustomPayload("lotr.npcUUID", data);
 			((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(packet);
+		}
+		
+		if (!entity.worldObj.isRemote && entity instanceof LOTREntityBanner)
+		{
+			((LOTREntityBanner)entity).sendBannerToPlayer(entityplayer, false);
 		}
 	}
 	
@@ -972,8 +1048,18 @@ public class LOTREventHandler implements IFuelHandler
 	public void onEntityInteract(EntityInteractEvent event)
 	{
 		EntityPlayer entityplayer = event.entityPlayer;
+		World world = entityplayer.worldObj;
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		Entity entity = event.target;
+		
+		if (!world.isRemote && (entity instanceof EntityHanging || entity instanceof LOTRBannerProtectable))
+		{
+			if (LOTRBannerProtection.isProtectedByBanner(world, entity, LOTRBannerProtection.forPlayer(entityplayer), true))
+			{
+				event.setCanceled(true);
+				return;
+			}
+		}
 		
 		if ((entity instanceof EntityCow || entity instanceof LOTREntityZebra) && itemstack != null && itemstack.getItem() == LOTRMod.mug && !entityplayer.capabilities.isCreativeMode)
 		{
@@ -1026,11 +1112,11 @@ public class LOTREventHandler implements IFuelHandler
 		{
 			if (entity instanceof LOTRUnitTradeable)
 			{
-				entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_TRADE_UNIT_TRADE_INTERACT, entityplayer.worldObj, entity.getEntityId(), 0, 0);
+				entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_TRADE_UNIT_TRADE_INTERACT, world, entity.getEntityId(), 0, 0);
 			}
 			else
 			{
-				entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_TRADE_INTERACT, entityplayer.worldObj, entity.getEntityId(), 0, 0);
+				entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_TRADE_INTERACT, world, entity.getEntityId(), 0, 0);
 			}
 			event.setCanceled(true);
 			return;
@@ -1038,14 +1124,14 @@ public class LOTREventHandler implements IFuelHandler
 		
 		if (entity instanceof LOTRUnitTradeable && ((LOTRUnitTradeable)entity).canTradeWith(entityplayer))
 		{
-			entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_UNIT_TRADE_INTERACT, entityplayer.worldObj, entity.getEntityId(), 0, 0);
+			entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_UNIT_TRADE_INTERACT, world, entity.getEntityId(), 0, 0);
 			event.setCanceled(true);
 			return;
 		}
 		
 		if (entity instanceof LOTREntityNPC && ((LOTREntityNPC)entity).hiredNPCInfo.getHiringPlayer() == entityplayer)
 		{
-			entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_HIRED_INTERACT, entityplayer.worldObj, entity.getEntityId(), 0, 0);
+			entityplayer.openGui(LOTRMod.instance, LOTRCommonProxy.GUI_ID_HIRED_INTERACT, world, entity.getEntityId(), 0, 0);
 			event.setCanceled(true);
 			return;
 		}
@@ -1070,6 +1156,15 @@ public class LOTREventHandler implements IFuelHandler
 		Entity entity = event.target;
 		World world = entity.worldObj;
 		EntityPlayer entityplayer = event.entityPlayer;
+		
+		if (!world.isRemote && (entity instanceof EntityHanging || entity instanceof LOTRBannerProtectable))
+		{
+			if (LOTRBannerProtection.isProtectedByBanner(world, entity, LOTRBannerProtection.forPlayer(entityplayer), true))
+			{
+				event.setCanceled(true);
+				return;
+			}
+		}
 		
 		if (!world.isRemote && entity instanceof LOTREntityWargskinRug)
 		{

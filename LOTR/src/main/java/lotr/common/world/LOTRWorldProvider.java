@@ -1,8 +1,8 @@
 package lotr.common.world;
 
 import lotr.client.render.LOTRSkyRenderer;
+import lotr.common.LOTRConfig;
 import lotr.common.LOTRDimension;
-import lotr.common.LOTRMod;
 import lotr.common.world.biome.LOTRBiome;
 import lotr.common.world.biome.LOTRBiomeGenOcean;
 import net.minecraft.client.Minecraft;
@@ -35,7 +35,7 @@ public abstract class LOTRWorldProvider extends WorldProvider
     @SideOnly(Side.CLIENT)
     public IRenderHandler getSkyRenderer()
     {
-		if (LOTRMod.enableLOTRSky)
+		if (LOTRConfig.enableLOTRSky)
 		{
 			if (lotrSkyRenderer == null)
 			{

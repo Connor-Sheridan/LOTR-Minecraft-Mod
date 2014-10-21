@@ -2,6 +2,7 @@ package lotr.common.entity.npc;
 
 import lotr.common.LOTRAlignmentValues;
 import lotr.common.LOTRFaction;
+import lotr.common.entity.npc.LOTREntityWarg.WargType;
 import net.minecraft.world.World;
 
 public class LOTREntityMordorWargBombardier extends LOTREntityWargBombardier
@@ -15,7 +16,7 @@ public class LOTREntityMordorWargBombardier extends LOTREntityWargBombardier
 	protected void entityInit()
 	{
 		super.entityInit();
-		setWargType(2);
+		setWargType(WargType.BLACK);
 	}
 
 	@Override

@@ -29,19 +29,19 @@ public class LOTRBlockFruitLeaves extends LOTRBlockLeavesBase
 		
 		if (!world.isRemote)
 		{
-			if ((meta & 3) == 0 && world.rand.nextInt(20) == 0)
+			if ((meta & 3) == 0 && world.rand.nextInt(16) == 0)
 			{
 				dropBlockAsItem(world, i, j, k, world.rand.nextBoolean() ? new ItemStack(Items.apple) : new ItemStack(LOTRMod.appleGreen));
 			}
-			else if ((meta & 3) == 1 && world.rand.nextInt(20) == 0)
+			else if ((meta & 3) == 1 && world.rand.nextInt(16) == 0)
 			{
 				dropBlockAsItem(world, i, j, k, new ItemStack(LOTRMod.pear));
 			}
-			else if ((meta & 3) == 2 && world.rand.nextInt(10) == 0)
+			else if ((meta & 3) == 2 && world.rand.nextInt(8) == 0)
 			{
 				dropBlockAsItem(world, i, j, k, new ItemStack(LOTRMod.cherry));
 			}
-			else if ((meta & 3) == 3 && world.rand.nextInt(20) == 0)
+			else if ((meta & 3) == 3 && world.rand.nextInt(16) == 0)
 			{
 				dropBlockAsItem(world, i, j, k, new ItemStack(LOTRMod.mango));
 			}

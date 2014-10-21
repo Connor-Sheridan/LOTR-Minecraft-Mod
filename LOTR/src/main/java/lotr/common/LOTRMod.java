@@ -38,7 +38,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.*;
@@ -57,7 +56,7 @@ public class LOTRMod
 	public static LOTRMod instance;
 	
 	public static ToolMaterial toolBronze = EnumHelper.addToolMaterial("LOTR_BRONZE", 2, 220, 5F, 1.5F, 10);
-	public static ToolMaterial toolMithril = EnumHelper.addToolMaterial("LOTR_MITHRIL", 4, 2478, 9F, 5F, 12);
+	public static ToolMaterial toolMithril = EnumHelper.addToolMaterial("LOTR_MITHRIL", 4, 2400, 9F, 5F, 8);
 	public static ToolMaterial toolOrc = EnumHelper.addToolMaterial("LOTR_ORC", 2, 280, 6F, 2.5F, 7);
 	public static ToolMaterial toolGondor = EnumHelper.addToolMaterial("LOTR_GONDOR", 2, 300, 6F, 2.5F, 10);
 	public static ToolMaterial toolMallorn = EnumHelper.addToolMaterial("LOTR_MALLORN", 1, 120, 4F, 1F, 15);
@@ -68,20 +67,21 @@ public class LOTRMod
 	public static ToolMaterial toolMorgul = EnumHelper.addToolMaterial("LOTR_MORGUL", 2, 400, 6F, 3F, 10);
 	public static ToolMaterial toolWoodElven = EnumHelper.addToolMaterial("LOTR_WOOD_ELVEN", 2, 310, 7F, 3F, 15);
 	public static ToolMaterial toolAngmar = EnumHelper.addToolMaterial("LOTR_ANGMAR", 2, 270, 6F, 2.5F, 11);
-	public static ToolMaterial toolNearHarad = EnumHelper.addToolMaterial("LOTR_NEAR_HARAD", 2, 280, 6F, 2.5F, 16);
+	public static ToolMaterial toolNearHarad = EnumHelper.addToolMaterial("LOTR_NEAR_HARAD", 2, 280, 6F, 2.5F, 12);
 	public static ToolMaterial toolHighElven = EnumHelper.addToolMaterial("LOTR_HIGH_ELVEN", 2, 400, 7F, 3F, 15);
 	public static ToolMaterial toolBlueDwarven = EnumHelper.addToolMaterial("LOTR_BLUE_DWARVEN", 3, 500, 5F, 3F, 8);
 	public static ToolMaterial toolDolGuldur = EnumHelper.addToolMaterial("LOTR_DOL_GULDUR", 2, 260, 6F, 2.5F, 12);
+	public static ToolMaterial toolBlackUruk = EnumHelper.addToolMaterial("LOTR_BLACK_URUK", 2, 450, 7F, 3F, 8);
 	
 	public static ArmorMaterial armorBronze = EnumHelper.addArmorMaterial("LOTR_BRONZE", 12, new int[]{2, 5, 4, 2}, 10);
-	public static ArmorMaterial armorMithril = EnumHelper.addArmorMaterial("LOTR_MITHRIL", 120, new int[]{3, 8, 6, 3}, 12);
-	public static ArmorMaterial armorOrc = EnumHelper.addArmorMaterial("LOTR_ORC", 17, new int[]{2, 6, 5, 2}, 7);
+	public static ArmorMaterial armorMithril = EnumHelper.addArmorMaterial("LOTR_MITHRIL", 120, new int[]{3, 8, 6, 3}, 8);
+	public static ArmorMaterial armorOrc = EnumHelper.addArmorMaterial("LOTR_ORC", 16, new int[]{2, 6, 5, 2}, 7);
 	public static ArmorMaterial armorGondor = EnumHelper.addArmorMaterial("LOTR_GONDOR", 19, new int[]{2, 6, 5, 2}, 10);
 	public static ArmorMaterial armorElven = EnumHelper.addArmorMaterial("LOTR_ELVEN", 22, new int[]{2, 6, 5, 2}, 14);
 	public static ArmorMaterial armorWarg = EnumHelper.addArmorMaterial("LOTR_WARG", 10, new int[]{1, 4, 3, 1}, 8);
-	public static ArmorMaterial armorDwarven = EnumHelper.addArmorMaterial("LOTR_DWARVEN", 24, new int[]{2, 6, 5, 2}, 8);
+	public static ArmorMaterial armorDwarven = EnumHelper.addArmorMaterial("LOTR_DWARVEN", 26, new int[]{2, 6, 5, 2}, 8);
 	public static ArmorMaterial armorGalvorn = EnumHelper.addArmorMaterial("LOTR_GALVORN", 22, new int[]{2, 6, 5, 2}, 15);
-	public static ArmorMaterial armorUruk = EnumHelper.addArmorMaterial("LOTR_URUK", 21, new int[]{2, 6, 5, 2}, 6);
+	public static ArmorMaterial armorUruk = EnumHelper.addArmorMaterial("LOTR_URUK", 22, new int[]{2, 6, 5, 2}, 6);
 	public static ArmorMaterial armorWoodElvenScout = EnumHelper.addArmorMaterial("LOTR_WOOD_ELVEN_SCOUT", 12, new int[]{1, 4, 3, 1}, 10);
 	public static ArmorMaterial armorRohan = EnumHelper.addArmorMaterial("LOTR_ROHAN", 14, new int[]{2, 5, 4, 2}, 12);
 	public static ArmorMaterial armorRanger = EnumHelper.addArmorMaterial("LOTR_RANGER", 16, new int[]{1, 4, 3, 1}, 6);
@@ -89,12 +89,13 @@ public class LOTRMod
 	public static ArmorMaterial armorMorgul = EnumHelper.addArmorMaterial("LOTR_MORGUL", 20, new int[]{2, 6, 5, 2}, 10);
 	public static ArmorMaterial armorWoodElven = EnumHelper.addArmorMaterial("LOTR_WOOD_ELVEN", 19, new int[]{2, 6, 5, 2}, 15);
 	public static ArmorMaterial armorAngmar = EnumHelper.addArmorMaterial("LOTR_ANGMAR", 17, new int[]{2, 6, 5, 2}, 11);
-	public static ArmorMaterial armorNearHarad = EnumHelper.addArmorMaterial("LOTR_NEAR_HARAD", 18, new int[]{2, 6, 5, 2}, 16);
+	public static ArmorMaterial armorNearHarad = EnumHelper.addArmorMaterial("LOTR_NEAR_HARAD", 18, new int[]{2, 6, 5, 2}, 12);
 	public static ArmorMaterial armorGemsbok = EnumHelper.addArmorMaterial("LOTR_GEMSBOK", 10, new int[]{1, 4, 3, 1}, 6);
 	public static ArmorMaterial armorHighElven = EnumHelper.addArmorMaterial("LOTR_HIGH_ELVEN", 22, new int[]{2, 6, 5, 2}, 15);
-	public static ArmorMaterial armorBlueDwarven = EnumHelper.addArmorMaterial("LOTR_BLUE_DWARVEN", 24, new int[]{2, 6, 5, 2}, 8);
+	public static ArmorMaterial armorBlueDwarven = EnumHelper.addArmorMaterial("LOTR_BLUE_DWARVEN", 26, new int[]{2, 6, 5, 2}, 8);
 	public static ArmorMaterial armorDolGuldur = EnumHelper.addArmorMaterial("LOTR_DOL_GULDUR", 16, new int[]{2, 6, 5, 2}, 12);
 	public static ArmorMaterial armorUtumno = EnumHelper.addArmorMaterial("LOTR_UTUMNO", 20, new int[]{2, 6, 5, 2}, 10);
+	public static ArmorMaterial armorBlackUruk = EnumHelper.addArmorMaterial("LOTR_BLACK_URUK", 24, new int[]{2, 6, 5, 2}, 8);
 
 	public static ArmorMaterial materialLeatherHat = EnumHelper.addArmorMaterial("LOTR_LEATHER_HAT", 0, new int[]{0, 0, 0, 0}, 0);
 	
@@ -300,6 +301,8 @@ public class LOTRMod
 	public static Block stairsBaobab;
 	public static Block fallenLeavesLOTR2;
 	public static Block stairsCedar;
+	public static Block rottenLog;
+	public static Block blockOreStorage2;
 
 	public static Item goldRing;
 	public static Item pouch;
@@ -683,18 +686,20 @@ public class LOTRMod
 	public static Item elderberry;
 	public static Item chestnut;
 	public static Item chestnutRoast;
-
-	public static Configuration modConfig;
-	public static boolean alwaysShowAlignment;
-	public static int alignmentXOffset;
-	public static int alignmentYOffset;
-	public static boolean displayAlignmentAboveHead;
-	public static boolean enableLOTRSky;
-	public static boolean enableMistyMountainsMist;
-	public static boolean enableSepiaMap;
+	public static Item blackUrukSteel;
+	public static Item scimitarBlackUruk;
+	public static Item daggerBlackUruk;
+	public static Item daggerBlackUrukPoisoned;
+	public static Item spearBlackUruk;
+	public static Item battleaxeBlackUruk;
+	public static Item hammerBlackUruk;
+	public static Item helmetBlackUruk;
+	public static Item bodyBlackUruk;
+	public static Item legsBlackUruk;
+	public static Item bootsBlackUruk;
+	public static Item helmetNearHaradWarlord;
 	
 	public static List unnamedItems = new ArrayList();
-	private static List woodenSlabRecipes = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
 	private LOTREventHandler modEventHandler = new LOTREventHandler();
 	
@@ -716,14 +721,14 @@ public class LOTRMod
 		woodSlabDouble = new LOTRBlockWoodSlab(true).setBlockName("lotr:woodSlabDouble");
 		stairsShirePine = new LOTRBlockStairs(planks, 0).setBlockName("lotr:stairsPine");
 		shireHeather = new LOTRBlockFlower().setFlowerBounds(0.1F, 0F, 0.1F, 0.9F, 0.7F, 0.9F).setBlockName("lotr:shireHeather");
-		brick = new LOTRBlockBrick().setHardness(1.5F).setResistance(10F).setStepSound(Block.soundTypeStone).setBlockName("lotr:brick");
-		appleCrumble = new LOTRBlockPlaceableFood().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("lotr:appleCrumble");
+		brick = new LOTRBlockBrick().setBlockName("lotr:brick");
+		appleCrumble = new LOTRBlockPlaceableFood().setBlockName("lotr:appleCrumble");
 		hobbitOven = new LOTRBlockHobbitOven().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:hobbitOven");
-		blockOreStorage = new LOTRBlockOreStorage().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal).setBlockName("lotr:oreStorage");
+		blockOreStorage = new LOTRBlockOreStorage().setBlockName("lotr:oreStorage");
 		oreNaurite = new LOTRBlockOre().setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:oreNaurite");
 		oreMorgulIron = new LOTRBlockOreMordorVariant().setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:oreMorgulIron");
 		morgulTable = new LOTRBlockMorgulTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:morgulCraftingTable");
-		chandelier = new LOTRBlockChandelier().setHardness(0F).setResistance(2F).setStepSound(Block.soundTypeStone).setBlockName("lotr:chandelier");
+		chandelier = new LOTRBlockChandelier().setHardness(0F).setResistance(2F).setStepSound(Block.soundTypeMetal).setBlockName("lotr:chandelier");
 		pipeweedPlant = new LOTRBlockPipeweedPlant().setBlockName("lotr:pipeweedPlant");
 		pipeweedCrop = new LOTRBlockPipeweedCrop().setBlockName("lotr:pipeweed");
 		slabSingle = new LOTRBlockSlab(false).setHardness(2F).setResistance(10F).setStepSound(Block.soundTypeStone).setBlockName("lotr:slabSingle");
@@ -770,11 +775,11 @@ public class LOTRMod
 		stairsCherry = new LOTRBlockStairs(planks, 6).setBlockName("lotr:stairsCherry");
 		dwarvenTable = new LOTRBlockDwarvenTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:dwarvenCraftingTable");
 		bluebell = new LOTRBlockFlower().setBlockName("lotr:bluebell");
-		dwarvenForge = new LOTRBlockDwarvenForge().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:dwarvenForge");
+		dwarvenForge = new LOTRBlockDwarvenForge().setBlockName("lotr:dwarvenForge");
 		hearth = new LOTRBlockHearth().setHardness(1F).setResistance(8F).setStepSound(Block.soundTypeStone).setBlockName("lotr:hearth");
 		morgulShroom = new LOTRBlockMorgulShroom().setBlockName("lotr:morgulShroom");
 		urukTable = new LOTRBlockUrukTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:urukCraftingTable");
-		cherryPie = new LOTRBlockPlaceableFood().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("lotr:cherryPie");
+		cherryPie = new LOTRBlockPlaceableFood().setBlockName("lotr:cherryPie");
 		clover = new LOTRBlockClover().setBlockName("lotr:clover");
 		slabSingle2 = new LOTRBlockSlab2(false).setHardness(2F).setResistance(10F).setStepSound(Block.soundTypeStone).setBlockName("lotr:slabSingle2");
 		slabDouble2 = new LOTRBlockSlab2(true).setHardness(2F).setResistance(10F).setStepSound(Block.soundTypeStone).setBlockName("lotr:slabDouble2");
@@ -812,7 +817,7 @@ public class LOTRMod
 		mordorThorn = new LOTRBlockMordorThorn().setBlockName("lotr:mordorThorn");
 		mordorMoss = new LOTRBlockMordorMoss().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("lotr:mordorMoss");
 		stairsMordorBrickCracked = new LOTRBlockStairs(brick, 7).setBlockName("lotr:stairsMordorBrickCracked");
-		orcForge = new LOTRBlockOrcForge().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:orcForge");
+		orcForge = new LOTRBlockOrcForge().setBlockName("lotr:orcForge");
 		trollTotem = new LOTRBlockTrollTotem().setHardness(5F).setResistance(20F).setStepSound(Block.soundTypeStone).setBlockName("lotr:trollTotem");
 		orcBed = new LOTRBlockBed(LOTRMod.planks, 3).setBlockName("lotr:orcBed");
 		stairsElvenBrick = new LOTRBlockStairs(brick, 11).setBlockName("lotr:stairsElvenBrick");
@@ -830,14 +835,14 @@ public class LOTRMod
 		oreSaltpeter = new LOTRBlockOre().setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:oreSaltpeter");
 		quagmire = new LOTRBlockQuagmire().setHardness(1F).setStepSound(Block.soundTypeGravel).setBlockName("lotr:quagmire");
 		angmarTable = new LOTRBlockAngmarTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:angmarCraftingTable");
-		brick2 = new LOTRBlockBrick2().setHardness(1.5F).setResistance(10F).setStepSound(Block.soundTypeStone).setBlockName("lotr:brick2");
+		brick2 = new LOTRBlockBrick2().setBlockName("lotr:brick2");
 		wall2 = new LOTRBlockWall2().setBlockName("lotr:wallStone2");
 		stairsAngmarBrick = new LOTRBlockStairs(brick2, 0).setBlockName("lotr:stairsAngmarBrick");
 		stairsAngmarBrickCracked = new LOTRBlockStairs(brick2, 1).setBlockName("lotr:stairsAngmarBrickCracked");
 		stairsMango = new LOTRBlockStairs(planks, 7).setBlockName("lotr:stairsMango");
 		stairsBanana = new LOTRBlockStairs(planks, 11).setBlockName("lotr:stairsBanana");
 		bananaBlock = new LOTRBlockBanana().setHardness(0F).setResistance(1F).setStepSound(Block.soundTypeWood).setBlockName("lotr:banana");
-		bananaCake = new LOTRBlockPlaceableFood().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("lotr:bananaCake");
+		bananaCake = new LOTRBlockPlaceableFood().setBlockName("lotr:bananaCake");
 		lionBed = new LOTRBlockBed(Blocks.planks, 0).setBlockName("lotr:lionBed");
 		wood3 = new LOTRBlockWood3().setBlockName("lotr:wood3");
 		leaves3 = new LOTRBlockLeaves3().setBlockName("lotr:leaves3");
@@ -878,7 +883,7 @@ public class LOTRMod
 		fallenLeavesLOTR = new LOTRBlockFallenLeaves(leaves, fruitLeaves, leaves2, leaves3).setBlockName("lotr:fallenLeavesLOTR");
 		gundabadTable = new LOTRBlockGundabadTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("lotr:gundabadCraftingTable");
 		thatchFloor = new LOTRBlockThatchFloor().setBlockName("lotr:thatchFloor");
-		dalishPastry = new LOTRBlockPlaceableFood(0.3125F, 0.375F).setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("lotr:dalishPastry");
+		dalishPastry = new LOTRBlockPlaceableFood(0.3125F, 0.375F).setBlockName("lotr:dalishPastry");
 		aridGrass = new LOTRBlockGrass().setSandy().setBlockName("lotr:aridGrass");
 		termiteMound = new LOTRBlockTermite().setHardness(0.5F).setResistance(3F).setBlockName("lotr:termiteMound");
 		utumnoBrick = new LOTRBlockUtumnoBrick().setHardness(1.5F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("lotr:utumnoBrick");
@@ -903,6 +908,8 @@ public class LOTRMod
 		stairsBaobab = new LOTRBlockStairs(planks2, 1).setBlockName("lotr:stairsBaobab");
 		fallenLeavesLOTR2 = new LOTRBlockFallenLeaves(leaves4).setBlockName("lotr:fallenLeavesLOTR2");
 		stairsCedar = new LOTRBlockStairs(planks2, 2).setBlockName("lotr:stairsCedar");
+		rottenLog = new LOTRBlockRottenLog().setBlockName("lotr:rottenLog");
+		blockOreStorage2 = new LOTRBlockOreStorage2().setBlockName("lotr:oreStorage2");
 		
 		goldRing = new Item().setCreativeTab(LOTRCreativeTabs.tabMagic).setUnlocalizedName("lotr:goldRing");
 		pouch = new LOTRItemPouch().setUnlocalizedName("lotr:pouch");
@@ -1089,7 +1096,7 @@ public class LOTRMod
 		bodyRohan = new LOTRItemArmor(armorRohan, 1).setUnlocalizedName("lotr:bodyRohan");
 		legsRohan = new LOTRItemArmor(armorRohan, 2).setUnlocalizedName("lotr:legsRohan");
 		bootsRohan = new LOTRItemArmor(armorRohan, 3).setUnlocalizedName("lotr:bootsRohan");
-		helmetGondorWinged = new LOTRItemArmor(armorGondor, "winged", 0).setUnlocalizedName("lotr:helmetGondorWinged");
+		helmetGondorWinged = new LOTRItemArmor(armorGondor, 0).setUnlocalizedName("lotr:helmetGondorWinged");
 		guldurilCrystal = new LOTRItemGuldurilCrystal().setUnlocalizedName("lotr:guldurilCrystal");
 		dwarvenDoorItem = new LOTRItemDwarvenDoor().setUnlocalizedName("lotr:dwarvenDoor");
 		mallornNut = new LOTRItemFood(2, 0.2F, false).setUnlocalizedName("lotr:mallornNut");
@@ -1286,6 +1293,18 @@ public class LOTRMod
 		elderberry = new LOTRItemBerry().setUnlocalizedName("lotr:elderberry");
 		chestnut = new LOTRItemConker().setUnlocalizedName("lotr:chestnut");
 		chestnutRoast = new LOTRItemFood(2, 0.2F, false).setUnlocalizedName("lotr:chestnutRoast");
+		blackUrukSteel = new Item().setCreativeTab(LOTRCreativeTabs.tabMaterials).setUnlocalizedName("lotr:blackUrukSteel");
+		scimitarBlackUruk = new LOTRItemSword(toolBlackUruk).setUnlocalizedName("lotr:scimitarBlackUruk");
+		daggerBlackUruk = new LOTRItemDagger(toolBlackUruk, 0).setUnlocalizedName("lotr:daggerBlackUruk");
+		daggerBlackUrukPoisoned = new LOTRItemDagger(toolBlackUruk, 1).setUnlocalizedName("lotr:daggerBlackUrukPoisoned");
+		spearBlackUruk = new LOTRItemSpear(toolBlackUruk, scimitarBlackUruk).setUnlocalizedName("lotr:spearBlackUruk");
+		battleaxeBlackUruk = new LOTRItemBattleaxe(toolBlackUruk).setUnlocalizedName("lotr:battleaxeBlackUruk");
+		hammerBlackUruk = new LOTRItemHammer(toolBlackUruk).setUnlocalizedName("lotr:hammerBlackUruk");
+		helmetBlackUruk = new LOTRItemArmor(armorBlackUruk, 0).setUnlocalizedName("lotr:helmetBlackUruk");
+		bodyBlackUruk = new LOTRItemArmor(armorBlackUruk, 1).setUnlocalizedName("lotr:bodyBlackUruk");
+		legsBlackUruk = new LOTRItemArmor(armorBlackUruk, 2).setUnlocalizedName("lotr:legsBlackUruk");
+		bootsBlackUruk = new LOTRItemArmor(armorBlackUruk, 3).setUnlocalizedName("lotr:bootsBlackUruk");
+		helmetNearHaradWarlord = new LOTRItemArmor(armorNearHarad, 0).setUnlocalizedName("lotr:helmetNearHaradWarlord");
 		
 		try
 		{
@@ -1524,6 +1543,8 @@ public class LOTRMod
 		registerBlock(stairsBaobab);
 		registerBlock(fallenLeavesLOTR2, LOTRItemFallenLeaves.class);
 		registerBlock(stairsCedar);
+		registerBlock(rottenLog, LOTRItemBlockMetadata.class);
+		registerBlock(blockOreStorage2, LOTRItemBlockMetadata.class);
 		
 		registerItem(goldRing);
 		registerItem(pouch);
@@ -1907,32 +1928,26 @@ public class LOTRMod
 		registerItem(elderberry);
 		registerItem(chestnut);
 		registerItem(chestnutRoast);
+		registerItem(blackUrukSteel);
+		registerItem(scimitarBlackUruk);
+		registerItem(daggerBlackUruk);
+		registerItem(daggerBlackUrukPoisoned);
+		registerItem(spearBlackUruk);
+		registerItem(battleaxeBlackUruk);
+		registerItem(hammerBlackUruk);
+		registerItem(helmetBlackUruk);
+		registerItem(bodyBlackUruk);
+		registerItem(legsBlackUruk);
+		registerItem(bootsBlackUruk);
+		registerItem(helmetNearHaradWarlord);
 		
-		modConfig = new Configuration(event.getSuggestedConfigurationFile());
-		loadConfig();
+		LOTRConfig.setupAndLoad(event);
 		
 		proxy.onPreload();
 		
 		LOTRBiome.initBiomes();
 		LOTREntityRegistry.loadRegisteredNPCs(event);
 		LOTRShields.forceClassLoad();
-	}
-	
-	public static void loadConfig()
-	{
-		LOTRDimension.configureDimensions(modConfig);
-		alwaysShowAlignment = modConfig.get(Configuration.CATEGORY_GENERAL, "Always show alignment", false, "If set to false, the alignment bar will only be shown in Middle-earth. If set to true, it will be shown in all dimensions").getBoolean();
-		alignmentXOffset = modConfig.get(Configuration.CATEGORY_GENERAL, "Alignment X Offset", 0, "Configure the x-position of the alignment bar on-screen. Negative values move it left, positive values right").getInt();
-		alignmentYOffset = modConfig.get(Configuration.CATEGORY_GENERAL, "Alignment Y Offset", 0, "Configure the y-position of the alignment bar on-screen. Negative values move it up, positive values down").getInt();
-		displayAlignmentAboveHead = modConfig.get(Configuration.CATEGORY_GENERAL, "Display alignment above head", true, "Enable or disable the rendering of other players' alignment values above their heads").getBoolean();
-		enableLOTRSky = modConfig.get(Configuration.CATEGORY_GENERAL, "Enable LOTR sky", true, "Enable or disable the new Middle-earth sky").getBoolean();
-		enableMistyMountainsMist = modConfig.get(Configuration.CATEGORY_GENERAL, "Enable Mist", true, "Enable or disable mist in the Misty Mountains").getBoolean();
-		enableSepiaMap = modConfig.get(Configuration.CATEGORY_GENERAL, "Sepia Map", false, "If set to true, the Middle-earth map will be displayed in more realistic map colours").getBoolean();
-
-		if (modConfig.hasChanged())
-		{
-			modConfig.save();
-		}
 	}
 
 	@Mod.EventHandler
@@ -1959,6 +1974,8 @@ public class LOTRMod
 		toolNearHarad.customCraftingMaterial = Items.iron_ingot;
 		toolHighElven.customCraftingMaterial = Items.iron_ingot;
 		toolBlueDwarven.customCraftingMaterial = blueDwarfSteel;
+		toolDolGuldur.customCraftingMaterial = orcSteel;
+		toolBlackUruk.customCraftingMaterial = blackUrukSteel;
 		
 		armorBronze.customCraftingMaterial = bronze;
 		armorMithril.customCraftingMaterial = mithril;
@@ -1980,6 +1997,9 @@ public class LOTRMod
 		armorGemsbok.customCraftingMaterial = gemsbokHide;
 		armorHighElven.customCraftingMaterial = Items.iron_ingot;
 		armorBlueDwarven.customCraftingMaterial = blueDwarfSteel;
+		armorDolGuldur.customCraftingMaterial = orcSteel;
+		armorUtumno.customCraftingMaterial = orcSteel;
+		armorBlackUruk.customCraftingMaterial = blackUrukSteel;
 
 		LOTRRecipes.createAllRecipes();
 		
@@ -2040,6 +2060,7 @@ public class LOTRMod
 		blockOreStorage.setHarvestLevel("pickaxe", 1, 9);
 		blockOreStorage.setHarvestLevel("pickaxe", 2, 11);
 		blockOreStorage.setHarvestLevel("pickaxe", 2, 12);
+		blockOreStorage.setHarvestLevel("pickaxe", 1, 15);
 		oreMorgulIron.setHarvestLevel("pickaxe", 1);
 		oreQuendite.setHarvestLevel("pickaxe", 2);
 		quenditeGrass.setHarvestLevel("shovel", 0);
@@ -2047,6 +2068,7 @@ public class LOTRMod
 		remains.setHarvestLevel("shovel", 0);
 		oreGulduril.setHarvestLevel("pickaxe", 2);
 		quagmire.setHarvestLevel("shovel", 0);
+		blockOreStorage2.setHarvestLevel("pickaxe", 1, 0);
 		
 		GameRegistry.registerTileEntity(LOTRTileEntityBeacon.class, "LOTRBeacon");
 		GameRegistry.registerTileEntity(LOTRTileEntityHobbitOven.class, "LOTROven");
@@ -2210,13 +2232,17 @@ public class LOTRMod
 		LOTREntities.registerCreature(LOTREntityGundabadBannerBearer.class, "GundabadBannerBearer", 141, 0x33271A, 0x827053);
 		LOTREntities.registerCreature(LOTREntityTermite.class, "Termite", 142, 0x17140D, 0x2F2B24);
 		LOTREntities.registerCreature(LOTREntityDikDik.class, "DikDik", 143, 0xB7783B, 0x684729);
+		LOTREntities.registerCreature(LOTREntityBlackUruk.class, "BlackUruk", 144, 0x0F150E, 0x2B3128);
+		LOTREntities.registerCreature(LOTREntityBlackUrukArcher.class, "BlackUrukArcher", 145, 0x0F150E, 0x2B3128);
 		
 		LOTREntities.registerCreature(LOTREntityUtumnoOrc.class, "UtumnoOrc", 800, 0x291F27, 0x9E5811);
 		LOTREntities.registerCreature(LOTREntityUtumnoOrcArcher.class, "UtumnoOrcArcher", 801, 0x291F27, 0x9E5811);
-		LOTREntities.registerCreature(LOTREntityUtumnoWarg.class, "UtumnoWarg", 802, 0xB7783B, 0x684729);
-		LOTREntities.registerCreature(LOTREntityUtumnoIceSpider.class, "UtumnoIceSpider", 803, 0xEDF3FF, 0x7575FF);
+		LOTREntities.registerCreature(LOTREntityUtumnoIceWarg.class, "UtumnoIceWarg", 802, 0xB1AFAD, 0x878685);
+		LOTREntities.registerCreature(LOTREntityUtumnoObsidianWarg.class, "UtumnoObsidianWarg", 803, 0x2D2B29, 0x191716);
+		LOTREntities.registerCreature(LOTREntityUtumnoFireWarg.class, "UtumnoFireWarg", 804, 0x6A2D1C, 0x6CE7500);
+		LOTREntities.registerCreature(LOTREntityUtumnoIceSpider.class, "UtumnoIceSpider", 805, 0xEDF3FF, 0x7575FF);
 
-		LOTREntities.registerCreature(LOTREntitySauron.class, "Sauron", 1000);
+		//LOTREntities.registerCreature(LOTREntitySauron.class, "Sauron", 1000);
 		LOTREntities.registerCreature(LOTREntityGollum.class, "Gollum", 1001, 0xCCBD90, 0x908565);
 		LOTREntities.registerCreature(LOTREntitySaruman.class, "Saruman", 1002, 0xE6E6E6, 0xB3B3B3);
 		

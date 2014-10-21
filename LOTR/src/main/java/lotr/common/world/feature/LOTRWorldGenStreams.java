@@ -3,24 +3,32 @@ package lotr.common.world.feature;
 import java.util.Random;
 
 import lotr.common.LOTRMod;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class LOTRWorldGenMordorLava extends WorldGenerator
+public class LOTRWorldGenStreams extends WorldGenerator
 {
+	private Block liquidBlock;
+
+	public LOTRWorldGenStreams(Block block)
+	{
+		liquidBlock = block;
+	}
+	
     public boolean generate(World world, Random random, int i, int j, int k)
     {
-        if (world.getBlock(i, j + 1, k) != LOTRMod.rock || world.getBlockMetadata(i, j + 1, k) != 0)
+        if (!isRock(world, i, j + 1, k))
         {
             return false;
         }
-        else if (world.getBlock(i, j - 1, k) != LOTRMod.rock || world.getBlockMetadata(i, j - 1, k) != 0)
+        else if (!isRock(world, i, j - 1, k))
         {
             return false;
         }
-        else if (world.getBlock(i, j, k).getMaterial() != Material.air && (world.getBlock(i, j, k) != LOTRMod.rock || world.getBlockMetadata(i, j, k) != 0))
+        else if (!world.isAirBlock(i, j, k) && !isRock(world, i, j, k))
         {
             return false;
         }
@@ -28,22 +36,22 @@ public class LOTRWorldGenMordorLava extends WorldGenerator
         {
             int sides = 0;
 
-            if (world.getBlock(i - 1, j, k) == LOTRMod.rock && world.getBlockMetadata(i - 1, j, k) == 0)
+            if (isRock(world, i - 1, j, k))
             {
                 ++sides;
             }
 
-            if (world.getBlock(i + 1, j, k) == LOTRMod.rock && world.getBlockMetadata(i + 1, j, k) == 0)
+            if (isRock(world, i + 1, j, k))
             {
                 ++sides;
             }
 
-            if (world.getBlock(i, j, k - 1) == LOTRMod.rock && world.getBlockMetadata(i, j, k - 1) == 0)
+            if (isRock(world, i, j, k - 1))
             {
                 ++sides;
             }
 
-            if (world.getBlock(i, j, k + 1) == LOTRMod.rock && world.getBlockMetadata(i, j, k + 1) == 0)
+            if (isRock(world, i, j, k + 1))
             {
                 ++sides;
             }
@@ -72,13 +80,19 @@ public class LOTRWorldGenMordorLava extends WorldGenerator
 
             if (sides == 3 && openAir == 1)
             {
-                world.setBlock(i, j, k, Blocks.flowing_lava, 0, 2);
+                world.setBlock(i, j, k, liquidBlock, 0, 2);
                 world.scheduledUpdatesAreImmediate = true;
-                Blocks.flowing_lava.updateTick(world, i, j, k, random);
+                liquidBlock.updateTick(world, i, j, k, random);
                 world.scheduledUpdatesAreImmediate = false;
             }
 
             return true;
         }
+    }
+    
+    private boolean isRock(World world, int i, int j, int k)
+    {
+    	Block block = world.getBlock(i, j, k);
+    	return block == Blocks.stone || block == Blocks.sandstone || block == LOTRMod.rock;
     }
 }

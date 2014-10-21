@@ -2,6 +2,7 @@ package lotr.common.world.feature;
 
 import java.util.Random;
 
+import lotr.common.LOTRMod;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -27,7 +28,7 @@ public class LOTRWorldGenLogs extends WorldGenerator
 			int length = 2 + random.nextInt(6);
 			for (int i1 = i; i1 < i + length && isSuitablePositionForLog(world, i1, j, k); i1++)
 			{
-				setBlockAndNotifyAdequately(world, i1, j, k, Blocks.log, 4);
+				setBlockAndNotifyAdequately(world, i1, j, k, LOTRMod.rottenLog, 4);
 				if (world.getBlock(i1, j - 1, k) == Blocks.grass)
 				{
 					setBlockAndNotifyAdequately(world, i1, j - 1, k, Blocks.dirt, 0);
@@ -40,7 +41,7 @@ public class LOTRWorldGenLogs extends WorldGenerator
 			int length = 2 + random.nextInt(6);
 			for (int k1 = k; k1 < k + length && isSuitablePositionForLog(world, i, j, k1); k1++)
 			{
-				setBlockAndNotifyAdequately(world, i, j, k1, Blocks.log, 8);
+				setBlockAndNotifyAdequately(world, i, j, k1, LOTRMod.rottenLog, 8);
 				if (world.getBlock(i, j - 1, k1) == Blocks.grass)
 				{
 					setBlockAndNotifyAdequately(world, i, j - 1, k1, Blocks.dirt, 0);
@@ -50,7 +51,7 @@ public class LOTRWorldGenLogs extends WorldGenerator
 		}
 		else
 		{
-			setBlockAndNotifyAdequately(world, i, j, k, Blocks.log, 0);
+			setBlockAndNotifyAdequately(world, i, j, k, LOTRMod.rottenLog, 0);
 			if (world.getBlock(i, j - 1, k) == Blocks.grass)
 			{
 				setBlockAndNotifyAdequately(world, i, j - 1, k, Blocks.dirt, 0);

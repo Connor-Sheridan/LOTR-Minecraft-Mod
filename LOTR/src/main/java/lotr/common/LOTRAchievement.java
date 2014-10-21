@@ -270,6 +270,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement killThievingBandit;
 	public static LOTRAchievement hundreds;
 	public static LOTRAchievement turnDownForWhat;
+	public static LOTRAchievement bannerProtect;
 	
 	public static LOTRAchievement killHobbit;
 	public static LOTRAchievement sellPipeweedLeaf;
@@ -480,6 +481,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement alignmentGood1000_URUK_HAI;
 	public static LOTRAchievement doMiniquestRohan;
 	public static LOTRAchievement doMiniquestUrukHai;
+	public static LOTRAchievement killUrukHai;
 	
 	public static LOTRAchievement killGondorSoldier;
 	public static LOTRAchievement lightGondorBeacon;
@@ -526,6 +528,8 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement alignmentGood100_MORDOR;
 	public static LOTRAchievement alignmentGood1000_MORDOR;
 	public static LOTRAchievement doMiniquestMordor;
+	public static LOTRAchievement smeltBlackUrukSteel;
+	public static LOTRAchievement wearFullBlackUruk;
 	
 	public static LOTRAchievement enterHarondor;
 	public static LOTRAchievement enterNearHarad;
@@ -562,6 +566,9 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement enterUtumnoIce;
 	public static LOTRAchievement enterUtumnoObsidian;
 	public static LOTRAchievement enterUtumnoFire;
+	public static LOTRAchievement wearFullUtumno;
+	public static LOTRAchievement killUtumnoOrc;
+	public static LOTRAchievement killUtumnoWarg;
 	
 	public static void createAchievements()
 	{
@@ -606,6 +613,7 @@ public class LOTRAchievement implements Comparable
 		killThievingBandit = new LOTRAchievement(GENERAL, 50, LOTRMod.leatherHat, "killThievingBandit");
 		hundreds = new LOTRAchievement(GENERAL, 51, Items.iron_sword, "hundreds");
 		turnDownForWhat = new LOTRAchievement(GENERAL, 52, LOTRMod.mugVodka, "turnDownForWhat");
+		bannerProtect = new LOTRAchievement(GENERAL, 53, LOTRMod.banner, "bannerProtect");
 
 		killHobbit = new LOTRAchievement(SHIRE, 0, LOTRMod.hobbitBone, "killHobbit").setRequiresEnemy(LOTRFaction.HOBBIT);
 		sellPipeweedLeaf = new LOTRAchievement(SHIRE, 1, LOTRMod.pipeweedLeaf, "sellPipeweedLeaf").setRequiresAlly(LOTRFaction.HOBBIT);
@@ -816,6 +824,7 @@ public class LOTRAchievement implements Comparable
 		alignmentGood1000_URUK_HAI = new LOTRAchievement(ROHAN, 20, LOTRMod.goldRing, "alignmentGood1000_URUK_HAI").setRequiresAlly(LOTRFaction.URUK_HAI).setSpecial();
 		doMiniquestRohan = new LOTRAchievement(ROHAN, 21, LOTRMod.redBook, "doMiniquestRohan").setRequiresAlly(LOTRFaction.ROHAN);
 		doMiniquestUrukHai = new LOTRAchievement(ROHAN, 22, LOTRMod.redBook, "doMiniquestUrukHai").setRequiresAlly(LOTRFaction.URUK_HAI);
+		killUrukHai = new LOTRAchievement(ROHAN, 23, LOTRMod.orcBone, "killUrukHai").setRequiresEnemy(LOTRFaction.URUK_HAI);
 
 		killGondorSoldier = new LOTRAchievement(GONDOR, 0, LOTRMod.swordGondor, "killGondorSoldier").setRequiresEnemy(LOTRFaction.GONDOR);
 		lightGondorBeacon = new LOTRAchievement(GONDOR, 1, LOTRMod.beacon, "lightGondorBeacon");
@@ -862,6 +871,8 @@ public class LOTRAchievement implements Comparable
 		alignmentGood100_MORDOR = new LOTRAchievement(MORDOR, 20, LOTRMod.goldRing, "alignmentGood100_MORDOR").setRequiresAlly(LOTRFaction.MORDOR).setSpecial();
 		alignmentGood1000_MORDOR = new LOTRAchievement(MORDOR, 21, LOTRMod.goldRing, "alignmentGood1000_MORDOR").setRequiresAlly(LOTRFaction.MORDOR).setSpecial();
 		doMiniquestMordor = new LOTRAchievement(MORDOR, 22, LOTRMod.redBook, "doMiniquestMordor").setRequiresAlly(LOTRFaction.MORDOR);
+		smeltBlackUrukSteel = new LOTRAchievement(MORDOR, 23, LOTRMod.blackUrukSteel, "smeltBlackUrukSteel");
+		wearFullBlackUruk = new LOTRAchievement(MORDOR, 24, LOTRMod.bodyBlackUruk, "wearFullBlackUruk");
 
 		enterHarondor = new LOTRAchievement(NEAR_HARAD, 0, Blocks.dirt, "enterHarondor").setBiomeAchievement();
 		enterNearHarad = new LOTRAchievement(NEAR_HARAD, 1, Blocks.sand, "enterNearHarad").setBiomeAchievement();
@@ -898,6 +909,9 @@ public class LOTRAchievement implements Comparable
 		enterUtumnoIce = new LOTRAchievement(UTUMNO, 0, new ItemStack(LOTRMod.utumnoBrick, 1, 3), "enterUtumnoIce").setSpecial();
 		enterUtumnoObsidian = new LOTRAchievement(UTUMNO, 1, new ItemStack(LOTRMod.utumnoBrick, 1, 5), "enterUtumnoObsidian").setSpecial();
 		enterUtumnoFire = new LOTRAchievement(UTUMNO, 2, new ItemStack(LOTRMod.utumnoBrick, 1, 1), "enterUtumnoFire").setSpecial();
+		wearFullUtumno = new LOTRAchievement(UTUMNO, 3, LOTRMod.bodyUtumno, "wearFullUtumno");
+		killUtumnoOrc = new LOTRAchievement(UTUMNO, 4, LOTRMod.orcBone, "killUtumnoOrc");
+		killUtumnoWarg = new LOTRAchievement(UTUMNO, 5, LOTRMod.wargBone, "killUtumnoWarg");
 	}
 	
 	public static Category categoryForName(String name)

@@ -24,7 +24,7 @@ public class LOTRMiniQuestKillFaction extends LOTRMiniQuestKill
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setString("KillFaction", killFaction.name());
+		nbt.setString("KillFaction", killFaction.codeName());
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class LOTRBlockLeaves4 extends LOTRBlockLeavesBase
             int meta = world.getBlockMetadata(i, j, k);
             int leafType = meta & 3;
             boolean playerPlaced = (meta & 4) != 0;
-            if (leafType == 0 && !playerPlaced && random.nextInt(50) == 0)
+            if (leafType == 0 && !playerPlaced && random.nextInt(60) == 0)
             {
                 double d = i + random.nextDouble();
                 double d1 = j - 0.2D;

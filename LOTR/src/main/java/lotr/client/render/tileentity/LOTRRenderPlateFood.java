@@ -30,12 +30,7 @@ public class LOTRRenderPlateFood extends TileEntitySpecialRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glTranslatef((float)d + 0.5F, (float)d1 + 0.125F, (float)d2 + 0.5F);
-			rand.setSeed((long)((plate.xCoord * 3129871) ^ plate.zCoord * 116129781L ^ plate.yCoord));
-			float rotation = rand.nextFloat() * 360F;
-			GL11.glRotatef(rotation, 0F, 1F, 0F);
-			GL11.glRotatef(90F, 1F, 0F, 0F);
-			GL11.glTranslatef(-0.25F, -0.25F, 0F);
-
+			
 			bindTexture(TextureMap.locationItemsTexture);
 			IIcon icon = plateItem.getIconIndex();
 			Tessellator tessellator = Tessellator.instance;
@@ -43,8 +38,22 @@ public class LOTRRenderPlateFood extends TileEntitySpecialRenderer
 			float f1 = icon.getMaxU();
 			float f2 = icon.getMinV();
 			float f3 = icon.getMaxV();
-			GL11.glScalef(0.5625F, 0.5625F, 0.5625F);
-			ItemRenderer.renderItemIn2D(tessellator, f1, f2, f4, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+			
+			int foods = plateItem.stackSize;
+			for (int l = 0; l < foods; l++)
+			{
+				GL11.glPushMatrix();
+				rand.setSeed((plate.xCoord * 3129871) ^ plate.zCoord * 116129781L ^ plate.yCoord + (l * 5930563L));
+				float rotation = rand.nextFloat() * 360F;
+				GL11.glRotatef(rotation, 0F, 1F, 0F);
+				GL11.glRotatef(90F, 1F, 0F, 0F);
+				GL11.glTranslatef(-0.25F, -0.25F, 0F);
+				GL11.glScalef(0.5625F, 0.5625F, 0.5625F);
+				ItemRenderer.renderItemIn2D(tessellator, f1, f2, f4, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+				GL11.glPopMatrix();
+				
+				GL11.glTranslatef(0F, 0.03125F, 0F);
+			}
 			
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 			GL11.glEnable(GL11.GL_CULL_FACE);

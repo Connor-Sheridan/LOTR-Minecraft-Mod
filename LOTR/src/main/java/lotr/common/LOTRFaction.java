@@ -31,6 +31,8 @@ public enum LOTRFaction
 	FAR_HARAD(0x2E6342),
 	HALF_TROLL(0x9E8373),
 	
+	DARK_HUORN(0, null, true, true, -1),
+	
 	UTUMNO(0x330500, LOTRDimension.UTUMNO, -66666),
 	
 	HOSTILE(true, -1),
@@ -160,6 +162,7 @@ public enum LOTRFaction
 		HOBBIT.addEnemy(URUK_HAI);
 		HOBBIT.addEnemy(MORDOR);
 		HOBBIT.addEnemy(HALF_TROLL);
+		HOBBIT.addEnemy(DARK_HUORN);
 		
 		HOBBIT.addKillPenalty(HOBBIT);
 		HOBBIT.addKillPenalty(RANGER_NORTH);
@@ -183,6 +186,7 @@ public enum LOTRFaction
 		RANGER_NORTH.addEnemy(NEAR_HARAD);
 		RANGER_NORTH.addEnemy(FAR_HARAD);
 		RANGER_NORTH.addEnemy(HALF_TROLL);
+		RANGER_NORTH.addEnemy(DARK_HUORN);
 		
 		RANGER_NORTH.addKillPenalty(RANGER_NORTH);
 		RANGER_NORTH.addKillPenalty(HIGH_ELF);
@@ -573,13 +577,15 @@ public enum LOTRFaction
 		MORDOR.addKillBonus(ROHAN);
 		MORDOR.addKillBonus(GONDOR);
 		
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrc.class, 10));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrcArcher.class, 5));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrcBombardier.class, 3));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorBannerBearer.class, 2));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorWarg.class, 10));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorWargBombardier.class, 1));
-		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityOlogHai.class, 5));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrc.class, 20));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrcArcher.class, 10));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorOrcBombardier.class, 5));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorBannerBearer.class, 5));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityBlackUruk.class, 10));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityBlackUrukArcher.class, 5));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorWarg.class, 25));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityMordorWargBombardier.class, 2));
+		MORDOR.invasionMobs.add(new InvasionSpawnEntry(LOTREntityOlogHai.class, 10));
 		
 		NEAR_HARAD.addAlignmentAchievement(10, LOTRAchievement.alignmentGood10_NEAR_HARAD);
 		NEAR_HARAD.addAlignmentAchievement(100, LOTRAchievement.alignmentGood100_NEAR_HARAD);
@@ -644,6 +650,12 @@ public enum LOTRFaction
 		
 		// No Half-troll invasion mobs yet
 		
+		DARK_HUORN.addEnemy(LOTRFaction.HOBBIT);
+		DARK_HUORN.addEnemy(LOTRFaction.RANGER_NORTH);
+		
+		DARK_HUORN.addKillBonus(LOTRFaction.HOBBIT);
+		DARK_HUORN.addKillBonus(LOTRFaction.RANGER_NORTH);
+		
 		for (LOTRFaction f : LOTRFaction.values())
 		{
 			if (f.allowPlayer && f != LOTRFaction.UTUMNO)
@@ -682,14 +694,19 @@ public enum LOTRFaction
 		return enemies.contains(other);
 	}
 	
+	public String codeName()
+	{
+		return name();
+	}
+	
 	public String factionName()
 	{
-		return StatCollector.translateToLocal("lotr.faction." + name() + ".name");
+		return StatCollector.translateToLocal("lotr.faction." + codeName() + ".name");
 	}
 	
 	public String factionEntityName()
 	{
-		return StatCollector.translateToLocal("lotr.faction." + name() + ".entity");
+		return StatCollector.translateToLocal("lotr.faction." + codeName() + ".entity");
 	}
 	
 	public boolean isAllied(LOTRFaction f)
@@ -718,7 +735,7 @@ public enum LOTRFaction
 	{
 		for (LOTRFaction f : values())
 		{
-			if (f.name().equals(factionName))
+			if (f.codeName().equals(factionName))
 			{
 				return f;
 			}
@@ -747,7 +764,7 @@ public enum LOTRFaction
 			{
 				continue;
 			}
-			list.add(f.name());
+			list.add(f.codeName());
 		}
 		return list;
 	}

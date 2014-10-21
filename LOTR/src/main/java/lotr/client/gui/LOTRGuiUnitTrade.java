@@ -95,7 +95,7 @@ public class LOTRGuiUnitTrade extends GuiContainer
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);
-		drawTexturedModalRect(68, 91, 0, 18, 16, 16);
+		drawTexturedModalRect(68, 91, 0, 36, 16, 16);
 		
 		int alignment = trades[currentTradeEntryIndex].alignmentRequired;
 		String s = String.valueOf(alignment);

@@ -14,7 +14,7 @@ public class LOTRBiomeGenAnduinWoodlands extends LOTRBiomeGenAnduin
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityRabbit.class, 6, 4, 4));
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityBird.class, 12, 4, 4));
 
-		decorator.treesPerChunk = 5;
+		decorator.treesPerChunk = 4;
 		decorator.flowersPerChunk = 5;
 		decorator.doubleFlowersPerChunk = 1;
 		decorator.grassPerChunk = 8;

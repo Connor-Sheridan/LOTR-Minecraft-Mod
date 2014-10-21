@@ -242,8 +242,8 @@ public class LOTRGuiAchievements extends LOTRGuiMenu
     public void handleMouseInput()
     {
         super.handleMouseInput();
+        
         int i = Mouse.getEventDWheel();
-
         if (i != 0 && hasScrollBar())
         {
             int j = currentCategoryTakenCount + currentCategoryUntakenCount - 4;

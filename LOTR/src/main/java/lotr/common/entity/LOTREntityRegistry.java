@@ -44,7 +44,7 @@ public class LOTREntityRegistry
 			{
 				stringbuilder.append(", ");
 			}
-			stringbuilder.append(faction.name());
+			stringbuilder.append(faction.codeName());
 		}
 		String allFactions = stringbuilder.toString();
 		
@@ -138,7 +138,7 @@ public class LOTREntityRegistry
 					String factionString = s.substring(i + "faction=".length() + 1, j);
 					for (LOTRFaction f : LOTRFaction.values())
 					{
-						if (f.name().equals(factionString))
+						if (f.codeName().equals(factionString))
 						{
 							faction = f;
 							break;

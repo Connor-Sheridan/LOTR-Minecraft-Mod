@@ -89,7 +89,8 @@ public class LOTRModelEnt extends ModelBase
 		rightHand.setTextureOffset(102, 92).addBox(-2F, 16F, -4F, 3, 10, 2);
 		rightHand.setTextureOffset(112, 92).addBox(-2F, 16F, -1F, 2, 8, 2);
 		rightHand.setTextureOffset(120, 92).addBox(-2F, 16F, 2F, 2, 6, 2);
-		rightHand.setRotationPoint(-13F, -20F, 0F);
+		rightHand.setRotationPoint(-5F, 28F, 0F);
+		rightArm.addChild(rightHand);
 		
 		leftArm = new ModelRenderer(this, 96, 28);
 		leftArm.mirror = true;
@@ -103,7 +104,8 @@ public class LOTRModelEnt extends ModelBase
 		leftHand.setTextureOffset(102, 92).addBox(-1F, 16F, -4F, 3, 10, 2);
 		leftHand.setTextureOffset(112, 92).addBox(0F, 16F, -1F, 2, 8, 2);
 		leftHand.setTextureOffset(120, 92).addBox(0F, 16F, 2F, 2, 6, 2);
-		leftHand.setRotationPoint(13F, -20F, 0F);
+		leftHand.setRotationPoint(5F, 28F, 0F);
+		leftArm.addChild(leftHand);
 		
 		rightLeg = new ModelRenderer(this, 0, 60);
 		rightLeg.addBox(-7F, -4F, -4F, 6, 22, 8);
@@ -115,7 +117,8 @@ public class LOTRModelEnt extends ModelBase
 		rightFoot.setTextureOffset(0, 111).addBox(2F, 13F, -16F, 3, 5, 9);
 		rightFoot.setTextureOffset(24, 113).addBox(-2F, 14F, -15F, 3, 4, 8);
 		rightFoot.setTextureOffset(46, 115).addBox(-5F, 15F, -14F, 2, 3, 7);
-		rightFoot.setRotationPoint(-8F, 6F, 0F);
+		rightFoot.setRotationPoint(-4F, 18F, 0F);
+		rightLeg.addChild(rightFoot);
 		
 		leftLeg = new ModelRenderer(this, 0, 60);
 		leftLeg.mirror = true;
@@ -129,7 +132,8 @@ public class LOTRModelEnt extends ModelBase
 		leftFoot.setTextureOffset(0, 111).addBox(-5F, 13F, -16F, 3, 5, 9);
 		leftFoot.setTextureOffset(24, 113).addBox(-1F, 14F, -15F, 3, 4, 8);
 		leftFoot.setTextureOffset(46, 115).addBox(3F, 15F, -14F, 2, 3, 7);
-		leftFoot.setRotationPoint(8F, 6F, 0F);
+		leftFoot.setRotationPoint(4F, 18F, 0F);
+		leftLeg.addChild(leftFoot);
 		
 		branch1 = new ModelRenderer(this, 0, 20);
 		branch1.addBox(-1.5F, -28F, -1.5F, 3, 32, 3);
@@ -198,13 +202,9 @@ public class LOTRModelEnt extends ModelBase
 		nose.render(f5);
 		beard.render(f5);
 		rightArm.render(f5);
-		rightHand.render(f5);
 		leftArm.render(f5);
-		leftHand.render(f5);
 		rightLeg.render(f5);
-		rightFoot.render(f5);
 		leftLeg.render(f5);
-		leftFoot.render(f5);
 		branch1.render(f5);
 		branch1twig1.renderWithRotation(f5);
 		branch1twig2.renderWithRotation(f5);
@@ -259,36 +259,10 @@ public class LOTRModelEnt extends ModelBase
 	    rightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
         leftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
 		
-		float angle = rightArm.rotateAngleZ;
-		float sin = MathHelper.sin(angle);
-		float cos = MathHelper.cos(angle);
-        rightHand.rotationPointX = -8F - (28F * sin) - (5F * cos);
-		rightHand.rotationPointY = -48F + (28F * cos) - (5F * sin);
-		rightHand.rotateAngleZ = angle;
-		
-		angle = leftArm.rotateAngleZ;
-		sin = MathHelper.sin(-angle);
-		cos = MathHelper.cos(-angle);
-        leftHand.rotationPointX = 8F + (28F * sin) + (5F * cos);
-		leftHand.rotationPointY = -48F + (28F * cos) - (5F * sin);
-		leftHand.rotateAngleZ = angle;
-		
         rightArm.rotateAngleX += MathHelper.cos(f * 0.6662F + (float)Math.PI) * 0.8F * f1;
         leftArm.rotateAngleX += MathHelper.cos(f * 0.6662F) * 0.8F * f1;
-		
-		angle = rightArm.rotateAngleX;
-		sin = MathHelper.sin(angle);
-		cos = MathHelper.cos(angle);
-		rightHand.rotationPointZ = 0F + (28F * sin);
-		rightHand.rotationPointY = -48F + (28F * cos);
-		rightHand.rotateAngleX = angle * 1.5F;
-		
-		angle = leftArm.rotateAngleX;
-		sin = MathHelper.sin(-angle);
-		cos = MathHelper.cos(-angle);
-		leftHand.rotationPointZ = 0F - (28F * sin);
-		leftHand.rotationPointY = -48F + (28F * cos);
-		leftHand.rotateAngleX = angle * 1.5F;
+        rightHand.rotateAngleX = rightArm.rotateAngleX * 1.5F;
+		leftHand.rotateAngleX = leftArm.rotateAngleX * 1.5F;
 		
 		rightLeg.rotateAngleX = 0F;
 		rightFoot.rotateAngleX = 0F;
@@ -307,18 +281,6 @@ public class LOTRModelEnt extends ModelBase
 			rightLeg.rotateAngleX -= leftLeg.rotateAngleX;
 			rightFoot.rotateAngleX = rightLeg.rotateAngleX;
 		}
-		
-		angle = rightLeg.rotateAngleX;
-		sin = MathHelper.sin(angle);
-		cos = MathHelper.cos(angle);
-		rightFoot.rotationPointZ = 0F + (18F * sin);
-		rightFoot.rotationPointY = -12F + (18F * cos);
-
-		angle = leftLeg.rotateAngleX;
-		sin = MathHelper.sin(angle);
-		cos = MathHelper.cos(angle);
-		leftFoot.rotationPointZ = 0F + (18F * sin);
-		leftFoot.rotationPointY = -12F + (18F * cos);
 	}
 	
 	private void setRotation(ModelRenderer part, float x, float y, float z)

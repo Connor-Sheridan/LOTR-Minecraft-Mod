@@ -2,17 +2,14 @@ package lotr.client;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import lotr.client.render.entity.LOTRRandomSkins;
-import lotr.common.LOTRMod;
+import lotr.common.LOTRConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.client.resources.*;
-import net.minecraft.client.resources.data.TextureMetadataSection;
 import net.minecraft.util.ResourceLocation;
 
 public class LOTRTextures implements IResourceManagerReloadListener
@@ -38,7 +35,7 @@ public class LOTRTextures implements IResourceManagerReloadListener
 	{
 		ResourceLocation map = new ResourceLocation("lotr:map/map.png");
 		
-		if (LOTRMod.enableSepiaMap)
+		if (LOTRConfig.enableSepiaMap)
 		{
 			try
 			{

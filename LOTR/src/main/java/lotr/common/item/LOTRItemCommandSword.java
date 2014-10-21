@@ -19,6 +19,7 @@ public class LOTRItemCommandSword extends LOTRItemSword
 	{
 		super(ToolMaterial.IRON);
         setMaxDamage(0);
+        lotrWeaponDamage = 1F;
 	}
 	
 	@Override

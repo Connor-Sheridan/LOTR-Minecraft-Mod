@@ -39,7 +39,7 @@ public class LOTRGuiFastTravel extends LOTRGuiScreenBase
     {
         drawBackground(0);
 		
-		String s = StatCollector.translateToLocalFormatted("lotr.gui.fastTravel.travel", new Object[] {theWaypoint.getDisplayName()});
+		String s = StatCollector.translateToLocalFormatted("lotr.fastTravel.travel", new Object[] {theWaypoint.getDisplayName()});
 		
         drawCenteredString(fontRendererObj, s, width / 2, height / 2 - 50, 0xFFFFFF);
 		

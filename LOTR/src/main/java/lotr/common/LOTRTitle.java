@@ -63,6 +63,7 @@ public class LOTRTitle implements Comparable<LOTRTitle>
 	public static LOTRTitle explore50Biomes;
 	public static LOTRTitle fourLeafClover;
 	public static LOTRTitle enterUtumno;
+	public static LOTRTitle visitOcean;
 	
 	private static int nextTitleID = 0;
 	
@@ -267,6 +268,7 @@ public class LOTRTitle implements Comparable<LOTRTitle>
 		explore50Biomes = new LOTRTitle("explore50Biomes").setRequiresAchievement(LOTRAchievement.travel50);
 		fourLeafClover = new LOTRTitle("fourLeafClover").setRequiresAchievement(LOTRAchievement.findFourLeafClover);
 		enterUtumno = new LOTRTitle("enterUtumno").setRequiresAchievement(LOTRAchievement.enterUtumnoIce);
+		visitOcean = new LOTRTitle("visitOcean").setRequiresAchievement(LOTRAchievement.enterOcean);
 	}
 	
 	public static class PlayerTitle

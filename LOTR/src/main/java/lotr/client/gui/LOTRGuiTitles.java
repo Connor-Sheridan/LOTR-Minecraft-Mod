@@ -279,8 +279,8 @@ public class LOTRGuiTitles extends LOTRGuiMenu
     public void handleMouseInput()
     {
         super.handleMouseInput();
+        
         int i = Mouse.getEventDWheel();
-
         if (i != 0)
         {
             if (i < 0)

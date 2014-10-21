@@ -130,9 +130,11 @@ public class LOTRBlockPlate extends BlockContainer
 			LOTRTileEntityPlate plate = (LOTRTileEntityPlate)tileentity;
 			ItemStack plateItem = plate.getFoodItem();
 			
-			if (plateItem == null && itemstack != null && itemstack.getItem() instanceof ItemFood)
+			if (plateItem == null && LOTRTileEntityPlate.isValidFoodItem(itemstack))
 			{
-				plate.setFoodItem(itemstack.copy());
+				plateItem = itemstack.copy();
+				plateItem.stackSize = 1;
+				plate.setFoodItem(plateItem);
 				if (!entityplayer.capabilities.isCreativeMode)
 				{
 					itemstack.stackSize--;
@@ -141,10 +143,23 @@ public class LOTRBlockPlate extends BlockContainer
 			}
 			else if (plateItem != null)
 			{
-				if (entityplayer.canEat(false))
+				if (itemstack != null && itemstack.isItemEqual(plateItem) && ItemStack.areItemStackTagsEqual(itemstack, plateItem))
+				{
+					if (plateItem.stackSize < plateItem.getMaxStackSize())
+					{
+						plateItem.stackSize++;
+						plate.setFoodItem(plateItem);
+						if (!entityplayer.capabilities.isCreativeMode)
+						{
+							itemstack.stackSize--;
+						}
+						return true;
+					}
+				}
+				else if (entityplayer.canEat(false))
 				{
 					plateItem.getItem().onEaten(plateItem, world, entityplayer);
-					plate.setFoodItem(null);
+					plate.setFoodItem(plateItem);
 					return true;
 				}
 			}
@@ -165,6 +180,18 @@ public class LOTRBlockPlate extends BlockContainer
 	
 	public void dropPlateItem(LOTRTileEntityPlate plate)
 	{
-		dropBlockAsItem(plate.getWorldObj(), plate.xCoord, plate.yCoord, plate.zCoord, plate.getFoodItem());
+		dropPlateItem(plate, plate.getFoodItem());
+	}
+	
+	public void dropOnePlateItem(LOTRTileEntityPlate plate)
+	{
+		ItemStack item = plate.getFoodItem().copy();
+		item.stackSize = 1;
+		dropPlateItem(plate, item);
+	}
+	
+	private void dropPlateItem(LOTRTileEntityPlate plate, ItemStack itemstack)
+	{
+		dropBlockAsItem(plate.getWorldObj(), plate.xCoord, plate.yCoord, plate.zCoord, itemstack);
 	}
 }

@@ -59,6 +59,7 @@ public class LOTRRecipes
 		RecipeSorter.register("lotr:leatherHatFeather", LOTRRecipeLeatherHatFeather.class, SHAPELESS, "after:minecraft:shapeless");
 		
 		createStandardRecipes();
+		createPoisonedDaggerRecipes();
 		
 		createWoodenSlabRecipes();
 		CraftingManager.getInstance().getRecipeList().addAll(0, woodenSlabRecipes);
@@ -795,66 +796,6 @@ public class LOTRRecipes
 		{
 			"X", "Y", "Z", 'X', Items.iron_ingot, 'Y', "ingotBronze", 'Z', "stickWood"
 		}));
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerOrcPoisoned), new Object[]
-		{
-			daggerOrc, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerUrukPoisoned), new Object[]
-		{
-			daggerUruk, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerBronzePoisoned), new Object[]
-		{
-			daggerBronze, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerIronPoisoned), new Object[]
-		{
-			daggerIron, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerMithrilPoisoned), new Object[]
-		{
-			daggerMithril, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerGondorPoisoned), new Object[]
-		{
-			daggerGondor, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerElvenPoisoned), new Object[]
-		{
-			daggerElven, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerDwarvenPoisoned), new Object[]
-		{
-			daggerDwarven, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerRohanPoisoned), new Object[]
-		{
-			daggerRohan, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerWoodElvenPoisoned), new Object[]
-		{
-			daggerWoodElven, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerAngmarPoisoned), new Object[]
-		{
-			daggerAngmar, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerHighElvenPoisoned), new Object[]
-		{
-			daggerHighElven, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerNearHaradPoisoned), new Object[]
-		{
-			daggerNearHarad, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerBlueDwarvenPoisoned), new Object[]
-		{
-			daggerBlueDwarven, bottlePoison
-		});
-		GameRegistry.addShapelessRecipe(new ItemStack(daggerDolGuldurPoisoned), new Object[]
-		{
-			daggerDolGuldur, bottlePoison
-		});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(sulfurMatch, 4), new Object[]
 		{
 			"X", "Y", 'X', "sulfur", 'Y', "stickWood"
@@ -1120,6 +1061,82 @@ public class LOTRRecipes
 		{
 			"X  ", "XX ", "XXX", 'X', new ItemStack(planks2, 1, 2)
 		});
+		GameRegistry.addShapelessRecipe(new ItemStack(blackUrukSteel, 9), new Object[]
+		{
+			new ItemStack(blockOreStorage2, 1, 0)
+		});
+		GameRegistry.addRecipe(new ItemStack(blockOreStorage2, 1, 0), new Object[]
+		{
+			"XXX", "XXX", "XXX", 'X', blackUrukSteel
+		});
+	}
+	
+	private static void createPoisonedDaggerRecipes()
+	{
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerOrcPoisoned), new Object[]
+		{
+			daggerOrc, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerUrukPoisoned), new Object[]
+		{
+			daggerUruk, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerBronzePoisoned), new Object[]
+		{
+			daggerBronze, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerIronPoisoned), new Object[]
+		{
+			daggerIron, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerMithrilPoisoned), new Object[]
+		{
+			daggerMithril, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerGondorPoisoned), new Object[]
+		{
+			daggerGondor, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerElvenPoisoned), new Object[]
+		{
+			daggerElven, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerDwarvenPoisoned), new Object[]
+		{
+			daggerDwarven, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerRohanPoisoned), new Object[]
+		{
+			daggerRohan, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerWoodElvenPoisoned), new Object[]
+		{
+			daggerWoodElven, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerAngmarPoisoned), new Object[]
+		{
+			daggerAngmar, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerHighElvenPoisoned), new Object[]
+		{
+			daggerHighElven, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerNearHaradPoisoned), new Object[]
+		{
+			daggerNearHarad, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerBlueDwarvenPoisoned), new Object[]
+		{
+			daggerBlueDwarven, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerDolGuldurPoisoned), new Object[]
+		{
+			daggerDolGuldur, bottlePoison
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(daggerBlackUrukPoisoned), new Object[]
+		{
+			daggerBlackUruk, bottlePoison
+		});
 	}
 	
 	private static void createWoodenSlabRecipes()
@@ -1232,6 +1249,7 @@ public class LOTRRecipes
 		addSmeltingXPForItem(urukSteel, 0.7F);
 		addSmeltingXPForItem(morgulSteel, 0.8F);
 		addSmeltingXPForItem(blueDwarfSteel, 0.7F);
+		addSmeltingXPForItem(blackUrukSteel, 0.7F);
 	}
 
 	private static void addSmeltingXPForItem(Item item, float xp)
@@ -1597,6 +1615,46 @@ public class LOTRRecipes
 		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(slabSingle5, 6, 1), new Object[]
 		{
 			"XXX", 'X', new ItemStack(pillar, 1, 7)
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(brick2, 1, 10), new Object[]
+		{
+			"XX", "XX", 'X', new ItemStack(brick, 1, 0)
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(scimitarBlackUruk), new Object[]
+		{
+			"X", "X", "Y", 'X', blackUrukSteel, 'Y', "stickWood"
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(daggerBlackUruk), new Object[]
+		{
+			"X", "Y", 'X', blackUrukSteel, 'Y', "stickWood"
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(spearBlackUruk), new Object[]
+		{
+			"  X", " Y ", "Y  ", 'X', blackUrukSteel, 'Y', "stickWood"
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(battleaxeBlackUruk), new Object[]
+		{
+			"XXX", "XYX", " Y ", 'X', blackUrukSteel, 'Y', "stickWood"
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(hammerBlackUruk), new Object[]
+		{
+			"XYX", "XYX", " Y ", 'X', blackUrukSteel, 'Y', "stickWood"
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(helmetBlackUruk), new Object[]
+		{
+			"XXX", "X X", 'X', blackUrukSteel
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(bodyBlackUruk), new Object[]
+		{
+			"X X", "XXX", "XXX", 'X', blackUrukSteel
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(legsBlackUruk), new Object[]
+		{
+			"XXX", "X X", "X X", 'X', blackUrukSteel
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(bootsBlackUruk), new Object[]
+		{
+			"X X", "X X", 'X', blackUrukSteel
 		}));
     }
 	
@@ -2405,6 +2463,10 @@ public class LOTRRecipes
 		nearHaradRecipes.add(new ShapedOreRecipe(new ItemStack(slabSingle4, 6, 7), new Object[]
 		{
 			"XXX", 'X', new ItemStack(pillar, 1, 5)
+		}));
+		nearHaradRecipes.add(new ShapedOreRecipe(new ItemStack(helmetNearHaradWarlord), new Object[]
+		{
+			"XYX", " Z ", 'X', "stickWood", 'Y', Items.leather, 'Z', new ItemStack(helmetNearHarad, 1, 0)
 		}));
     }
     

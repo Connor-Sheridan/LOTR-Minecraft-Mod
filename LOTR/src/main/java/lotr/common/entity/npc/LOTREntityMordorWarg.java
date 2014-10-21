@@ -15,7 +15,7 @@ public class LOTREntityMordorWarg extends LOTREntityWarg
 	protected void entityInit()
 	{
 		super.entityInit();
-		setWargType(2);
+		setWargType(WargType.BLACK);
 	}
 	
 	@Override
