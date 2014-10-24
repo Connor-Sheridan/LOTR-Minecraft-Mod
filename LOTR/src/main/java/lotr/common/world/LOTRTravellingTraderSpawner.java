@@ -58,7 +58,7 @@ public class LOTRTravellingTraderSpawner
 		{
 			timeUntilTrader--;
 		}
-		else
+		else if (world.rand.nextInt(100) == 0)
 		{
 			boolean spawned = false;
 			
@@ -103,7 +103,7 @@ public class LOTRTravellingTraderSpawner
 			
 			if (!spawned)
 			{
-				timeUntilTrader = 100;
+				timeUntilTrader = 200 + world.rand.nextInt(400);
 			}
 		}
 	}

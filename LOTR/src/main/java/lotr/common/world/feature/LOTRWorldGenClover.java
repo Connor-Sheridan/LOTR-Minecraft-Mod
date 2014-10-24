@@ -32,7 +32,7 @@ public class LOTRWorldGenClover extends WorldGenerator
 
             if (world.isAirBlock(i1, j1, k1) && LOTRMod.clover.canBlockStay(world, i1, j1, k1))
             {
-				if (random.nextInt(1000) == 0)
+				if (random.nextInt(500) == 0)
 				{
 					world.setBlock(i1, j1, k1, LOTRMod.clover, 1, 2);
 				}

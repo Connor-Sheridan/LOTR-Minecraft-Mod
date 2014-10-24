@@ -5,21 +5,19 @@ import java.util.Random;
 
 import lotr.common.LOTRCreativeTabs;
 import lotr.common.LOTRMod;
+import lotr.common.world.biome.LOTRBiomeGenMordor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class LOTRBlockGrass extends BlockBush implements IShearable
+public class LOTRBlockMordorGrass extends BlockBush implements IShearable
 {
-	private boolean isSandy;
-	
-    public LOTRBlockGrass()
+    public LOTRBlockMordorGrass()
     {
         super(Material.vine);
         setBlockBounds(0.1F, 0F, 0.1F, 0.9F, 0.8F, 0.9F);
@@ -27,22 +25,18 @@ public class LOTRBlockGrass extends BlockBush implements IShearable
 		setHardness(0F);
 		setStepSound(Block.soundTypeGrass);
     }
-    
-    public LOTRBlockGrass setSandy()
-    {
-    	isSandy = true;
-    	return this;
-    }
-	
-	@Override
+
+    @Override
     public boolean canBlockStay(World world, int i, int j, int k)
     {
-        Block below = world.getBlock(i, j - 1, k);
-        if (below.canSustainPlant(world, i, j, k, ForgeDirection.UP, this) || (isSandy && below.getMaterial() == Material.sand))
+        if (j >= 0 && j < 256)
         {
-        	return world.getFullBlockLightValue(i, j, k) >= 8 || world.canBlockSeeTheSky(i, j, k);
+            return LOTRBiomeGenMordor.canPlantGrow(world, i, j - 1, k);
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 	
 	@Override
@@ -58,22 +52,10 @@ public class LOTRBlockGrass extends BlockBush implements IShearable
     }
 	
 	@Override
-    public int quantityDroppedWithBonus(int i, Random random)
-    {
-        return Blocks.tallgrass.quantityDroppedWithBonus(i, random);
-    }
-	
-	@Override
-    public ArrayList getDrops(World world, int i, int j, int k, int meta, int fortune)
-    {
-        return Blocks.tallgrass.getDrops(world, i, j, k, meta, fortune);
-    }
-	
-	@Override
-    public int getDamageValue(World world, int i, int j, int k)
-    {
-        return world.getBlockMetadata(i, j, k);
-    }
+    public Item getItemDropped(int i, Random random, int j)
+	{
+		return null;
+	}
 
 	@Override
     public boolean isShearable(ItemStack item, IBlockAccess world, int i, int j, int k) 

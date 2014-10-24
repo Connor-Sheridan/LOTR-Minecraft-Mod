@@ -413,6 +413,9 @@ tile.lotr:stairsBaobab.name=Baobab Wood Stairs
 tile.lotr:stairsCedar.name=Cedar Wood Stairs
 tile.lotr:rottenLog.0.name=Rotten Log
 tile.lotr:oreStorage2.0.name=Block of Black Uruk Steel
+tile.lotr:mordorGrass.name=Mordor Scrub
+tile.lotr:mordorDirt.name=Mordor Dirt
+tile.lotr:mordorGravel.name=Mordor Gravel
 
 item.lotr:goldRing.name=Gold Ring
 item.lotr:pouch.0.name=Small Pouch
@@ -859,6 +862,8 @@ item.lotr:bodyBlackUruk.name=Black Uruk Chestplate
 item.lotr:legsBlackUruk.name=Black Uruk Leggings
 item.lotr:bootsBlackUruk.name=Black Uruk Boots
 item.lotr:helmetNearHaradWarlord.name=Near Harad Warlord Helmet
+item.lotr:utumnoKey.0.name=Icy Utumno Key
+item.lotr:utumnoKey.1.name=Obsidian Utumno Key
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength
@@ -1621,6 +1626,7 @@ lotr.biome.anduinVale.name=Vales of Anduin
 lotr.biome.anduinValeWoodlands.name=Vales of Anduin Woodlands
 lotr.biome.shireMoors.name=Shire Moors
 lotr.biome.shireMarshes.name=Shire Marshes
+lotr.biome.farHaradBaobab.name=Far Harad Baobab Savannah
 
 lotr.biome.utumno.name=Utumno
 
@@ -2410,6 +2416,8 @@ lotr.achievement.alignmentGood100_FAR_HARAD.title=Far Harad Warrior
 lotr.achievement.alignmentGood100_FAR_HARAD.desc=Reach +100 alignment with the Far Haradrim
 lotr.achievement.alignmentGood1000_FAR_HARAD.title=Far Harad Warlord
 lotr.achievement.alignmentGood1000_FAR_HARAD.desc=Reach +1000 alignment with the Far Haradrim
+lotr.achievement.growBaobab.title=Mighty Trees
+lotr.achievement.growBaobab.desc=Grow a baobab tree from a sapling
 
 lotr.achievement.enterPertorogwaith.title=Monstrous Things
 lotr.achievement.enterPertorogwaith.desc=Enter the land of Pertorogwaith

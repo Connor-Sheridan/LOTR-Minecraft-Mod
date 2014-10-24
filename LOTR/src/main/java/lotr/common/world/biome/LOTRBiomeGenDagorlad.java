@@ -2,9 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRWaypoint;
+import lotr.common.*;
 import lotr.common.entity.npc.LOTREntityMordorOrc;
 import lotr.common.entity.npc.LOTREntityMordorOrcArcher;
 import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
@@ -29,7 +27,7 @@ public class LOTRBiomeGenDagorlad extends LOTRBiome
 	{
 		super(i);
 		
-		topBlock = Blocks.gravel;
+		topBlock = LOTRMod.mordorGravel;
 		
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

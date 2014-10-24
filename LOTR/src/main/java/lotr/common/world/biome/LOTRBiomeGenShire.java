@@ -16,16 +16,12 @@ import lotr.common.entity.npc.LOTREntityHobbitShirriff;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import lotr.common.world.feature.*;
 import lotr.common.world.structure.*;
 import lotr.common.world.structure2.LOTRWorldGenHobbitFarm;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigTree;
-import net.minecraft.world.gen.feature.WorldGenDoublePlant;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -100,6 +96,14 @@ public class LOTRBiomeGenShire extends LOTRBiome
     public void decorate(World world, Random random, int i, int k)
     {
         super.decorate(world, random, i, k);
+        
+        for (int l = 0; l < decorator.grassPerChunk / 2; l++)
+        {
+        	int i1 = i + random.nextInt(16) + 8;
+            int j1 = random.nextInt(128);
+            int k1 = k + random.nextInt(16) + 8;
+            new LOTRWorldGenClover().generate(world, random, i1, j1, k1);
+        }
 		
 		if (random.nextInt(6) == 0)
 		{
@@ -150,16 +154,6 @@ public class LOTRBiomeGenShire extends LOTRBiome
 	{
 		return 0.5F;
 	}
-	
-	@Override
-    public WorldGenerator getRandomWorldGenForGrass(Random random)
-    {
-		if (getClass() == LOTRBiomeGenShire.class && random.nextInt(3) == 0)
-		{
-			return new LOTRWorldGenClover();
-		}
-		return super.getRandomWorldGenForGrass(random);
-    }
 	
 	@Override
 	public float getChanceToSpawnLakes()

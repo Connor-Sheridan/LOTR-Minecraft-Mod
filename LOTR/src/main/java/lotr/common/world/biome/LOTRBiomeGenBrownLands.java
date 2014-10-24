@@ -5,6 +5,7 @@ import java.util.Random;
 import lotr.common.*;
 import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
@@ -77,15 +78,15 @@ public class LOTRBiomeGenBrownLands extends LOTRBiome
     }
 	
 	@Override
-	public WorldGenerator getRandomWorldGenForGrass(Random random)
+	public GrassBlockAndMeta getRandomGrass(Random random)
 	{
 		if (random.nextInt(3) == 0)
 		{
-			return new WorldGenTallGrass(Blocks.tallgrass, 1);
+			return new GrassBlockAndMeta(Blocks.tallgrass, 1);
 		}
 		else
 		{
-			return new WorldGenTallGrass(LOTRMod.tallGrass, 0);
+			return new GrassBlockAndMeta(LOTRMod.tallGrass, 0);
 		}
 	}
 	

@@ -6,6 +6,7 @@ import lotr.common.*;
 import lotr.common.entity.npc.*;
 import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenHaradObelisk;
 import lotr.common.world.structure2.LOTRWorldGenNearHaradDesertCamp;
@@ -102,9 +103,9 @@ public class LOTRBiomeGenHarondor extends LOTRBiome
     }
 	
 	@Override
-    public WorldGenerator getRandomWorldGenForGrass(Random random)
-    {
-        return random.nextBoolean() ? new WorldGenTallGrass(LOTRMod.aridGrass, 0) : super.getRandomWorldGenForGrass(random);
+	public GrassBlockAndMeta getRandomGrass(Random random)
+	{
+        return random.nextBoolean() ? new GrassBlockAndMeta(LOTRMod.aridGrass, 0) : super.getRandomGrass(random);
     }
 	
 	@Override

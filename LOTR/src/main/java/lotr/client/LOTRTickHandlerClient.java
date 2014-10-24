@@ -100,6 +100,9 @@ public class LOTRTickHandlerClient
 	private int newDate = 0;
 	private static final int newDateMax = 200;
 	
+	private float utumnoCamRoll = 0F;
+	public boolean inUtumnoReturnPortal = false;
+	
 	public LOTRTickHandlerClient()
 	{
 		FMLCommonHandler.instance().bus().register(this);
@@ -188,39 +191,6 @@ public class LOTRTickHandlerClient
 					}
 					checkedUpdate = true;
 				}
-			
-				if ((entityplayer.dimension == 0 || entityplayer.dimension == LOTRDimension.MIDDLE_EARTH.dimensionID) && playersInPortals.containsKey(entityplayer))
-				{
-					List portals = world.getEntitiesWithinAABB(LOTREntityPortal.class, entityplayer.boundingBox.expand(8D, 8D, 8D));
-					boolean inPortal = false;
-					for (int i = 0; i < portals.size(); i++)
-					{
-						LOTREntityPortal portal = (LOTREntityPortal)portals.get(i);
-						if (portal.boundingBox.intersectsWith(entityplayer.boundingBox))
-						{
-							inPortal = true;
-							break;
-						}
-					}
-					if (inPortal)
-					{
-						int i = (Integer)playersInPortals.get(entityplayer);
-						i++;
-						playersInPortals.put(entityplayer, Integer.valueOf(i));
-						if (i >= 100)
-						{
-							minecraft.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("portal.trigger"), world.rand.nextFloat() * 0.4F + 0.8F));
-							playersInPortals.remove(entityplayer);
-						}
-					}
-					else
-					{
-						playersInPortals.remove(entityplayer);
-					}
-				}
-				
-				updatePlayerInPortal(entityplayer, playersInElvenPortals, LOTRMod.elvenPortal);
-				updatePlayerInPortal(entityplayer, playersInMorgulPortals, LOTRMod.morgulPortal);
 				
 				if (!isGamePaused(minecraft))
 				{
@@ -285,6 +255,36 @@ public class LOTRTickHandlerClient
 						}
 					}
 					
+					if (LOTRDimension.getCurrentDimension(world) == LOTRDimension.UTUMNO)
+					{
+						if (inUtumnoReturnPortal)
+						{
+							if (utumnoCamRoll < 180F)
+							{
+								utumnoCamRoll += 5F;
+								utumnoCamRoll = Math.min(utumnoCamRoll, 180F);
+								LOTRReflectionClient.setCameraRoll(minecraft.entityRenderer, utumnoCamRoll);
+							}
+						}
+						else
+						{
+							if (utumnoCamRoll > 0F)
+							{
+								utumnoCamRoll -= 5F;
+								utumnoCamRoll = Math.max(utumnoCamRoll, 0F);
+								LOTRReflectionClient.setCameraRoll(minecraft.entityRenderer, utumnoCamRoll);
+							}
+						}
+					}
+					else
+					{
+						if (utumnoCamRoll != 0F)
+						{
+							utumnoCamRoll = 0F;
+							LOTRReflectionClient.setCameraRoll(minecraft.entityRenderer, utumnoCamRoll);
+						}
+					}
+					
 					if (newDate > 0)
 					{
 						newDate--;
@@ -295,6 +295,40 @@ public class LOTRTickHandlerClient
 						LOTRAmbience.update(world, entityplayer);
 					}
 				}
+				
+				if ((entityplayer.dimension == 0 || entityplayer.dimension == LOTRDimension.MIDDLE_EARTH.dimensionID) && playersInPortals.containsKey(entityplayer))
+				{
+					List portals = world.getEntitiesWithinAABB(LOTREntityPortal.class, entityplayer.boundingBox.expand(8D, 8D, 8D));
+					boolean inPortal = false;
+					for (int i = 0; i < portals.size(); i++)
+					{
+						LOTREntityPortal portal = (LOTREntityPortal)portals.get(i);
+						if (portal.boundingBox.intersectsWith(entityplayer.boundingBox))
+						{
+							inPortal = true;
+							break;
+						}
+					}
+					if (inPortal)
+					{
+						int i = (Integer)playersInPortals.get(entityplayer);
+						i++;
+						playersInPortals.put(entityplayer, Integer.valueOf(i));
+						if (i >= 100)
+						{
+							minecraft.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("portal.trigger"), world.rand.nextFloat() * 0.4F + 0.8F));
+							playersInPortals.remove(entityplayer);
+						}
+					}
+					else
+					{
+						playersInPortals.remove(entityplayer);
+					}
+				}
+				
+				updatePlayerInPortal(entityplayer, playersInElvenPortals, LOTRMod.elvenPortal);
+				updatePlayerInPortal(entityplayer, playersInMorgulPortals, LOTRMod.morgulPortal);
+				inUtumnoReturnPortal = false;
 			}
 			
 			GuiScreen guiscreen = minecraft.currentScreen;
@@ -733,7 +767,7 @@ public class LOTRTickHandlerClient
 	{
 		EntityPlayerSP entityplayer = event.entity;
 		float fov = event.fov;
-		
+
         if (entityplayer.isUsingItem())
         {
 			ItemStack itemstack = entityplayer.getItemInUse();
@@ -818,16 +852,16 @@ public class LOTRTickHandlerClient
 		int i = resolution.getScaledWidth();
 		int j = resolution.getScaledHeight();
 		
+		boolean boss = BossStatus.bossName != null && BossStatus.statusBarTime > 0;
+		alignmentXPosBase = (i / 2) + LOTRConfig.alignmentXOffset;
+		alignmentYPosBase = (boss ? 22 : 2) + LOTRConfig.alignmentYOffset;
+		
 		if (firstAlignmentRender)
 		{
 			alignmentXPosCurrent = alignmentXPosBase;
 			alignmentYPosCurrent = alignmentYPosBase;
 			firstAlignmentRender = false;
 		}
-		
-		boolean boss = BossStatus.bossName != null && BossStatus.statusBarTime > 0;
-		alignmentXPosBase = (i / 2) + LOTRConfig.alignmentXOffset;
-		alignmentYPosBase = (boss ? 22 : 2) + LOTRConfig.alignmentYOffset;
 
         GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(LOTRClientProxy.alignmentTexture);

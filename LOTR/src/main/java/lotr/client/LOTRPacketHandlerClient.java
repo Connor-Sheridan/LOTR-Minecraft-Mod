@@ -17,6 +17,7 @@ import lotr.common.entity.npc.LOTREntityNPC;
 import lotr.common.entity.npc.LOTRHiredNPCInfo.Task;
 import lotr.common.quest.LOTRMiniQuest;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -79,13 +80,14 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 		NetworkRegistry.INSTANCE.newChannel("lotr.mqRemove", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.time", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.title", this);
+		NetworkRegistry.INSTANCE.newChannel("lotr.utumnoReturn", this);
 	}
 	
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, FMLProxyPacket packet) throws Exception
 	{
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayer entityplayer = mc.thePlayer;
+		EntityClientPlayerMP entityplayer = mc.thePlayer;
 		World world = entityplayer.worldObj;
 		
 		ByteBuf data = packet.payload();
@@ -639,6 +641,14 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 				EnumChatFormatting color = LOTRTitle.PlayerTitle.colorForID(colorCode);
 				LOTRLevelData.getData(entityplayer).setPlayerTitle(new LOTRTitle.PlayerTitle(title, color));
 			}
+		}
+		
+		else if (channel.equals("lotr.utumnoReturn"))
+		{
+			double x = data.readDouble();
+			double z = data.readDouble();
+			
+			entityplayer.setPosition(x, entityplayer.posY, z);
 		}
 	}
 }

@@ -90,12 +90,6 @@ public class LOTREntityBlackUruk extends LOTREntityMordorOrc
 	}
 	
 	@Override
-	public boolean canPickUpLoot()
-	{
-		return false;
-	}
-	
-	@Override
 	public boolean canOrcSkirmish()
 	{
 		return false;

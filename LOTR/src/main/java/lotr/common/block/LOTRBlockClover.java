@@ -9,9 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.ColorizerGrass;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,6 +53,17 @@ public class LOTRBlockClover extends LOTRBlockFlower
     {
         stemIcon = iconregister.registerIcon(getTextureName() + "_" + "stem");
 		petalIcon = iconregister.registerIcon(getTextureName() + "_" + "petal");
+    }
+	
+	@Override
+    public boolean isReplaceable(IBlockAccess world, int i, int j, int k)
+    {
+	    int meta = world.getBlockMetadata(i, j, k);
+	    if (meta == 1)
+	    {
+	    	return false;
+	    }
+	    return true;
     }
 	
 	@Override

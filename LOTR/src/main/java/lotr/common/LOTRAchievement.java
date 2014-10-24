@@ -553,6 +553,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement alignmentGood10_FAR_HARAD;
 	public static LOTRAchievement alignmentGood100_FAR_HARAD;
 	public static LOTRAchievement alignmentGood1000_FAR_HARAD;
+	public static LOTRAchievement growBaobab;
 
 	public static LOTRAchievement enterPertorogwaith;
 	public static LOTRAchievement alignmentGood10_HALF_TROLL;
@@ -890,12 +891,13 @@ public class LOTRAchievement implements Comparable
 
 		enterUmbar = new LOTRAchievement(UMBAR, 0, Blocks.grass, "enterUmbar").setBiomeAchievement();
 
-		enterFarHarad = new LOTRAchievement(FAR_HARAD, 0, Blocks.grass, "enterFarHarad").setBiomeAchievement();
+		enterFarHarad = new LOTRAchievement(FAR_HARAD, 0, new ItemStack(Blocks.sapling, 1, 4), "enterFarHarad").setBiomeAchievement();
 		drinkMangoJuice = new LOTRAchievement(FAR_HARAD, 1, LOTRMod.mugMangoJuice, "drinkMangoJuice");
 		pickBanana = new LOTRAchievement(FAR_HARAD, 2, LOTRMod.banana, "pickBanana");
 		alignmentGood10_FAR_HARAD = new LOTRAchievement(FAR_HARAD, 3, LOTRMod.goldRing, "alignmentGood10_FAR_HARAD").setRequiresAlly(LOTRFaction.FAR_HARAD).setSpecial();
 		alignmentGood100_FAR_HARAD = new LOTRAchievement(FAR_HARAD, 4, LOTRMod.goldRing, "alignmentGood100_FAR_HARAD").setRequiresAlly(LOTRFaction.FAR_HARAD).setSpecial();
 		alignmentGood1000_FAR_HARAD = new LOTRAchievement(FAR_HARAD, 5, LOTRMod.goldRing, "alignmentGood1000_FAR_HARAD").setRequiresAlly(LOTRFaction.FAR_HARAD).setSpecial();
+		growBaobab = new LOTRAchievement(FAR_HARAD, 6, new ItemStack(LOTRMod.sapling4, 1, 1), "growBaobab");
 
 		enterPertorogwaith = new LOTRAchievement(PERTOROGWAITH, 0, Blocks.stone, "enterPertorogwaith").setBiomeAchievement();
 		alignmentGood10_HALF_TROLL = new LOTRAchievement(PERTOROGWAITH, 1, LOTRMod.goldRing, "alignmentGood10_HALF_TROLL").setRequiresAlly(LOTRFaction.HALF_TROLL).setSpecial();

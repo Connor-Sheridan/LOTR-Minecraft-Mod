@@ -303,6 +303,11 @@ public class LOTRMod
 	public static Block stairsCedar;
 	public static Block rottenLog;
 	public static Block blockOreStorage2;
+	public static Block mordorGrass;
+	public static Block mordorDirt;
+	public static Block mordorGravel;
+	public static Block utumnoReturnPortal;
+	public static Block utumnoReturnLight;
 
 	public static Item goldRing;
 	public static Item pouch;
@@ -698,6 +703,7 @@ public class LOTRMod
 	public static Item legsBlackUruk;
 	public static Item bootsBlackUruk;
 	public static Item helmetNearHaradWarlord;
+	public static Item utumnoKey;
 	
 	public static List unnamedItems = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
@@ -910,6 +916,11 @@ public class LOTRMod
 		stairsCedar = new LOTRBlockStairs(planks2, 2).setBlockName("lotr:stairsCedar");
 		rottenLog = new LOTRBlockRottenLog().setBlockName("lotr:rottenLog");
 		blockOreStorage2 = new LOTRBlockOreStorage2().setBlockName("lotr:oreStorage2");
+		mordorGrass = new LOTRBlockMordorGrass().setBlockName("lotr:mordorGrass");
+		mordorDirt = new LOTRBlockMordorDirt().setBlockName("lotr:mordorDirt");
+		mordorGravel = new LOTRBlockGravel().setBlockName("lotr:mordorGravel");
+		utumnoReturnPortal = new LOTRBlockUtumnoReturnPortal().setBlockName("lotr:utumnoReturnPortal");
+		utumnoReturnLight = new LOTRBlockUtumnoReturnLight().setBlockName("lotr:utumnoReturnLight");
 		
 		goldRing = new Item().setCreativeTab(LOTRCreativeTabs.tabMagic).setUnlocalizedName("lotr:goldRing");
 		pouch = new LOTRItemPouch().setUnlocalizedName("lotr:pouch");
@@ -1305,6 +1316,7 @@ public class LOTRMod
 		legsBlackUruk = new LOTRItemArmor(armorBlackUruk, 2).setUnlocalizedName("lotr:legsBlackUruk");
 		bootsBlackUruk = new LOTRItemArmor(armorBlackUruk, 3).setUnlocalizedName("lotr:bootsBlackUruk");
 		helmetNearHaradWarlord = new LOTRItemArmor(armorNearHarad, 0).setUnlocalizedName("lotr:helmetNearHaradWarlord");
+		utumnoKey = new LOTRItemUtumnoKey().setUnlocalizedName("lotr:utumnoKey");
 		
 		try
 		{
@@ -1545,6 +1557,11 @@ public class LOTRMod
 		registerBlock(stairsCedar);
 		registerBlock(rottenLog, LOTRItemBlockMetadata.class);
 		registerBlock(blockOreStorage2, LOTRItemBlockMetadata.class);
+		registerBlock(mordorGrass);
+		registerBlock(mordorDirt);
+		registerBlock(mordorGravel);
+		registerBlock(utumnoReturnPortal);
+		registerBlock(utumnoReturnLight);
 		
 		registerItem(goldRing);
 		registerItem(pouch);
@@ -1940,6 +1957,7 @@ public class LOTRMod
 		registerItem(legsBlackUruk);
 		registerItem(bootsBlackUruk);
 		registerItem(helmetNearHaradWarlord);
+		registerItem(utumnoKey);
 		
 		LOTRConfig.setupAndLoad(event);
 		
@@ -2028,7 +2046,7 @@ public class LOTRMod
 				Blocks.fire.setFireInfo(block, 5, 20);
 			}
 			
-			if (block instanceof LOTRBlockGrass)
+			if (block instanceof LOTRBlockGrass || block instanceof LOTRBlockMordorGrass)
 			{
 				Blocks.fire.setFireInfo(block, 60, 100);
 			}
@@ -2069,6 +2087,8 @@ public class LOTRMod
 		oreGulduril.setHarvestLevel("pickaxe", 2);
 		quagmire.setHarvestLevel("shovel", 0);
 		blockOreStorage2.setHarvestLevel("pickaxe", 1, 0);
+		mordorDirt.setHarvestLevel("shovel", 0);
+		mordorGravel.setHarvestLevel("shovel", 0);
 		
 		GameRegistry.registerTileEntity(LOTRTileEntityBeacon.class, "LOTRBeacon");
 		GameRegistry.registerTileEntity(LOTRTileEntityHobbitOven.class, "LOTROven");
@@ -2088,6 +2108,7 @@ public class LOTRMod
 		GameRegistry.registerTileEntity(LOTRTileEntityOrcForge.class, "LOTROrcForge");
 		GameRegistry.registerTileEntity(LOTRTileEntityTrollTotem.class, "LOTRTrollTotem");
 		GameRegistry.registerTileEntity(LOTRTileEntityUtumnoPortal.class, "LOTRUtumnoPortal");
+		GameRegistry.registerTileEntity(LOTRTileEntityUtumnoReturnPortal.class, "LOTRUtumnoReturnPortal");
 		
 		LOTREntities.registerCreature(LOTREntityHorse.class, "Horse", 1, 0x834121, 0x3F1E0E);
 		LOTREntities.registerCreature(LOTREntityHobbit.class, "Hobbit", 2, 0xFF9F7F, 0x7A3A23);
@@ -2304,7 +2325,7 @@ public class LOTRMod
 	{
 		proxy.onPostload();
 		
-		Color baseWater = new Color(0x324AF4);
+		Color baseWater = new Color(0x4A68EF);
 		int baseR = baseWater.getRed();
 		int baseG = baseWater.getGreen();
 		int baseB = baseWater.getBlue();
@@ -2332,7 +2353,7 @@ public class LOTRMod
 	{
 		World world = DimensionManager.getWorld(0);
 		
-		LOTRReflection.testAll(world);
+		proxy.testReflection(world);
 		
 		//world.getGameRules().addGameRule("allowPVPBetweenSameAlignment", "true");
 		//world.getGameRules().addGameRule("enableOrcSkirmish", "true");

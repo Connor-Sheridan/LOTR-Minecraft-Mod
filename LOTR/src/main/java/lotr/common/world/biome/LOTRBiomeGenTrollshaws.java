@@ -39,7 +39,7 @@ public class LOTRBiomeGenTrollshaws extends LOTRBiome
 		
 		spawnableGoodList.add(new SpawnListEntry(LOTREntityRangerNorth.class, 10, 4, 4));
 		
-		spawnableEvilList.add(new SpawnListEntry(LOTREntityTroll.class, 15, 1, 3));
+		spawnableEvilList.add(new SpawnListEntry(LOTREntityTroll.class, 20, 1, 3));
 		
 		setGoodEvilWeight(1, 99);
 		

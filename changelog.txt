@@ -3,13 +3,13 @@ Public Beta 21
 + Added the realm of Utumno
 + Added Utumno achievements and the Utumno faction
 + Added Utumno bricks
-+ Added Utumno Orcs and Wargs
++ Added Utumno Orcs, Wargs, and Spiders
 + Added player titles
 + Added an on-screen compass and a Middle-earth map compass
 + Added many new mini-quests
 + Added improved mountain generation
 + Added new Harad biomes: Near Harad Semidesert and Fertile Forest, and Far Harad Arid Savannah, Cloud Forest, Swampland, Mangrove, and Bushland
-+ Added mangrove, baobab, and cedar trees, and wood
++ Added mangrove, baobab, and cedar trees, and their wood
 + Added termite mounds and exploding termites
 + Added dik-diks
 + Added new Harad flowers
@@ -36,15 +36,17 @@ Public Beta 21
 + Added the Near Harad Warlord helmet
 + Added Rohan, Gondor, Mordor, and Near Harad pillars and pillar slabs
 + Added Carved Mordor Brick and a new Mordor Brick texture
++ Added Mordor scrub, dirt, and gravel
 + Added the ability to shift-click a plate to make the food pop out
 + Added the ability to stack multiple identical food items on a plate
++ Added the complete list of fishable items for the Dunlending Trident
 + Added a gradual distance-dependent transparency effect for on-screen quest book rendering
 + Added an updated logo
 + Added a Forge modlist configuration screen for the mod's config file
 + Added config options to enable or disable banner protection
 
-* Fast travel now has a 10-second countdown before teleporting, which is cancelled by movement, so that players cannot use it to escape dangerous situations
-* Changed the default fast travel cooldown to 30 minutes
+* Fast travel now has a 10-second countdown before teleporting, which is cancelled by moving, so that players cannot use it to escape dangerous situations
+* Default fast travel cooldown is now 30 minutes
 * Protection banners now protect themselves by default
 * Protection banners can no longer be destroyed by anything other than direct or indirect attacks from players
 * Banner protection now protects wall banners, other standing banners which are non-protecting, paintings, item frames, wagrskin rugs, and troll statues
@@ -62,6 +64,7 @@ Public Beta 21
 * Increased the amount of grassy land in the Blue Mountains
 * Changed Blue Mountains houses to have Sarlluin exteriors instead of dirt and stone
 * Blue Mountains mines can now spawn upon Sarlluin
+* Gravel in Dagorlad is now Mordor gravel
 * Fixed white water in ent jars
 * Ent jars containing brewed draughts now produce particle effects
 * Fixed marsh lights not generating
@@ -74,6 +77,7 @@ Public Beta 21
 * Fixed the friendly and neutral orc speech banks being reversed
 * Fixed iron, gold, and diamond LOTR horse armour items not being displayed in the hand
 * Fixed some plants using stone block sounds
+* Three-leaf clovers are now replaceable like tall grass
 * Changed the beech and shire pine wood texture
 * Changed the hobbit pancake textures
 * Changed the Middle-earth achievement notification texture and fixed longer achievement names being cut off

@@ -376,6 +376,7 @@ public class LOTREventHandler implements IFuelHandler
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
+		EntityPlayer entityplayer = event.entityPlayer;
 		World world = event.world;
 		Random rand = world.rand;
 		int i = event.x;
@@ -386,10 +387,17 @@ public class LOTREventHandler implements IFuelHandler
 		{
 			if (event.block instanceof LOTRBlockSaplingBase)
 			{
-				LOTRBlockSaplingBase blockSapling = (LOTRBlockSaplingBase)event.block;
+				LOTRBlockSaplingBase sapling = (LOTRBlockSaplingBase)event.block;
+				int meta = world.getBlockMetadata(i, j, k);
+				
 				if (rand.nextFloat() < 0.45D)
 				{
-					blockSapling.incrementGrowth(world, i, j, k, rand);
+					sapling.incrementGrowth(world, i, j, k, rand);
+				}
+				
+				if (sapling == LOTRMod.sapling4 && (meta & 3) == 1 && world.getBlock(i, j, k) == LOTRMod.wood4 && world.getBlockMetadata(i, j, k) == 1)
+				{
+					LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.growBaobab);
 				}
 				
 				event.setResult(Result.ALLOW);

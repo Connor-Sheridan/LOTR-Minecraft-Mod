@@ -839,6 +839,12 @@ public abstract class LOTREntityNPC extends EntityCreature
 	}
 	
 	@Override
+	public final boolean canPickUpLoot()
+	{
+		return false;
+	}
+	
+	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
 		dropNPCEquipment(flag, i);

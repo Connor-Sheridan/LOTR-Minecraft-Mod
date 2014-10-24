@@ -59,23 +59,20 @@ public class LOTRTileEntityUtumnoPortal extends TileEntity
 				Entity entity = (Entity)obj;
 				
 				entity.fallDistance = 0F;
-				if (!worldObj.isRemote)
+				
+				int dimension = LOTRDimension.UTUMNO.dimensionID;
+				LOTRTeleporterUtumno teleporter = new LOTRTeleporterUtumno(DimensionManager.getWorld(dimension));
+				teleporter.setTargetCoords(targetX, targetZ);
+				if (entity instanceof EntityPlayerMP)
 				{
-					int dimension = LOTRDimension.UTUMNO.dimensionID;
-					
-					LOTRTeleporterUtumno teleporter = new LOTRTeleporterUtumno(DimensionManager.getWorld(dimension));
-					teleporter.setTargetCoords(targetX, targetZ);
-					if (entity instanceof EntityPlayerMP)
-					{
-						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
-					}
-					else
-					{
-						LOTRMod.transferEntityToDimension(entity, dimension, teleporter);
-					}
-					
-					targetResetTick = targetResetTick_max;
+					MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
 				}
+				else
+				{
+					LOTRMod.transferEntityToDimension(entity, dimension, teleporter);
+				}
+				
+				targetResetTick = targetResetTick_max;
 		    }
 		}
 	}

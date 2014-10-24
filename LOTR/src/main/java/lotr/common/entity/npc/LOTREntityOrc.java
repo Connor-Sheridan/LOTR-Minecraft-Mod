@@ -201,12 +201,6 @@ public abstract class LOTREntityOrc extends LOTREntityNPC
     }
 	
 	@Override
-	public boolean canPickUpLoot()
-	{
-		return !(this instanceof IRangedAttackMob);
-	}
-	
-	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
 		super.dropFewItems(flag, i);

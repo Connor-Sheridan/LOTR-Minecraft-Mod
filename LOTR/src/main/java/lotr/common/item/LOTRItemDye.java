@@ -88,7 +88,7 @@ public class LOTRItemDye extends Item
 	@SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List list)
     {
-        for (int j = 0; j <= 2; j++)
+        for (int j = 0; j < dyeNames.length; j++)
         {
             list.add(new ItemStack(item, 1, j));
         }

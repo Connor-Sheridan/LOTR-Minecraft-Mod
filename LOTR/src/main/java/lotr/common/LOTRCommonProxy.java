@@ -72,6 +72,11 @@ public class LOTRCommonProxy implements IGuiHandler
 	
 	public void onPostload() {}
 	
+	public void testReflection(World world)
+	{
+		LOTRReflection.testAll(world);
+	}
+	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer entityplayer, World world, int i, int j, int k)
 	{
@@ -467,6 +472,8 @@ public class LOTRCommonProxy implements IGuiHandler
 			LOTRTickHandlerServer.playersInMorgulPortals.put(entityplayer, Integer.valueOf(0));
 		}
 	}
+	
+	public void setInUtumnoReturnPortal(EntityPlayer entityplayer) {}
 	
 	public void spawnParticle(String type, double d, double d1, double d2, double d3, double d4, double d5) {}
 	

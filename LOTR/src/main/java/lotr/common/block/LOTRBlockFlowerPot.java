@@ -96,7 +96,7 @@ public class LOTRBlockFlowerPot extends BlockFlowerPot implements ITileEntityPro
 		if (item instanceof ItemBlock)
 		{
 			Block block = ((ItemBlock)item).field_150939_a;
-			return block instanceof LOTRBlockFlower && !(block instanceof LOTRBlockGrass);
+			return block instanceof LOTRBlockFlower;
 		}
 		return false;
 	}

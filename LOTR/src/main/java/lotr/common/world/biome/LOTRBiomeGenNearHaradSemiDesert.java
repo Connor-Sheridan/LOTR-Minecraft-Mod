@@ -50,8 +50,8 @@ public class LOTRBiomeGenNearHaradSemiDesert extends LOTRBiomeGenNearHarad
 	}
 	
 	@Override
-    public WorldGenerator getRandomWorldGenForGrass(Random random)
-    {
-        return new WorldGenTallGrass(LOTRMod.aridGrass, 0);
+	public GrassBlockAndMeta getRandomGrass(Random random)
+	{
+        return new GrassBlockAndMeta(LOTRMod.aridGrass, 0);
     }
 }

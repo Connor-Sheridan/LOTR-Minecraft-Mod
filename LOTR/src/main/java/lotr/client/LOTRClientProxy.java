@@ -224,6 +224,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityEntJar.class, new LOTRRenderEntJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityTrollTotem.class, new LOTRRenderTrollTotem());
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityUtumnoPortal.class, new LOTRRenderUtumnoPortal());
+		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityUtumnoReturnPortal.class, new LOTRRenderUtumnoReturnPortal());
 		
 		MinecraftForgeClient.registerItemRenderer(LOTRMod.hobbitPipe, new LOTRRenderBlownItem());
 		MinecraftForgeClient.registerItemRenderer(LOTRMod.commandHorn, new LOTRRenderBlownItem());
@@ -281,6 +282,13 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	public void onPostload()
 	{
 		LOTRLang.updateTranslations();
+	}
+	
+	@Override
+	public void testReflection(World world)
+	{
+		LOTRReflection.testAll(world);
+		LOTRReflectionClient.testAll(world, Minecraft.getMinecraft());
 	}
 	
     public static void renderHealthBar(EntityLivingBase entity, double d, double d1, double d2, int i, RenderManager renderManager)
@@ -513,6 +521,12 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		{
 			LOTRTickHandlerServer.playersInMorgulPortals.put(entityplayer, Integer.valueOf(0));
 		}
+	}
+	
+	@Override
+	public void setInUtumnoReturnPortal(EntityPlayer entityplayer)
+	{
+		tickHandler.inUtumnoReturnPortal = true;
 	}
 	
 	@Override

@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import lotr.common.LOTRDimension;
-import lotr.common.tileentity.LOTRTileEntityUtumnoPortal;
+import lotr.common.LOTRMod;
+import lotr.common.tileentity.LOTRTileEntityUtumnoReturnPortal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,20 +20,21 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LOTRBlockUtumnoPortal extends BlockContainer
+public class LOTRBlockUtumnoReturnPortal extends BlockContainer
 {
-	public LOTRBlockUtumnoPortal()
+	public LOTRBlockUtumnoReturnPortal()
     {
         super(Material.portal);
         setHardness(-1F);
         setResistance(Float.MAX_VALUE);
         setStepSound(Block.soundTypeStone);
+        setLightLevel(1F);
     }
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i)
 	{
-		return new LOTRTileEntityUtumnoPortal();
+		return new LOTRTileEntityUtumnoReturnPortal();
 	}
 	
     @Override
@@ -65,12 +67,29 @@ public class LOTRBlockUtumnoPortal extends BlockContainer
     @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
-		if (world.provider.dimensionId != LOTRDimension.MIDDLE_EARTH.dimensionID)
+		if (world.provider.dimensionId != LOTRDimension.UTUMNO.dimensionID)
 		{
 			world.setBlockToAir(i, j, k);
 		}
     }
-
+    
+    @Override
+    public void breakBlock(World world, int i, int j, int k, Block block, int meta)
+    {
+        super.breakBlock(world, i, j, k, block, meta);
+        
+        if (!world.isRemote)
+        {
+        	for (int j1 = j; j1 <= world.getHeight(); j1++)
+        	{
+        		if (world.getBlock(i, j1, k) == LOTRMod.utumnoReturnLight)
+        		{
+        			world.setBlockToAir(i, j1, k);
+        		}
+        	}
+        }
+    }
+    
 	@Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int i, int j, int k)

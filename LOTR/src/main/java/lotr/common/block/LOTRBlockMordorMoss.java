@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lotr.common.LOTRCreativeTabs;
 import lotr.common.LOTRMod;
+import lotr.common.world.biome.LOTRBiomeGenMordor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -34,7 +35,7 @@ public class LOTRBlockMordorMoss extends Block implements IShearable
     {
         if (j >= 0 && j < 256)
         {
-            return world.getBlock(i, j - 1, k) == LOTRMod.rock && world.getBlockMetadata(i, j - 1, k) == 0;
+            return LOTRBiomeGenMordor.canPlantGrow(world, i, j - 1, k);
         }
         else
         {

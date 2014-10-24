@@ -5,8 +5,10 @@ import java.util.Random;
 import lotr.common.*;
 import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import lotr.common.world.feature.*;
 import lotr.common.world.structure.*;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.*;
 
@@ -16,6 +18,12 @@ public class LOTRBiomeGenMordor extends LOTRBiome
     private WorldGenerator morgulIronGen = new WorldGenMinable(LOTRMod.oreMorgulIron, 1, 8, LOTRMod.rock);
 	private WorldGenerator guldurilGen = new WorldGenMinable(LOTRMod.oreGulduril, 1, 8, LOTRMod.rock);
 	private WorldGenerator boulderGen = new LOTRWorldGenBoulder(LOTRMod.rock, 0, 2, 8).setSpawnBlock(LOTRMod.rock, 0);
+	
+	private WorldGenerator mordorDirtGen = new WorldGenMinable(LOTRMod.mordorDirt, 0, 60, LOTRMod.rock);
+	private WorldGenerator mordorDirtVeins = new WorldGenMinable(LOTRMod.mordorDirt, 0, 40, LOTRMod.rock);
+	
+	private WorldGenerator mordorGravelGen = new WorldGenMinable(LOTRMod.mordorGravel, 0, 32, LOTRMod.rock);
+	private WorldGenerator mordorGravelVeins = new WorldGenMinable(LOTRMod.mordorGravel, 0, 20, LOTRMod.rock);
 	
 	public LOTRBiomeGenMordor(int i)
 	{
@@ -44,7 +52,7 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 		}
 		
 		decorator.flowersPerChunk = 0;
-		decorator.grassPerChunk = 0;
+		decorator.grassPerChunk = 1;
 		decorator.generateWater = false;
 		
 		decorator.addRandomStructure(new LOTRWorldGenMordorCamp(), 60);
@@ -87,6 +95,8 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 	@Override
     public void decorate(World world, Random random, int i, int k)
     {
+		genStandardOre(world, random, i, k, 20, mordorDirtVeins, 0, 60);
+		genStandardOre(world, random, i, k, 10, mordorGravelVeins, 0, 60);
 		genStandardOre(world, random, i, k, 20, nauriteGen, 0, 64);
         genStandardOre(world, random, i, k, 20, morgulIronGen, 0, 64);
 		genStandardOre(world, random, i, k, 8, guldurilGen, 0, 32);
@@ -95,6 +105,9 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 		
 		if (isGorgoroth())
 		{
+			genStandardOre(world, random, i, k, 3, mordorDirtGen, 60, 90);
+			genStandardOre(world, random, i, k, 2, mordorGravelGen, 60, 90);
+			
 			if (random.nextInt(24) == 0)
 			{
 				for (int l = 0; l < 6; l++)
@@ -123,19 +136,19 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 					int i1 = i + random.nextInt(6) + 8;
 					int k1 = k + random.nextInt(6) + 8;
 					int j1 = world.getHeightValue(i1, k1);
-					if (world.getBlock(i1, j1 - 1, k1) == LOTRMod.rock && world.getBlockMetadata(i1, j1 - 1, k1) == 0 && world.isAirBlock(i1, j1, k1))
+					if (world.isAirBlock(i1, j1, k1) && LOTRMod.mordorThorn.canBlockStay(world, i1, j1, k1))
 					{
 						world.setBlock(i1, j1, k1, LOTRMod.mordorThorn, 0, 2);
 					}
 				}
 			}
 			
-			if (random.nextInt(30) == 0)
+			if (random.nextInt(20) == 0)
 			{
 				int i1 = i + random.nextInt(16) + 8;
 				int k1 = k + random.nextInt(16) + 8;
 				int j1 = world.getHeightValue(i1, k1);
-				if (world.getBlock(i1, j1 - 1, k1) == LOTRMod.rock && world.getBlockMetadata(i1, j1 - 1, k1) == 0 && world.isAirBlock(i1, j1, k1))
+				if (world.isAirBlock(i1, j1, k1) && LOTRMod.mordorMoss.canBlockStay(world, i1, j1, k1))
 				{
 					new LOTRWorldGenMordorMoss().generate(world, random, i1, j1, k1);
 				}
@@ -164,6 +177,12 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 	}
 	
 	@Override
+	public GrassBlockAndMeta getRandomGrass(Random random)
+	{
+		return new GrassBlockAndMeta(LOTRMod.mordorGrass, 0);
+	}
+	
+	@Override
 	public float getChanceToSpawnAnimals()
 	{
 		return 0F;
@@ -185,5 +204,12 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 	public float getChanceToSpawnLavaLakes()
 	{
 		return 1F;
+	}
+	
+	public static boolean canPlantGrow(World world, int i, int j, int k)
+	{
+		Block block = world.getBlock(i, j, k);
+		int meta = world.getBlockMetadata(i, j, k);
+		return (block == LOTRMod.rock && meta == 0) || block == LOTRMod.mordorDirt;
 	}
 }

@@ -102,9 +102,7 @@ public class LOTRWorldGenFangornTrees extends WorldGenAbstractTree
 								{
 									if (j1 >= 0 && j1 < 256)
 									{
-										Block block = world.getBlock(i2, j1, k2);
-
-										if (block != Blocks.air && !block.isLeaves(world, i2, j1, k2) && block != Blocks.grass && block != Blocks.dirt && !block.isWood(world, i2, j1, k2))
+										if (!isReplaceable(world, i2, j1, k2))
 										{
 											flag = false;
 										}

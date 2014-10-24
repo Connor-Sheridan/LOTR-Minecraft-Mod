@@ -24,9 +24,9 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
 {
 	public static enum UtumnoLevel
 	{
-		ICE(0xD2DFEF, 180, 250, 4, 4, new int[] {2, 3}),
-		OBSIDIAN(0x201B2D, 90, 180, 6, 5, new int[] {4, 5}),
-		FIRE(0x600E00, 0, 90, 8, 6, new int[] {0, 1});
+		ICE(0xD2DFEF, 180, 240, 4, 4, new int[] {2, 3, 1}),
+		OBSIDIAN(0x201B2D, 90, 180, 6, 5, new int[] {4, 5, 2}),
+		FIRE(0x600E00, 0, 90, 8, 6, new int[] {0, 1, 0});
 		
 		public final int fogColor;
 		
@@ -40,6 +40,7 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
 		
 		public final int brickMeta;
 		public final int brickMetaGlow;
+		public final int pillarMeta;
 		
 		private List npcSpawnList = new ArrayList();
 		
@@ -69,6 +70,7 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
 			
 			brickMeta = meta[0];
 			brickMetaGlow = meta[1];
+			pillarMeta = meta[2];
 		}
 		
 		public List getNPCSpawnList()
@@ -128,8 +130,8 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
     {
     	Arrays.fill(blocks, Blocks.air);
     	
-    	boolean hugeHoleChunk = rand.nextInt(20) == 0;
-    	boolean hugeRavineChunk = rand.nextInt(20) == 0;
+    	boolean hugeHoleChunk = rand.nextInt(16) == 0;
+    	boolean hugeRavineChunk = rand.nextInt(16) == 0;
     	
     	long seed = worldObj.getSeed();
     	seed *= (chunkX / 2) * 67839703L + (chunkZ / 2) * 368093693L;
@@ -147,7 +149,7 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
                 	UtumnoLevel utumnoLevel = UtumnoLevel.forY(j);
                     
                     int blockIndex = (k * 16 + i) * 256 + j;
-                    if (j <= 0 + rand.nextInt(5) || j >= 255 - rand.nextInt(5))
+                    if (j <= 0 + rand.nextInt(5) || j >= 255 - rand.nextInt(3))
                     {
                         blocks[blockIndex] = Blocks.bedrock;
                     }

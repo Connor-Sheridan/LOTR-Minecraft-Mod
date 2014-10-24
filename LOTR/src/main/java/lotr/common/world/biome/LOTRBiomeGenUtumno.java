@@ -43,6 +43,7 @@ public class LOTRBiomeGenUtumno extends LOTRBiome
 		generatePits(world, random, i, k);
 		generateBridges(world, random, i, k);
 		generateStairs(world, random, i, k);
+		generatePillars(world, random, i, k);
 	}
 	
 	private void generateHoles(World world, Random random, int i, int k)
@@ -83,15 +84,15 @@ public class LOTRBiomeGenUtumno extends LOTRBiome
 	
 	private void generatePits(World world, Random random, int i, int k)
 	{
-		if (random.nextInt(10) == 0)
+		if (random.nextInt(5) == 0)
 		{
 			int i1 = i + 8 + random.nextInt(16);
 			int k1 = k + 8 + random.nextInt(16);
-			int j1 = MathHelper.getRandomIntegerInRange(random, 20, 240);
+			int j1 = MathHelper.getRandomIntegerInRange(random, 20, 220);
 			
 			if (world.isAirBlock(i1, j1, k1))
 			{
-				int radius = 10 + random.nextInt(30);
+				int radius = 8 + random.nextInt(30);
 				
 				UtumnoLevel level = UtumnoLevel.forY(j1);
 				
@@ -373,6 +374,33 @@ public class LOTRBiomeGenUtumno extends LOTRBiome
 							stairZ++;
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	private void generatePillars(World world, Random random, int i, int k)
+	{
+		for (int l = 0; l < 40; l++)
+		{
+			int i1 = i + 8 + random.nextInt(16);
+			int k1 = k + 8 + random.nextInt(16);
+
+			UtumnoLevel utumnoLevel = UtumnoLevel.values()[random.nextInt(UtumnoLevel.values().length)];
+			int j1 = utumnoLevel.corridorBaseLevels[random.nextInt(utumnoLevel.corridorBaseLevels.length)];
+			int pillarHeight = MathHelper.getRandomIntegerInRange(random, 1, utumnoLevel.corridorHeight);
+			
+			if (!world.isAirBlock(i1, j1 - 1, k1))
+			{
+				verticalLoop:
+				for (int j2 = j1; j2 <= j1 + pillarHeight; j2++)
+				{
+					if (!world.isAirBlock(i1, j2, k1))
+					{
+						break verticalLoop;
+					}
+	
+					world.setBlock(i1, j2, k1, LOTRMod.utumnoPillar, utumnoLevel.pillarMeta, 2);
 				}
 			}
 		}

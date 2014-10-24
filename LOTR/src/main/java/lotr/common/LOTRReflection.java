@@ -29,13 +29,13 @@ import cpw.mods.fml.relauncher.ReflectionHelper.UnableToFindFieldException;
 
 public class LOTRReflection
 {
-	private static void logFailure(Exception e)
+	public static void logFailure(Exception e)
 	{
-		System.out.println("LOTRReflection failed");
+		FMLLog.log(Level.ERROR, "LOTRReflection failed");
 		throw new RuntimeException(e);
 	}
 	
-    private static String[] remapMethodNames(String className, String... methodNames)
+	public static String[] remapMethodNames(String className, String... methodNames)
     {
         String internalClassName = FMLDeobfuscatingRemapper.INSTANCE.unmap(className.replace('.', '/'));
         String[] mappedNames = new String[methodNames.length];

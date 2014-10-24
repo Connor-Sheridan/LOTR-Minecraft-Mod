@@ -6,14 +6,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.item.*;
+import net.minecraft.stats.StatBase;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.common.FishingHooks;
+import net.minecraftforge.common.FishingHooks.FishableCategory;
 
 public class LOTRItemTrident extends LOTRItemSword
 {
@@ -55,7 +53,12 @@ public class LOTRItemTrident extends LOTRItemSword
 
 						if (world.rand.nextInt(4) == 0)
 						{
-							EntityItem fish = new EntityItem(world, (double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, new ItemStack(Items.fish));
+							float fishChance = world.rand.nextFloat();
+							ItemStack fishedItem = FishingHooks.getRandomFishable(world.rand, fishChance);
+							FishableCategory category = FishingHooks.getFishableCategory(fishChance, 0, 0);
+							StatBase fishedStat = category.stat;
+							
+							EntityItem fish = new EntityItem(world, (double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, fishedItem);
 							double d = entityplayer.posX - fish.posX;
 							double d1 = entityplayer.posY - fish.posY;
 							double d2 = entityplayer.posZ - fish.posZ;
@@ -65,9 +68,14 @@ public class LOTRItemTrident extends LOTRItemSword
 							fish.motionY = d1 * d4 + (double)MathHelper.sqrt_double(d3) * 0.08D;
 							fish.motionZ = d2 * d4;
 							world.spawnEntityInWorld(fish);
-							entityplayer.addStat(StatList.fishCaughtStat, 1);
+							
+							entityplayer.addStat(fishedStat, 1);
 							world.spawnEntityInWorld(new EntityXPOrb(world, fish.posX, fish.posY, fish.posZ, world.rand.nextInt(3) + 1));
-							LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.useDunlendingTrident);
+							
+							if (category == FishableCategory.FISH)
+							{
+								LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.useDunlendingTrident);
+							}
 						}
 					}
 				}

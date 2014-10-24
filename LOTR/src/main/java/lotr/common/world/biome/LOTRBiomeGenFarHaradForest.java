@@ -14,7 +14,7 @@ public class LOTRBiomeGenFarHaradForest extends LOTRBiomeGenFarHarad
 		
 		spawnableLOTRAmbientList.add(new SpawnListEntry(LOTREntityBird.class, 10, 4, 4));
 		
-		decorator.treesPerChunk = 10;
+		decorator.treesPerChunk = 7;
 		decorator.vinesPerChunk = 10;
 		decorator.logsPerChunk = 3;
 		decorator.grassPerChunk = 8;

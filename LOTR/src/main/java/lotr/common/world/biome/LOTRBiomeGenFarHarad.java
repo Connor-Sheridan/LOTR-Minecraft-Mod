@@ -6,16 +6,10 @@ import lotr.common.LOTRAchievement;
 import lotr.common.LOTRWaypoint;
 import lotr.common.entity.animal.*;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDesertTrees;
-import lotr.common.world.feature.LOTRWorldGenDoubleFlower;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenSavannaTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
 
 public class LOTRBiomeGenFarHarad extends LOTRBiome
 {
@@ -43,8 +37,8 @@ public class LOTRBiomeGenFarHarad extends LOTRBiome
 		setGoodEvilWeight(0, 100);
 		
 		decorator.treesPerChunk = 0;
-		decorator.setTreeCluster(3, 8);
-		decorator.grassPerChunk = 14;
+		decorator.setTreeCluster(3, 16);
+		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 12;
 		decorator.flowersPerChunk = 3;
 		decorator.doubleFlowersPerChunk = 1;
@@ -89,6 +83,10 @@ public class LOTRBiomeGenFarHarad extends LOTRBiome
 		if (random.nextInt(1000) == 0)
 		{
 			return LOTRWorldGenSimpleTrees.newMango(false);
+		}
+		if (random.nextInt(50) == 0)
+		{
+			return new LOTRWorldGenBaobab(false);
 		}
 		if (random.nextInt(3) > 0)
 		{

@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.LOTRMod;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.*;
@@ -34,9 +35,9 @@ public class LOTRBiomeGenFarHaradArid extends LOTRBiomeGenFarHarad
 	}
 	
 	@Override
-    public WorldGenerator getRandomWorldGenForGrass(Random random)
-    {
-        return random.nextBoolean() ? new WorldGenTallGrass(LOTRMod.aridGrass, 0) : super.getRandomWorldGenForGrass(random);
+	public GrassBlockAndMeta getRandomGrass(Random random)
+	{
+        return random.nextBoolean() ? new GrassBlockAndMeta(LOTRMod.aridGrass, 0) : super.getRandomGrass(random);
     }
 	
 	@Override

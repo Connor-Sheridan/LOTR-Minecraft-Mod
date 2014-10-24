@@ -165,6 +165,7 @@ public class LOTRBiome extends BiomeGenBase
 	public static BiomeGenBase anduinValeWoodlands;
 	public static BiomeGenBase shireMoors;
 	public static BiomeGenBase shireMarshes;
+	public static BiomeGenBase farHaradBaobab;
 	
 	public static BiomeGenBase utumno;
 	
@@ -267,7 +268,7 @@ public class LOTRBiome extends BiomeGenBase
 		beach = new LOTRBiomeGenBeach(94).setBeachBlock(Blocks.sand).setColor(0xDBCA97).setBiomeName("beach");
 		beachGravel = new LOTRBiomeGenBeach(95).setBeachBlock(Blocks.gravel).setColor(0x9695A0).setBiomeName("beachGravel");
 		nearHarad = new LOTRBiomeGenNearHarad(96).setTemperatureRainfall(1.5F, 0.1F).setMinMaxHeight(0.2F, 0F).setColor(0xBFAC67).setBiomeName("nearHarad");
-		farHarad = new LOTRBiomeGenFarHarad(97).setTemperatureRainfall(1.2F, 0.3F).setMinMaxHeight(0.2F, 0.25F).setColor(0x9AA051).setBiomeName("farHarad");
+		farHarad = new LOTRBiomeGenFarHarad(97).setTemperatureRainfall(1.2F, 0.2F).setMinMaxHeight(0.2F, 0.25F).setColor(0x9AA051).setBiomeName("farHarad");
 		haradMountains = new LOTRBiomeGenHaradMountains(98).setTemperatureRainfall(0.9F, 0.5F).setMinMaxHeight(1.8F, 2F).setColor(0x9E9381).setBiomeName("haradMountains");
 		umbar = new LOTRBiomeGenUmbar(99).setTemperatureRainfall(0.7F, 0.5F).setMinMaxHeight(0.1F, 0.2F).setColor(0x7A7661).setBiomeName("umbar");
 		farHaradJungle = new LOTRBiomeGenFarHaradJungle(100).setTemperatureRainfall(1.2F, 0.9F).setMinMaxHeight(0.2F, 0.4F).setColor(0x7C8E34).setBiomeName("farHaradJungle");
@@ -303,6 +304,7 @@ public class LOTRBiome extends BiomeGenBase
 		anduinValeWoodlands = new LOTRBiomeGenAnduinValeWoodlands(130).setTemperatureRainfall(1F, 1.2F).setMinMaxHeight(0.1F, 0.2F).setColor(0x34AF59).setBiomeName("anduinValeWoodlands");
 		shireMoors = new LOTRBiomeGenShireMoors(131).setTemperatureRainfall(0.6F, 1.6F).setMinMaxHeight(0.4F, 0.6F).setColor(0x52A04B).setBiomeName("shireMoors");
 		shireMarshes = new LOTRBiomeGenShireMarshes(132).setTemperatureRainfall(0.8F, 1.2F).setMinMaxHeight(0F, 0.1F).setColor(0x37932F).setBiomeName("shireMarshes");
+		farHaradBaobab = new LOTRBiomeGenFarHaradBaobab(133).setTemperatureRainfall(1.2F, 0.4F).setMinMaxHeight(0.2F, 0.1F).setColor(0x9B955B).setBiomeName("farHaradBaobab");
 		
 		utumno = new LOTRBiomeGenUtumno(0).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0F, 0F).setColor(0x000000).setBiomeName("utumno");
 	}
@@ -985,7 +987,7 @@ public class LOTRBiome extends BiomeGenBase
 	}
 	
 	@Override
-	public WorldGenerator getRandomWorldGenForGrass(Random random)
+	public final WorldGenerator getRandomWorldGenForGrass(Random random)
 	{
 		GrassBlockAndMeta obj = getRandomGrass(random);
 		return new WorldGenTallGrass(obj.block, obj.meta);
