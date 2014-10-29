@@ -15,7 +15,6 @@ public class LOTREntityMirkTroll extends LOTREntityTroll
 	public LOTREntityMirkTroll(World world)
 	{
 		super(world);
-		setSize(1.8F, 3.6F);
 		tasks.taskEntries.clear();
 		targetTasks.taskEntries.clear();
         tasks.addTask(0, new EntityAISwimming(this));
@@ -28,6 +27,12 @@ public class LOTREntityMirkTroll extends LOTREntityTroll
         tasks.addTask(6, new EntityAIWatchClosest(this, EntityLiving.class, 12F, 0.01F));
         tasks.addTask(7, new EntityAILookIdle(this));
 		addTargetTasks(true, LOTREntityAINearestAttackableTargetOrc.class);
+	}
+	
+	@Override
+	public float getTrollScale()
+	{
+		return 1.2F;
 	}
 	
 	@Override
@@ -69,20 +74,8 @@ public class LOTREntityMirkTroll extends LOTREntityTroll
         {
             if (entity instanceof EntityLivingBase)
             {
-                byte duration = 0;
-
-				if (worldObj.difficultySetting == EnumDifficulty.EASY)
-				{
-					duration = 2;
-				}
-				else if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-				{
-					duration = 5;
-				}
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-				{
-					duration = 8;
-				}
+            	int difficulty = worldObj.difficultySetting.getDifficultyId();
+                int duration = difficulty * 3 - 1;
 
                 if (duration > 0)
                 {

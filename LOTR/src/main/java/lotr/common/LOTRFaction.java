@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRInvasionSpawner.InvasionSpawnEntry;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -56,6 +57,8 @@ public enum LOTRFaction
 	
 	private Map<Integer, LOTRAchievement> alignmentAchievements = new HashMap();
 	private LOTRAchievement miniquestAchievement;
+	
+	private static Random factionRand = new Random();
 	
 	private LOTRFaction(int color)
 	{
@@ -698,9 +701,21 @@ public enum LOTRFaction
 	{
 		return name();
 	}
-	
+
 	public String factionName()
 	{
+		if (LOTRMod.isAprilFools())
+		{
+			String[] names = {"9GAG", "Yes Scotland", "No Scotland", "Empire of Great Britain", "Gondor", "Detroit", "faction.Formatting error %1$s#@%3$s#!#%.2f.name", "House Baratheon", "Kentucky Fried Chicken"};
+			
+			int i = ordinal();
+			i = (int)(i + (i ^ 62341L) + 28703L * (i * i ^ 3195015L));
+			factionRand.setSeed(i);
+			List<String> list = Arrays.asList(names);
+			Collections.shuffle(list, factionRand);
+			return list.get(0);
+		}
+		
 		return StatCollector.translateToLocal("lotr.faction." + codeName() + ".name");
 	}
 	

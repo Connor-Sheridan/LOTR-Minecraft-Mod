@@ -570,6 +570,9 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement wearFullUtumno;
 	public static LOTRAchievement killUtumnoOrc;
 	public static LOTRAchievement killUtumnoWarg;
+	public static LOTRAchievement killBalrog;
+	public static LOTRAchievement killTormentedElf;
+	public static LOTRAchievement killUtumnoTroll;
 	
 	public static void createAchievements()
 	{
@@ -914,6 +917,9 @@ public class LOTRAchievement implements Comparable
 		wearFullUtumno = new LOTRAchievement(UTUMNO, 3, LOTRMod.bodyUtumno, "wearFullUtumno");
 		killUtumnoOrc = new LOTRAchievement(UTUMNO, 4, LOTRMod.orcBone, "killUtumnoOrc");
 		killUtumnoWarg = new LOTRAchievement(UTUMNO, 5, LOTRMod.wargBone, "killUtumnoWarg");
+		killBalrog = new LOTRAchievement(UTUMNO, 6, Blocks.fire, "killBalrog");
+		killTormentedElf = new LOTRAchievement(UTUMNO, 7, LOTRMod.elfBone, "killTormentedElf");
+		killUtumnoTroll = new LOTRAchievement(UTUMNO, 8, LOTRMod.trollBone, "killUtumnoTroll");
 	}
 	
 	public static Category categoryForName(String name)

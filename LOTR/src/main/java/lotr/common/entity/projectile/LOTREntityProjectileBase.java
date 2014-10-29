@@ -473,12 +473,21 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 				return null;
 			}
 		}
+		else
+		{
+			return null;
+		}
 		return itemstack;
 	}
 
 	@Override
     public void onCollideWithPlayer(EntityPlayer entityplayer)
     {
+		if (entityplayer == getThrower())
+		{
+			return;
+		}
+		
         if (!worldObj.isRemote)
 		{
         	ItemStack itemstack = createDropItem();

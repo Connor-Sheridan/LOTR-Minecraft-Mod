@@ -2,27 +2,10 @@ package lotr.common.entity.npc;
 
 import java.util.List;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRLevelData;
-import lotr.common.LOTRMod;
-import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
-import lotr.common.entity.ai.LOTREntityAIFollowHiringPlayer;
-import lotr.common.entity.ai.LOTREntityAIHiredRemainStill;
-import lotr.common.entity.ai.LOTREntityAIHiringPlayerHurtByTarget;
-import lotr.common.entity.ai.LOTREntityAIHiringPlayerHurtTarget;
-import lotr.common.entity.ai.LOTREntityAINearestAttackableTargetOrc;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import lotr.common.*;
+import lotr.common.entity.ai.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -33,7 +16,6 @@ public class LOTREntityOlogHai extends LOTREntityTroll
 	public LOTREntityOlogHai(World world)
 	{
 		super(world);
-		setSize(2F, 4F);
 		tasks.taskEntries.clear();
 		targetTasks.taskEntries.clear();
         tasks.addTask(0, new EntityAISwimming(this));
@@ -46,6 +28,12 @@ public class LOTREntityOlogHai extends LOTREntityTroll
         tasks.addTask(6, new EntityAIWatchClosest(this, EntityLiving.class, 12F, 0.01F));
         tasks.addTask(7, new EntityAILookIdle(this));
 		addTargetTasks(true, LOTREntityAINearestAttackableTargetOrc.class);
+	}
+	
+	@Override
+	public float getTrollScale()
+	{
+		return 1.25F;
 	}
 	
 	@Override

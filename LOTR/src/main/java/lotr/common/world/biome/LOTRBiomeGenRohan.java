@@ -35,7 +35,7 @@ public class LOTRBiomeGenRohan extends LOTRBiome
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityUrukHaiCrossbower.class, 10, 4, 6));
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityUrukHaiSapper.class, 3, 1, 2));
 		spawnableEvilList.add(new SpawnListEntry(LOTREntityUrukHaiBerserker.class, 5, 4, 6));
-		spawnableEvilList.add(new SpawnListEntry(LOTREntityUrukWarg.class, 5, 4, 4));
+		spawnableEvilList.add(new SpawnListEntry(LOTREntityUrukWarg.class, 15, 4, 4));
 		
 		if (corrupted)
 		{

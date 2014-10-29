@@ -97,7 +97,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public LOTRShields npcShield;
 	public ResourceLocation npcCape;
 	
-	private EntityLivingBase prevAttackTarget;
+	private UUID prevAttackTarget;
 	private boolean hurtOnlyByPlates = true;
 	public int npcTalkTick = 0;
 	
@@ -337,12 +337,50 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public void setAttackTarget(EntityLivingBase target)
 	{
 		super.setAttackTarget(target);
-		if (target != null && target != prevAttackTarget)
+		
+		if (target == null)
 		{
-			prevAttackTarget = target;
-			if (getAttackSound() != null)
+			prevAttackTarget = null;
+		}
+		else
+		{
+			if (!target.getUniqueID().equals(prevAttackTarget))
 			{
-				worldObj.playSoundAtEntity(this, getAttackSound(), getSoundVolume(), getSoundPitch());
+				prevAttackTarget = target.getUniqueID();
+				
+				if (getAttackSound() != null)
+				{
+					worldObj.playSoundAtEntity(this, getAttackSound(), getSoundVolume(), getSoundPitch());
+				}
+				
+				if (target instanceof EntityPlayer)
+				{
+					final EntityPlayer entityplayer = (EntityPlayer)target;
+					String speechBank = getSpeechBank(entityplayer);
+					if (speechBank != null && rand.nextInt(5) == 0 && getEntitySenses().canSee(entityplayer) && getDistanceSqToEntity(entityplayer) <= getMaxCombatRangeSq())
+					{
+						IEntitySelector selectorAttackingNPCs = new IEntitySelector()
+						{
+							@Override
+							public boolean isEntityApplicable(Entity entity)
+					        {
+								if (entity instanceof LOTREntityNPC)
+								{
+									LOTREntityNPC npc = (LOTREntityNPC)entity;
+									return npc.isAIEnabled() && npc.isEntityAlive() && npc.getAttackTarget() == entityplayer;
+								}
+					            return false;
+					        }
+						};
+						
+						double range = 16D;
+						List nearbyMobs = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(range, range, range), selectorAttackingNPCs);
+						if (nearbyMobs.size() <= 5)
+						{
+							sendSpeechBank(entityplayer, speechBank);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -1271,19 +1309,23 @@ public abstract class LOTREntityNPC extends EntityCreature
 				}
 			}
 			
-			String speechBank = getSpeechBank(entityplayer);
-			if (speechBank != null)
+			if (getAttackTarget() == null)
 			{
-				sendSpeechBank(entityplayer, speechBank);
-				
-				if (getTalkAchievement() != null)
+				String speechBank = getSpeechBank(entityplayer);
+				if (speechBank != null)
 				{
-					LOTRLevelData.getData(entityplayer).addAchievement(getTalkAchievement());
+					sendSpeechBank(entityplayer, speechBank);
+					
+					if (getTalkAchievement() != null)
+					{
+						LOTRLevelData.getData(entityplayer).addAchievement(getTalkAchievement());
+					}
+					
+					return true;
 				}
-				
-				return true;
 			}
 		}
+		
 		return super.interact(entityplayer);
 	}
 	

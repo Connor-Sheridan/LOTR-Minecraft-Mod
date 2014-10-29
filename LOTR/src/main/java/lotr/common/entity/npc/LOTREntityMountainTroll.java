@@ -1,14 +1,9 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
-import lotr.common.entity.npc.LOTREntityNPC.AttackMode;
 import lotr.common.entity.projectile.LOTREntityThrownRock;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.attributes.IAttribute;
@@ -30,7 +25,12 @@ public class LOTREntityMountainTroll extends LOTREntityTroll implements IRangedA
 	public LOTREntityMountainTroll(World world)
 	{
 		super(world);
-		setSize(2.56F, 5.12F);
+	}
+	
+	@Override
+	public float getTrollScale()
+	{
+		return 1.6F;
 	}
 	
 	@Override

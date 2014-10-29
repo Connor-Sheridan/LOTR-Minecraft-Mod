@@ -32,7 +32,7 @@ public class LOTREntityUrukHai extends LOTREntityOrc
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(26D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.22D);
     }
 	

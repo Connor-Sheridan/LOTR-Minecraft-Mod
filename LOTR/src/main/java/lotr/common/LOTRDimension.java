@@ -13,7 +13,7 @@ import net.minecraftforge.common.config.Configuration;
 public enum LOTRDimension
 {
 	MIDDLE_EARTH("MiddleEarth", 100, LOTRWorldProviderMiddleEarth.class, true, 100),
-	UTUMNO("Utumno", 101, LOTRWorldProviderUtumno.class, true, 300);
+	UTUMNO("Utumno", 101, LOTRWorldProviderUtumno.class, false, 300);
 	
 	public String dimensionName;
 	private int defaultID;

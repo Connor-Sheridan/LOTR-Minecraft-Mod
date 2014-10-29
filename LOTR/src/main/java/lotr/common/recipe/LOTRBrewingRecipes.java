@@ -5,9 +5,9 @@ import java.util.Iterator;
 
 import lotr.common.LOTRMod;
 import lotr.common.tileentity.LOTRTileEntityBarrel;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class LOTRBrewingRecipes
@@ -100,6 +100,11 @@ public class LOTRBrewingRecipes
 		addBrewingRecipe(new ItemStack(LOTRMod.mugMelonLiqueur, BARREL_CAPACITY), new Object[]
 		{
 			Items.melon, Items.melon, Items.melon, Items.melon, Items.melon, Items.melon
+		});
+		
+		addBrewingRecipe(new ItemStack(LOTRMod.mugCactusLiqueur, BARREL_CAPACITY), new Object[]
+		{
+			Blocks.cactus, Blocks.cactus, Blocks.cactus, Blocks.cactus, Blocks.cactus, Blocks.cactus
 		});
 	}
 	

@@ -1,5 +1,6 @@
 package lotr.common.entity.npc;
 
+import lotr.common.entity.npc.LOTREntityWarg.WargType;
 import net.minecraft.world.World;
 
 public class LOTREntityUtumnoObsidianWarg extends LOTREntityUtumnoWarg
@@ -13,10 +14,6 @@ public class LOTREntityUtumnoObsidianWarg extends LOTREntityUtumnoWarg
 	public void entityInit()
 	{
 		super.entityInit();
-		
-		if (rand.nextInt(3) > 0)
-		{
-			setWargType(WargType.BLACK);
-		}
+		setWargType(WargType.OBSIDIAN);
 	}
 }

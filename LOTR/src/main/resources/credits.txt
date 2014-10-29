@@ -37,6 +37,8 @@ Yorick Hamletson - Pirate
 M.G. - Croatian update
 Lukas Kuhn - German update
 Fabio Silvestro - Italian
+Frederic Genest - French
+Matteo Feola - Italian
 
 Structures:
 

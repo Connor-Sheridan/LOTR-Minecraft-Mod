@@ -5,6 +5,7 @@ import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -24,10 +25,25 @@ public class LOTREntityUtumnoOrc extends LOTREntityOrc
 	}
 	
 	@Override
+	public void entityInit()
+	{
+		super.entityInit();
+		
+		if (rand.nextInt(4) == 0)
+		{
+			setOrcName(LOTRNames.getRandomElfName(rand.nextBoolean(), rand));
+		}
+		else
+		{
+			setOrcName(LOTRNames.getRandomOrcName(rand));
+		}
+	}
+	
+	@Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30D);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24D);
     }
 	
@@ -35,31 +51,31 @@ public class LOTREntityUtumnoOrc extends LOTREntityOrc
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
 		data = super.onSpawnWithEgg(data);
-		int i = rand.nextInt(6);
 		
+		int i = rand.nextInt(6);
 		if (i == 0)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.scimitarOrc));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.swordUtumno));
 		}
 		else if (i == 1)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.battleaxeOrc));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.battleaxeUtumno));
 		}
 		else if (i == 2)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.daggerOrc));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.daggerUtumno));
 		}
 		else if (i == 3)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.daggerOrcPoisoned));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.daggerUtumnoPoisoned));
 		}
 		else if (i == 4)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.spearOrc));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.spearUtumno));
 		}
 		else if (i == 5)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.hammerOrc));
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.hammerUtumno));
 		}
 		
 		setCurrentItemOrArmor(1, new ItemStack(LOTRMod.bootsUtumno));
@@ -96,5 +112,11 @@ public class LOTREntityUtumnoOrc extends LOTREntityOrc
 	public boolean canOrcSkirmish()
 	{
 		return false;
+	}
+	
+	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		return "utumnoOrc_hostile";
 	}
 }

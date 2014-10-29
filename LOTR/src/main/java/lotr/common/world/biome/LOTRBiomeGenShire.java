@@ -46,7 +46,7 @@ public class LOTRBiomeGenShire extends LOTRBiome
 		
 		decorator.flowersPerChunk = 3;
 		decorator.doubleFlowersPerChunk = 1;
-		decorator.grassPerChunk = 8;
+		decorator.grassPerChunk = 6;
 		decorator.generateLava = false;
 		
 		registerForestFlowers();

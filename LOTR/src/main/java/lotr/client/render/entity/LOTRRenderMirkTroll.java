@@ -8,8 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
 public class LOTRRenderMirkTroll extends LOTRRenderTroll
 {
 	private static List mirkSkins;
@@ -38,11 +36,5 @@ public class LOTRRenderMirkTroll extends LOTRRenderTroll
 	protected void bindTrollOutfitTexture(EntityLivingBase entity)
 	{
 		bindTexture(LOTRRandomSkins.getRandomSkin(mirkArmorSkins, (LOTREntityMirkTroll)entity));
-	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float f)
-	{
-		GL11.glScalef(1.2F, 1.2F, 1.2F);
 	}
 }

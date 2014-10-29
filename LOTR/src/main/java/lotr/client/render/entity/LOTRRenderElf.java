@@ -23,6 +23,8 @@ public class LOTRRenderElf extends LOTRRenderBiped
 	private static List highElfSkinsMale;
 	private static List highElfSkinsFemale;
 	
+	private static List tormentedElfSkins;
+	
 	public LOTRRenderElf()
 	{
 		super(new LOTRModelElf(), 0.5F);
@@ -35,12 +37,14 @@ public class LOTRRenderElf extends LOTRRenderBiped
 		
 		highElfSkinsMale = LOTRRandomSkins.loadSkinsList("lotr:mob/elf/highElf_male");
 		highElfSkinsFemale = LOTRRandomSkins.loadSkinsList("lotr:mob/elf/highElf_female");
+		
+		tormentedElfSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/elf/tormented");
 	}
 	
 	@Override
 	protected void func_82421_b()
     {
-        field_82423_g = new LOTRModelElf(1.0F);
+        field_82423_g = new LOTRModelElf(1F);
         field_82425_h = new LOTRModelElf(0.5F);
     }
 	
@@ -49,7 +53,12 @@ public class LOTRRenderElf extends LOTRRenderBiped
     {
         LOTREntityElf elf = (LOTREntityElf)entity;
 		boolean male = elf.familyInfo.isNPCMale();
-		if (elf instanceof LOTREntityHighElf)
+		
+		if (elf instanceof LOTREntityTormentedElf)
+		{
+			return LOTRRandomSkins.getRandomSkin(tormentedElfSkins, elf);
+		}
+		else if (elf instanceof LOTREntityHighElf)
 		{
 			if (male)
 			{

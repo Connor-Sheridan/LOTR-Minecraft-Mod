@@ -28,7 +28,8 @@ public class LOTREntityTroll extends LOTREntityNPC
 	public LOTREntityTroll(World world)
 	{
 		super(world);
-		setSize(1.6F, 3.2F);
+		float f = getTrollScale();
+		setSize(1.6F * f, 3.2F * f);
 		getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIRestrictSun(this));
@@ -43,6 +44,11 @@ public class LOTREntityTroll extends LOTREntityNPC
         tasks.addTask(9, new EntityAILookIdle(this));
         addTargetTasks(true, LOTREntityAINearestAttackableTargetTroll.class);
         spawnsInDarkness = true;
+	}
+	
+	public float getTrollScale()
+	{
+		return 1F;
 	}
 	
 	public EntityAIBase getTrollAttackAI()

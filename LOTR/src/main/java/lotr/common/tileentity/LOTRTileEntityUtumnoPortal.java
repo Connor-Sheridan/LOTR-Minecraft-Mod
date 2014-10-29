@@ -61,7 +61,7 @@ public class LOTRTileEntityUtumnoPortal extends TileEntity
 				entity.fallDistance = 0F;
 				
 				int dimension = LOTRDimension.UTUMNO.dimensionID;
-				LOTRTeleporterUtumno teleporter = new LOTRTeleporterUtumno(DimensionManager.getWorld(dimension));
+				LOTRTeleporterUtumno teleporter = LOTRTeleporterUtumno.newTeleporter(dimension);
 				teleporter.setTargetCoords(targetX, targetZ);
 				if (entity instanceof EntityPlayerMP)
 				{

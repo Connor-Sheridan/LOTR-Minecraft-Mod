@@ -193,20 +193,8 @@ public abstract class LOTREntityScorpion extends EntityMob
             
             if (entity instanceof EntityLivingBase)
             {
-                byte duration = 0;
-
-				if (worldObj.difficultySetting == EnumDifficulty.EASY)
-				{
-					duration = 3;
-				}
-				else if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-				{
-					duration = 7;
-				}
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-				{
-					duration = 15;
-				}
+            	int difficulty = worldObj.difficultySetting.getDifficultyId();
+                int duration = difficulty * (difficulty + 5) / 2;
 
                 if (duration > 0)
                 {

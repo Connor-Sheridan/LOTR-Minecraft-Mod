@@ -864,6 +864,14 @@ item.lotr:bootsBlackUruk.name=Black Uruk Boots
 item.lotr:helmetNearHaradWarlord.name=Near Harad Warlord Helmet
 item.lotr:utumnoKey.0.name=Icy Utumno Key
 item.lotr:utumnoKey.1.name=Obsidian Utumno Key
+item.lotr:swordUtumno.name=Utumno Sword
+item.lotr:daggerUtumno.name=Utumno Dagger
+item.lotr:daggerUtumnoPoisoned.name=Poisoned Utumno Dagger
+item.lotr:spearUtumno.name=Utumno Spear
+item.lotr:battleaxeUtumno.name=Utumno Battleaxe
+item.lotr:hammerUtumno.name=Utumno Warhammer
+item.lotr:utumnoBow.name=Utumno Bow
+item.lotr:mugCactusLiqueur.name=Cactus Liqueur
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength
@@ -1076,6 +1084,7 @@ lotr.title.explore50Biomes=Worldwalker
 lotr.title.fourLeafClover=Lucky
 lotr.title.enterUtumno=Flame of Udûn
 lotr.title.visitOcean=Mariner
+lotr.title.killBalrog=Balrog Slayer
 
 lotr.shields.category.ALIGNMENT=Alignment Shields
 lotr.shields.category.ACHIEVABLE=Achievable Shields
@@ -1389,10 +1398,14 @@ entity.lotr.BlackUrukArcher.name=Black Uruk Archer
 
 entity.lotr.UtumnoOrc.name=Utumno Orc
 entity.lotr.UtumnoOrcArcher.name=Utumno Orc Archer
+entity.lotr.UtumnoWarg.name=Utumno Warg
 entity.lotr.UtumnoIceWarg.name=Utumno Ice Warg
 entity.lotr.UtumnoObsidianWarg.name=Utumno Obsidian Warg
 entity.lotr.UtumnoFireWarg.name=Utumno Fire Warg
 entity.lotr.UtumnoIceSpider.name=Utumno Ice Spider
+entity.lotr.Balrog.name=Balrog
+entity.lotr.TormentedElf.name=Tormented Elf
+entity.lotr.UtumnoTroll.name=Utumno Troll
 
 entity.lotr.Sauron.name=Sauron
 entity.lotr.Gollum.name=Gollum
@@ -2443,9 +2456,15 @@ lotr.achievement.enterUtumnoFire.desc=Descend to the lower level of Utumno
 lotr.achievement.wearFullUtumno.title=Underworld Looter
 lotr.achievement.wearFullUtumno.desc=Equip a full suit of Utumno armor
 lotr.achievement.killUtumnoOrc.title=Demonic Minions
-lotr.achievement.killUtumnoOrc.desc=Kill an Utumno Orc
+lotr.achievement.killUtumnoOrc.desc=Kill an Orc of Utumno
 lotr.achievement.killUtumnoWarg.title=The Hounds of Hell
-lotr.achievement.killUtumnoWarg.desc=Kill an Utumno Warg
+lotr.achievement.killUtumnoWarg.desc=Kill a Warg of Utumno
+lotr.achievement.killBalrog.title=Balrog Slayer
+lotr.achievement.killBalrog.desc=Kill a Balrog
+lotr.achievement.killTormentedElf.title=The Forgotten
+lotr.achievement.killTormentedElf.desc=Kill a Tormented Elf
+lotr.achievement.killUtumnoTroll.title=Troll in the Dungeons
+lotr.achievement.killUtumnoTroll.desc=Kill a troll of Utumno
 
 lotr.waypoint.HIMLING=Himling
 lotr.waypoint.TOL_FUIN=Tol Fuin

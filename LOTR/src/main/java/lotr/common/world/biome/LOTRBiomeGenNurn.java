@@ -2,8 +2,8 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRWaypoint;
+import lotr.common.*;
+import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
 import lotr.common.world.feature.LOTRWorldGenCharredTrees;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import lotr.common.world.feature.LOTRWorldGenDesertTrees;
@@ -73,6 +73,19 @@ public class LOTRBiomeGenNurn extends LOTRBiomeGenMordor
 	public float getTreeIncreaseChance()
 	{
 		return 0.2F;
+	}
+	
+	@Override
+	public GrassBlockAndMeta getRandomGrass(Random random)
+	{
+		if (random.nextInt(3) == 0)
+		{
+			return new GrassBlockAndMeta(Blocks.tallgrass, 1);
+		}
+		else
+		{
+			return new GrassBlockAndMeta(LOTRMod.tallGrass, 0);
+		}
 	}
 	
 	@Override

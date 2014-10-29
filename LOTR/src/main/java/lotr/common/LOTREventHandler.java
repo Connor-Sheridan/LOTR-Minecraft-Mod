@@ -367,7 +367,7 @@ public class LOTREventHandler implements IFuelHandler
 			}
 			else if (deathDimension == LOTRDimension.UTUMNO.dimensionID)
 			{
-				new LOTRTeleporterUtumno(worldserver).placeInPortal(entityplayermp, 0D, 0D, 0D, 0F);
+				LOTRTeleporterUtumno.newTeleporter(LOTRDimension.MIDDLE_EARTH.dimensionID).placeInPortal(entityplayermp, 0D, 0D, 0D, 0F);
 				entityplayermp.playerNetServerHandler.setPlayerLocation(entityplayermp.posX, entityplayermp.posY, entityplayermp.posZ, entityplayermp.rotationYaw, entityplayermp.rotationPitch);
 			}
 		}
@@ -1249,17 +1249,12 @@ public class LOTREventHandler implements IFuelHandler
 				return;
 			}
 			
-			if (!world.isRemote && entity instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof LOTREntitySpear)
+			if (!world.isRemote && entity instanceof EntityPlayer && attacker instanceof LOTREntityOrc && event.source.getSourceOfDamage() instanceof LOTREntitySpear)
 			{
-				LOTREntitySpear spear = (LOTREntitySpear)event.source.getSourceOfDamage();
-				Item spearItem = spear.getItem().getItem();
-				if (spearItem == LOTRMod.spearOrc || spearItem == LOTRMod.spearAngmar || spearItem == LOTRMod.spearDolGuldur || spearItem == LOTRMod.spearUruk)
+				ItemStack chestplate = entity.getEquipmentInSlot(3);
+				if (chestplate != null && chestplate.getItem() == LOTRMod.bodyMithril)
 				{
-					ItemStack chestplate = entity.getEquipmentInSlot(3);
-					if (chestplate != null && chestplate.getItem() == LOTRMod.bodyMithril)
-					{
-						LOTRLevelData.getData((EntityPlayer)entity).addAchievement(LOTRAchievement.hitByOrcSpear);
-					}
+					LOTRLevelData.getData((EntityPlayer)entity).addAchievement(LOTRAchievement.hitByOrcSpear);
 				}
 			}
 		}

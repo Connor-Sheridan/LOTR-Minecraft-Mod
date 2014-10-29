@@ -39,10 +39,4 @@ public class LOTRRenderOlogHai extends LOTRRenderTroll
 	{
 		bindTexture(LOTRRandomSkins.getRandomSkin(ologArmorSkins, (LOTREntityOlogHai)entity));
 	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float f)
-	{
-		GL11.glScalef(1.25F, 1.25F, 1.25F);
-	}
 }

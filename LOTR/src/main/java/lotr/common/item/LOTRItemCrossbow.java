@@ -106,6 +106,16 @@ public class LOTRItemCrossbow extends ItemBow
     }
 	
 	@Override
+	public void onUsingTick(ItemStack itemstack, EntityPlayer entityplayer, int count)
+    {
+		World world = entityplayer.worldObj;
+		if (!world.isRemote && !isLoaded(itemstack) && getMaxItemUseDuration(itemstack) - count == getMaxDrawTime())
+		{
+			world.playSoundAtEntity(entityplayer, "lotr:item.crossbowLoad", 1F, 1.5F + world.rand.nextFloat() * 0.2F);
+		}
+    }
+	
+	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int useTick)
     {
 		int ticksInUse = getMaxItemUseDuration(itemstack) - useTick;
@@ -122,7 +132,6 @@ public class LOTRItemCrossbow extends ItemBow
         		{
         			setLoaded(itemstack, true);
         		}
-        		System.out.println("Loaded");
             }
         	entityplayer.clearItemInUse();
         }

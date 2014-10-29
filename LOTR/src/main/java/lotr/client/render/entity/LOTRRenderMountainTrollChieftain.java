@@ -55,12 +55,6 @@ public class LOTRRenderMountainTrollChieftain extends LOTRRenderMountainTroll
 			return super.shouldRenderPass(entity, pass, f);
 		}
     }
-
-	@Override
-	protected float getMountainTrollScale()
-	{
-		return 2F;
-	}
 	
 	@Override
 	protected void preRenderCallback(EntityLivingBase entity, float f)

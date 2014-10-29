@@ -99,7 +99,7 @@ public class LOTRTileEntityUtumnoReturnPortal extends TileEntity
 				if (entity.posY >= PORTAL_TOP - 5D)
 				{
 					int dimension = LOTRDimension.MIDDLE_EARTH.dimensionID;
-					LOTRTeleporterUtumno teleporter = new LOTRTeleporterUtumno(DimensionManager.getWorld(dimension));
+					LOTRTeleporterUtumno teleporter = LOTRTeleporterUtumno.newTeleporter(dimension);
 					if (entity instanceof EntityPlayerMP)
 					{
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);

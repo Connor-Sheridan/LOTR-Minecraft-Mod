@@ -71,6 +71,7 @@ public class LOTRMod
 	public static ToolMaterial toolHighElven = EnumHelper.addToolMaterial("LOTR_HIGH_ELVEN", 2, 400, 7F, 3F, 15);
 	public static ToolMaterial toolBlueDwarven = EnumHelper.addToolMaterial("LOTR_BLUE_DWARVEN", 3, 500, 5F, 3F, 8);
 	public static ToolMaterial toolDolGuldur = EnumHelper.addToolMaterial("LOTR_DOL_GULDUR", 2, 260, 6F, 2.5F, 12);
+	public static ToolMaterial toolUtumno = EnumHelper.addToolMaterial("LOTR_UTUMNO", 2, 360, 6F, 3.5F, 6);
 	public static ToolMaterial toolBlackUruk = EnumHelper.addToolMaterial("LOTR_BLACK_URUK", 2, 450, 7F, 3F, 8);
 	
 	public static ArmorMaterial armorBronze = EnumHelper.addArmorMaterial("LOTR_BRONZE", 12, new int[]{2, 5, 4, 2}, 10);
@@ -704,6 +705,14 @@ public class LOTRMod
 	public static Item bootsBlackUruk;
 	public static Item helmetNearHaradWarlord;
 	public static Item utumnoKey;
+	public static Item swordUtumno;
+	public static Item daggerUtumno;
+	public static Item daggerUtumnoPoisoned;
+	public static Item spearUtumno;
+	public static Item battleaxeUtumno;
+	public static Item hammerUtumno;
+	public static Item utumnoBow;
+	public static Item mugCactusLiqueur;
 	
 	public static List unnamedItems = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
@@ -1317,6 +1326,14 @@ public class LOTRMod
 		bootsBlackUruk = new LOTRItemArmor(armorBlackUruk, 3).setUnlocalizedName("lotr:bootsBlackUruk");
 		helmetNearHaradWarlord = new LOTRItemArmor(armorNearHarad, 0).setUnlocalizedName("lotr:helmetNearHaradWarlord");
 		utumnoKey = new LOTRItemUtumnoKey().setUnlocalizedName("lotr:utumnoKey");
+		swordUtumno = new LOTRItemSword(toolUtumno).setUnlocalizedName("lotr:swordUtumno");
+		daggerUtumno = new LOTRItemDagger(toolUtumno, 0).setUnlocalizedName("lotr:daggerUtumno");
+		daggerUtumnoPoisoned = new LOTRItemDagger(toolUtumno, 1).setUnlocalizedName("lotr:daggerUtumnoPoisoned");
+		spearUtumno = new LOTRItemSpear(toolUtumno, swordUtumno).setUnlocalizedName("lotr:spearUtumno");
+		battleaxeUtumno = new LOTRItemBattleaxe(toolUtumno).setUnlocalizedName("lotr:battleaxeUtumno");
+		hammerUtumno = new LOTRItemHammer(toolUtumno).setUnlocalizedName("lotr:hammerUtumno");
+		utumnoBow = new LOTRItemBow(350, 0.5D, 0.2F, 2, 20).setUnlocalizedName("lotr:utumnoBow");
+		mugCactusLiqueur = new LOTRItemMugBrewable(0.8F).setDrinkStats(2, 0.3F).setUnlocalizedName("lotr:mugCactusLiqueur");
 		
 		try
 		{
@@ -1958,6 +1975,14 @@ public class LOTRMod
 		registerItem(bootsBlackUruk);
 		registerItem(helmetNearHaradWarlord);
 		registerItem(utumnoKey);
+		registerItem(swordUtumno);
+		registerItem(daggerUtumno);
+		registerItem(daggerUtumnoPoisoned);
+		registerItem(spearUtumno);
+		registerItem(battleaxeUtumno);
+		registerItem(hammerUtumno);
+		registerItem(utumnoBow);
+		registerItem(mugCactusLiqueur);
 		
 		LOTRConfig.setupAndLoad(event);
 		
@@ -1993,6 +2018,7 @@ public class LOTRMod
 		toolHighElven.customCraftingMaterial = Items.iron_ingot;
 		toolBlueDwarven.customCraftingMaterial = blueDwarfSteel;
 		toolDolGuldur.customCraftingMaterial = orcSteel;
+		toolUtumno.customCraftingMaterial = orcSteel;
 		toolBlackUruk.customCraftingMaterial = blackUrukSteel;
 		
 		armorBronze.customCraftingMaterial = bronze;
@@ -2258,10 +2284,14 @@ public class LOTRMod
 		
 		LOTREntities.registerCreature(LOTREntityUtumnoOrc.class, "UtumnoOrc", 800, 0x291F27, 0x9E5811);
 		LOTREntities.registerCreature(LOTREntityUtumnoOrcArcher.class, "UtumnoOrcArcher", 801, 0x291F27, 0x9E5811);
-		LOTREntities.registerCreature(LOTREntityUtumnoIceWarg.class, "UtumnoIceWarg", 802, 0xB1AFAD, 0x878685);
-		LOTREntities.registerCreature(LOTREntityUtumnoObsidianWarg.class, "UtumnoObsidianWarg", 803, 0x2D2B29, 0x191716);
-		LOTREntities.registerCreature(LOTREntityUtumnoFireWarg.class, "UtumnoFireWarg", 804, 0x6A2D1C, 0x6CE7500);
-		LOTREntities.registerCreature(LOTREntityUtumnoIceSpider.class, "UtumnoIceSpider", 805, 0xEDF3FF, 0x7575FF);
+		LOTREntities.registerCreature(LOTREntityUtumnoWarg.class, "UtumnoWarg", 802, 0x463329, 0x291D16);
+		LOTREntities.registerCreature(LOTREntityUtumnoIceWarg.class, "UtumnoIceWarg", 803, 0xE5E3E0, 0x8EA4AD);
+		LOTREntities.registerCreature(LOTREntityUtumnoObsidianWarg.class, "UtumnoObsidianWarg", 804, 0x2D2B29, 0x191716);
+		LOTREntities.registerCreature(LOTREntityUtumnoFireWarg.class, "UtumnoFireWarg", 805, 0x6A2D1C, 0xCE7500);
+		LOTREntities.registerCreature(LOTREntityUtumnoIceSpider.class, "UtumnoIceSpider", 806, 0xEDF3FF, 0x7575FF);
+		LOTREntities.registerCreature(LOTREntityBalrog.class, "Balrog", 807, 0x6A2D1C, 0xCE7500);
+		LOTREntities.registerCreature(LOTREntityTormentedElf.class, "TormentedElf", 808, 0xD6D7AF, 0x42302E);
+		LOTREntities.registerCreature(LOTREntityUtumnoTroll.class, "UtumnoTroll", 809, 0xA17253, 0x714139);
 
 		//LOTREntities.registerCreature(LOTREntitySauron.class, "Sauron", 1000);
 		LOTREntities.registerCreature(LOTREntityGollum.class, "Gollum", 1001, 0xCCBD90, 0x908565);

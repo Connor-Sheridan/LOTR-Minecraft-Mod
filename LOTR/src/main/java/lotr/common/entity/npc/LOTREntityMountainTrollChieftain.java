@@ -42,8 +42,13 @@ public class LOTREntityMountainTrollChieftain extends LOTREntityMountainTroll im
 	public LOTREntityMountainTrollChieftain(World world)
 	{
 		super(world);
-		setSize(3.2F, 6.4F);
 		tasks.addTask(2, new LOTREntityAIMTCJumpAttack(this));
+	}
+	
+	@Override
+	public float getTrollScale()
+	{
+		return 2F;
 	}
 	
 	@Override

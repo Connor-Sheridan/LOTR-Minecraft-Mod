@@ -50,7 +50,8 @@ public class LOTRItemWargskinRug extends Item
         rugIcons = new IIcon[WargType.values().length];
         for (int i = 0; i < rugIcons.length; i++)
         {
-            rugIcons[i] = iconregister.registerIcon(getIconString() + "_" + i);
+        	WargType w = WargType.values()[i];
+            rugIcons[i] = iconregister.registerIcon(getIconString() + "_" + w.textureName());
         }
     }
 	

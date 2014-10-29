@@ -29,20 +29,8 @@ public class LOTRItemDagger extends LOTRItemSword
 		}
 		else if (effect == 1)
 		{
-			int duration = 1;
 			EnumDifficulty difficulty = user.worldObj.difficultySetting;
-			if (difficulty == EnumDifficulty.EASY)
-			{
-				duration = 3;
-			}
-			else if (difficulty == EnumDifficulty.NORMAL)
-			{
-				duration = 5;
-			}
-			else if (difficulty == EnumDifficulty.HARD)
-			{
-				duration = 7;
-			}
+			int duration = 1 + difficulty.getDifficultyId() * 2;
 			PotionEffect poison = new PotionEffect(Potion.poison.id, (duration + itemRand.nextInt(duration)) * 20);
 			hitEntity.addPotionEffect(poison);
 		}

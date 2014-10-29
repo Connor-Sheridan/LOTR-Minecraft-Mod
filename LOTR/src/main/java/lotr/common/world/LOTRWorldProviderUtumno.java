@@ -34,7 +34,7 @@ public class LOTRWorldProviderUtumno extends LOTRWorldProvider
         for (int i = 0; i <= 15; i++)
         {
             float f = (float)i / 15F;
-            lightBrightnessTable[i] = (float)Math.pow(f, 5D);
+            lightBrightnessTable[i] = (float)Math.pow(f, 6D);
         }
     }
 	

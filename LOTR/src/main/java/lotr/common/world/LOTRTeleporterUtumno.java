@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 public class LOTRTeleporterUtumno extends Teleporter
 {
@@ -15,10 +16,21 @@ public class LOTRTeleporterUtumno extends Teleporter
 	private int targetX;
 	private int targetZ;
 	
-    public LOTRTeleporterUtumno(WorldServer worldserver)
+    private LOTRTeleporterUtumno(WorldServer world)
     {
-		super(worldserver);
-		worldObj = worldserver;
+		super(world);
+		worldObj = world;
+    }
+    
+    public static LOTRTeleporterUtumno newTeleporter(int dimension)
+    {
+    	WorldServer world = DimensionManager.getWorld(dimension);
+    	if (world == null)
+    	{
+    		DimensionManager.initDimension(dimension);
+    		world = DimensionManager.getWorld(dimension);
+    	}
+    	return new LOTRTeleporterUtumno(world);
     }
     
     public void setTargetCoords(int x, int z)

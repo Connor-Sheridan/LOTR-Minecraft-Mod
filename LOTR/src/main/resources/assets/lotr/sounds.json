@@ -201,6 +201,15 @@
         ]
     },
     
+    "item.crossbowLoad":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "item/crossbowLoad"
+        ]
+    },
+    
     "item.gandalfFireball":
     {
         "category": "neutral",

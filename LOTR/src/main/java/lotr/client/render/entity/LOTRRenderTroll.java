@@ -61,10 +61,22 @@ public class LOTRRenderTroll extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entity, float f)
 	{
-		if (LOTRMod.isAprilFools() || ((LOTREntityTroll)entity).getTrollName().toLowerCase().equals("shrek"))
+		LOTREntityTroll troll = (LOTREntityTroll)entity;
+		scaleTroll(troll, false);
+		if (LOTRMod.isAprilFools() || troll.getTrollName().toLowerCase().equals("shrek"))
 		{
 			GL11.glColor3f(0F, 1F, 0F);
 		}
+	}
+	
+	protected void scaleTroll(LOTREntityTroll troll, boolean inverse)
+	{
+		float scale = troll.getTrollScale();
+		if (inverse)
+		{
+			scale = 1F / scale;
+		}
+		GL11.glScalef(scale, scale, scale);
 	}
 	
 	@Override

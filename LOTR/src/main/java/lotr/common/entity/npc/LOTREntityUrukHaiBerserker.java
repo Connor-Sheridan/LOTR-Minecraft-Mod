@@ -20,7 +20,7 @@ public class LOTREntityUrukHaiBerserker extends LOTREntityUrukHai
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.28D);
     }
 	

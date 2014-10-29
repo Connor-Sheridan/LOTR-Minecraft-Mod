@@ -183,6 +183,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityDikDik.class, new LOTRRenderDikDik());
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityUtumnoIceSpider.class, new LOTRRenderUtumnoIceSpider());
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityConker.class, new RenderSnowball(LOTRMod.chestnut));
+		RenderingRegistry.registerEntityRenderingHandler(LOTREntityUtumnoTroll.class, new LOTRRenderUtumnoTroll());
 
 		beaconRenderID = RenderingRegistry.getNextAvailableRenderId();
 		barrelRenderID = RenderingRegistry.getNextAvailableRenderId();

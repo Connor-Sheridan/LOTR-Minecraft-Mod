@@ -2,11 +2,13 @@ Public Beta 21
 
 + Added the realm of Utumno
 + Added Utumno achievements and the Utumno faction
-+ Added Utumno bricks
-+ Added Utumno Orcs, Wargs, and Spiders
++ Added Utumno Orcs, Wargs, Trolls, and Spiders
++ Added Tormented Elves
++ Added Balrogs
++ Added Utumno weapons and armour
++ Added Utumno bricks and pillars
 + Added player titles
 + Added an on-screen compass and a Middle-earth map compass
-+ Added many new mini-quests
 + Added improved mountain generation
 + Added new Harad biomes: Near Harad Semidesert and Fertile Forest, and Far Harad Arid Savannah, Cloud Forest, Swampland, Mangrove, and Bushland
 + Added mangrove, baobab, and cedar trees, and their wood
@@ -22,7 +24,7 @@ Public Beta 21
 + Added berry bushes and several types of berries
 + Added rotten logs
 + Added latitude-varying water colours for all biomes
-+ Added more variance in tree generation for some plains biomes
++ Added more variance in tree generation for plains-type biomes
 + Added a layer of red sand in the Red Mountains
 + Added thicker layers of sandstone for sandy biomes
 + Added new improved Vales of Anduin biomes
@@ -37,13 +39,16 @@ Public Beta 21
 + Added Rohan, Gondor, Mordor, and Near Harad pillars and pillar slabs
 + Added Carved Mordor Brick and a new Mordor Brick texture
 + Added Mordor scrub, dirt, and gravel
++ Added a crossbow loading sound effect
 + Added the ability to shift-click a plate to make the food pop out
 + Added the ability to stack multiple identical food items on a plate
 + Added the complete list of fishable items for the Dunlending Trident
++ Added cactus liqueur
 + Added a gradual distance-dependent transparency effect for on-screen quest book rendering
-+ Added an updated logo
-+ Added a Forge modlist configuration screen for the mod's config file
 + Added config options to enable or disable banner protection
++ Added a Forge modlist configuration screen for the mod's config file
++ Added an updated logo
++ Added French (France) and French (Canada) translations and an updated Italian translation
 
 * Fast travel now has a 10-second countdown before teleporting, which is cancelled by moving, so that players cannot use it to escape dangerous situations
 * Default fast travel cooldown is now 30 minutes
@@ -54,9 +59,11 @@ Public Beta 21
 * Custom waypoints can no longer be created in banner-protected areas
 * Fixed being unable to remove players from the banner whitelist
 * Changed the Near Harad armour recipes to use bronze
-* Changed the storage of completed mini-quests to record the amount completed per faction
-* Slightly reduced the chance for an NPC to offer a quest
+* NPCs now sometimes say things when they begin attacking a player
+* NPCs can no longer be spoken to when they are in combat
 * Fixed the drop rate of pouches being ridiculously high
+* Slightly reduced the chance for an NPC to offer a mini-quest
+* Changed the storage of completed mini-quests to record the amount completed per faction
 * Fixed kill-entity mini-quests sometimes not recording kills of subtypes of the target entity
 * Fixed blocks rendering darkly in the mini-quest screen
 * Fixed some elements of the Middle-earth map screen being layered in the wrong order
@@ -74,6 +81,7 @@ Public Beta 21
 * Fixed Rohirrim being angered when non-horse mounts are killed in Rohan
 * Fixed a mead hall generation error
 * Drunkards no longer give mini-quests
+* Orcs and Dunlendings no longer pick up items
 * Fixed the friendly and neutral orc speech banks being reversed
 * Fixed iron, gold, and diamond LOTR horse armour items not being displayed in the hand
 * Fixed some plants using stone block sounds

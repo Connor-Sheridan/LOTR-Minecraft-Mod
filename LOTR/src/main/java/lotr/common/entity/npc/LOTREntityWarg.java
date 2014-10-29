@@ -553,7 +553,9 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 		GREY(1),
 		BLACK(2),
 		WHITE(3),
-		RED(4);
+		ICE(4),
+		OBSIDIAN(5),
+		FIRE(6);
 		
 		public final int wargID;
 
@@ -564,7 +566,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 		
 		public String textureName()
 		{
-			return String.valueOf(wargID);
+			return name().toLowerCase();
 		}
 		
 		public static WargType forID(int ID)

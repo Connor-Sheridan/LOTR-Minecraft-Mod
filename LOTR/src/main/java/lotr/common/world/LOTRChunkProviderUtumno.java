@@ -99,16 +99,23 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
 			
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoIceWarg.class, 20, 4, 4));
+			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 10, 4, 4));
+			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoIceWarg.class, 10, 4, 4));
 			ICE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoIceSpider.class, 10, 4, 4));
 			
 			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoObsidianWarg.class, 20, 4, 4));
+			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 10, 4, 4));
+			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoObsidianWarg.class, 10, 4, 4));
+			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityTormentedElf.class, 10, 4, 4));
+			OBSIDIAN.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoTroll.class, 5, 4, 4));
 			
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrc.class, 20, 4, 4));
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoOrcArcher.class, 10, 4, 4));
-			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoFireWarg.class, 20, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoWarg.class, 10, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoFireWarg.class, 10, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityTormentedElf.class, 15, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoTroll.class, 15, 4, 4));
 		}
 	}
 	

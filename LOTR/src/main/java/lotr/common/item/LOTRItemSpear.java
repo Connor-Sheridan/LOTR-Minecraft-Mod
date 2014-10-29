@@ -1,5 +1,7 @@
 package lotr.common.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import lotr.common.dispenser.LOTRDispenseSpear;
 import lotr.common.entity.projectile.LOTREntitySpear;
 import net.minecraft.block.BlockDispenser;

@@ -64,6 +64,7 @@ public class LOTRTitle implements Comparable<LOTRTitle>
 	public static LOTRTitle fourLeafClover;
 	public static LOTRTitle enterUtumno;
 	public static LOTRTitle visitOcean;
+	public static LOTRTitle killBalrog;
 	
 	private static int nextTitleID = 0;
 	
@@ -269,6 +270,7 @@ public class LOTRTitle implements Comparable<LOTRTitle>
 		fourLeafClover = new LOTRTitle("fourLeafClover").setRequiresAchievement(LOTRAchievement.findFourLeafClover);
 		enterUtumno = new LOTRTitle("enterUtumno").setRequiresAchievement(LOTRAchievement.enterUtumnoIce);
 		visitOcean = new LOTRTitle("visitOcean").setRequiresAchievement(LOTRAchievement.enterOcean);
+		killBalrog = new LOTRTitle("killBalrog").setRequiresAchievement(LOTRAchievement.killBalrog);
 	}
 	
 	public static class PlayerTitle

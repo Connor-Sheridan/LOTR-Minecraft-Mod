@@ -175,7 +175,10 @@ public class LOTRFoods
 	
 	public static LOTRFoods NEAR_HARAD_DRINK = new LOTRFoods(new ItemStack[]
 	{
-		new ItemStack(LOTRMod.mugAraq)
+		new ItemStack(LOTRMod.mugAraq),
+		new ItemStack(LOTRMod.mugAraq),
+		new ItemStack(LOTRMod.mugAraq),
+		new ItemStack(LOTRMod.mugCactusLiqueur)
 	});
 	
 	public static LOTRFoods ORC = new LOTRFoods(new ItemStack[]

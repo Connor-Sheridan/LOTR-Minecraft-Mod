@@ -7,7 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.world.World;
 
-public abstract class LOTREntityUtumnoWarg extends LOTREntityWarg
+public class LOTREntityUtumnoWarg extends LOTREntityWarg
 {
 	public LOTREntityUtumnoWarg(World world)
 	{

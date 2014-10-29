@@ -51,7 +51,7 @@ public class LOTRBiomeGenLoneLands extends LOTRBiome
 		
         registerPlainsFlowers();
         
-        biomeColors.setGrass(0xB7A759);
+        biomeColors.setGrass(0xC4BA64);
 		
 		decorator.generateOrcDungeon = true;
 		
