@@ -33,28 +33,13 @@ public class LOTRWorldGenBigTrees extends WorldGenAbstractTree
     private Block leafBlock;
     private int leafMeta;
 
-    private LOTRWorldGenBigTrees(boolean flag, Block block, int i, Block block1, int j)
+    public LOTRWorldGenBigTrees(boolean flag, Block block, int i, Block block1, int j)
     {
         super(flag);
         woodBlock = block;
         woodMeta = i;
         leafBlock = block1;
         leafMeta = i;
-    }
-    
-    public static LOTRWorldGenBigTrees newBeech(boolean flag) 
-    {
-    	return new LOTRWorldGenBigTrees(flag, LOTRMod.wood2, 1, LOTRMod.leaves2, 1);
-    }
-    
-    public static LOTRWorldGenBigTrees newMaple(boolean flag) 
-    {
-    	return new LOTRWorldGenBigTrees(flag, LOTRMod.wood3, 0, LOTRMod.leaves3, 0);
-    }
-    
-    public static LOTRWorldGenBigTrees newChestnut(boolean flag) 
-    {
-    	return new LOTRWorldGenBigTrees(flag, LOTRMod.wood4, 0, LOTRMod.leaves4, 0);
     }
 	
 	@Override

@@ -39,26 +39,6 @@ public class LOTRWorldGenFangornTrees extends WorldGenAbstractTree
 		generateLeaves = false;
 		return this;
 	}
-	
-	public static LOTRWorldGenFangornTrees newOak(boolean flag)
-	{
-		return new LOTRWorldGenFangornTrees(flag, Blocks.log, 0, Blocks.leaves, 0);
-	}
-	
-	public static LOTRWorldGenFangornTrees newBeech(boolean flag)
-	{
-		return new LOTRWorldGenFangornTrees(flag, LOTRMod.wood2, 1, LOTRMod.leaves2, 1);
-	}
-	
-	public static LOTRWorldGenFangornTrees newBirch(boolean flag)
-	{
-		return new LOTRWorldGenFangornTrees(flag, Blocks.log, 2, Blocks.leaves, 2);
-	}
-	
-	public static LOTRWorldGenFangornTrees newCharred(boolean flag)
-	{
-		return new LOTRWorldGenFangornTrees(flag, LOTRMod.wood, 3, Blocks.air, 0).setNoLeaves();
-	}
 
 	@Override
     public boolean generate(World world, Random random, int i, int j, int k)

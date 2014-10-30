@@ -2,7 +2,6 @@ package lotr.common.world.feature;
 
 import java.util.Random;
 
-import lotr.common.LOTRMod;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -13,46 +12,11 @@ public class LOTRWorldGenDeadTrees extends WorldGenAbstractTree
 	private Block woodBlock;
 	private int woodMeta;
 	
-	private LOTRWorldGenDeadTrees(Block block, int i)
+	public LOTRWorldGenDeadTrees(Block block, int i)
 	{
 		super(false);
 		woodBlock = block;
 		woodMeta = i;
-	}
-	
-	public static LOTRWorldGenDeadTrees newOak()
-	{
-		return new LOTRWorldGenDeadTrees(Blocks.log, 0);
-	}
-	
-	public static LOTRWorldGenDeadTrees newSpruce()
-	{
-		return new LOTRWorldGenDeadTrees(Blocks.log, 1);
-	}
-	
-	public static LOTRWorldGenDeadTrees newMirkOak()
-	{
-		return new LOTRWorldGenDeadTrees(LOTRMod.wood, 2);
-	}
-	
-	public static LOTRWorldGenDeadTrees newBirch()
-	{
-		return new LOTRWorldGenDeadTrees(Blocks.log, 2);
-	}
-	
-	public static LOTRWorldGenDeadTrees newAcacia()
-	{
-		return new LOTRWorldGenDeadTrees(Blocks.log2, 0);
-	}
-	
-	public static LOTRWorldGenDeadTrees newBeech()
-	{
-		return new LOTRWorldGenDeadTrees(LOTRMod.wood2, 1);
-	}
-	
-	public static LOTRWorldGenDeadTrees newLebethron()
-	{
-		return new LOTRWorldGenDeadTrees(LOTRMod.wood2, 0);
 	}
 	
 	@Override

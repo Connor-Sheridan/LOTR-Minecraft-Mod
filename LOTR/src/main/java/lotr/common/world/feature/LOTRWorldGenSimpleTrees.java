@@ -20,7 +20,7 @@ public class LOTRWorldGenSimpleTrees extends WorldGenAbstractTree
 	private int leafMeta;
 	private int extraTrunkWidth;
 	
-    private LOTRWorldGenSimpleTrees(boolean flag, int i, int j, Block k, int l, Block i1, int j1)
+	public LOTRWorldGenSimpleTrees(boolean flag, int i, int j, Block k, int l, Block i1, int j1)
     {
 		super(flag);
 		minHeight = i;
@@ -35,56 +35,6 @@ public class LOTRWorldGenSimpleTrees extends WorldGenAbstractTree
 	{
 		extraTrunkWidth = i - 1;
 		return this;
-	}
-	
-	public static LOTRWorldGenSimpleTrees newMallorn(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 9, 15, LOTRMod.wood, 1, LOTRMod.leaves, 1);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newApple(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 4, 7, LOTRMod.fruitWood, 0, LOTRMod.fruitLeaves, 0);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newPear(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 4, 5, LOTRMod.fruitWood, 1, LOTRMod.fruitLeaves, 1);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newCherry(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 4, 8, LOTRMod.fruitWood, 2, LOTRMod.fruitLeaves, 2);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newMango(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 4, 7, LOTRMod.fruitWood, 3, LOTRMod.fruitLeaves, 3);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newLebethron(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 5, 9, LOTRMod.wood2, 0, LOTRMod.leaves2, 0);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newLebethronLarge(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 11, 18, LOTRMod.wood2, 0, LOTRMod.leaves2, 0).setTrunkWidth(2);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newBeech(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 5, 9, LOTRMod.wood2, 1, LOTRMod.leaves2, 1);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newMaple(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 4, 8, LOTRMod.wood3, 0, LOTRMod.leaves3, 0);
-	}
-	
-	public static LOTRWorldGenSimpleTrees newChestnut(boolean flag)
-	{
-		return new LOTRWorldGenSimpleTrees(flag, 5, 7, LOTRMod.wood4, 0, LOTRMod.leaves4, 0);
 	}
 
 	@Override

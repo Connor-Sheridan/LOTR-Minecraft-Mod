@@ -18,7 +18,7 @@ public class LOTRWorldGenHugeTrees extends WorldGenAbstractTree
 	private int leafMeta;
 	private boolean restrictions = true;
 	
-    private LOTRWorldGenHugeTrees(Block block, int i, Block block1, int j)
+    public LOTRWorldGenHugeTrees(Block block, int i, Block block1, int j)
     {
 		super(false);
 		woodBlock = block;
@@ -31,21 +31,6 @@ public class LOTRWorldGenHugeTrees extends WorldGenAbstractTree
     {
     	restrictions  = false;
     	return this;
-    }
-    
-    public static LOTRWorldGenHugeTrees newOak()
-    {
-    	return new LOTRWorldGenHugeTrees(Blocks.log, 0, Blocks.leaves, 0);
-    }
-    
-    public static LOTRWorldGenHugeTrees newBirch()
-    {
-    	return new LOTRWorldGenHugeTrees(Blocks.log, 2, Blocks.leaves, 2);
-    }
-    
-    public static LOTRWorldGenHugeTrees newCherry()
-    {
-    	return new LOTRWorldGenHugeTrees(LOTRMod.fruitWood, 2, LOTRMod.fruitLeaves, 2);
     }
 
 	@Override
