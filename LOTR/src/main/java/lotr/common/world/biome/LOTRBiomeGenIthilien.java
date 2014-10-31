@@ -14,8 +14,7 @@ import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenCedar;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenGondorObelisk;
 import lotr.common.world.structure.LOTRWorldGenGondorRuins;
 import lotr.common.world.structure.LOTRWorldGenRuinedBeaconTower;
@@ -63,6 +62,16 @@ public class LOTRBiomeGenIthilien extends LOTRBiome
 		decorator.doubleGrassPerChunk = 4;
 		decorator.waterlilyPerChunk = 2;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK_TALL, 500);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 200);
+		decorator.addTree(LOTRTreeType.LEBETHRON, 150);
+		decorator.addTree(LOTRTreeType.LEBETHRON, 15);
+		decorator.addTree(LOTRTreeType.BIRCH, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 50);
+		decorator.addTree(LOTRTreeType.CEDAR, 200);
+		decorator.addTree(LOTRTreeType.APPLE, 3);
+		decorator.addTree(LOTRTreeType.PEAR, 3);
 		
 		registerForestFlowers();
 		addFlower(LOTRMod.asphodel, 0, 10);
@@ -112,31 +121,6 @@ public class LOTRBiomeGenIthilien extends LOTRBiome
             doubleFlowerGen.func_150548_a(0);
             doubleFlowerGen.generate(world, random, i1, j1, k1);
         }
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(8) == 0)
-		{
-			return random.nextInt(8) == 0 ? LOTRWorldGenSimpleTrees.newLebethronLarge(false) : LOTRWorldGenSimpleTrees.newLebethron(false);
-		}
-		else if (random.nextInt(5) == 0)
-		{
-			return new LOTRWorldGenCedar(false);
-		}
-		else
-		{
-			return random.nextInt(8) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false, 4 + random.nextInt(4), 0, 0, false);
-		}
     }
 	
 	@Override

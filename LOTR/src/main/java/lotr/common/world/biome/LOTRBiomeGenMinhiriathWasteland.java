@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -17,6 +18,11 @@ public class LOTRBiomeGenMinhiriathWasteland extends LOTRBiomeGenMinhiriath
 		decorator.grassPerChunk = 2;
 		decorator.doubleGrassPerChunk = 0;
 		decorator.flowersPerChunk = 0;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 5000);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 1000);
+		decorator.addTree(LOTRTreeType.BEECH_DEAD, 500);
+		decorator.addTree(LOTRTreeType.BIRCH_DEAD, 100);
 		
 		biomeColors.setGrass(0xAEB269);
 	}
@@ -34,19 +40,6 @@ public class LOTRBiomeGenMinhiriathWasteland extends LOTRBiomeGenMinhiriath
 				int k1 = k + random.nextInt(16) + 8;
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
-		}
-	}
-
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(5) == 0)
-		{
-			return super.func_150567_a(random);
-		}
-		else
-		{
-			return LOTRWorldGenDeadTrees.newOak();
 		}
 	}
 	

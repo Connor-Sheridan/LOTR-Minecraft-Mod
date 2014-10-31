@@ -16,10 +16,7 @@ import lotr.common.entity.npc.LOTREntityTroll;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBlastedLand;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenCharredTrees;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.*;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.init.Blocks;
@@ -59,6 +56,11 @@ public class LOTRBiomeGenAngmar extends LOTRBiome
 		decorator.flowersPerChunk = 0;
 		decorator.grassPerChunk = 4;
 		decorator.doubleGrassPerChunk = 1;
+
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 150);
+		decorator.addTree(LOTRTreeType.CHARRED, 150);
 		
 		biomeColors.setGrass(0x787C57);
 		biomeColors.setSky(0x513F33);
@@ -124,23 +126,6 @@ public class LOTRBiomeGenAngmar extends LOTRBiome
 			boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextBoolean())
-		{
-			if (random.nextBoolean())
-			{
-				return new LOTRWorldGenCharredTrees();
-			}
-			else
-			{
-				return LOTRWorldGenDeadTrees.newSpruce();
-			}
-		}
-		return random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

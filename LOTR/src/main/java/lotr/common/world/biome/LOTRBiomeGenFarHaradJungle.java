@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lotr.common.entity.animal.*;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
@@ -36,30 +37,15 @@ public class LOTRBiomeGenFarHaradJungle extends LOTRBiomeGenFarHarad
         decorator.grassPerChunk = 15;
 		decorator.doubleGrassPerChunk = 10;
         decorator.enableFern = true;
+        
+        decorator.clearTrees();
+        decorator.addTree(LOTRTreeType.JUNGLE, 1000);
+        decorator.addTree(LOTRTreeType.JUNGLE_LARGE, 500);
+        decorator.addTree(LOTRTreeType.OAK_SHRUB, 1000);
+        decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+        decorator.addTree(LOTRTreeType.MANGO, 20);
 		
 		registerJungleFlowers();
-    }
-
-    @Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(100) == 0)
-		{
-			return LOTRWorldGenSimpleTrees.newMango(false);
-		}
-    	if (random.nextInt(10) == 0)
-    	{
-    		return new WorldGenBigTree(false);
-    	}
-    	else if (random.nextBoolean())
-    	{
-    		return new WorldGenShrub(3, 0);
-    	}
-    	else if (random.nextInt(3) == 0)
-    	{
-    		return new WorldGenMegaJungle(false, 10, 20, 3, 3);
-    	}
-    	return new WorldGenTrees(false, 4 + random.nextInt(7), 3, 3, true);
     }
 
     @Override

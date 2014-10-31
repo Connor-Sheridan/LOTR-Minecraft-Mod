@@ -48,7 +48,7 @@ Public Beta 21
 + Added config options to enable or disable banner protection
 + Added a Forge modlist configuration screen for the mod's config file
 + Added an updated logo
-+ Added French (France) and French (Canada) translations and an updated Italian translation
++ Added French (France) and French (Canada) translations and updated Italian and Serbian translations
 
 * Fast travel now has a 10-second countdown before teleporting, which is cancelled by moving, so that players cannot use it to escape dangerous situations
 * Default fast travel cooldown is now 30 minutes
@@ -81,6 +81,7 @@ Public Beta 21
 * Fixed Rohirrim being angered when non-horse mounts are killed in Rohan
 * Fixed a mead hall generation error
 * Drunkards no longer give mini-quests
+* Dunland is no longer enemies with Mordor or the elves
 * Orcs and Dunlendings no longer pick up items
 * Fixed the friendly and neutral orc speech banks being reversed
 * Fixed iron, gold, and diamond LOTR horse armour items not being displayed in the hand

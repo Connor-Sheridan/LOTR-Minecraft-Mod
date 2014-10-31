@@ -1,12 +1,7 @@
 package lotr.common.world.biome;
 
-import java.util.Random;
-
-import lotr.common.world.feature.LOTRWorldGenHugeTrees;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigTree;
-import net.minecraft.world.gen.feature.WorldGenMegaPineTree;
 
 public class LOTRBiomeGenEnedwaithWoodlandsDense extends LOTRBiomeGenEnedwaithWoodlands
 {
@@ -21,29 +16,9 @@ public class LOTRBiomeGenEnedwaithWoodlandsDense extends LOTRBiomeGenEnedwaithWo
 		hasPodzol = true;
 		decorator.treesPerChunk = 12;
 		decorator.logsPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 700);
+		decorator.addTree(LOTRTreeType.OAK_HUGE, 125);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 125);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(8) == 0)
-		{
-			return LOTRWorldGenHugeTrees.newOak();
-		}
-		else if (random.nextInt(3) > 0)
-		{
-			if (random.nextBoolean())
-			{
-				return new WorldGenBigTree(false);
-			}
-			else
-			{
-				return new WorldGenMegaPineTree(false, true);
-			}
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 }

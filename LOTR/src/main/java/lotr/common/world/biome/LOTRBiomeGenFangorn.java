@@ -12,10 +12,7 @@ import lotr.common.entity.npc.LOTREntityElvenTrader;
 import lotr.common.entity.npc.LOTREntityEnt;
 import lotr.common.entity.npc.LOTREntityHuorn;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenEntJars;
-import lotr.common.world.feature.LOTRWorldGenFangornTrees;
-import lotr.common.world.feature.LOTRWorldGenWaterPlant;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -50,6 +47,18 @@ public class LOTRBiomeGenFangorn extends LOTRBiome
 		decorator.doubleGrassPerChunk = 6;
 		decorator.enableFern = true;
 		
+		decorator.addTree(LOTRTreeType.OAK, 100);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 200);
+		decorator.addTree(LOTRTreeType.OAK_TALLER, 200);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.BIRCH, 20);
+		decorator.addTree(LOTRTreeType.BIRCH_TALL, 20);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 10);
+		decorator.addTree(LOTRTreeType.BEECH, 50);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 10);
+		decorator.addTree(LOTRTreeType.OAK_FANGORN, 50);
+		decorator.addTree(LOTRTreeType.BEECH_FANGORN, 20);
+		
 		registerForestFlowers();
 		addFlower(LOTRMod.fangornPlant, 0, 1);
 		addFlower(LOTRMod.fangornPlant, 1, 1);
@@ -70,6 +79,10 @@ public class LOTRBiomeGenFangorn extends LOTRBiome
 	public LOTRBiomeGenFangorn setBirchFangorn()
 	{
 		isBirchFangorn = true;
+		decorator.addTree(LOTRTreeType.BIRCH, 2000);
+		decorator.addTree(LOTRTreeType.BIRCH_TALL, 2000);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 2000);
+		decorator.addTree(LOTRTreeType.BIRCH_FANGORN, 1000);
 		return this;
 	}
 	
@@ -112,41 +125,6 @@ public class LOTRBiomeGenFangorn extends LOTRBiome
 			new LOTRWorldGenEntJars().generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			if (isBirchFangorn)
-			{
-				return LOTRWorldGenFangornTrees.newBirch(false);
-			}
-			else
-			{
-				return random.nextInt(6) == 0 ? LOTRWorldGenFangornTrees.newBeech(false) : LOTRWorldGenFangornTrees.newOak(false);
-			}
-		}
-		else if ((isBirchFangorn && random.nextInt(4) != 0) || random.nextInt(15) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(15) == 0)
-		{
-			return LOTRWorldGenBigTrees.newBeech(false);
-		}
-		else
-		{
-			if (random.nextInt(4) == 0)
-			{
-				return new WorldGenBigTree(false);
-			}
-			else
-			{
-				return random.nextInt(4) == 0 ? new WorldGenTrees(false) : new WorldGenTrees(false, 10 + random.nextInt(4), 0, 0, false);
-			}
-		}
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

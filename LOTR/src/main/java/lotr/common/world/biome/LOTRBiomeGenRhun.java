@@ -7,6 +7,7 @@ import lotr.common.LOTRWaypoint;
 import lotr.common.entity.animal.LOTREntityHorse;
 import lotr.common.entity.npc.LOTREntityNearHaradMerchant;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -31,6 +32,12 @@ public class LOTRBiomeGenRhun extends LOTRBiome
 		decorator.flowersPerChunk = 1;
         decorator.grassPerChunk = 12;
 		decorator.doubleGrassPerChunk = 7;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 300);
+		decorator.addTree(LOTRTreeType.SPRUCE, 300);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 50);
 		
         registerPlainsFlowers();
         
@@ -65,16 +72,6 @@ public class LOTRBiomeGenRhun extends LOTRBiome
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
 		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-        return random.nextInt(3) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
     }
 	
 	@Override

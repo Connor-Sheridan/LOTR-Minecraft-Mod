@@ -10,6 +10,7 @@ import lotr.common.entity.animal.LOTREntityWildBoar;
 import lotr.common.entity.npc.LOTREntityGundabadOrc;
 import lotr.common.entity.npc.LOTREntityGundabadOrcArcher;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
@@ -964,9 +965,10 @@ public class LOTRBiome extends BiomeGenBase
 	}
 	
 	@Override
-	public WorldGenAbstractTree func_150567_a(Random random)
+	public final WorldGenAbstractTree func_150567_a(Random random)
 	{
-		return random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
+		LOTRTreeType tree = decorator.getRandomTree(random);
+		return tree.create(false);
 	}
 	
 	public float getTreeIncreaseChance()

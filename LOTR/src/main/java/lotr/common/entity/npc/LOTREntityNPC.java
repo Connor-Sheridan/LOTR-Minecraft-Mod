@@ -1460,7 +1460,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 	}
 	
 	@Override
-    public ItemStack getEquipmentInSlot(int i)
+    public final ItemStack func_130225_q(int i)
     {
         if (worldObj.isRemote)
 		{
@@ -1486,12 +1486,14 @@ public abstract class LOTREntityNPC extends EntityCreature
 				initFestiveItems = true;
 			}
 			
-			if (festiveItems[i] != null)
+			int index = i + 1;
+			if (festiveItems[index] != null)
 			{
-				return festiveItems[i];
+				return festiveItems[index];
 			}
 		}
-		return super.getEquipmentInSlot(i);
+        
+		return super.func_130225_q(i);
     }
 	
 	@Override

@@ -38,22 +38,22 @@ public class LOTRBlockSapling4 extends LOTRBlockSaplingBase
 		{
 			if (random.nextInt(10) == 0)
 			{
-				treeGen = LOTRWorldGenBigTrees.newChestnut(true);
+				treeGen = LOTRTreeType.CHESTNUT_LARGE.create(true);
 			}
 			else
 			{
-				treeGen = LOTRWorldGenSimpleTrees.newChestnut(true);
+				treeGen = LOTRTreeType.CHESTNUT.create(true);
 			}
 		}
 		
 		if (meta == 1)
 		{
-			treeGen = new LOTRWorldGenBaobab(true);
+			treeGen = LOTRTreeType.BAOBAB.create(true);
 		}
 		
 		if (meta == 2)
 		{
-			treeGen = new LOTRWorldGenCedar(true);
+			treeGen = LOTRTreeType.CEDAR.create(true);
 		}
 		
 		world.setBlock(i, j, k, Blocks.air, 0, 4);

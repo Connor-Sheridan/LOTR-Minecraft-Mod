@@ -6,9 +6,7 @@ import lotr.common.LOTRAchievement;
 import lotr.common.LOTRMod;
 import lotr.common.LOTRWaypoint;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenDesertTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySkull;
@@ -37,6 +35,11 @@ public class LOTRBiomeGenPertorogwaith extends LOTRBiome
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 4;
 		decorator.flowersPerChunk = 0;
+		
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 50);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 100);
+		decorator.addTree(LOTRTreeType.ACACIA, 100);
+		decorator.addTree(LOTRTreeType.ACACIA_DEAD, 200);
 		
 		registerHaradFlowers();
 		
@@ -97,27 +100,6 @@ public class LOTRBiomeGenPertorogwaith extends LOTRBiome
 					}
 				}
 			}
-		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) > 0)
-		{
-			if (random.nextInt(3) > 0)
-			{
-				return LOTRWorldGenDeadTrees.newAcacia();
-			}
-			return LOTRWorldGenDeadTrees.newOak();
-		}
-		else
-		{
-			if (random.nextInt(3) > 0)
-			{
-				return new WorldGenSavannaTree(false);
-			}
-			return new LOTRWorldGenDesertTrees();
 		}
     }
 	

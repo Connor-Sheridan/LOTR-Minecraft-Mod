@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.entity.animal.LOTREntityBird;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
@@ -30,6 +31,8 @@ public class LOTRBiomeGenFarHaradSwamp extends LOTRBiomeGenFarHarad
 		decorator.waterlilyPerChunk = 2;
 		decorator.reedsPerChunk = 10;
 		
+		decorator.addTree(LOTRTreeType.OAK_SWAMP, 1000);
+		
 		registerSwampFlowers();
 		
 		biomeColors.setWater(0x558E7E);
@@ -48,16 +51,6 @@ public class LOTRBiomeGenFarHaradSwamp extends LOTRBiomeGenFarHarad
 			new WorldGenLakes(Blocks.water).generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextBoolean())
-		{
-			return new WorldGenSwamp();
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

@@ -9,8 +9,7 @@ import lotr.common.LOTRWaypoint;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenMarshLights;
+import lotr.common.world.feature.*;
 import lotr.common.world.genlayer.LOTRGenLayerWorld;
 import lotr.common.world.structure.LOTRWorldGenMarshHut;
 import net.minecraft.block.Block;
@@ -45,6 +44,8 @@ public class LOTRBiomeGenDeadMarshes extends LOTRBiome
 		decorator.enableFern = true;
 		decorator.enableSpecialGrasses = false;
 		decorator.reedsPerChunk = 10;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1000);
 		
 		flowers.clear();
 		addFlower(LOTRMod.deadPlant, 0, 10);
@@ -125,12 +126,6 @@ public class LOTRBiomeGenDeadMarshes extends LOTRBiome
 			new LOTRWorldGenMarshHut().generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return LOTRWorldGenDeadTrees.newOak();
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

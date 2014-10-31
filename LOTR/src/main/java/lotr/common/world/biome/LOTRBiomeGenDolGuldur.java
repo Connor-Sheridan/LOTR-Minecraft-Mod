@@ -5,8 +5,7 @@ import java.util.Random;
 import lotr.common.LOTRAchievement;
 import lotr.common.LOTRMod;
 import lotr.common.entity.npc.*;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenMirkOak;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
 import lotr.common.world.structure2.LOTRWorldGenDolGuldurAltar;
 import lotr.common.world.structure2.LOTRWorldGenDolGuldurTower;
@@ -34,6 +33,10 @@ public class LOTRBiomeGenDolGuldur extends LOTRBiomeGenMirkwood
 		decorator.flowersPerChunk = 0;
 		decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 1;
+		
+		decorator.clearTrees();
+		decorator.addTree(LOTRTreeType.MIRK_OAK_MID, 200);
+		decorator.addTree(LOTRTreeType.MIRK_OAK_DEAD, 1000);
 		
 		biomeColors.setGrass(0x2E4431);
 		biomeColors.setSky(0x424751);
@@ -66,16 +69,6 @@ public class LOTRBiomeGenDolGuldur extends LOTRBiomeGenMirkwood
 	{
 		return 0.25F;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(6) > 0)
-		{
-			return LOTRWorldGenDeadTrees.newMirkOak();
-		}
-		return new LOTRWorldGenMirkOak(false, 8, 4, 0, 3);
-    }
 	
 	@Override
 	public boolean canSpawnHostilesInDay()

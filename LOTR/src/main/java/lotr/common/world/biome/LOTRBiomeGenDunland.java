@@ -50,6 +50,12 @@ public class LOTRBiomeGenDunland extends LOTRBiome
         decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 1;
 		
+		decorator.addTree(LOTRTreeType.SPRUCE, 500);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 200);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 20);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 50);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 10);
+		
 		registerForestFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenDunlendingHouse(false), 25);
@@ -103,23 +109,6 @@ public class LOTRBiomeGenDunland extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false, 4 + random.nextInt(5), 0, 0, false);
-		}
-		else
-		{
-			return new WorldGenTaiga2(false);
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

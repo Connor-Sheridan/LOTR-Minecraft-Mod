@@ -2,6 +2,7 @@ package lotr.common.world.structure2;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenBigTrees;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -76,11 +77,11 @@ public class LOTRWorldGenNumenorRuin extends LOTRWorldGenStructureBase2
 		
 		if (random.nextBoolean())
 		{
-			new WorldGenBigTree(notifyChanges).generate(world, random, originX, originY + 1, originZ);
+			LOTRTreeType.OAK_LARGE.create(notifyChanges).generate(world, random, originX, originY + 1, originZ);
 		}
 		else
 		{
-			LOTRWorldGenBigTrees.newBeech(notifyChanges).generate(world, random, originX, originY + 1, originZ);
+			LOTRTreeType.BEECH_LARGE.create(notifyChanges).generate(world, random, originX, originY + 1, originZ);
 		}
 		
 		for (int i1 = -width; i1 <= width; i1++)

@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.entity.npc.LOTREntityHobbitOrcharder;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -14,6 +15,11 @@ public class LOTRBiomeGenShireOrchard extends LOTRBiomeGenShire
 		super(i);
 		
 		spawnableGoodList.add(new SpawnListEntry(LOTREntityHobbitOrcharder.class, 20, 1, 1));
+		
+		decorator.clearTrees();
+		decorator.addTree(LOTRTreeType.APPLE, 100);
+		decorator.addTree(LOTRTreeType.PEAR, 100);
+		decorator.addTree(LOTRTreeType.CHERRY, 10);
 		
 		decorator.treesPerChunk = 0;
 		decorator.flowersPerChunk = 6;
@@ -40,19 +46,6 @@ public class LOTRBiomeGenShireOrchard extends LOTRBiomeGenShire
 		
 		super.decorate(world, random, i, k);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return LOTRWorldGenSimpleTrees.newCherry(false);
-		}
-		else
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

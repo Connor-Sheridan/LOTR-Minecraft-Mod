@@ -231,7 +231,6 @@ public enum LOTRFaction
 		HIGH_ELF.addEnemy(GUNDABAD);
 		HIGH_ELF.addEnemy(ANGMAR);
 		HIGH_ELF.addEnemy(DOL_GULDUR);
-		HIGH_ELF.addEnemy(DUNLAND);
 		HIGH_ELF.addEnemy(URUK_HAI);
 		HIGH_ELF.addEnemy(MORDOR);
 		HIGH_ELF.addEnemy(NEAR_HARAD);
@@ -325,7 +324,6 @@ public enum LOTRFaction
 		WOOD_ELF.addEnemy(GUNDABAD);
 		WOOD_ELF.addEnemy(ANGMAR);
 		WOOD_ELF.addEnemy(DOL_GULDUR);
-		WOOD_ELF.addEnemy(DUNLAND);
 		WOOD_ELF.addEnemy(URUK_HAI);
 		WOOD_ELF.addEnemy(MORDOR);
 		WOOD_ELF.addEnemy(NEAR_HARAD);
@@ -404,7 +402,6 @@ public enum LOTRFaction
 		GALADHRIM.addEnemy(GUNDABAD);
 		GALADHRIM.addEnemy(ANGMAR);
 		GALADHRIM.addEnemy(DOL_GULDUR);
-		GALADHRIM.addEnemy(DUNLAND);
 		GALADHRIM.addEnemy(URUK_HAI);
 		GALADHRIM.addEnemy(MORDOR);
 		GALADHRIM.addEnemy(NEAR_HARAD);
@@ -428,16 +425,11 @@ public enum LOTRFaction
 		DUNLAND.setMiniquestAchievement(LOTRAchievement.doMiniquestDunland);
 		
 		DUNLAND.addEnemy(RANGER_NORTH);
-		DUNLAND.addEnemy(HIGH_ELF);
 		DUNLAND.addEnemy(GUNDABAD);
 		DUNLAND.addEnemy(ANGMAR);
-		DUNLAND.addEnemy(WOOD_ELF);
 		DUNLAND.addEnemy(DOL_GULDUR);
-		DUNLAND.addEnemy(GALADHRIM);
 		DUNLAND.addEnemy(ROHAN);
 		DUNLAND.addEnemy(GONDOR);
-		DUNLAND.addEnemy(MORDOR);
-		DUNLAND.addEnemy(HALF_TROLL);
 		
 		DUNLAND.addKillPenalty(DUNLAND);
 		
@@ -567,7 +559,6 @@ public enum LOTRFaction
 		MORDOR.addEnemy(WOOD_ELF);
 		MORDOR.addEnemy(DWARF);
 		MORDOR.addEnemy(GALADHRIM);
-		MORDOR.addEnemy(DUNLAND);
 		MORDOR.addEnemy(FANGORN);
 		MORDOR.addEnemy(ROHAN);
 		MORDOR.addEnemy(GONDOR);
@@ -641,7 +632,6 @@ public enum LOTRFaction
 		HALF_TROLL.addEnemy(WOOD_ELF);
 		HALF_TROLL.addEnemy(DWARF);
 		HALF_TROLL.addEnemy(GALADHRIM);
-		HALF_TROLL.addEnemy(DUNLAND);
 		HALF_TROLL.addEnemy(FANGORN);
 		HALF_TROLL.addEnemy(ROHAN);
 		HALF_TROLL.addEnemy(GONDOR);

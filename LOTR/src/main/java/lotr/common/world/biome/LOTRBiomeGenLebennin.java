@@ -10,9 +10,7 @@ import lotr.common.entity.animal.LOTREntityButterfly;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenForest;
@@ -35,6 +33,11 @@ public class LOTRBiomeGenLebennin extends LOTRBiomeGenGondor
 		decorator.flowersPerChunk = 5;
 		decorator.grassPerChunk = 12;
 		decorator.doubleGrassPerChunk = 6;
+		
+		decorator.addTree(LOTRTreeType.BIRCH, 300);
+		decorator.addTree(LOTRTreeType.BEECH, 150);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 15);
+		decorator.addTree(LOTRTreeType.MAPLE, 100);
 		
 		setBanditChance(LOTRBanditSpawner.RARE);
 	}
@@ -60,23 +63,4 @@ public class LOTRBiomeGenLebennin extends LOTRBiomeGenGondor
 			}
 		}
 	}
-	
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return LOTRWorldGenSimpleTrees.newMaple(false);
-		}
-		if (random.nextInt(8) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-        return super.func_150567_a(random);
-    }
 }

@@ -2,32 +2,16 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
-import lotr.common.LOTRWaypoint;
+import lotr.common.*;
 import lotr.common.entity.animal.LOTREntityHorse;
-import lotr.common.entity.npc.LOTREntityBlueDwarfMerchant;
-import lotr.common.entity.npc.LOTREntityElvenTrader;
-import lotr.common.entity.npc.LOTREntityGondorArcher;
-import lotr.common.entity.npc.LOTREntityGondorSoldier;
-import lotr.common.entity.npc.LOTREntityMordorOrc;
-import lotr.common.entity.npc.LOTREntityMordorOrcArcher;
-import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
-import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
+import lotr.common.entity.npc.*;
+import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
-import lotr.common.world.structure.LOTRWorldGenGondorFortress;
-import lotr.common.world.structure.LOTRWorldGenGondorObelisk;
-import lotr.common.world.structure.LOTRWorldGenGondorRuin;
-import lotr.common.world.structure.LOTRWorldGenGondorRuins;
-import lotr.common.world.structure.LOTRWorldGenGondorSmithy;
-import lotr.common.world.structure.LOTRWorldGenRuinedGondorTower;
+import lotr.common.world.feature.LOTRTreeType;
+import lotr.common.world.structure.*;
 import lotr.common.world.structure2.LOTRWorldGenGondorTurret;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -56,6 +40,11 @@ public class LOTRBiomeGenGondor extends LOTRBiome
         decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 1;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 150);
+		decorator.addTree(LOTRTreeType.APPLE, 2);
+		decorator.addTree(LOTRTreeType.PEAR, 2);
 		
         registerPlainsFlowers();
 		
@@ -94,16 +83,6 @@ public class LOTRBiomeGenGondor extends LOTRBiome
 		genStandardOre(world, random, i, k, 2, gondorRockVein, 0, 64);
 
 		super.decorate(world, random, i, k);
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-        return super.func_150567_a(random);
     }
 	
 	@Override

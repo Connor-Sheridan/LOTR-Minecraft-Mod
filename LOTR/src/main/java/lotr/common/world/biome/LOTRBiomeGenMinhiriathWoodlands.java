@@ -5,6 +5,7 @@ import java.util.Random;
 import lotr.common.entity.animal.LOTREntityBird;
 import lotr.common.entity.animal.LOTREntityButterfly;
 import lotr.common.entity.animal.LOTREntityRabbit;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
@@ -28,21 +29,11 @@ public class LOTRBiomeGenMinhiriathWoodlands extends LOTRBiomeGenMinhiriath
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 3;
 		
+		decorator.addTree(LOTRTreeType.OAK, 10000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE, 2000);
+		
 		registerForestFlowers();
-	}
-
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return super.func_150567_a(random);
-		}
-		else if (random.nextInt(5) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		return random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
 	}
 	
 	@Override

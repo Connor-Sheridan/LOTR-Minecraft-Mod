@@ -9,6 +9,7 @@ import lotr.common.entity.npc.LOTREntityGundabadWarg;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenLarch;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -29,6 +30,12 @@ public class LOTRBiomeGenGreyMountains extends LOTRBiome
 		decorator.flowersPerChunk = 0;
 		decorator.grassPerChunk = 0;
 		decorator.doubleGrassPerChunk = 0;
+		
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 500);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 50);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 10);
+		decorator.addTree(LOTRTreeType.LARCH, 500);
 		
 		registerMountainsFlowers();
 		
@@ -86,24 +93,6 @@ public class LOTRBiomeGenGreyMountains extends LOTRBiome
 				getRandomWorldGenForGrass(random).generate(world, random, i1, j1, k1);
 			}
 		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			if (random.nextInt(10) == 0)
-			{
-				return new WorldGenMegaPineTree(false, true);
-			}
-			return new WorldGenMegaPineTree(false, false);
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			return new LOTRWorldGenLarch(false);
-		}
-        return random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
     }
 	
 	@Override

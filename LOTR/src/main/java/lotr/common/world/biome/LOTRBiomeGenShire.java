@@ -49,6 +49,17 @@ public class LOTRBiomeGenShire extends LOTRBiome
 		decorator.grassPerChunk = 6;
 		decorator.generateLava = false;
 		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 400);
+		decorator.addTree(LOTRTreeType.OAK_HUGE, 10);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 250);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 100);
+		decorator.addTree(LOTRTreeType.BIRCH, 25);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 10);
+		decorator.addTree(LOTRTreeType.APPLE, 5);
+		decorator.addTree(LOTRTreeType.PEAR, 5);
+		decorator.addTree(LOTRTreeType.CHERRY, 2);
+		
 		registerForestFlowers();
 		addFlower(LOTRMod.bluebell, 0, 5);
 		
@@ -123,31 +134,6 @@ public class LOTRBiomeGenShire extends LOTRBiome
             doubleFlowerGen.generate(world, random, i1, j1, k1);
         }
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(100) == 0)
-		{
-			return LOTRWorldGenHugeTrees.newOak();
-		}
-		if (random.nextInt(80) == 0)
-		{
-			if (random.nextInt(4) == 0)
-			{
-				return LOTRWorldGenSimpleTrees.newCherry(false);
-			}
-			else
-			{
-				return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-			}
-		}
-		if (random.nextInt(4) == 0)
-		{
-			return random.nextInt(3) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-        return random.nextInt(3) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

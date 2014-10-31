@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.*;
@@ -23,22 +24,14 @@ public class LOTRBiomeGenShireMarshes extends LOTRBiomeGenShire
 		decorator.waterlilyPerChunk = 2;
 		decorator.reedsPerChunk = 10;
 		
+		decorator.addTree(LOTRTreeType.OAK_SWAMP, 2000);
+		
 		registerSwampFlowers();
 		
 		biomeColors.resetGrass();
 		
 		setBanditChance(LOTRBanditSpawner.RARE);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) > 0)
-		{
-			return new WorldGenSwamp();
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

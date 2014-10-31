@@ -6,8 +6,7 @@ import java.util.*;
 import lotr.common.LOTRAchievement;
 import lotr.common.LOTRWaypoint;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenUnderwaterElvenRuin;
 import lotr.common.world.structure2.LOTRWorldGenNumenorRuin;
 import net.minecraft.util.MathHelper;
@@ -32,6 +31,15 @@ public class LOTRBiomeGenOcean extends LOTRBiome
 		decorator.doubleFlowersPerChunk = 1;
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.BIRCH, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 10);
+		decorator.addTree(LOTRTreeType.BEECH, 50);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 5);
+		decorator.addTree(LOTRTreeType.APPLE, 3);
+		decorator.addTree(LOTRTreeType.PEAR, 3);
 		
 		decorator.addRandomStructure(new LOTRWorldGenNumenorRuin(false), 500);
 		
@@ -72,31 +80,6 @@ public class LOTRBiomeGenOcean extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-		else if (random.nextInt(20) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(40) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

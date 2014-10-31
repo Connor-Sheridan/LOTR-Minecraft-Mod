@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMegaPineTree;
@@ -19,28 +20,11 @@ public class LOTRBiomeGenDunlandForest extends LOTRBiomeGenDunland
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 2;
 		decorator.mushroomsPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK_HUGE, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 50);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 20);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(6) == 0)
-		{
-			if (random.nextBoolean())
-			{
-				return LOTRWorldGenHugeTrees.newOak();
-			}
-			else
-			{
-				if (random.nextInt(4) == 0)
-				{
-					return new WorldGenMegaPineTree(false, true);
-				}
-				return new WorldGenMegaPineTree(false, false);
-			}
-		}
-        return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

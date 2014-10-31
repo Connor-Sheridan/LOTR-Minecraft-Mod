@@ -14,6 +14,7 @@ import lotr.common.entity.npc.LOTREntityElvenTrader;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.structure.LOTRWorldGenBlueMountainsHouse;
 import lotr.common.world.structure.LOTRWorldGenBlueMountainsStronghold;
 import net.minecraft.init.Blocks;
@@ -52,6 +53,11 @@ public class LOTRBiomeGenBlueMountains extends LOTRBiome
 		decorator.generateWater = false;
 		decorator.generateLava = false;
 		decorator.generateCobwebs = false;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE, 500);
+		decorator.addTree(LOTRTreeType.BIRCH, 250);
 		
 		registerMountainsFlowers();
 		addFlower(LOTRMod.dwarfHerb, 0, 1);
@@ -100,23 +106,6 @@ public class LOTRBiomeGenBlueMountains extends LOTRBiome
 			int j1 = 70 + random.nextInt(80);
 			int k1 = k + random.nextInt(16) + 8;
 			new LOTRWorldGenBlueMountainsHouse(false).generate(world, random, i1, j1, k1);
-		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
 		}
     }
 	

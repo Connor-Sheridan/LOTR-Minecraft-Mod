@@ -10,8 +10,7 @@ import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenGundabadCamp;
 import lotr.common.world.structure.LOTRWorldGenRangerCamp;
 import lotr.common.world.structure.LOTRWorldGenRuinedDunedainTower;
@@ -38,6 +37,18 @@ public class LOTRBiomeGenEriador extends LOTRBiome
 		decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 4;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.BIRCH, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 10);
+		decorator.addTree(LOTRTreeType.SPRUCE, 200);
+		decorator.addTree(LOTRTreeType.BEECH, 20);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 2);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+        decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 10);
+        decorator.addTree(LOTRTreeType.APPLE, 2);
+		decorator.addTree(LOTRTreeType.PEAR, 2);
 		
         registerPlainsFlowers();
 		
@@ -73,35 +84,6 @@ public class LOTRBiomeGenEriador extends LOTRBiome
 	{
 		return LOTRWaypoint.Region.ERIADOR;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(5) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(20) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		else if (random.nextInt(8) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

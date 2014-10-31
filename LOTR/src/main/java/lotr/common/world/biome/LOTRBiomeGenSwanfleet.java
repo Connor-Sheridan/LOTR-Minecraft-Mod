@@ -7,6 +7,7 @@ import lotr.common.LOTRFaction;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -36,6 +37,12 @@ public class LOTRBiomeGenSwanfleet extends LOTRBiomeGenEriador
 		decorator.waterlilyPerChunk = 2;
 		decorator.reedsPerChunk = 10;
 		
+		decorator.clearTrees();
+		decorator.addTree(LOTRTreeType.OAK_TALL, 500);
+		decorator.addTree(LOTRTreeType.OAK_SWAMP, 500);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 300);
+		decorator.addTree(LOTRTreeType.BIRCH, 50);
+		
 		registerSwampFlowers();
 		
 		setBanditChance(LOTRBanditSpawner.RARE);
@@ -48,27 +55,6 @@ public class LOTRBiomeGenSwanfleet extends LOTRBiomeGenEriador
 	{
 		return LOTRAchievement.enterSwanfleet;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) == 0)
-		{
-			return new WorldGenBigTree(false);
-		}
-		else if (random.nextBoolean())
-		{
-			return new WorldGenSwamp();
-		}
-		else if (random.nextInt(8) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else
-		{
-			return new WorldGenTrees(false, 4 + random.nextInt(4), 0, 0, false);
-		}
-    }
 	
 	@Override
     public void decorate(World world, Random random, int i, int k)

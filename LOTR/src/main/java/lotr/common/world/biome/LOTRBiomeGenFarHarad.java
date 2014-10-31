@@ -43,6 +43,11 @@ public class LOTRBiomeGenFarHarad extends LOTRBiome
 		decorator.flowersPerChunk = 3;
 		decorator.doubleFlowersPerChunk = 1;
 		
+		decorator.addTree(LOTRTreeType.ACACIA, 1000);
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 300);
+		decorator.addTree(LOTRTreeType.BAOBAB, 20);
+		decorator.addTree(LOTRTreeType.MANGO, 1);
+		
 		registerHaradFlowers();
 		
 		setBanditChance(LOTRBanditSpawner.NEVER);
@@ -75,24 +80,6 @@ public class LOTRBiomeGenFarHarad extends LOTRBiome
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
 		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(1000) == 0)
-		{
-			return LOTRWorldGenSimpleTrees.newMango(false);
-		}
-		if (random.nextInt(50) == 0)
-		{
-			return new LOTRWorldGenBaobab(false);
-		}
-		if (random.nextInt(3) > 0)
-		{
-			return new WorldGenSavannaTree(false);
-		}
-		return new LOTRWorldGenDesertTrees();
     }
 	
 	@Override

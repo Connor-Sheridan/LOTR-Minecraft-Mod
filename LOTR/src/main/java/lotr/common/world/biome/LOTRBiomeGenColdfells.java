@@ -12,10 +12,7 @@ import lotr.common.entity.npc.LOTREntityTroll;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenLarch;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenRuinedDunedainTower;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
 import net.minecraft.entity.passive.EntityWolf;
@@ -48,6 +45,14 @@ public class LOTRBiomeGenColdfells extends LOTRBiome
 		decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 2;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 300);
+		decorator.addTree(LOTRTreeType.OAK, 300);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 30);
+		decorator.addTree(LOTRTreeType.LARCH, 300);
+		decorator.addTree(LOTRTreeType.MAPLE, 100);
+		decorator.addTree(LOTRTreeType.MAPLE_LARGE, 10);
 		
 		registerForestFlowers();
 		
@@ -93,24 +98,6 @@ public class LOTRBiomeGenColdfells extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return random.nextInt(8) == 0 ? LOTRWorldGenBigTrees.newMaple(false) : LOTRWorldGenSimpleTrees.newMaple(false);
-		}
-		else if (random.nextInt(4) == 0)
-		{
-			return new LOTRWorldGenLarch(false);
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return super.func_150567_a(random);
-		}
-		return random.nextInt(4) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

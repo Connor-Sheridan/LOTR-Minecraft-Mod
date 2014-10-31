@@ -14,9 +14,7 @@ import lotr.common.entity.npc.LOTREntityTroll;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -53,6 +51,15 @@ public class LOTRBiomeGenTrollshaws extends LOTRBiome
         decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 2;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 500);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 500);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 200);
+		decorator.addTree(LOTRTreeType.BEECH, 500);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE, 200);
+		decorator.addTree(LOTRTreeType.MAPLE, 50);
+		decorator.addTree(LOTRTreeType.MAPLE_LARGE, 20);
 		
 		registerForestFlowers();
 		
@@ -104,25 +111,4 @@ public class LOTRBiomeGenTrollshaws extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(30) == 0)
-		{
-			return random.nextInt(8) == 0 ? LOTRWorldGenBigTrees.newMaple(false) : LOTRWorldGenSimpleTrees.newMaple(false);
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextBoolean())
-		{
-			return random.nextInt(8) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		else
-		{
-			return random.nextInt(8) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false, 4 + random.nextInt(3), 0, 0, false);
-		}
-    }
 }

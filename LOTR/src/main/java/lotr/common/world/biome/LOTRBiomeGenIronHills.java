@@ -15,6 +15,7 @@ import lotr.common.entity.npc.LOTREntityDwarfWarrior;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.structure.LOTRWorldGenDwarfHouse;
 import lotr.common.world.structure.LOTRWorldGenDwarvenTower;
 import net.minecraft.init.Blocks;
@@ -51,6 +52,10 @@ public class LOTRBiomeGenIronHills extends LOTRBiome
 		decorator.generateWater = false;
 		decorator.generateLava = false;
 		decorator.generateCobwebs = false;
+		
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 50);
 		
 		registerMountainsFlowers();
 		addFlower(LOTRMod.dwarfHerb, 0, 1);
@@ -104,20 +109,6 @@ public class LOTRBiomeGenIronHills extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(5) == 0)
-		{
-			if (random.nextInt(8) == 0)
-			{
-				return new WorldGenMegaPineTree(false, true);
-			}
-			return new WorldGenMegaPineTree(false, false);
-		}
-        return new WorldGenTaiga2(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

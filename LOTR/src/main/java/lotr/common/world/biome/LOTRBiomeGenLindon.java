@@ -14,9 +14,7 @@ import lotr.common.entity.npc.LOTREntityHighElfWarrior;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenHugeTrees;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenHighElvenHall;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -45,6 +43,19 @@ public class LOTRBiomeGenLindon extends LOTRBiome
 		decorator.flowersPerChunk = 3;
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK, 100);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 25);
+		decorator.addTree(LOTRTreeType.BIRCH, 500);
+		decorator.addTree(LOTRTreeType.BIRCH_TALL, 500);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 200);
+		decorator.addTree(LOTRTreeType.BIRCH_HUGE, 50);
+		decorator.addTree(LOTRTreeType.BEECH, 100);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 25);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 40);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 10);
+		decorator.addTree(LOTRTreeType.APPLE, 2);
+		decorator.addTree(LOTRTreeType.PEAR, 2);
 		
         registerPlainsFlowers();
 		
@@ -77,35 +88,6 @@ public class LOTRBiomeGenLindon extends LOTRBiome
 		
 		super.decorate(world, random, i, k);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-		else if (random.nextInt(4) > 0)
-		{
-			if (random.nextInt(10) == 0)
-			{
-				return LOTRWorldGenHugeTrees.newBirch();
-			}
-			return new WorldGenForest(false, random.nextBoolean());
-		}
-		else if (random.nextInt(8) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		else if (random.nextInt(20) == 0)
-		{
-			return random.nextInt(5) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

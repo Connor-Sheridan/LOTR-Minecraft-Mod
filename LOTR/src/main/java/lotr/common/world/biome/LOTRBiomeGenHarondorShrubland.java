@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenShrub;
@@ -13,6 +14,8 @@ public class LOTRBiomeGenHarondorShrubland extends LOTRBiomeGenHarondor
 		super(i);
 
 		decorator.treesPerChunk = 8;
+		
+		decorator.addTree(LOTRTreeType.OAK_SHRUB, 10000);
 	}
 	
 	@Override
@@ -22,14 +25,4 @@ public class LOTRBiomeGenHarondorShrubland extends LOTRBiomeGenHarondor
 		
 		super.decorate(world, random, i, k);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return super.func_150567_a(random);
-		}
-		return new WorldGenShrub(0, 0);
-    }
 }

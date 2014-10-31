@@ -9,8 +9,7 @@ import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenCharredTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -40,6 +39,8 @@ public class LOTRBiomeGenDagorlad extends LOTRBiome
 		decorator.treesPerChunk = 0;
 		decorator.flowersPerChunk = 0;
 		decorator.grassPerChunk = 0;
+		
+		decorator.addTree(LOTRTreeType.CHARRED, 1000);
 		
 		biomeColors.setSky(0x54493D);
 		biomeColors.setClouds(0x333333);
@@ -85,12 +86,6 @@ public class LOTRBiomeGenDagorlad extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return new LOTRWorldGenCharredTrees();
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

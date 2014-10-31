@@ -7,8 +7,7 @@ import lotr.common.entity.animal.*;
 import lotr.common.entity.npc.*;
 import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenHolly;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenRuinedElvenTurret;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
 import net.minecraft.entity.passive.EntityWolf;
@@ -38,6 +37,13 @@ public class LOTRBiomeGenEregion extends LOTRBiome
 		decorator.doubleFlowersPerChunk = 1;
         decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 3;
+		
+		decorator.addTree(LOTRTreeType.OAK, 200);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 50);
+		decorator.addTree(LOTRTreeType.HOLLY, 1500);
+		decorator.addTree(LOTRTreeType.HOLLY_LARGE, 100);
 		
 		registerForestFlowers();
 		
@@ -82,20 +88,6 @@ public class LOTRBiomeGenEregion extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) != 0)
-		{
-			if (random.nextInt(20) == 0)
-			{
-				return new LOTRWorldGenHolly(false).setLarge();
-			}
-			return new LOTRWorldGenHolly(false);
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lotr.common.entity.animal.LOTREntityBird;
 import lotr.common.entity.animal.LOTREntityRabbit;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
@@ -27,17 +28,9 @@ public class LOTRBiomeGenWilderlandForest extends LOTRBiomeGenWilderland
 		decorator.grassPerChunk = 12;
 		decorator.doubleGrassPerChunk = 5;
 		
+        decorator.addTree(LOTRTreeType.SPRUCE, 3000);
+		
 		registerForestFlowers();
-	}
-	
-	@Override
-	public WorldGenAbstractTree func_150567_a(Random random)
-	{
-		if (random.nextInt(4) == 0)
-		{
-			return super.func_150567_a(random);
-		}
-		return new WorldGenTaiga2(false);
 	}
 	
 	@Override

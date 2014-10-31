@@ -15,8 +15,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class LOTRBiomeGenRohan extends LOTRBiome
 {
@@ -80,6 +80,11 @@ public class LOTRBiomeGenRohan extends LOTRBiome
         decorator.grassPerChunk = 15;
 		decorator.doubleGrassPerChunk = 5;
 		
+		decorator.addTree(LOTRTreeType.OAK, 400);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 800);
+		decorator.addTree(LOTRTreeType.APPLE, 2);
+		decorator.addTree(LOTRTreeType.PEAR, 2);
+		
         registerPlainsFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenRohanBarrow(false), 500);
@@ -119,7 +124,7 @@ public class LOTRBiomeGenRohan extends LOTRBiome
 		{
 			if (random.nextInt(30) == 0)
 			{
-				WorldGenerator treeGen = random.nextInt(3) == 0 ? LOTRWorldGenDeadTrees.newOak() : new LOTRWorldGenCharredTrees();
+				WorldGenerator treeGen = random.nextInt(3) == 0 ? LOTRTreeType.OAK_DEAD.create(false) : LOTRTreeType.CHARRED.create(false);
 				int trees = 3 + random.nextInt(5);
 				for (int l = 0; l < trees; l++)
 				{
@@ -171,16 +176,6 @@ public class LOTRBiomeGenRohan extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-        return random.nextInt(3) > 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

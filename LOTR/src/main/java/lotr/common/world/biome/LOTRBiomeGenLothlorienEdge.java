@@ -1,14 +1,9 @@
 package lotr.common.world.biome;
 
-import java.util.Random;
-
 import lotr.common.LOTRFaction;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigTree;
-import net.minecraft.world.gen.feature.WorldGenTrees;
+import lotr.common.world.feature.LOTRTreeType;
 
 public class LOTRBiomeGenLothlorienEdge extends LOTRBiomeGenLothlorien
 {
@@ -21,22 +16,16 @@ public class LOTRBiomeGenLothlorienEdge extends LOTRBiomeGenLothlorien
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 1;
 		
+		decorator.clearTrees();
+		decorator.addTree(LOTRTreeType.OAK, 300);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 50);
+		decorator.addTree(LOTRTreeType.LARCH, 200);
+		decorator.addTree(LOTRTreeType.BEECH, 100);
+		decorator.addTree(LOTRTreeType.MALLORN, 100);
+		
 		invasionSpawns.add(new BiomeInvasionListEntry(LOTRFaction.GUNDABAD, LOTRInvasionSpawner.RARE));
 		invasionSpawns.add(new BiomeInvasionListEntry(LOTRFaction.DOL_GULDUR, LOTRInvasionSpawner.RARE));
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(8) != 0)
-		{
-			return random.nextInt(6) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
-		}
-		else
-		{
-			return LOTRWorldGenSimpleTrees.newMallorn(false);
-		}
-    }
 	
 	@Override
 	public int spawnCountMultiplier()

@@ -2,10 +2,7 @@ package lotr.common.block;
 
 import java.util.Random;
 
-import lotr.common.world.feature.LOTRWorldGenBanana;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenHolly;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -37,11 +34,11 @@ public class LOTRBlockSapling2 extends LOTRBlockSaplingBase
                     {
 						if (metadata == 0)
 						{
-							treeGen = LOTRWorldGenSimpleTrees.newLebethronLarge(true);
+							treeGen = LOTRTreeType.LEBETHRON_LARGE.create(true);
 						}
 						else if (metadata == 2)
 						{
-							treeGen = new LOTRWorldGenHolly(true).setLarge();
+							treeGen = LOTRTreeType.HOLLY_LARGE.create(true);
 						}
                         extraTrunkWidth = 1;
 						xOffset = i1;
@@ -62,11 +59,11 @@ public class LOTRBlockSapling2 extends LOTRBlockSaplingBase
 				zOffset = 0;
 				if (metadata == 0)
 				{
-					treeGen = LOTRWorldGenSimpleTrees.newLebethron(true);
+					treeGen = LOTRTreeType.LEBETHRON.create(true);
 				}
 				else if (metadata == 2)
 				{
-					treeGen = new LOTRWorldGenHolly(true);
+					treeGen = LOTRTreeType.HOLLY.create(true);
 				}
             }
 		}
@@ -74,16 +71,16 @@ public class LOTRBlockSapling2 extends LOTRBlockSaplingBase
 		{
 			if (random.nextInt(10) == 0)
 			{
-				treeGen = LOTRWorldGenBigTrees.newBeech(true);
+				treeGen = LOTRTreeType.BEECH_LARGE.create(true);
 			}
 			else
 			{
-				treeGen = LOTRWorldGenSimpleTrees.newBeech(true);
+				treeGen = LOTRTreeType.BEECH.create(true);
 			}
 		}
 		else if (metadata == 3)
 		{
-			treeGen = new LOTRWorldGenBanana(true);
+			treeGen = LOTRTreeType.BANANA.create(true);
 		}
 		
 		for (int i1 = 0; i1 <= extraTrunkWidth; i1++)

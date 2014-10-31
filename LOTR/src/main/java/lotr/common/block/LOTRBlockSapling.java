@@ -28,7 +28,7 @@ public class LOTRBlockSapling extends LOTRBlockSaplingBase
 		
 		if (metadata == 0)
 		{
-			treeGen = new LOTRWorldGenShirePine(true);
+			treeGen = LOTRTreeType.SHIRE_PINE.create(true);
 		}
 		
 		if (metadata == 1)
@@ -58,7 +58,7 @@ public class LOTRBlockSapling extends LOTRBlockSaplingBase
 	                	
 	                    if (canGenerate)
 	                    {
-	                    	treeGen = new LOTRWorldGenMallornLarge(true).setSaplingGrowth();
+	                    	treeGen = LOTRTreeType.MALLORN_HUGE_SAPLING.create(true);
 	                    	trunkWidth = 2;
 							xOffset = i1;
 							zOffset = k1;
@@ -72,18 +72,18 @@ public class LOTRBlockSapling extends LOTRBlockSaplingBase
             {
 				xOffset = 0;
 				zOffset = 0;
-				treeGen = LOTRWorldGenSimpleTrees.newMallorn(true);
+				treeGen = LOTRTreeType.MALLORN.create(true);
             }
 		}
 		
 		if (metadata == 2)
 		{
-			treeGen = new LOTRWorldGenMirkOak(true, 6, 3, 0, 2);
+			treeGen = LOTRTreeType.MIRK_OAK.create(true);
 		}
 		
 		if (metadata == 3)
 		{
-			treeGen = new LOTRWorldGenMirkOak(true, 6, 4, 0, 2).setRed();
+			treeGen = LOTRTreeType.RED_MIRK_OAK.create(true);
 		}
 		
 		for (int i1 = -trunkWidth; i1 <= trunkWidth; i1++)

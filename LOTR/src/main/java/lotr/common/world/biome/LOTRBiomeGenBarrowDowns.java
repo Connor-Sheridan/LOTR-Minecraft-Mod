@@ -6,6 +6,7 @@ import lotr.common.LOTRAchievement;
 import lotr.common.LOTRWaypoint;
 import lotr.common.entity.animal.LOTREntityHorse;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import lotr.common.world.structure.LOTRWorldGenRuinedDunedainTower;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
@@ -32,6 +33,12 @@ public class LOTRBiomeGenBarrowDowns extends LOTRBiome
 		decorator.grassPerChunk = 6;
 		decorator.doubleGrassPerChunk = 6;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 200);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1500);
+		decorator.addTree(LOTRTreeType.SPRUCE, 500);
+		decorator.addTree(LOTRTreeType.BIRCH, 150);
 		
         registerPlainsFlowers();
         
@@ -64,27 +71,6 @@ public class LOTRBiomeGenBarrowDowns extends LOTRBiome
 	}
 	
 	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(20) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextInt(5) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(3) > 0)
-		{
-			return LOTRWorldGenDeadTrees.newOak();
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
-	
-	@Override
 	public float getChanceToSpawnAnimals()
 	{
 		return 0.1F;
@@ -93,7 +79,7 @@ public class LOTRBiomeGenBarrowDowns extends LOTRBiome
 	@Override
 	public float getTreeIncreaseChance()
 	{
-		return 0.25F;
+		return 0.4F;
 	}
 	
 	@Override

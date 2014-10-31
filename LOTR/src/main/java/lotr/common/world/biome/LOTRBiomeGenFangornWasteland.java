@@ -34,6 +34,14 @@ public class LOTRBiomeGenFangornWasteland extends LOTRBiome
 		decorator.doubleGrassPerChunk = 3;
 		decorator.enableFern = true;
 		
+		decorator.addTree(LOTRTreeType.CHARRED, 500);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 300);
+		decorator.addTree(LOTRTreeType.BEECH_DEAD, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_DEAD, 20);
+		decorator.addTree(LOTRTreeType.CHARRED, 50);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 30);
+		decorator.addTree(LOTRTreeType.BEECH_DEAD, 10);
+		
 		setBanditChance(LOTRBanditSpawner.UNCOMMON);
 		
 		invasionSpawns.add(new BiomeInvasionListEntry(LOTRFaction.URUK_HAI, LOTRInvasionSpawner.UNCOMMON));
@@ -52,38 +60,6 @@ public class LOTRBiomeGenFangornWasteland extends LOTRBiome
 			new LOTRWorldGenBlastedLand().generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			if (random.nextInt(3) == 0)
-			{
-				return LOTRWorldGenFangornTrees.newCharred(false);
-			}
-			else
-			{
-				return random.nextInt(6) == 0 ? LOTRWorldGenFangornTrees.newBeech(false).setNoLeaves() : LOTRWorldGenFangornTrees.newOak(false).setNoLeaves();
-			}
-		}
-		else if (random.nextInt(3) == 0)
-		{
-			return new LOTRWorldGenCharredTrees();
-		}
-		else 
-		{
-			if (random.nextInt(20) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newBirch();
-			}
-			else if (random.nextInt(5) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newBeech();
-			}
-			return LOTRWorldGenDeadTrees.newOak();
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

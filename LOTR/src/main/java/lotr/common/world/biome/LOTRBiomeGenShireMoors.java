@@ -4,8 +4,7 @@ import java.util.Random;
 
 import lotr.common.LOTRMod;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenHobbitWindmill;
 import lotr.common.world.structure2.LOTRWorldGenHobbitFarm;
 import net.minecraft.init.Blocks;
@@ -26,6 +25,9 @@ public class LOTRBiomeGenShireMoors extends LOTRBiomeGenShire
 		decorator.doubleFlowersPerChunk = 0;
 		decorator.grassPerChunk = 16;
 		decorator.doubleGrassPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 8000);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 2000);
 		
 		addFlower(LOTRMod.shireHeather, 0, 100);
 		
@@ -62,16 +64,6 @@ public class LOTRBiomeGenShireMoors extends LOTRBiomeGenShire
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(5) > 0)
-		{
-			return random.nextInt(3) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : new WorldGenBigTree(false);
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

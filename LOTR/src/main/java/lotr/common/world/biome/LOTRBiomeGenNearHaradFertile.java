@@ -39,6 +39,10 @@ public class LOTRBiomeGenNearHaradFertile extends LOTRBiome
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 2;
 		
+		decorator.addTree(LOTRTreeType.CEDAR, 1000);
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 500);
+		decorator.addTree(LOTRTreeType.DATE_PALM, 50);
+		
 		registerHaradFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenHaradObelisk(false), 3000);
@@ -72,24 +76,6 @@ public class LOTRBiomeGenNearHaradFertile extends LOTRBiome
 		}
 		
 		super.decorate(world, random, i, k);
-    }
-	
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(30) == 0)
-		{
-			return new LOTRWorldGenDatePalm(false);
-		}
-		else
-		{
-			if (random.nextInt(3) > 0)
-			{
-				return new LOTRWorldGenCedar(false);
-			}
-			return new LOTRWorldGenDesertTrees();
-		}
     }
 	
 	@Override

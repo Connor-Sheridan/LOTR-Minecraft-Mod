@@ -10,9 +10,7 @@ import lotr.common.entity.npc.*;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBigTrees;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenGundabadCamp;
 import lotr.common.world.structure.LOTRWorldGenRangerCamp;
 import lotr.common.world.structure.LOTRWorldGenRuinedDunedainTower;
@@ -48,6 +46,12 @@ public class LOTRBiomeGenLoneLands extends LOTRBiome
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 6;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 300);
+		decorator.addTree(LOTRTreeType.SPRUCE, 300);
+		decorator.addTree(LOTRTreeType.BEECH, 100);
+		decorator.addTree(LOTRTreeType.BEECH_LARGE, 50);
 		
         registerPlainsFlowers();
         
@@ -101,27 +105,6 @@ public class LOTRBiomeGenLoneLands extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(30) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newBeech(false) : LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		else if (random.nextInt(20) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

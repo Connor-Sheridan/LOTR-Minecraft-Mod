@@ -1,16 +1,11 @@
 package lotr.common.world.biome;
 
-import java.util.Random;
-
 import lotr.common.LOTRWaypoint;
 import lotr.common.entity.npc.LOTREntityGundabadWarg;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.structure2.LOTRWorldGenRuinedHouse;
 import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTaiga1;
-import net.minecraft.world.gen.feature.WorldGenTaiga2;
 
 public class LOTRBiomeGenTundra extends LOTRBiome
 {
@@ -35,6 +30,10 @@ public class LOTRBiomeGenTundra extends LOTRBiome
 		decorator.doubleGrassPerChunk = 1;
 		decorator.generateOrcDungeon = true;
 		
+		decorator.addTree(LOTRTreeType.SPRUCE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 100);
+		
 		registerTaigaFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenRuinedHouse(false), 1500);
@@ -47,16 +46,6 @@ public class LOTRBiomeGenTundra extends LOTRBiome
 	{
 		return LOTRWaypoint.Region.FORODWAITH;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) == 0)
-		{
-			return LOTRWorldGenDeadTrees.newSpruce();
-		}
-        return random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

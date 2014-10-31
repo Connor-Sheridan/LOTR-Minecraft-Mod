@@ -14,6 +14,7 @@ import lotr.common.entity.npc.LOTREntityTroll;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
 import lotr.common.world.structure.LOTRWorldGenRuinedDunedainTower;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
@@ -49,6 +50,11 @@ public class LOTRBiomeGenEttenmoors extends LOTRBiome
 		decorator.grassPerChunk = 4;
 		decorator.doubleGrassPerChunk = 2;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 500);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 100);
 		
 		registerTaigaFlowers();
 		
@@ -112,16 +118,6 @@ public class LOTRBiomeGenEttenmoors extends LOTRBiome
 			boulderGenSmall.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			return new WorldGenMegaPineTree(false, false);
-		}
-		return random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
-    }
 
 	@Override
 	public float getTreeIncreaseChance()

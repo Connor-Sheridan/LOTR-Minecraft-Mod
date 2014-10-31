@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.LOTRMod;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -20,6 +21,10 @@ public class LOTRBiomeGenFarHaradBushland extends LOTRBiomeGenFarHarad
 		decorator.logsPerChunk = 1;
 		decorator.grassPerChunk = 16;
 		decorator.doubleGrassPerChunk = 10;
+		
+		decorator.addTree(LOTRTreeType.BIRCH, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_TALL, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 25);
 		
 		biomeColors.setGrass(0xCCB257);
 	}
@@ -58,16 +63,6 @@ public class LOTRBiomeGenFarHaradBushland extends LOTRBiomeGenFarHarad
 				}
 			}
 		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenForest(false, random.nextBoolean());
-		}
-		return super.func_150567_a(random);
     }
 	
 	@Override

@@ -25,24 +25,24 @@ public class LOTRBlockSapling3 extends LOTRBlockSaplingBase
 		{
 			if (random.nextInt(10) == 0)
 			{
-				treeGen = LOTRWorldGenBigTrees.newMaple(true);
+				treeGen = LOTRTreeType.MAPLE_LARGE.create(true);
 			}
 			else
 			{
-				treeGen = LOTRWorldGenSimpleTrees.newMaple(true);
+				treeGen = LOTRTreeType.MAPLE.create(true);
 			}
 		}
 		else if (meta == 1)
 		{
-			treeGen = new LOTRWorldGenLarch(true);
+			treeGen = LOTRTreeType.LARCH.create(true);
 		}
 		else if (meta == 2)
 		{
-			treeGen = new LOTRWorldGenDatePalm(true);
+			treeGen = LOTRTreeType.DATE_PALM.create(true);
 		}
 		else if (meta == 3)
 		{
-			treeGen = new LOTRWorldGenMangrove(true);
+			treeGen = LOTRTreeType.MANGROVE.create(true);
 		}
 		
 		world.setBlock(i, j, k, Blocks.air, 0, 4);

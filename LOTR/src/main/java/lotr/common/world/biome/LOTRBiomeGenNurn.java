@@ -4,9 +4,7 @@ import java.util.Random;
 
 import lotr.common.*;
 import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
-import lotr.common.world.feature.LOTRWorldGenCharredTrees;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenDesertTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenNurnWheatFarm;
 import lotr.common.world.structure.LOTRWorldGenOrcSlaverTower;
 import net.minecraft.init.Blocks;
@@ -33,6 +31,10 @@ public class LOTRBiomeGenNurn extends LOTRBiomeGenMordor
 		decorator.addRandomStructure(new LOTRWorldGenNurnWheatFarm(false), 40);
 		decorator.addRandomStructure(new LOTRWorldGenOrcSlaverTower(false), 200);
 		
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 1000);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 500);
+		decorator.addTree(LOTRTreeType.CHARRED, 500);
+		
 		biomeColors.setSky(0x564637);
 		biomeColors.resetClouds();
 		biomeColors.resetFog();
@@ -55,19 +57,6 @@ public class LOTRBiomeGenNurn extends LOTRBiomeGenMordor
 	{
 		return false;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextBoolean())
-		{
-			return new LOTRWorldGenDesertTrees();
-		}
-		else
-		{
-			return random.nextBoolean() ? new LOTRWorldGenCharredTrees() : LOTRWorldGenDeadTrees.newOak();
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

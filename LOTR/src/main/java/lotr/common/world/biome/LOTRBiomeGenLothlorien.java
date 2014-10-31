@@ -41,6 +41,14 @@ public class LOTRBiomeGenLothlorien extends LOTRBiome
 		decorator.generateLava = false;
 		decorator.generateCobwebs = false;
 		
+		decorator.addTree(LOTRTreeType.OAK, 200);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 100);
+		decorator.addTree(LOTRTreeType.OAK_TALLER, 50);
+		decorator.addTree(LOTRTreeType.LARCH, 200);
+		decorator.addTree(LOTRTreeType.BEECH, 100);
+		decorator.addTree(LOTRTreeType.MALLORN, 1000);
+		decorator.addTree(LOTRTreeType.MALLORN_HUGE, 30);
+		
 		flowers.clear();
 		addFlower(LOTRMod.elanor, 0, 20);
 		addFlower(LOTRMod.niphredil, 0, 10);
@@ -113,24 +121,6 @@ public class LOTRBiomeGenLothlorien extends LOTRBiome
 				}
 			}
 		}
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) == 0)
-		{
-			return new WorldGenTrees(false);
-		}
-		if (random.nextInt(5) == 0)
-		{
-			return new LOTRWorldGenLarch(false);
-		}
-		if (random.nextInt(8) == 0)
-		{
-			return LOTRWorldGenSimpleTrees.newBeech(false);
-		}
-		return random.nextInt(35) == 0 ? new LOTRWorldGenMallornLarge(false) : LOTRWorldGenSimpleTrees.newMallorn(false);
     }
 	
 	@Override

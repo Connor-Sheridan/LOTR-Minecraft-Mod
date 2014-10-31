@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenHolly;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -17,17 +18,9 @@ public class LOTRBiomeGenEregionForest extends LOTRBiomeGenEregion
 		decorator.doubleFlowersPerChunk = 2;
         decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 3;
+		
+		decorator.addTree(LOTRTreeType.HOLLY_LARGE, 400);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(6) == 0)
-		{
-			return new LOTRWorldGenHolly(false).setLarge();
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

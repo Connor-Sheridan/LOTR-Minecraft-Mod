@@ -41,6 +41,9 @@ public class LOTRBiomeGenHarondor extends LOTRBiome
 		decorator.cactiPerChunk = 1;
 		decorator.deadBushPerChunk = 1;
 		
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 1000);
+		decorator.addTree(LOTRTreeType.CEDAR, 250);
+		
 		decorator.addRandomStructure(new LOTRWorldGenHaradObelisk(false), 1000);
 		decorator.addRandomStructure(new LOTRWorldGenNearHaradDesertCamp(false), 1200);
 		
@@ -91,17 +94,7 @@ public class LOTRBiomeGenHarondor extends LOTRBiome
 			}
 		}
     }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(5) == 0)
-		{
-			return new LOTRWorldGenCedar(false);
-		}
-		return new LOTRWorldGenDesertTrees();
-    }
-	
+
 	@Override
 	public GrassBlockAndMeta getRandomGrass(Random random)
 	{

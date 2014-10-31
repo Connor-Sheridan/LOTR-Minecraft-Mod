@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenHugeTrees;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -21,29 +22,9 @@ public class LOTRBiomeGenWilderlandForestDense extends LOTRBiomeGenWilderlandFor
 		hasPodzol = true;
 		decorator.treesPerChunk = 12;
 		decorator.logsPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 400);
+		decorator.addTree(LOTRTreeType.OAK_HUGE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 300);
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(8) == 0)
-		{
-			return LOTRWorldGenHugeTrees.newOak();
-		}
-		else if (random.nextInt(3) > 0)
-		{
-			if (random.nextInt(5) == 0)
-			{
-				return new WorldGenBigTree(false);
-			}
-			else
-			{
-				return new WorldGenMegaPineTree(false, true);
-			}
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
-    }
 }

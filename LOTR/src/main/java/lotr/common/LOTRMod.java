@@ -2518,25 +2518,30 @@ public class LOTRMod
 	public static boolean isNewYearsDay()
 	{
 		Calendar calendar = Calendar.getInstance();
-		return calendar.get(2) + 1 == 1 && calendar.get(5) == 1;
+		return calendar.get(Calendar.MONTH) == Calendar.JANUARY && calendar.get(Calendar.DATE) == 1;
 	}
 	
 	public static boolean isAprilFools()
 	{
 		Calendar calendar = Calendar.getInstance();
-		return calendar.get(2) + 1 == 4 && calendar.get(5) == 1;
+		return calendar.get(Calendar.MONTH) == Calendar.APRIL && calendar.get(Calendar.DATE) == 1;
 	}
 	
 	public static boolean isHalloween()
 	{
 		Calendar calendar = Calendar.getInstance();
-		return calendar.get(2) + 1 == 10 && calendar.get(5) == 31;
+		return calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) == 31;
 	}
 	
 	public static boolean isChristmas()
 	{
 		Calendar calendar = Calendar.getInstance();
-		return calendar.get(2) + 1 == 12 && (calendar.get(5) == 24 || calendar.get(5) == 25 || calendar.get(5) == 26);
+		if (calendar.get(Calendar.MONTH) == Calendar.DECEMBER)
+		{
+			int date = calendar.get(Calendar.DATE);
+			return date == 24 || date == 25 || date == 26;
+		}
+		return false;
 	}
 	
 	public static EntityPlayer playerSourceOfDamage(DamageSource damagesource)

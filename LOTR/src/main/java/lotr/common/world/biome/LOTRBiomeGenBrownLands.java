@@ -6,8 +6,7 @@ import lotr.common.*;
 import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
 import lotr.common.world.biome.LOTRBiome.GrassBlockAndMeta;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenStoneRuin;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -31,6 +30,8 @@ public class LOTRBiomeGenBrownLands extends LOTRBiome
 		decorator.treesPerChunk = 0;
 		decorator.flowersPerChunk = 0;
 		decorator.grassPerChunk = 2;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1000);
 		
 		biomeColors.setGrass(0xAD875F);
 		biomeColors.setSky(0x877962);
@@ -70,12 +71,6 @@ public class LOTRBiomeGenBrownLands extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return LOTRWorldGenDeadTrees.newOak();
-    }
 	
 	@Override
 	public GrassBlockAndMeta getRandomGrass(Random random)

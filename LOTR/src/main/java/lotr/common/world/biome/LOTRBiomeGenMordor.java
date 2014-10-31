@@ -55,6 +55,8 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 		decorator.grassPerChunk = 1;
 		decorator.generateWater = false;
 		
+		decorator.addTree(LOTRTreeType.CHARRED, 1000);
+		
 		decorator.addRandomStructure(new LOTRWorldGenMordorCamp(), 60);
 		decorator.addRandomStructure(new LOTRWorldGenMordorWargPit(false), 300);
 		decorator.addRandomStructure(new LOTRWorldGenMordorTower(false), 400);
@@ -160,14 +162,8 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 			int i1 = i + 8;
 			int k1 = k + 8;
 			int j1 = world.getHeightValue(i1, k1);
-			LOTRWorldGenHugeTrees.newCherry().disableRestrictions().generate(world, random, i1, j1, k1);
+			LOTRTreeType.CHERRY_MORDOR.create(false).generate(world, random, i1, j1, k1);
 		}
-    }
-
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return new LOTRWorldGenCharredTrees();
     }
 	
 	@Override

@@ -9,9 +9,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import lotr.common.LOTRAchievement;
 import lotr.common.LOTRWaypoint;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenSimpleTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenGondorFortress;
 import lotr.common.world.structure.LOTRWorldGenGondorObelisk;
 import lotr.common.world.structure.LOTRWorldGenGondorRuin;
@@ -37,6 +35,8 @@ public class LOTRBiomeGenTolfalas extends LOTRBiome
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 6;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 2000);
 		
 		decorator.addRandomStructure(new LOTRWorldGenGondorRuins(), 1000);
 		decorator.addRandomStructure(new LOTRWorldGenRuinedGondorTower(false), 1500);
@@ -72,16 +72,6 @@ public class LOTRBiomeGenTolfalas extends LOTRBiome
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
 		}
-	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) > 0)
-		{
-			return LOTRWorldGenDeadTrees.newOak();
-		}
-        return super.func_150567_a(random);
     }
 	
 	@Override

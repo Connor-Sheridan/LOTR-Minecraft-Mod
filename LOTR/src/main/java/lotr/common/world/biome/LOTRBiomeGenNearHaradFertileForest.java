@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenCedar;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -13,25 +14,11 @@ public class LOTRBiomeGenNearHaradFertileForest extends LOTRBiomeGenNearHaradFer
 		
 		decorator.treesPerChunk = 6;
 		
+		decorator.addTree(LOTRTreeType.CEDAR, 6000);
+		decorator.addTree(LOTRTreeType.CEDAR_LARGE, 1500);
+		
 		decorator.clearRandomStructures();
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(5) > 0)
-		{
-			if (random.nextInt(6) == 0)
-			{
-				return new LOTRWorldGenCedar(false).setMinMaxHeight(15, 30);
-			}
-			else
-			{
-				return new LOTRWorldGenCedar(false);
-			}
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

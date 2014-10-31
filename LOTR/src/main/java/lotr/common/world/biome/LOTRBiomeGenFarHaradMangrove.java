@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.LOTRMod;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenMangrove;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -22,11 +23,15 @@ public class LOTRBiomeGenFarHaradMangrove extends LOTRBiomeGenFarHarad
 		spawnableLOTRAmbientList.clear();
 
 		decorator.quagmirePerChunk = 1;
-		decorator.treesPerChunk = 4;
+		decorator.treesPerChunk = 5;
 		decorator.vinesPerChunk = 20;
 		decorator.grassPerChunk = 8;
 		decorator.enableFern = true;
 		decorator.waterlilyPerChunk = 3;
+		
+		decorator.addTree(LOTRTreeType.MANGROVE, 1000);
+		decorator.addTree(LOTRTreeType.ACACIA, 200);
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 100);
 		
 		registerSwampFlowers();
 		
@@ -75,13 +80,7 @@ public class LOTRBiomeGenFarHaradMangrove extends LOTRBiomeGenFarHarad
             }
         }
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return new LOTRWorldGenMangrove(false);
-    }
-	
+
 	@Override
 	public float getChanceToSpawnAnimals()
 	{

@@ -3,11 +3,10 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.LOTRAchievement;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class LOTRBiomeGenMinhiriath extends LOTRBiomeGenEriador
@@ -20,6 +19,11 @@ public class LOTRBiomeGenMinhiriath extends LOTRBiomeGenEriador
 
 		decorator.grassPerChunk = 5;
 		decorator.doubleGrassPerChunk = 3;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 300);
+		decorator.addTree(LOTRTreeType.BEECH_DEAD, 100);
+		decorator.addTree(LOTRTreeType.BIRCH_DEAD, 50);
 	}
 	
 	@Override
@@ -41,31 +45,6 @@ public class LOTRBiomeGenMinhiriath extends LOTRBiomeGenEriador
 				int k1 = k + random.nextInt(16) + 8;
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
-		}
-	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextBoolean())
-		{
-			return super.func_150567_a(random);
-		}
-		else
-		{
-			if (random.nextInt(30) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newBirch();
-			}
-			else if (random.nextInt(8) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newBeech();
-			}
-			else if (random.nextInt(4) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newSpruce();
-			}
-			return LOTRWorldGenDeadTrees.newOak();
 		}
 	}
 	

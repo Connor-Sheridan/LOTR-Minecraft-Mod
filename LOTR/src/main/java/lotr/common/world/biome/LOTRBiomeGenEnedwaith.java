@@ -41,6 +41,12 @@ public class LOTRBiomeGenEnedwaith extends LOTRBiome
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 4;
 		
+		decorator.addTree(LOTRTreeType.OAK, 500);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 300);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 1000);
+		
 		registerPlainsFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenRuinedHouse(false), 1000);
@@ -96,23 +102,6 @@ public class LOTRBiomeGenEnedwaith extends LOTRBiome
 			{
 				func_150567_a(random).generate(world, random, i1, j1, k1);
 			}
-		}
-	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextBoolean())
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(20) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
 		}
 	}
 	

@@ -34,6 +34,17 @@ public class LOTRBiomeGenAnduin extends LOTRBiome
 		decorator.grassPerChunk = 4;
 		decorator.doubleGrassPerChunk = 1;
 		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+        decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+        decorator.addTree(LOTRTreeType.BIRCH, 150);
+		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 15);
+		decorator.addTree(LOTRTreeType.SPRUCE, 500);
+		decorator.addTree(LOTRTreeType.LARCH, 150);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 10);
+		decorator.addTree(LOTRTreeType.APPLE, 2);
+		decorator.addTree(LOTRTreeType.PEAR, 2);
+		
         registerPlainsFlowers();
 		
 		decorator.generateOrcDungeon = true;
@@ -78,35 +89,6 @@ public class LOTRBiomeGenAnduin extends LOTRBiome
 				int k1 = k + random.nextInt(16) + 8;
 				boulderGen.generate(world, random, i1, world.getHeightValue(i1, k1), k1);
 			}
-		}
-	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(300) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenSimpleTrees.newApple(false) : LOTRWorldGenSimpleTrees.newPear(false);
-		}
-		else if (random.nextInt(6) == 0)
-		{
-			return new LOTRWorldGenLarch(false);
-		}
-		else if (random.nextInt(6) == 0)
-		{
-			return new WorldGenForest(false, false);
-		}
-		else if (random.nextBoolean())
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
 		}
 	}
 	

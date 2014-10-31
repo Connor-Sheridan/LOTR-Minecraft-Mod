@@ -11,8 +11,7 @@ import lotr.common.entity.npc.LOTREntityMordorOrcBombardier;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -46,6 +45,12 @@ public class LOTRBiomeGenNindalf extends LOTRBiome
 		decorator.doubleGrassPerChunk = 6;
 		decorator.enableFern = true;
 		decorator.reedsPerChunk = 10;
+		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 500);
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 500);
 		
 		registerSwampFlowers();
 		
@@ -96,20 +101,6 @@ public class LOTRBiomeGenNindalf extends LOTRBiome
 			new WorldGenLakes(Blocks.water).generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) == 0)
-		{
-			return random.nextBoolean() ? LOTRWorldGenDeadTrees.newOak() : LOTRWorldGenDeadTrees.newSpruce();
-		}
-		else if (random.nextBoolean())
-		{
-			return new WorldGenTaiga2(false);
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

@@ -35,6 +35,13 @@ public class LOTRBiomeGenWilderland extends LOTRBiome
         decorator.grassPerChunk = 14;
 		decorator.doubleGrassPerChunk = 8;
 		
+		decorator.addTree(LOTRTreeType.OAK, 1000);
+        decorator.addTree(LOTRTreeType.OAK_LARGE, 100);
+        decorator.addTree(LOTRTreeType.OAK_DEAD, 500);
+        decorator.addTree(LOTRTreeType.SPRUCE, 200);
+        decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 10);
+		
 		registerPlainsFlowers();
 		
 		decorator.addRandomStructure(new LOTRWorldGenGundabadCamp(), 2000);
@@ -77,20 +84,6 @@ public class LOTRBiomeGenWilderland extends LOTRBiome
 			}
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			return random.nextInt(10) == 0 ? LOTRWorldGenBigTrees.newChestnut(false) : LOTRWorldGenSimpleTrees.newChestnut(false);
-		}
-		if (random.nextInt(5) == 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-        return random.nextBoolean() ? LOTRWorldGenDeadTrees.newOak() : super.func_150567_a(random);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

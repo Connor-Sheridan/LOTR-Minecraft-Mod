@@ -6,6 +6,7 @@ import lotr.common.LOTRMod;
 import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenOrcDungeon;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.*;
 
@@ -79,6 +80,8 @@ public class LOTRBiomeDecorator
 	public boolean generateOrcDungeon = false;
 	public boolean generateTrollHoard = false;
 	
+	private List<LOTRTreeType.WeightedTreeType> treeTypes = new ArrayList();
+	
 	private Random structureRand = new Random();
 	private List<RandomStructure> randomStructures = new ArrayList();
 
@@ -87,13 +90,29 @@ public class LOTRBiomeDecorator
         biome = lotrbiome;
     }
     
+    public void addTree(LOTRTreeType type, int weight)
+    {
+    	treeTypes.add(new LOTRTreeType.WeightedTreeType(type, weight));
+    }
+    
+    public void clearTrees()
+    {
+    	treeTypes.clear();
+    }
+    
+    public LOTRTreeType getRandomTree(Random random)
+    {
+    	WeightedRandom.Item item = WeightedRandom.getRandomItem(random, treeTypes);
+    	return ((LOTRTreeType.WeightedTreeType)item).treeType;
+    }
+    
     public void setTreeCluster(int size, int chance)
     {
     	treeClusterSize = size;
     	treeClusterChance = chance;
     }
     
-    public void clearTreeCluster()
+    public void resetTreeCluster()
     {
     	setTreeCluster(0, -1);
     }

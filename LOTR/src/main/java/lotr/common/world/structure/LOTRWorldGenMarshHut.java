@@ -104,7 +104,7 @@ public class LOTRWorldGenMarshHut extends LOTRWorldGenStructureBase
 		setBlockAndNotifyAdequately(world, i, j + 1, k - radius, Blocks.wooden_door, 1);
 		setBlockAndNotifyAdequately(world, i, j + 2, k - radius, Blocks.wooden_door, 8);
 		
-		LOTRWorldGenFangornTrees.newOak(false).disableRestrictions().generate(world, random, i, j + 11, k);
+		new LOTRWorldGenFangornTrees(false, Blocks.log, 0, Blocks.leaves, 0).disableRestrictions().generate(world, random, i, j + 11, k);
 		
 		LOTREntityTroll troll = new LOTREntityTroll(world);
 		troll.setLocationAndAngles(i + 0.5D, j + 1, k + 0.5D, 0F, 0F);

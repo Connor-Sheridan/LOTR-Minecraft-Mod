@@ -9,6 +9,7 @@ import lotr.common.entity.animal.LOTREntityMidges;
 import lotr.common.world.LOTRBanditSpawner;
 import lotr.common.world.LOTRInvasionSpawner;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -43,6 +44,11 @@ public class LOTRBiomeGenMidgewater extends LOTRBiome
 		decorator.waterlilyPerChunk = 2;
 		decorator.reedsPerChunk = 10;
 		decorator.generateAthelas = true;
+		
+		decorator.addTree(LOTRTreeType.OAK, 500);
+		decorator.addTree(LOTRTreeType.OAK_TALL, 500);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 500);
+		decorator.addTree(LOTRTreeType.OAK_SWAMP, 1500);
 		
 		registerSwampFlowers();
 		
@@ -81,23 +87,6 @@ public class LOTRBiomeGenMidgewater extends LOTRBiome
 			new WorldGenLakes(Blocks.water).generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new WorldGenBigTree(false);
-		}
-		else if (random.nextBoolean())
-		{
-			return new WorldGenSwamp();
-		}
-		else
-		{
-			return new WorldGenTrees(false, 4 + random.nextInt(6), 0, 0, false);
-		}
-    }
 	
 	@Override
 	public float getTreeIncreaseChance()

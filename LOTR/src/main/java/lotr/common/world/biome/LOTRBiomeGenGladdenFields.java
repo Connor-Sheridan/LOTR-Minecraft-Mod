@@ -5,15 +5,13 @@ import java.util.Random;
 import lotr.common.LOTRAchievement;
 import lotr.common.LOTRFaction;
 import lotr.common.entity.animal.LOTREntityRabbit;
-import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
+import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenDoubleFlower;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.feature.WorldGenSwamp;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class LOTRBiomeGenGladdenFields extends LOTRBiomeGenAnduin
@@ -32,6 +30,8 @@ public class LOTRBiomeGenGladdenFields extends LOTRBiomeGenAnduin
 		decorator.doubleGrassPerChunk = 5;
 		decorator.waterlilyPerChunk = 1;
 		decorator.reedsPerChunk = 10;
+		
+		decorator.addTree(LOTRTreeType.OAK_SWAMP, 1000);
 		
 		registerSwampFlowers();
 		
@@ -60,16 +60,6 @@ public class LOTRBiomeGenGladdenFields extends LOTRBiomeGenAnduin
 			new WorldGenLakes(Blocks.water).generate(world, random, i1, j1, k1);
 		}
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) == 0)
-		{
-			return new WorldGenSwamp();
-		}
-		return super.func_150567_a(random);
-    }
 	
 	@Override
 	public WorldGenerator getRandomWorldGenForDoubleFlower(Random random)

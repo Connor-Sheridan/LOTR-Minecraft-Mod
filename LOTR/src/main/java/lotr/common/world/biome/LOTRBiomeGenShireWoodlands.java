@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import java.util.Random;
 
 import lotr.common.LOTRMod;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenShirePine;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenForest;
@@ -20,6 +21,9 @@ public class LOTRBiomeGenShireWoodlands extends LOTRBiomeGenShire
 		decorator.doubleGrassPerChunk = 2;
 		decorator.enableFern = true;
 		
+		decorator.addTree(LOTRTreeType.BIRCH, 250);
+		decorator.addTree(LOTRTreeType.SHIRE_PINE, 2500);
+		
 		addFlower(LOTRMod.shireHeather, 0, 20);
 		
 		biomeColors.resetGrass();
@@ -30,12 +34,6 @@ public class LOTRBiomeGenShireWoodlands extends LOTRBiomeGenShire
 	{
 		return false;
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return random.nextInt(3) == 0 ? super.func_150567_a(random) : random.nextInt(10) == 0 ? new WorldGenForest(false, false) : new LOTRWorldGenShirePine(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnLakes()

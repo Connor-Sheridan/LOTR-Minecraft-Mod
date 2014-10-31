@@ -7,6 +7,7 @@ import lotr.common.LOTRMod;
 import lotr.common.LOTRWaypoint;
 import lotr.common.entity.npc.LOTREntityBlueDwarfMerchant;
 import lotr.common.world.LOTRBanditSpawner;
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenLarch;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -31,6 +32,13 @@ public class LOTRBiomeGenRedMountains extends LOTRBiome
 		decorator.flowersPerChunk = 1;
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK, 300);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 50);
+		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
+		decorator.addTree(LOTRTreeType.LARCH, 300);
+		decorator.addTree(LOTRTreeType.MAPLE, 300);
+		decorator.addTree(LOTRTreeType.MAPLE_LARGE, 50);
 		
 		registerMountainsFlowers();
 		
@@ -65,23 +73,6 @@ public class LOTRBiomeGenRedMountains extends LOTRBiome
 		genStandardOre(world, random, i, k, 6, redRockVein, 0, 96);
 
         super.decorate(world, random, i, k);
-    }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(4) == 0)
-		{
-			return new LOTRWorldGenLarch(false);
-		}
-		if (random.nextInt(4) > 0)
-		{
-			return new WorldGenTaiga2(false);
-		}
-		else
-		{
-			return super.func_150567_a(random);
-		}
     }
 	
 	@Override

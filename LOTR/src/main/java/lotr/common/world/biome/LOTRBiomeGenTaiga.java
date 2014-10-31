@@ -2,6 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
+import lotr.common.world.feature.LOTRTreeType;
 import lotr.common.world.feature.LOTRWorldGenDeadTrees;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTaiga1;
@@ -18,18 +19,13 @@ public class LOTRBiomeGenTaiga extends LOTRBiomeGenTundra
 		decorator.grassPerChunk = 8;
 		decorator.doubleGrassPerChunk = 2;
 		
+		decorator.clearTrees();
+		decorator.addTree(LOTRTreeType.SPRUCE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 100);
+		decorator.addTree(LOTRTreeType.SPRUCE_DEAD, 50);
+		
 		registerTaigaFlowers();
 	}
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(10) == 0)
-		{
-			return LOTRWorldGenDeadTrees.newSpruce();
-		}
-        return random.nextInt(5) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
-    }
 	
 	@Override
 	public float getChanceToSpawnAnimals()

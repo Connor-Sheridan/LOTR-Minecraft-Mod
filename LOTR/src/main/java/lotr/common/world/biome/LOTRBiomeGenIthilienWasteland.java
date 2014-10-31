@@ -1,11 +1,6 @@
 package lotr.common.world.biome;
 
-import java.util.Random;
-
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
-import lotr.common.world.feature.LOTRWorldGenLogs;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import lotr.common.world.feature.LOTRTreeType;
 
 public class LOTRBiomeGenIthilienWasteland extends LOTRBiomeGenIthilien
 {
@@ -24,26 +19,9 @@ public class LOTRBiomeGenIthilienWasteland extends LOTRBiomeGenIthilien
         decorator.flowersPerChunk = 1;
         decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 2;
-	}
-
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		if (random.nextInt(3) != 0)
-		{
-			if (random.nextInt(40) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newBirch();
-			}
-			else if (random.nextInt(5) == 0)
-			{
-				return LOTRWorldGenDeadTrees.newLebethron();
-			}
-			else
-			{
-				return LOTRWorldGenDeadTrees.newOak();
-			}
-		}
-		return super.func_150567_a(random);
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1000);
+		decorator.addTree(LOTRTreeType.LEBETHRON_DEAD, 200);
+		decorator.addTree(LOTRTreeType.BIRCH_DEAD, 50);
 	}
 }

@@ -7,8 +7,7 @@ import lotr.common.LOTRWaypoint;
 import lotr.common.entity.animal.LOTREntityCamel;
 import lotr.common.entity.animal.LOTREntityDesertScorpion;
 import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.feature.LOTRWorldGenBoulder;
-import lotr.common.world.feature.LOTRWorldGenDeadTrees;
+import lotr.common.world.feature.*;
 import lotr.common.world.structure.LOTRWorldGenHaradObelisk;
 import lotr.common.world.structure2.*;
 import net.minecraft.init.Blocks;
@@ -46,6 +45,8 @@ public class LOTRBiomeGenNearHarad extends LOTRBiome
 		decorator.doubleGrassPerChunk = 0;
 		decorator.cactiPerChunk = 1;
 		decorator.deadBushPerChunk = 1;
+		
+		decorator.addTree(LOTRTreeType.OAK_DEAD, 1000);
 		
 		decorator.addRandomStructure(new LOTRWorldGenHaradObelisk(false), 3000);
 		decorator.addRandomStructure(new LOTRWorldGenNearHaradFortress(false), 3000);
@@ -100,13 +101,7 @@ public class LOTRBiomeGenNearHarad extends LOTRBiome
 			}
 		}
     }
-	
-	@Override
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return LOTRWorldGenDeadTrees.newOak();
-    }
-	
+
 	@Override
 	public float getTreeIncreaseChance()
 	{
