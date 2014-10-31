@@ -2,28 +2,15 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRWaypoint;
-import lotr.common.entity.animal.LOTREntityBird;
-import lotr.common.entity.animal.LOTREntityButterfly;
-import lotr.common.entity.animal.LOTREntityElk;
-import lotr.common.entity.npc.LOTREntityMirkwoodSpider;
-import lotr.common.entity.npc.LOTREntityWoodElf;
-import lotr.common.entity.npc.LOTREntityWoodElfScout;
-import lotr.common.entity.npc.LOTREntityWoodElfWarrior;
-import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
+import lotr.common.*;
+import lotr.common.entity.animal.*;
+import lotr.common.entity.npc.*;
+import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.*;
-import lotr.common.world.structure.LOTRWorldGenRuinedWoodElfTower;
-import lotr.common.world.structure.LOTRWorldGenWoodElfHouse;
-import lotr.common.world.structure.LOTRWorldGenWoodElfTower;
-import net.minecraft.util.Vec3;
+import lotr.common.world.feature.LOTRTreeType;
+import lotr.common.world.feature.LOTRWorldGenWebOfUngoliant;
+import lotr.common.world.structure.*;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class LOTRBiomeGenMirkwood extends LOTRBiome
 {
@@ -94,6 +81,7 @@ public class LOTRBiomeGenMirkwood extends LOTRBiome
 			
 			decorator.addTree(LOTRTreeType.OAK, 200);
 			decorator.addTree(LOTRTreeType.OAK_LARGE, 50);
+			decorator.addTree(LOTRTreeType.SPRUCE, 100);
 			decorator.addTree(LOTRTreeType.CHESTNUT, 50);
 			decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 20);
 			decorator.addTree(LOTRTreeType.LARCH, 100);

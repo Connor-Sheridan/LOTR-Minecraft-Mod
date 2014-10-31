@@ -30,8 +30,8 @@ public class LOTRBiomeGenFarHaradMangrove extends LOTRBiomeGenFarHarad
 		decorator.waterlilyPerChunk = 3;
 		
 		decorator.addTree(LOTRTreeType.MANGROVE, 1000);
-		decorator.addTree(LOTRTreeType.ACACIA, 200);
-		decorator.addTree(LOTRTreeType.OAK_DESERT, 100);
+		decorator.addTree(LOTRTreeType.ACACIA, 10);
+		decorator.addTree(LOTRTreeType.OAK_DESERT, 5);
 		
 		registerSwampFlowers();
 		

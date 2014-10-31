@@ -102,6 +102,11 @@ public class LOTRBiomeDecorator
     
     public LOTRTreeType getRandomTree(Random random)
     {
+    	if (treeTypes.isEmpty())
+    	{
+    		return LOTRTreeType.OAK;
+    	}
+    	
     	WeightedRandom.Item item = WeightedRandom.getRandomItem(random, treeTypes);
     	return ((LOTRTreeType.WeightedTreeType)item).treeType;
     }
