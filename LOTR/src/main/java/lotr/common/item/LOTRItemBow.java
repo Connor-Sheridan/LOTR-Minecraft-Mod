@@ -1,6 +1,10 @@
 package lotr.common.item;
 
 import static lotr.common.item.LOTRItemBow.BowState.*;
+
+import java.util.Arrays;
+
+import lotr.client.render.item.LOTRRenderBow;
 import lotr.common.LOTRCreativeTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
@@ -13,6 +17,8 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -180,9 +186,18 @@ public class LOTRItemBow extends ItemBow
     {
 		itemIcon = iconregister.registerIcon(getIconString());
 		bowPullIcons = new IIcon[3];
-		bowPullIcons[0] = iconregister.registerIcon(getIconString() + PULL_0.iconName);
-		bowPullIcons[1] = iconregister.registerIcon(getIconString() + PULL_1.iconName);
-        bowPullIcons[2] = iconregister.registerIcon(getIconString() + PULL_2.iconName);
+		
+		IItemRenderer bowRenderer = MinecraftForgeClient.getItemRenderer(new ItemStack(this), IItemRenderer.ItemRenderType.EQUIPPED_FIRST_PERSON);
+		if (bowRenderer instanceof LOTRRenderBow && ((LOTRRenderBow)bowRenderer).isLargeBow)
+		{
+			Arrays.fill(bowPullIcons, itemIcon);
+		}
+		else
+		{
+			bowPullIcons[0] = iconregister.registerIcon(getIconString() + PULL_0.iconName);
+			bowPullIcons[1] = iconregister.registerIcon(getIconString() + PULL_1.iconName);
+	        bowPullIcons[2] = iconregister.registerIcon(getIconString() + PULL_2.iconName);
+		}
     }
 	
 	public static enum BowState

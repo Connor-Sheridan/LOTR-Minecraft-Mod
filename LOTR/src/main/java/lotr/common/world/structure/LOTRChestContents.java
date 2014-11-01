@@ -272,7 +272,7 @@ public class LOTRChestContents
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.mug), 1, 3, 50),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.mugMiruvor), 1, 1, 50),
 			new WeightedRandomChestContent(new ItemStack(Items.arrow), 2, 6, 50),
-			new WeightedRandomChestContent(new ItemStack(LOTRMod.elvenBow), 1, 1, 25),
+			new WeightedRandomChestContent(new ItemStack(LOTRMod.highElvenBow), 1, 1, 25),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.swordHighElven), 1, 1, 10),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.daggerHighElven), 1, 1, 10),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.spearHighElven), 1, 1, 10),

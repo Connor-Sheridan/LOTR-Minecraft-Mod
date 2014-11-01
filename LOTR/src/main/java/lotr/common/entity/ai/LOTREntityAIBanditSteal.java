@@ -143,10 +143,6 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     		{
     			stolenSomething = true;
     		}
-    		else if (tryStealItem(inv, LOTRMod.pouch))
-    		{
-    			stolenSomething = true;
-    		}
     		else if (tryStealItem(inv, ItemArmor.class))
     		{
     			stolenSomething = true;
@@ -156,6 +152,10 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     			stolenSomething = true;
     		}
     		else if (tryStealItem(inv, ItemTool.class))
+    		{
+    			stolenSomething = true;
+    		}
+    		else if (tryStealItem(inv, LOTRMod.pouch))
     		{
     			stolenSomething = true;
     		}
@@ -176,6 +176,7 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     {
     	return tryStealItem_do(inv, new BanditItemFilter()
     	{
+    		@Override
     		public boolean isApplicable(ItemStack itemstack)
     		{
     			return itemstack.getItem() == item;
@@ -187,6 +188,7 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     {
     	return tryStealItem_do(inv, new BanditItemFilter()
     	{
+    		@Override
     		public boolean isApplicable(ItemStack itemstack)
     		{
     			return itemclass.isAssignableFrom(itemstack.getItem().getClass());
@@ -198,6 +200,7 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     {
     	return tryStealItem_do(inv, new BanditItemFilter()
     	{
+    		@Override
     		public boolean isApplicable(ItemStack itemstack)
     		{
     			return itemList.contains(itemstack.getItem());
@@ -209,6 +212,7 @@ public class LOTREntityAIBanditSteal extends EntityAIBase
     {
     	return tryStealItem_do(inv, new BanditItemFilter()
     	{
+    		@Override
     		public boolean isApplicable(ItemStack itemstack)
     		{
     			return true;

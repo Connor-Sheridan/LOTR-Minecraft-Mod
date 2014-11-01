@@ -35,6 +35,9 @@ public class LOTRBlockBeacon extends BlockContainer
 		super(Material.wood);
 		setCreativeTab(LOTRCreativeTabs.tabDeco);
 		setBlockBounds(0F, 0F, 0F, 1F, 0.8125F, 1F);
+		setHardness(0F);
+		setResistance(5F);
+		setStepSound(Block.soundTypeWood);
 	}
 	
 	@Override

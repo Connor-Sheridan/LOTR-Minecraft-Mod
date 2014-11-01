@@ -303,19 +303,24 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		LOTRReflectionClient.testAll(world, Minecraft.getMinecraft());
 	}
 	
-    public static void renderHealthBar(EntityLivingBase entity, double d, double d1, double d2, int i, RenderManager renderManager)
+    public static void renderHealthBar(EntityLivingBase entity, double d, double d1, double d2, int distance, RenderManager renderManager)
     {
+    	if (!LOTRConfig.hiredUnitHealthBars)
+    	{
+    		return;
+    	}
+    	
 		if (entity.riddenByEntity instanceof LOTREntityNPC)
 		{
 			return;
 		}
 		
-        double d3 = entity.getDistanceSqToEntity(renderManager.livingPlayer);
+        double distanceSq = entity.getDistanceSqToEntity(renderManager.livingPlayer);
 
-        if (d3 <= (double)(i * i))
+        if (distanceSq <= (double)(distance * distance))
         {
             float f1 = 1.6F;
-            float f2 = 0.016666668F * f1;
+            float f2 = 0.016666666F * f1;
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d, (float)d1 + entity.height + 0.7F, (float)d2);
             GL11.glNormal3f(0F, 1F, 0F);

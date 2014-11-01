@@ -22,6 +22,8 @@ public class LOTRBlockMordorMoss extends Block implements IShearable
 		setBlockBounds(0F, 0F, 0F, 1F, 0.0625F, 1F);
 		setTickRandomly(true);
 		setCreativeTab(LOTRCreativeTabs.tabDeco);
+		setHardness(0.2F);
+		setStepSound(Block.soundTypeGrass);
     }
 	
     @Override

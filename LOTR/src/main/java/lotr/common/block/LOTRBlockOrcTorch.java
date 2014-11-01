@@ -25,6 +25,8 @@ public class LOTRBlockOrcTorch extends Block
 	public LOTRBlockOrcTorch()
 	{
 		super(Material.circuits);
+		setHardness(0F);
+		setStepSound(Block.soundTypeWood);
 	}
 	
 	@Override

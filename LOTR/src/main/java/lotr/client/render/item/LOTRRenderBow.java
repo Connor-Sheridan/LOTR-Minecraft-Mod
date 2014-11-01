@@ -42,7 +42,7 @@ public class LOTRRenderBow implements IItemRenderer
 		return texture;
 	}
 	
-	private boolean isLargeBow;
+	public final boolean isLargeBow;
 
 	public LOTRRenderBow(boolean large)
 	{

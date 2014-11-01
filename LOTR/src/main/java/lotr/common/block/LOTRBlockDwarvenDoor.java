@@ -6,6 +6,7 @@ import lotr.common.LOTRAchievement;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
 import lotr.common.tileentity.LOTRTileEntityDwarvenDoor;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,6 +25,8 @@ public class LOTRBlockDwarvenDoor extends BlockDoor
 	public LOTRBlockDwarvenDoor()
 	{
 		super(Material.rock);
+		setHardness(4F);
+		setStepSound(Block.soundTypeStone);
 	}
 	
 	@Override

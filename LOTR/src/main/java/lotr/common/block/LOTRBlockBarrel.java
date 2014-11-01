@@ -10,7 +10,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -28,6 +29,9 @@ public class LOTRBlockBarrel extends BlockContainer
 		super(Material.wood);
 		setCreativeTab(LOTRCreativeTabs.tabFood);
 		setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 0.8125F, 0.875F);
+		setHardness(3F);
+		setResistance(5F);
+		setStepSound(Block.soundTypeWood);
 	}
 	
 	@Override

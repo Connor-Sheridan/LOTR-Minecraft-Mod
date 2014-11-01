@@ -186,7 +186,7 @@ public class LOTRBiome extends BiomeGenBase
 		ironHills = new LOTRBiomeGenIronHills(11).setTemperatureRainfall(0.27F, 0.4F).setMinMaxHeight(0.3F, 1.4F).setColor(0xAD8569).setBiomeName("ironHills");
 		deadMarshes = new LOTRBiomeGenDeadMarshes(12).setTemperatureRainfall(0.4F, 1F).setMinMaxHeight(0F, 0.1F).setColor(0x60523B).setBiomeName("deadMarshes");
 		trollshaws = new LOTRBiomeGenTrollshaws(13).setTemperatureRainfall(0.6F, 0.8F).setMinMaxHeight(0.15F, 1F).setColor(0x9E8D69).setBiomeName("trollshaws");
-		mirkwood = new LOTRBiomeGenMirkwood(14, false).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.3F).setColor(0x183811).setBiomeName("mirkwood");
+		mirkwood = new LOTRBiomeGenMirkwood(14, false).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.3F).setColor(0x1B3F13).setBiomeName("mirkwood");
 		mirkwoodCorrupted = new LOTRBiomeGenMirkwood(15, true).setTemperatureRainfall(0.6F, 0.8F).setMinMaxHeight(0.2F, 0.4F).setColor(0x142112).setBiomeName("mirkwoodCorrupted");
 		rohanUrukHighlands = new LOTRBiomeGenRohan(16, true).setTemperatureRainfall(0.7F, 0.4F).setMinMaxHeight(0.8F, 0.3F).setColor(0x90904D).setBiomeName("rohanUrukHighlands");
 		emynMuil = new LOTRBiomeGenEmynMuil(17).setTemperatureRainfall(0.5F, 0.9F).setMinMaxHeight(0.2F, 0.8F).setColor(0x967E72).setBiomeName("emynMuil");

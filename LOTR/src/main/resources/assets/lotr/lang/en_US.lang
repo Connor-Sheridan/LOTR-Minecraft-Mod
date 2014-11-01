@@ -873,8 +873,9 @@ item.lotr:battleaxeUtumno.name=Utumno Battleaxe
 item.lotr:hammerUtumno.name=Utumno Warhammer
 item.lotr:utumnoBow.name=Utumno Bow
 item.lotr:mugCactusLiqueur.name=Cactus Liqueur
-item.lotr:rohanBow.name=Rohirric Longbow
-item.lotr:gondorBow.name=Gondorian Longbow
+item.lotr:rohanBow.name=Rohirric Bow
+item.lotr:gondorBow.name=Gondorian Bow
+item.lotr:highElvenBow.name=High Elven Bow
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength

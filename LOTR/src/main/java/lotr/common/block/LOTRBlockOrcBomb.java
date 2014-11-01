@@ -28,6 +28,9 @@ public class LOTRBlockOrcBomb extends Block
     {
         super(Material.iron);
         setCreativeTab(LOTRCreativeTabs.tabCombat);
+        setHardness(3F);
+        setResistance(0F);
+        setStepSound(Block.soundTypeMetal);
     }
 	
 	@Override

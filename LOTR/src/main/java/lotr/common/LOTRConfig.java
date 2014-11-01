@@ -35,6 +35,7 @@ public class LOTRConfig
 	public static boolean enableSepiaMap;
 	public static boolean enableOnscreenCompass;
 	public static boolean compassExtraInfo;
+	public static boolean hiredUnitHealthBars;
 	
 	public static boolean enableLOTRSky;
 	public static boolean enableMistyMountainsMist;
@@ -60,6 +61,7 @@ public class LOTRConfig
 		enableSepiaMap = config.get(CATEGORY_GUI, "Sepia Map", false, "Display the Middle-earth map in sepia colours").getBoolean();
 		enableOnscreenCompass = config.get(CATEGORY_GUI, "On-screen Compass", true).getBoolean();
 		compassExtraInfo = config.get(CATEGORY_GUI, "On-screen Compass Extra Info", true, "Display co-ordinates and biome below compass").getBoolean();
+		hiredUnitHealthBars = config.get(CATEGORY_GUI, "Hired NPC Health Bars", true).getBoolean();
 		
 		enableLOTRSky = config.get(CATEGORY_ENVIRONMENT, "Middle-earth sky", true, "Toggle the new Middle-earth sky").getBoolean();
 		enableMistyMountainsMist = config.get(CATEGORY_ENVIRONMENT, "Misty Misty Mountains", true, "Toggle mist in the Misty Mountains").getBoolean();

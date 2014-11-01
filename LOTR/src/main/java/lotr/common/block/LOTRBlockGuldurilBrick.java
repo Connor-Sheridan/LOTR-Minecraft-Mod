@@ -26,6 +26,10 @@ public class LOTRBlockGuldurilBrick extends Block
 	{
 		super(Material.rock);
 		setCreativeTab(LOTRCreativeTabs.tabBlock);
+		setHardness(3F);
+		setResistance(10F);
+		setStepSound(Block.soundTypeStone);
+		setLightLevel(0.75F);
 	}
 	
 	public static int guldurilMetaForBlock(Block block, int i)

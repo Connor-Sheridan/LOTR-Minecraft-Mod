@@ -18,6 +18,8 @@ public class LOTRBlockRemains extends Block
 	{
 		super(LOTRMaterialRemains.remains);
 		setCreativeTab(LOTRCreativeTabs.tabBlock);
+		setHardness(3F);
+		setStepSound(Block.soundTypeGravel);
 	}
 	
     @Override 

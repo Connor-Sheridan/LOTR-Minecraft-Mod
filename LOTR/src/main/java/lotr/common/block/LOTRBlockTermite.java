@@ -21,6 +21,8 @@ public class LOTRBlockTermite extends Block
     {
         super(Material.ground);
         setCreativeTab(LOTRCreativeTabs.tabBlock);
+        setHardness(0.5F);
+        setResistance(3F);
     }
 
 	@Override

@@ -33,6 +33,8 @@ public class LOTRBlockHobbitOven extends BlockContainer
 	{
 		super(Material.rock);
 		setCreativeTab(LOTRCreativeTabs.tabDeco);
+		setHardness(3.5F);
+		setStepSound(Block.soundTypeStone);
 	}
 	
 	@Override

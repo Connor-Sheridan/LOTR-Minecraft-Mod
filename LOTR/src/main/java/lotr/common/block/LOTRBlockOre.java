@@ -20,6 +20,9 @@ public class LOTRBlockOre extends Block
 	{
 		super(Material.rock);
 		setCreativeTab(LOTRCreativeTabs.tabBlock);
+		setHardness(3F);
+		setResistance(5F);
+		setStepSound(Block.soundTypeStone);
 	}
 	
 	@Override

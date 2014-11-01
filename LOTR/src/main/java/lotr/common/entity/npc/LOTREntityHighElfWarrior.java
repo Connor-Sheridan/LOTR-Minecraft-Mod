@@ -75,7 +75,7 @@ public class LOTREntityHighElfWarrior extends LOTREntityHighElf
 	@Override
 	public Item getElfBowId()
 	{
-		return LOTRMod.elvenBow;
+		return LOTRMod.highElvenBow;
 	}
 	
 	@Override
