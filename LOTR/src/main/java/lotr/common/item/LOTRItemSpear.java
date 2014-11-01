@@ -49,6 +49,11 @@ public class LOTRItemSpear extends LOTRItemSword
         {
         	spear.setFire(1000);
         }
+        
+        if (entityplayer.capabilities.isCreativeMode)
+        {
+        	spear.canBePickedUp = 2;
+        }
 		
         world.playSoundAtEntity(entityplayer, "random.bow", 1F, 1F / (itemRand.nextFloat() * 0.4F + 1.2F) + 0.25F);
 		entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);

@@ -1492,6 +1492,10 @@ public class LOTRRecipes
 		{
 			"X X", "X X", 'X', Items.leather
 		}));
+		addRecipeTo(commonDunedainRecipes, new ShapedOreRecipe(new ItemStack(gondorBow), new Object[]
+		{
+			" XY", "X Y", " XY", 'X', "stickWood", 'Y', Items.string
+		}));
 	}
 	
     private static void createMorgulRecipes()
@@ -1655,6 +1659,10 @@ public class LOTRRecipes
 		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(bootsBlackUruk), new Object[]
 		{
 			"X X", "X X", 'X', blackUrukSteel
+		}));
+		morgulRecipes.add(new ShapedOreRecipe(new ItemStack(blackUrukBow), new Object[]
+		{
+			" XY", "X Y", " XY", 'X', blackUrukSteel, 'Y', Items.string
 		}));
     }
 	
@@ -2255,6 +2263,10 @@ public class LOTRRecipes
 		rohirricRecipes.add(new ShapedOreRecipe(new ItemStack(slabSingle5, 6, 2), new Object[]
 		{
 			"XXX", 'X', new ItemStack(pillar, 1, 8)
+		}));
+		rohirricRecipes.add(new ShapedOreRecipe(new ItemStack(rohanBow), new Object[]
+		{
+			" XY", "X Y", " XY", 'X', "stickWood", 'Y', Items.string
 		}));
 	}
 	

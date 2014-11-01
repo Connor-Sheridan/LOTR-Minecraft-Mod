@@ -861,6 +861,7 @@ item.lotr:helmetBlackUruk.name=Black Uruk Helmet
 item.lotr:bodyBlackUruk.name=Black Uruk Chestplate
 item.lotr:legsBlackUruk.name=Black Uruk Leggings
 item.lotr:bootsBlackUruk.name=Black Uruk Boots
+item.lotr:blackUrukBow.name=Black Uruk Bow
 item.lotr:helmetNearHaradWarlord.name=Near Harad Warlord Helmet
 item.lotr:utumnoKey.0.name=Icy Utumno Key
 item.lotr:utumnoKey.1.name=Obsidian Utumno Key
@@ -872,6 +873,8 @@ item.lotr:battleaxeUtumno.name=Utumno Battleaxe
 item.lotr:hammerUtumno.name=Utumno Warhammer
 item.lotr:utumnoBow.name=Utumno Bow
 item.lotr:mugCactusLiqueur.name=Cactus Liqueur
+item.lotr:rohanBow.name=Rohirric Longbow
+item.lotr:gondorBow.name=Gondorian Longbow
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength

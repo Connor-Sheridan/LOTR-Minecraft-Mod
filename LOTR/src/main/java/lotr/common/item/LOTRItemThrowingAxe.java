@@ -33,11 +33,17 @@ public class LOTRItemThrowingAxe extends Item
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         LOTREntityThrowingAxe axe = new LOTREntityThrowingAxe(world, entityplayer, itemstack.copy(), 1F);
+        if (entityplayer.capabilities.isCreativeMode)
+        {
+        	axe.canBePickedUp = 2;
+        }
+        
         world.playSoundAtEntity(entityplayer, "random.bow", 1F, 1F / (itemRand.nextFloat() * 0.4F + 1.2F) + 0.25F);
         if (!world.isRemote)
         {
             world.spawnEntityInWorld(axe);
         }
+        
 		if (!entityplayer.capabilities.isCreativeMode)
 		{
 			itemstack.stackSize--;

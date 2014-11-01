@@ -703,6 +703,7 @@ public class LOTRMod
 	public static Item bodyBlackUruk;
 	public static Item legsBlackUruk;
 	public static Item bootsBlackUruk;
+	public static Item blackUrukBow;
 	public static Item helmetNearHaradWarlord;
 	public static Item utumnoKey;
 	public static Item swordUtumno;
@@ -713,6 +714,8 @@ public class LOTRMod
 	public static Item hammerUtumno;
 	public static Item utumnoBow;
 	public static Item mugCactusLiqueur;
+	public static Item rohanBow;
+	public static Item gondorBow;
 	
 	public static List unnamedItems = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
@@ -1324,6 +1327,7 @@ public class LOTRMod
 		bodyBlackUruk = new LOTRItemArmor(armorBlackUruk, 1).setUnlocalizedName("lotr:bodyBlackUruk");
 		legsBlackUruk = new LOTRItemArmor(armorBlackUruk, 2).setUnlocalizedName("lotr:legsBlackUruk");
 		bootsBlackUruk = new LOTRItemArmor(armorBlackUruk, 3).setUnlocalizedName("lotr:bootsBlackUruk");
+		blackUrukBow = new LOTRItemBow(500, 0.5D, 0F, 3, 20).setUnlocalizedName("lotr:blackUrukBow");
 		helmetNearHaradWarlord = new LOTRItemArmor(armorNearHarad, 0).setUnlocalizedName("lotr:helmetNearHaradWarlord");
 		utumnoKey = new LOTRItemUtumnoKey().setUnlocalizedName("lotr:utumnoKey");
 		swordUtumno = new LOTRItemSword(toolUtumno).setUnlocalizedName("lotr:swordUtumno");
@@ -1334,6 +1338,8 @@ public class LOTRMod
 		hammerUtumno = new LOTRItemHammer(toolUtumno).setUnlocalizedName("lotr:hammerUtumno");
 		utumnoBow = new LOTRItemBow(350, 0.5D, 0.2F, 2, 20).setUnlocalizedName("lotr:utumnoBow");
 		mugCactusLiqueur = new LOTRItemMugBrewable(0.8F).setDrinkStats(2, 0.3F).setUnlocalizedName("lotr:mugCactusLiqueur");
+		rohanBow = new LOTRItemBow(450, 0D, 0.2F, 3, 15).setUnlocalizedName("lotr:rohanBow");
+		gondorBow = new LOTRItemBow(420, 0.25D, 0.4F, 3, 20).setUnlocalizedName("lotr:gondorBow");
 		
 		try
 		{
@@ -1973,6 +1979,7 @@ public class LOTRMod
 		registerItem(bodyBlackUruk);
 		registerItem(legsBlackUruk);
 		registerItem(bootsBlackUruk);
+		registerItem(blackUrukBow);
 		registerItem(helmetNearHaradWarlord);
 		registerItem(utumnoKey);
 		registerItem(swordUtumno);
@@ -1983,6 +1990,8 @@ public class LOTRMod
 		registerItem(hammerUtumno);
 		registerItem(utumnoBow);
 		registerItem(mugCactusLiqueur);
+		registerItem(rohanBow);
+		registerItem(gondorBow);
 		
 		LOTRConfig.setupAndLoad(event);
 		
@@ -2643,7 +2652,8 @@ public class LOTRMod
 		
 		if (attacker instanceof LOTREntityNPC)
 		{
-			EntityPlayer hiringPlayer = ((LOTREntityNPC)attacker).hiredNPCInfo.getHiringPlayer();
+			LOTREntityNPC npc = (LOTREntityNPC)attacker;
+			EntityPlayer hiringPlayer = npc.hiredNPCInfo.getHiringPlayer();
 			if (hiringPlayer != null)
 			{
 				if (target == hiringPlayer || target.riddenByEntity == hiringPlayer)

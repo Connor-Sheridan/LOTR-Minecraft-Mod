@@ -29,6 +29,7 @@ Public Beta 21
 + Added thicker layers of sandstone for sandy biomes
 + Added new improved Vales of Anduin biomes
 + Added Shire moors in the north and marshes in the south
++ Added more tree types to the Woodland Realm
 + Added more slots for banner protection whitelists
 + Added the ability to set a required alignment level for banners in faction protection mode
 + Added Hobbit and Ranger alignment bonuses for killing dark huorns
@@ -36,10 +37,12 @@ Public Beta 21
 + Added Black Uruks, Black Uruk Steel and Black Uruk equipment
 + Added a new Uruk helmet model
 + Added the Near Harad Warlord helmet
++ Added Rohirric and Gondorian longbows
++ Added larger bow icons for other bows
++ Added a crossbow loading sound effect
 + Added Rohan, Gondor, Mordor, and Near Harad pillars and pillar slabs
 + Added Carved Mordor Brick and a new Mordor Brick texture
 + Added Mordor scrub, dirt, and gravel
-+ Added a crossbow loading sound effect
 + Added the ability to shift-click a plate to make the food pop out
 + Added the ability to stack multiple identical food items on a plate
 + Added the complete list of fishable items for the Dunlending Trident
@@ -81,7 +84,7 @@ Public Beta 21
 * Fixed Rohirrim being angered when non-horse mounts are killed in Rohan
 * Fixed a mead hall generation error
 * Drunkards no longer give mini-quests
-* Dunland is no longer enemies with Mordor or the elves
+* Dunland is no longer enemies with Mordor or elven factions
 * Orcs and Dunlendings no longer pick up items
 * Fixed the friendly and neutral orc speech banks being reversed
 * Fixed iron, gold, and diamond LOTR horse armour items not being displayed in the hand

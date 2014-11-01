@@ -3,6 +3,7 @@ package lotr.common.item;
 import lotr.common.LOTRCreativeTabs;
 import lotr.common.LOTRMod;
 import lotr.common.entity.projectile.LOTREntityCrossbowBolt;
+import lotr.common.item.LOTRItemBow.BowState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -268,9 +269,8 @@ public class LOTRItemCrossbow extends ItemBow
     {
 		itemIcon = iconregister.registerIcon(getIconString());
 		crossbowPullIcons = new IIcon[3];
-        for (int i = 0; i < 3; i++)
-        {
-            crossbowPullIcons[i] = iconregister.registerIcon(getIconString() + "_pull_" + i);
-        }
+		crossbowPullIcons[0] = iconregister.registerIcon(getIconString() + BowState.PULL_0.iconName);
+		crossbowPullIcons[1] = iconregister.registerIcon(getIconString() + BowState.PULL_1.iconName);
+		crossbowPullIcons[2] = iconregister.registerIcon(getIconString() + BowState.PULL_2.iconName);
     }
 }

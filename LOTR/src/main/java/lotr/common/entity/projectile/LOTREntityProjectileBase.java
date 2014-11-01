@@ -11,7 +11,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
@@ -472,28 +471,26 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 			{
 				return null;
 			}
+			else
+			{
+				return itemstack;
+			}
 		}
 		else
 		{
 			return null;
 		}
-		return itemstack;
 	}
 
 	@Override
     public void onCollideWithPlayer(EntityPlayer entityplayer)
     {
-		if (entityplayer == getThrower())
-		{
-			return;
-		}
-		
         if (!worldObj.isRemote)
 		{
         	ItemStack itemstack = createDropItem();
         	if (itemstack != null)
 			{
-				boolean canPickUp = canBePickedUp == 1;
+				boolean canPickUp = (canBePickedUp == 1 || canBePickedUp == 2 && entityplayer.capabilities.isCreativeMode);
 				if (inGround && shake <= 0 && canPickUp)
 				{
 					if (entityplayer.inventory.addItemStackToInventory(itemstack.copy()))

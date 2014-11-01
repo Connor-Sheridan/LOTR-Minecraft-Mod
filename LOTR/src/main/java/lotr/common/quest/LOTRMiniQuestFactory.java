@@ -193,7 +193,7 @@ public enum LOTRMiniQuestFactory
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("craftRangerItem").setCollectItem(new ItemStack(LOTRMod.bodyRanger), 2, 5).setRewardFactor(4F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWeapons").setCollectItem(new ItemStack(Items.iron_sword), 2, 4).setRewardFactor(3F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWeapons").setCollectItem(new ItemStack(LOTRMod.daggerIron), 2, 6).setRewardFactor(2F));
-		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWeapons").setCollectItem(new ItemStack(Items.bow), 3, 7).setRewardFactor(2F));
+		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWeapons").setCollectItem(new ItemStack(LOTRMod.gondorBow), 3, 7).setRewardFactor(2F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectWeapons").setCollectItem(new ItemStack(Items.arrow), 20, 40).setRewardFactor(0.25F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectMaterials").setCollectItem(new ItemStack(Blocks.wool, 1, 0), 6, 15).setRewardFactor(1F));
 		RANGER_NORTH.addQuest(new LOTRMiniQuestCollect.QuestFactory("collectMaterials").setCollectItem(new ItemStack(Items.leather), 10, 20).setRewardFactor(0.5F));

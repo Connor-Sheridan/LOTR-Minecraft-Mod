@@ -1,6 +1,7 @@
 package lotr.client.render.item;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import lotr.client.LOTRClientProxy;
 import lotr.common.LOTRMod;
@@ -19,14 +20,26 @@ import org.lwjgl.opengl.GL11;
 
 public class LOTRRenderLargeItem implements IItemRenderer
 {
-	private static HashMap largeItemTextures = new HashMap();
+	private static Map<Item, ResourceLocation> largeItemTextures = new HashMap();
 	
 	public static ResourceLocation getLargeItemTexture(Item item)
 	{
 		String prefix = LOTRMod.getModID() + ":";
 		String itemName = item.getUnlocalizedName();
-		String s = prefix + "textures/items/large/" + itemName.substring(itemName.indexOf(prefix) + prefix.length()) + ".png";
+		itemName = itemName.substring(itemName.indexOf(prefix) + prefix.length());
+		String s = prefix + "textures/items/large/" + itemName + ".png";
 		return new ResourceLocation(s);
+	}
+	
+	private static ResourceLocation getOrCreateLargeItemTexture(Item item)
+	{
+		ResourceLocation texture = largeItemTextures.get(item);
+		if (texture == null)
+		{
+			texture = getLargeItemTexture(item);
+			largeItemTextures.put(item, texture);
+		}
+		return texture;
 	}
 	
 	@Override
@@ -52,25 +65,17 @@ public class LOTRRenderLargeItem implements IItemRenderer
 			GL11.glRotatef(260F, 0F, 0F, 1F);
 			GL11.glTranslatef(-1F, 0F, 0F);
 		}
+		
 		GL11.glTranslatef(-0.5F, -0.5F, 0F);
 		GL11.glScalef(2F, 2F, 1F);
+		
+		Tessellator tessellator = Tessellator.instance;
 		TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
-		ResourceLocation texture = null;
 		
+		ResourceLocation texture = getOrCreateLargeItemTexture(item);
 		
-		if (largeItemTextures.get(item) != null)
-		{
-			texture = (ResourceLocation)largeItemTextures.get(item);
-		}
-		else
-		{
-			texture = getLargeItemTexture(item);
-			largeItemTextures.put(item, texture);
-		}
-
 		textureManager.bindTexture(texture);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		Tessellator tessellator = Tessellator.instance;
 		ItemRenderer.renderItemIn2D(tessellator, 1F, 0F, 0F, 1F, 32, 32, 0.0625F);
 
 		if (itemstack != null && itemstack.hasEffect(0))
@@ -81,22 +86,22 @@ public class LOTRRenderLargeItem implements IItemRenderer
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 			float f = 0.76F;
-			GL11.glColor4f(0.5F * f, 0.25F * f, 0.8F * f, 1.0F);
+			GL11.glColor4f(0.5F * f, 0.25F * f, 0.8F * f, 1F);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glPushMatrix();
 			float f1 = 0.125F;
 			GL11.glScalef(f1, f1, f1);
-			float f2 = (float)(System.currentTimeMillis() % 3000L) / 3000.0F * 8.0F;
-			GL11.glTranslatef(f2, 0.0F, 0.0F);
-			GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+			float f2 = (float)(System.currentTimeMillis() % 3000L) / 3000F * 8F;
+			GL11.glTranslatef(f2, 0F, 0F);
+			GL11.glRotatef(-50F, 0F, 0F, 1F);
+			ItemRenderer.renderItemIn2D(tessellator, 0F, 0F, 1F, 1F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glScalef(f1, f1, f1);
-			f2 = (float)(System.currentTimeMillis() % 4873L) / 4873.0F * 8.0F;
-			GL11.glTranslatef(-f2, 0.0F, 0.0F);
-			GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+			f2 = (float)(System.currentTimeMillis() % 4873L) / 4873F * 8F;
+			GL11.glTranslatef(-f2, 0F, 0F);
+			GL11.glRotatef(10F, 0F, 0F, 1F);
+			ItemRenderer.renderItemIn2D(tessellator, 0F, 0F, 1F, 1F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glDisable(GL11.GL_BLEND);

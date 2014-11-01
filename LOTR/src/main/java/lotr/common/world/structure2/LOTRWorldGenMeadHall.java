@@ -422,7 +422,7 @@ public class LOTRWorldGenMeadHall extends LOTRWorldGenStructureBase2
 				item = new ItemStack(Items.wooden_sword);
 				break;
 			case 4:
-				item = new ItemStack(Items.bow);
+				item = new ItemStack(LOTRMod.rohanBow);
 				break;
 			case 5:
 				item = new ItemStack(Items.arrow);

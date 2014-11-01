@@ -1,5 +1,6 @@
 package lotr.common.entity.npc;
 
+import lotr.common.LOTRMod;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
@@ -27,7 +28,7 @@ public class LOTREntityGondorArcher extends LOTREntityGondorSoldier implements I
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
 		data = super.onSpawnWithEgg(data);
-		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+		setCurrentItemOrArmor(0, new ItemStack(LOTRMod.gondorBow));
 		return data;
     }
 	

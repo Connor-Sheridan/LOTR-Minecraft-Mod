@@ -401,7 +401,7 @@ public class LOTRChestContents
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.bodyRanger), 1, 1, 25),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.legsRanger), 1, 1, 25),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.bootsRanger), 1, 1, 25),
-			new WeightedRandomChestContent(new ItemStack(Items.bow), 1, 1, 25)
+			new WeightedRandomChestContent(new ItemStack(LOTRMod.gondorBow), 1, 1, 25)
 		}).enablePouches();
 		
 		BARROW_DOWNS = new LOTRChestContents(3, 8, new WeightedRandomChestContent[]
@@ -692,7 +692,7 @@ public class LOTRChestContents
 		{
 			new WeightedRandomChestContent(new ItemStack(Items.arrow), 2, 6, 100),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.swordRohan), 1, 1, 75),
-			new WeightedRandomChestContent(new ItemStack(Items.bow), 1, 1, 75),
+			new WeightedRandomChestContent(new ItemStack(LOTRMod.rohanBow), 1, 1, 75),
 			new WeightedRandomChestContent(new ItemStack(Items.bread), 1, 3, 100),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.mug), 1, 2, 100),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.mugMead), 1, 1, 100),
@@ -800,7 +800,7 @@ public class LOTRChestContents
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.spearGondor), 1, 1, 25),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.daggerGondor), 1, 1, 25),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.hammerGondor), 1, 1, 25),
-			new WeightedRandomChestContent(new ItemStack(Items.bow), 1, 1, 100),
+			new WeightedRandomChestContent(new ItemStack(LOTRMod.gondorBow), 1, 1, 100),
 			new WeightedRandomChestContent(new ItemStack(Items.arrow), 4, 10, 100),
 			new WeightedRandomChestContent(new ItemStack(Items.flint_and_steel), 1, 1, 50),
 			new WeightedRandomChestContent(new ItemStack(LOTRMod.silverCoin), 2, 5, 75),

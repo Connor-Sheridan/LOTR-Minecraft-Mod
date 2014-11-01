@@ -1,9 +1,11 @@
 package lotr.common.item;
 
+import static lotr.common.item.LOTRItemBow.BowState.*;
 import lotr.common.LOTRCreativeTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -130,26 +132,44 @@ public class LOTRItemBow extends ItemBow
         return repairItem.getItem() == Items.string ? true : super.getIsRepairable(itemstack, repairItem);
     }
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-    public IIcon getIcon(ItemStack itemstack, int renderPass, EntityPlayer entityplayer, ItemStack usingItem, int useRemaining)
-    {
-		if (usingItem != null && usingItem.getItem() == this)
+	public BowState getBowState(EntityLivingBase entity, ItemStack usingItem, int useRemaining)
+	{
+		if (entity instanceof EntityPlayer && usingItem != null && usingItem.getItem() == this)
 		{
 			int ticksInUse = usingItem.getMaxItemUseDuration() - useRemaining;
 			double useAmount = (double)ticksInUse / (double)bowPullTime;
 			if (useAmount >= 0.9D)
 			{
-				return bowPullIcons[2];
+				return PULL_2;
 			}
 			else if (useAmount > 0.65D)
 			{
-				return bowPullIcons[1];
+				return PULL_1;
 			}
 			else if (useAmount > 0D)
 			{
-				return bowPullIcons[0];
+				return PULL_0;
 			}
+		}
+		return HELD;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public IIcon getIcon(ItemStack itemstack, int renderPass, EntityPlayer entityplayer, ItemStack usingItem, int useRemaining)
+    {
+		BowState bowState = getBowState(entityplayer, usingItem, useRemaining);
+		if (bowState == PULL_0)
+		{
+			return bowPullIcons[0];
+		}
+		if (bowState == PULL_1)
+		{
+			return bowPullIcons[1];
+		}
+		if (bowState == PULL_2)
+		{
+			return bowPullIcons[2];
 		}
 		return itemIcon;
     }
@@ -160,9 +180,23 @@ public class LOTRItemBow extends ItemBow
     {
 		itemIcon = iconregister.registerIcon(getIconString());
 		bowPullIcons = new IIcon[3];
-        for (int i = 0; i < 3; i++)
-        {
-            bowPullIcons[i] = iconregister.registerIcon(getIconString() + "_pull_" + i);
-        }
+		bowPullIcons[0] = iconregister.registerIcon(getIconString() + PULL_0.iconName);
+		bowPullIcons[1] = iconregister.registerIcon(getIconString() + PULL_1.iconName);
+        bowPullIcons[2] = iconregister.registerIcon(getIconString() + PULL_2.iconName);
     }
+	
+	public static enum BowState
+	{
+		HELD(""),
+		PULL_0("_pull_0"),
+		PULL_1("_pull_1"),
+		PULL_2("_pull_2");
+		
+		public final String iconName;
+		
+		private BowState(String s)
+		{
+			iconName = s;
+		}
+	}
 }

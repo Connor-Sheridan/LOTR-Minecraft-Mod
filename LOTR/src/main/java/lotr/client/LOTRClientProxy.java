@@ -247,7 +247,18 @@ public class LOTRClientProxy extends LOTRCommonProxy
 					}
 					else if (item instanceof LOTRItemBow)
 					{
-						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderBow());
+						boolean largeBow = false;
+						try
+						{
+							ResourceLocation large = LOTRRenderLargeItem.getLargeItemTexture(item);
+							if (Minecraft.getMinecraft().getResourceManager().getResource(large) != null)
+							{
+								largeBow = true;
+							}
+						}
+						catch (FileNotFoundException e) {}
+						
+						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderBow(largeBow));
 					}
 					else if (item instanceof LOTRItemSword && ((LOTRItemSword)item).isElvenBlade())
 					{

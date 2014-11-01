@@ -33,7 +33,7 @@ public class LOTREntityRangerNorth extends LOTREntityRanger
 	@Override
 	public Item getRangerBowId()
 	{
-		return Items.bow;
+		return LOTRMod.gondorBow;
 	}
 	
 	@Override

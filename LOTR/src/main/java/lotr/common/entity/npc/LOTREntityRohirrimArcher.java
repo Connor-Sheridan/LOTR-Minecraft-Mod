@@ -1,8 +1,7 @@
 package lotr.common.entity.npc;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IRangedAttackMob;
+import lotr.common.LOTRMod;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -28,7 +27,7 @@ public class LOTREntityRohirrimArcher extends LOTREntityRohirrim implements IRan
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
 		data = super.onSpawnWithEgg(data);
-		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+		setCurrentItemOrArmor(0, new ItemStack(LOTRMod.rohanBow));
 		return data;
     }
 	

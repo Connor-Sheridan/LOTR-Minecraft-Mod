@@ -1,20 +1,54 @@
 package lotr.client.render.item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lotr.client.LOTRClientProxy;
+import lotr.common.LOTRMod;
+import lotr.common.item.LOTRItemBow;
+import lotr.common.item.LOTRItemBow.BowState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class LOTRRenderBow implements IItemRenderer
 {
+	private static Map<Pair<LOTRItemBow, BowState>, ResourceLocation> largeBowTextures = new HashMap();
+	
+	private static ResourceLocation getLargeBowTexture(LOTRItemBow item, BowState bowState)
+	{
+		Pair<LOTRItemBow, BowState> pair = Pair.of(item, bowState);
+		ResourceLocation texture = largeBowTextures.get(pair);
+		if (texture == null)
+		{
+			String prefix = LOTRMod.getModID() + ":";
+			String itemName = item.getUnlocalizedName();
+			itemName = itemName.substring(itemName.indexOf(prefix) + prefix.length());
+			String s = prefix + "textures/items/large/" + itemName + bowState.iconName + ".png";
+			texture = new ResourceLocation(s);
+			largeBowTextures.put(pair, texture);
+		}
+		return texture;
+	}
+	
+	private boolean isLargeBow;
+
+	public LOTRRenderBow(boolean large)
+	{
+		isLargeBow = large;
+	}
+	
 	@Override
     public boolean handleRenderType(ItemStack itemstack, ItemRenderType type)
 	{
@@ -30,73 +64,116 @@ public class LOTRRenderBow implements IItemRenderer
 	@Override
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data)
 	{
-		if (Minecraft.getMinecraft().gameSettings.thirdPersonView != 0 || data[1] != Minecraft.getMinecraft().thePlayer)
+		GL11.glPushMatrix();
+		
+		EntityLivingBase entity = (EntityLivingBase)data[1];
+		if (Minecraft.getMinecraft().gameSettings.thirdPersonView != 0 || entity != Minecraft.getMinecraft().thePlayer)
 		{
-			GL11.glTranslatef(0.9375F, 0.0625F, 0.0F);
-			GL11.glRotatef(-335.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(-50.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(0.9375F, 0.0625F, 0F);
+			GL11.glRotatef(-335F, 0F, 0F, 1F);
+			GL11.glRotatef(-50F, 0F, 1F, 0F);
 			GL11.glScalef(1F / 1.5F, 1F / 1.5F, 1F / 1.5F);
-			GL11.glTranslatef(0.0F, 0.3F, 0.0F);
+			GL11.glTranslatef(0F, 0.3F, 0F);
 			
-			GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(-60.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(-20F, 0F, 0F, 1F);
+			GL11.glRotatef(90F, 1F, 0F, 0F);
+			GL11.glRotatef(-60F, 0F, 0F, 1F);
 			GL11.glScalef(1F / 0.375F, 1F / 0.375F, 1F / 0.375F);
 			GL11.glTranslatef(-0.25F, -0.1875F, 0.1875F);
 			
-			GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
-			GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(0F, 0.125F, 0.3125F);
+			GL11.glRotatef(-20F, 0F, 1F, 0F);
 			GL11.glScalef(0.625F, -0.625F, 0.625F);
-			GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-100F, 1F, 0F, 0F);
+			GL11.glRotatef(45F, 0F, 1F, 0F);
 			
-			GL11.glTranslatef(0.0F, -0.3F, 0.0F);
+			GL11.glTranslatef(0F, -0.3F, 0F);
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
-			GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
+			GL11.glRotatef(50F, 0F, 1F, 0F);
+			GL11.glRotatef(335F, 0F, 0F, 1F);
+			GL11.glTranslatef(-0.9375F, -0.0625F, 0F);
 		}
 		
-		IIcon icon = ((EntityLivingBase)data[1]).getItemIcon(itemstack, 0);
-
-		if (icon == null)
+		if (isLargeBow)
 		{
-			GL11.glPopMatrix();
-			return;
+			GL11.glTranslatef(-0.5F, -0.5F, 0F);
+			GL11.glScalef(2F, 2F, 1F);
 		}
-
-		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+		
 		Tessellator tessellator = Tessellator.instance;
-		float f = icon.getMinU();
-		float f1 = icon.getMaxU();
-		float f2 = icon.getMinV();
-		float f3 = icon.getMaxV();
-		ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+		TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
+		
+		if (isLargeBow)
+		{
+			ResourceLocation texture = null;
+	
+			Item item = itemstack.getItem();
+			if (item instanceof LOTRItemBow)
+			{
+				LOTRItemBow bow = (LOTRItemBow)item;
+				BowState bowState = BowState.HELD;
+				
+				if (entity instanceof EntityPlayer)
+				{
+					EntityPlayer entityplayer = (EntityPlayer)entity;
+					ItemStack usingItem = entityplayer.getItemInUse();
+					int useCount = entityplayer.getItemInUseCount();
+					bowState = bow.getBowState(entityplayer, usingItem, useCount);
+				}
+				else
+				{
+					bowState = bow.getBowState(entity, itemstack, 0);
+				}
+
+				texture = getLargeBowTexture(bow, bowState);
+		
+				textureManager.bindTexture(texture);
+				GL11.glColor4f(1F, 1F, 1F, 1F);
+				ItemRenderer.renderItemIn2D(tessellator, 1F, 0F, 0F, 1F, 32, 32, 0.0625F);
+			}
+			else
+			{
+				throw new RuntimeException("Attempting to render a large bow which is not a bow");
+			}
+		}
+		else
+		{
+			IIcon icon = ((EntityLivingBase)data[1]).getItemIcon(itemstack, 0);
+			icon = RenderBlocks.getInstance().getIconSafe(icon);
+	
+			float minU = icon.getMinU();
+			float maxU = icon.getMaxU();
+			float minV = icon.getMinV();
+			float maxV = icon.getMaxV();
+			int width = icon.getIconWidth();
+			int height = icon.getIconWidth();
+			ItemRenderer.renderItemIn2D(tessellator, maxU, minV, minU, maxV, width, height, 0.0625F);
+		}
 		
 		if (itemstack != null && itemstack.hasEffect(0))
 		{
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			texturemanager.bindTexture(LOTRClientProxy.enchantmentTexture);
+			textureManager.bindTexture(LOTRClientProxy.enchantmentTexture);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-			float var14 = 0.76F;
-			GL11.glColor4f(0.5F * var14, 0.25F * var14, 0.8F * var14, 1.0F);
+			float f = 0.76F;
+			GL11.glColor4f(0.5F * f, 0.25F * f, 0.8F * f, 1F);
 			GL11.glMatrixMode(GL11.GL_TEXTURE);
 			GL11.glPushMatrix();
-			float var15 = 0.125F;
-			GL11.glScalef(var15, var15, var15);
-			float var16 = (float)(Minecraft.getSystemTime() % 3000L) / 3000.0F * 8.0F;
-			GL11.glTranslatef(var16, 0.0F, 0.0F);
-			GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+			float f1 = 0.125F;
+			GL11.glScalef(f1, f1, f1);
+			float f2 = (float)(System.currentTimeMillis() % 3000L) / 3000F * 8F;
+			GL11.glTranslatef(f2, 0F, 0F);
+			GL11.glRotatef(-50F, 0F, 0F, 1F);
+			ItemRenderer.renderItemIn2D(tessellator, 0F, 0F, 1F, 1F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
-			GL11.glScalef(var15, var15, var15);
-			var16 = (float)(Minecraft.getSystemTime() % 4873L) / 4873.0F * 8.0F;
-			GL11.glTranslatef(-var16, 0.0F, 0.0F);
-			GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-			ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+			GL11.glScalef(f1, f1, f1);
+			f2 = (float)(System.currentTimeMillis() % 4873L) / 4873F * 8F;
+			GL11.glTranslatef(-f2, 0F, 0F);
+			GL11.glRotatef(10F, 0F, 0F, 1F);
+			ItemRenderer.renderItemIn2D(tessellator, 0F, 0F, 1F, 1F, 256, 256, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glDisable(GL11.GL_BLEND);
@@ -105,5 +182,6 @@ public class LOTRRenderBow implements IItemRenderer
 		}
 
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		GL11.glPopMatrix();
 	}
 }

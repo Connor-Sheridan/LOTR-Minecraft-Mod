@@ -26,7 +26,7 @@ public class LOTREntityBlackUrukArcher extends LOTREntityBlackUruk implements IR
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
     {
 		data = super.onSpawnWithEgg(data);
-		setCurrentItemOrArmor(0, new ItemStack(LOTRMod.orcBow));
+		setCurrentItemOrArmor(0, new ItemStack(LOTRMod.blackUrukBow));
 		return data;
 	}
 	

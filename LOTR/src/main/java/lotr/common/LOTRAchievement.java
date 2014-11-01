@@ -665,7 +665,7 @@ public class LOTRAchievement implements Comparable
 		enterBreeland = new LOTRAchievement(BREE_LAND, 0, Blocks.grass, "enterBreeland").setBiomeAchievement();
 		enterChetwood = new LOTRAchievement(BREE_LAND, 1, Blocks.sapling, "enterChetwood").setBiomeAchievement();
 
-		killRangerNorth = new LOTRAchievement(ERIADOR, 0, Items.bow, "killRangerNorth").setRequiresEnemy(LOTRFaction.RANGER_NORTH);
+		killRangerNorth = new LOTRAchievement(ERIADOR, 0, LOTRMod.gondorBow, "killRangerNorth").setRequiresEnemy(LOTRFaction.RANGER_NORTH);
 		wearFullRanger = new LOTRAchievement(ERIADOR, 1, LOTRMod.bodyRanger, "wearFullRanger");
 		killTroll = new LOTRAchievement(ERIADOR, 2, LOTRMod.trollBone, "killTroll").setRequiresEnemy(LOTRFaction.ANGMAR);
 		getTrollStatue = new LOTRAchievement(ERIADOR, 3, LOTRMod.trollStatue, "getTrollStatue");
@@ -836,9 +836,9 @@ public class LOTRAchievement implements Comparable
 		tradeGondorBlacksmith = new LOTRAchievement(GONDOR, 3, LOTRMod.silverCoin, "tradeGondorBlacksmith").setRequiresAlly(LOTRFaction.GONDOR);
 		tradeGondorianCaptain = new LOTRAchievement(GONDOR, 4, LOTRMod.silverCoin, "tradeGondorianCaptain").setRequiresAlly(LOTRFaction.GONDOR);
 		wearFullGondorian = new LOTRAchievement(GONDOR, 5, LOTRMod.bodyGondor, "wearFullGondorian");
-		killRangerIthilien = new LOTRAchievement(GONDOR, 6, Items.bow, "killRangerIthilien").setRequiresEnemy(LOTRFaction.GONDOR);
+		killRangerIthilien = new LOTRAchievement(GONDOR, 6, LOTRMod.gondorBow, "killRangerIthilien").setRequiresEnemy(LOTRFaction.GONDOR);
 		enterGondor = new LOTRAchievement(GONDOR, 7, LOTRMod.spearGondor, "enterGondor").setBiomeAchievement();
-		enterIthilien = new LOTRAchievement(GONDOR, 8, Items.bow, "enterIthilien").setBiomeAchievement();
+		enterIthilien = new LOTRAchievement(GONDOR, 8, LOTRMod.gondorBow, "enterIthilien").setBiomeAchievement();
 		enterWhiteMountains = new LOTRAchievement(GONDOR, 9, new ItemStack(LOTRMod.rock, 1, 1), "enterWhiteMountains").setBiomeAchievement();
 		alignmentGood10_GONDOR = new LOTRAchievement(GONDOR, 10, LOTRMod.goldRing, "alignmentGood10_GONDOR").setRequiresAlly(LOTRFaction.GONDOR).setSpecial();
 		alignmentGood100_GONDOR = new LOTRAchievement(GONDOR, 11, LOTRMod.goldRing, "alignmentGood100_GONDOR").setRequiresAlly(LOTRFaction.GONDOR).setSpecial();

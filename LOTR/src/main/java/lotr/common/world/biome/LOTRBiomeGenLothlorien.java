@@ -41,9 +41,7 @@ public class LOTRBiomeGenLothlorien extends LOTRBiome
 		decorator.generateLava = false;
 		decorator.generateCobwebs = false;
 		
-		decorator.addTree(LOTRTreeType.OAK, 200);
-		decorator.addTree(LOTRTreeType.OAK_TALL, 100);
-		decorator.addTree(LOTRTreeType.OAK_TALLER, 50);
+		decorator.addTree(LOTRTreeType.OAK, 300);
 		decorator.addTree(LOTRTreeType.LARCH, 200);
 		decorator.addTree(LOTRTreeType.BEECH, 100);
 		decorator.addTree(LOTRTreeType.MALLORN, 1000);
