@@ -167,6 +167,7 @@ public class LOTRBiome extends BiomeGenBase
 	public static BiomeGenBase shireMoors;
 	public static BiomeGenBase shireMarshes;
 	public static BiomeGenBase farHaradBaobab;
+	public static BiomeGenBase farHaradVolcano;
 	
 	public static BiomeGenBase utumno;
 	
@@ -306,6 +307,7 @@ public class LOTRBiome extends BiomeGenBase
 		shireMoors = new LOTRBiomeGenShireMoors(131).setTemperatureRainfall(0.6F, 1.6F).setMinMaxHeight(0.4F, 0.6F).setColor(0x52A04B).setBiomeName("shireMoors");
 		shireMarshes = new LOTRBiomeGenShireMarshes(132).setTemperatureRainfall(0.8F, 1.2F).setMinMaxHeight(0F, 0.1F).setColor(0x37932F).setBiomeName("shireMarshes");
 		farHaradBaobab = new LOTRBiomeGenFarHaradBaobab(133).setTemperatureRainfall(1.2F, 0.4F).setMinMaxHeight(0.2F, 0.1F).setColor(0x9B955B).setBiomeName("farHaradBaobab");
+		farHaradVolcano = new LOTRBiomeGenFarHaradVolcano(134).setTemperatureRainfall(1.5F, 0F).setMinMaxHeight(0.4F, 1.2F).setColor(0x7A5A48).setBiomeName("farHaradVolcano");
 		
 		utumno = new LOTRBiomeGenUtumno(0).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0F, 0F).setColor(0x000000).setBiomeName("utumno");
 	}

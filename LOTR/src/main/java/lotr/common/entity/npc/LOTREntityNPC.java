@@ -75,6 +75,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public LOTRTraderNPCInfo traderNPCInfo;
 	public LOTRFamilyInfo familyInfo;
 	public LOTRTravellingTraderInfo travellingTraderInfo;
+	public boolean isTraderEscort = false;
 	
 	public boolean isOfferingMiniQuest = false;
 	public boolean hasMiniQuest = false;
@@ -98,8 +99,8 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public ResourceLocation npcCape;
 	
 	private UUID prevAttackTarget;
-	private boolean hurtOnlyByPlates = true;
 	public int npcTalkTick = 0;
+	private boolean hurtOnlyByPlates = true;
 	
 	private List<ItemStack> enpouchedDrops = new ArrayList();
 	private boolean enpouchNPCDrops = false;
@@ -668,6 +669,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);
+		
 		hiredNPCInfo.writeToNBT(nbt);
 		traderNPCInfo.writeToNBT(nbt);
 		familyInfo.writeToNBT(nbt);
@@ -675,6 +677,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		{
 			travellingTraderInfo.writeToNBT(nbt);
 		}
+		
 		nbt.setInteger("NPCHomeX", getHomePosition().posX);
 		nbt.setInteger("NPCHomeY", getHomePosition().posY);
 		nbt.setInteger("NPCHomeZ", getHomePosition().posZ);
@@ -685,9 +688,11 @@ public abstract class LOTREntityNPC extends EntityCreature
 			nbt.setString("NPCLocationName", npcLocationName);
 		}
 		nbt.setBoolean("SpecificLocationName", hasSpecificLocationName);
+		
 		nbt.setBoolean("HurtOnlyByPlates", hurtOnlyByPlates);
 		nbt.setBoolean("RidingHorse", ridingHorse);
 		nbt.setBoolean("NPCPassive", isPassive);
+		
 		nbt.setBoolean("HasDefaultHeldItem", hasDefaultHeldItem);
 		if (hasDefaultHeldItem)
 		{
@@ -698,13 +703,16 @@ public abstract class LOTREntityNPC extends EntityCreature
 			}
 			nbt.setTag("DefaultHeldItem", itemData);
 		}
+		
 		nbt.setBoolean("NPCHasMiniQuest", hasMiniQuest);
+		nbt.setBoolean("TraderEscort", isTraderEscort);
 	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
+		
 		hiredNPCInfo.readFromNBT(nbt);
 		traderNPCInfo.readFromNBT(nbt);
 		familyInfo.readFromNBT(nbt);
@@ -712,6 +720,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		{
 			travellingTraderInfo.readFromNBT(nbt);
 		}
+		
 		setHomeArea(nbt.getInteger("NPCHomeX"), nbt.getInteger("NPCHomeY"), nbt.getInteger("NPCHomeZ"), nbt.getInteger("NPCHomeRadius"));
 		isNPCPersistent = nbt.getBoolean("NPCPersistent");
 		if (nbt.hasKey("NPCLocationName"))
@@ -719,9 +728,11 @@ public abstract class LOTREntityNPC extends EntityCreature
 			npcLocationName = nbt.getString("NPCLocationName");
 		}
 		hasSpecificLocationName = nbt.getBoolean("SpecificLocationName");
+		
 		hurtOnlyByPlates = nbt.getBoolean("HurtOnlyByPlates");
 		ridingHorse = nbt.getBoolean("RidingHorse");
 		isPassive = nbt.getBoolean("NPCPassive");
+		
 		hasDefaultHeldItem = nbt.getBoolean("HasDefaultHeldItem");
 		if (hasDefaultHeldItem)
 		{
@@ -737,10 +748,10 @@ public abstract class LOTREntityNPC extends EntityCreature
 			}
 			clearDefaultHeldItem();
 		}
-		
 		onAttackModeChange(AttackMode.IDLE);
 		
 		hasMiniQuest = nbt.getBoolean("NPCHasMiniQuest");
+		isTraderEscort = nbt.getBoolean("TraderEscort");
 	}
 	
 	@Override
@@ -1256,7 +1267,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 	{
 		if (!worldObj.isRemote && canNPCTalk())
 		{
-			if (!isTrader() && !isChild() && !hiredNPCInfo.isActive && isFriendly(entityplayer) && getAttackTarget() == null)
+			if (!isTrader() && !isTraderEscort && !isChild() && !hiredNPCInfo.isActive && isFriendly(entityplayer) && getAttackTarget() == null)
 			{
 				LOTRPlayerData playerData = LOTRLevelData.getData(entityplayer);
 				

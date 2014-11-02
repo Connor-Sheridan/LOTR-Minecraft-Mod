@@ -45,7 +45,7 @@ public class LOTRGenLayerBeach extends GenLayer
                     }
                     else
                     {
-                    	if (biome instanceof LOTRBiomeGenLindon || biome instanceof LOTRBiomeGenForodwaith)
+                    	if (biome instanceof LOTRBiomeGenLindon || biome instanceof LOTRBiomeGenForodwaith || biome instanceof LOTRBiomeGenFarHaradVolcano)
                     	{
                     		newBiomeID = LOTRBiome.beachStone.biomeID;
                     	}

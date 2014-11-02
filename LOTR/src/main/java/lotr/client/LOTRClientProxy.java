@@ -94,6 +94,73 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	{
 		return Minecraft.getMinecraft().thePlayer;
 	}
+	
+	@Override
+	public void onPreload()
+	{
+		MinecraftForgeClient.registerItemRenderer(LOTRMod.hobbitPipe, new LOTRRenderBlownItem());
+		MinecraftForgeClient.registerItemRenderer(LOTRMod.commandHorn, new LOTRRenderBlownItem());
+		
+		MinecraftForgeClient.registerItemRenderer(LOTRMod.banner, new LOTRRenderBannerItem());
+		MinecraftForgeClient.registerItemRenderer(LOTRMod.orcSkullStaff, new LOTRRenderSkullStaff());
+		
+		try
+		{
+			for (Field field : LOTRMod.class.getFields())
+			{
+				if (field.get(null) instanceof Item)
+				{
+					Item item = (Item)field.get(null);
+					
+					if (item instanceof LOTRItemCrossbow)
+					{
+						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderCrossbow());
+					}
+					else if (item instanceof LOTRItemBow)
+					{
+						boolean largeBow = false;
+						try
+						{
+							ResourceLocation large = LOTRRenderLargeItem.getLargeItemTexture(item);
+							if (Minecraft.getMinecraft().getResourceManager().getResource(large) != null)
+							{
+								largeBow = true;
+							}
+						}
+						catch (FileNotFoundException e) {}
+						
+						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderBow(largeBow));
+					}
+					else if (item instanceof LOTRItemSword && ((LOTRItemSword)item).isElvenBlade())
+					{
+						double d = 24D;
+						if (item == LOTRMod.sting)
+						{
+							d = 40D;
+						}
+						
+						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderElvenBlade(d));
+					}
+					else
+					{
+						try
+						{
+							ResourceLocation large = LOTRRenderLargeItem.getLargeItemTexture(item);
+							if (Minecraft.getMinecraft().getResourceManager().getResource(large) != null)
+							{
+								MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderLargeItem());
+							}
+						}
+						catch (FileNotFoundException e) {}
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void onLoad()
@@ -226,69 +293,6 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityTrollTotem.class, new LOTRRenderTrollTotem());
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityUtumnoPortal.class, new LOTRRenderUtumnoPortal());
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityUtumnoReturnPortal.class, new LOTRRenderUtumnoReturnPortal());
-		
-		MinecraftForgeClient.registerItemRenderer(LOTRMod.hobbitPipe, new LOTRRenderBlownItem());
-		MinecraftForgeClient.registerItemRenderer(LOTRMod.commandHorn, new LOTRRenderBlownItem());
-		
-		MinecraftForgeClient.registerItemRenderer(LOTRMod.banner, new LOTRRenderBannerItem());
-		MinecraftForgeClient.registerItemRenderer(LOTRMod.orcSkullStaff, new LOTRRenderSkullStaff());
-		
-		try
-		{
-			for (Field field : LOTRMod.class.getFields())
-			{
-				if (field.get(null) instanceof Item)
-				{
-					Item item = (Item)field.get(null);
-					
-					if (item instanceof LOTRItemCrossbow)
-					{
-						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderCrossbow());
-					}
-					else if (item instanceof LOTRItemBow)
-					{
-						boolean largeBow = false;
-						try
-						{
-							ResourceLocation large = LOTRRenderLargeItem.getLargeItemTexture(item);
-							if (Minecraft.getMinecraft().getResourceManager().getResource(large) != null)
-							{
-								largeBow = true;
-							}
-						}
-						catch (FileNotFoundException e) {}
-						
-						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderBow(largeBow));
-					}
-					else if (item instanceof LOTRItemSword && ((LOTRItemSword)item).isElvenBlade())
-					{
-						double d = 24D;
-						if (item == LOTRMod.sting)
-						{
-							d = 40D;
-						}
-						
-						MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderElvenBlade(d));
-					}
-					else
-					{
-						try
-						{
-							ResourceLocation large = LOTRRenderLargeItem.getLargeItemTexture(item);
-							if (Minecraft.getMinecraft().getResourceManager().getResource(large) != null)
-							{
-								MinecraftForgeClient.registerItemRenderer(item, new LOTRRenderLargeItem());
-							}
-						}
-						catch (FileNotFoundException e) {}
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	public void onPostload()

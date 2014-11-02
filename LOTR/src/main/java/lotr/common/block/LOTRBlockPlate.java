@@ -150,8 +150,11 @@ public class LOTRBlockPlate extends BlockContainer
 				{
 					if (plateItem.stackSize < plateItem.getMaxStackSize())
 					{
-						plateItem.stackSize++;
-						plate.setFoodItem(plateItem);
+						if (!world.isRemote)
+						{
+							plateItem.stackSize++;
+							plate.setFoodItem(plateItem);
+						}
 						if (!entityplayer.capabilities.isCreativeMode)
 						{
 							itemstack.stackSize--;
@@ -162,7 +165,10 @@ public class LOTRBlockPlate extends BlockContainer
 				else if (entityplayer.canEat(false))
 				{
 					plateItem.getItem().onEaten(plateItem, world, entityplayer);
-					plate.setFoodItem(plateItem);
+					if (!world.isRemote)
+					{
+						plate.setFoodItem(plateItem);
+					}
 					return true;
 				}
 			}

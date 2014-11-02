@@ -10,7 +10,7 @@ Public Beta 21
 + Added player titles
 + Added an on-screen compass and a Middle-earth map compass
 + Added improved mountain generation
-+ Added new Harad biomes: Near Harad Semidesert and Fertile Forest, and Far Harad Arid Savannah, Cloud Forest, Swampland, Mangrove, and Bushland
++ Added new Harad biomes: Near Harad Semidesert and Fertile Forest, and Far Harad Arid Savannah, Baobab Savannah, Cloud Forest, Swampland, Mangrove, Bushland, and Volcano
 + Added mangrove, baobab, and cedar trees, and their wood
 + Added termite mounds and exploding termites
 + Added dik-diks
@@ -69,6 +69,7 @@ Public Beta 21
 * Slightly reduced the chance for an NPC to offer a mini-quest
 * Changed the storage of completed mini-quests to record the amount completed per faction
 * Fixed kill-entity mini-quests sometimes not recording kills of subtypes of the target entity
+* Fixed travelling trader escorts being able to give mini-quests
 * Fixed blocks rendering darkly in the mini-quest screen
 * Fixed some elements of the Middle-earth map screen being layered in the wrong order
 * The Forodwaith biome now extends south around the Bay of Forochel

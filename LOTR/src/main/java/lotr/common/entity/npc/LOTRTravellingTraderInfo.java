@@ -61,7 +61,9 @@ public class LOTRTravellingTraderInfo
 				escort.spawnRidingHorse = false;
 				escort.onSpawnWithEgg(null);
 				theEntity.worldObj.spawnEntityInWorld(escort);
+				
 				escort.setHomeArea(i, j, k, 16);
+				escort.isTraderEscort = true;
 				escortUUIDs.add(escort.getUniqueID());
 			}
 		}

@@ -11,6 +11,8 @@ import java.util.zip.ZipFile;
 
 import javax.imageio.ImageIO;
 
+import org.apache.logging.log4j.Level;
+
 import lotr.common.LOTRDimension;
 import lotr.common.LOTRMod;
 import lotr.common.world.biome.LOTRBiome;
@@ -22,8 +24,7 @@ import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraft.world.gen.layer.IntCache;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 
 public class LOTRGenLayerWorld extends GenLayer
 {
@@ -133,6 +134,7 @@ public class LOTRGenLayerWorld extends GenLayer
 					}
 					else
 					{
+						FMLLog.log(Level.ERROR, "Found unknown biome on map " + Integer.toHexString(color));
 						biomeImageData[i] = LOTRBiome.ocean.biomeID;
 					}
 				}
