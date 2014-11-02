@@ -132,9 +132,12 @@ public class LOTRBlockPlate extends BlockContainer
 			
 			if (plateItem == null && LOTRTileEntityPlate.isValidFoodItem(itemstack))
 			{
-				plateItem = itemstack.copy();
-				plateItem.stackSize = 1;
-				plate.setFoodItem(plateItem);
+				if (!world.isRemote)
+				{
+					plateItem = itemstack.copy();
+					plateItem.stackSize = 1;
+					plate.setFoodItem(plateItem);
+				}
 				if (!entityplayer.capabilities.isCreativeMode)
 				{
 					itemstack.stackSize--;

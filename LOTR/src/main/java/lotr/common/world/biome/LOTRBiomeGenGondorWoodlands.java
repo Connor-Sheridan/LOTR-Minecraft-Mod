@@ -3,6 +3,7 @@ package lotr.common.world.biome;
 import lotr.common.entity.animal.LOTREntityBird;
 import lotr.common.entity.animal.LOTREntityButterfly;
 import lotr.common.entity.animal.LOTREntityRabbit;
+import lotr.common.world.feature.LOTRTreeType;
 import net.minecraft.entity.passive.EntityWolf;
 
 public class LOTRBiomeGenGondorWoodlands extends LOTRBiomeGenGondor
@@ -22,6 +23,8 @@ public class LOTRBiomeGenGondorWoodlands extends LOTRBiomeGenGondor
 		decorator.doubleFlowersPerChunk = 1;
 		decorator.grassPerChunk = 10;
 		decorator.doubleGrassPerChunk = 4;
+		
+		decorator.addTree(LOTRTreeType.BIRCH, 100);
 		
 		registerForestFlowers();
 	}

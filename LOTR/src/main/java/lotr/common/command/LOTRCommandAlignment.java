@@ -2,13 +2,8 @@ package lotr.common.command;
 
 import java.util.List;
 
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRLevelData;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerNotFoundException;
-import net.minecraft.command.WrongUsageException;
+import lotr.common.*;
+import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
@@ -19,19 +14,19 @@ public class LOTRCommandAlignment extends CommandBase
     {
         return "alignment";
     }
-
+	
 	@Override
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
-
+	
 	@Override
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.lotr.alignment.usage";
     }
-
+	
 	@Override
     public void processCommand(ICommandSender sender, String[] input)
     {
