@@ -36,10 +36,10 @@ public class LOTREntitySpear extends LOTREntityProjectileBase
 	}
 	
 	@Override
-	public float getDamageVsEntity(Entity entity)
+	public float getImpactDamage(Entity entity)
 	{
-		float momentum = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+		float speed = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
 		float damage = ((LOTRItemSpear)getItem().getItem()).getLOTRWeaponDamage();
-		return momentum * damage * 0.7F;
+		return speed * damage * 0.7F;
 	}
 }

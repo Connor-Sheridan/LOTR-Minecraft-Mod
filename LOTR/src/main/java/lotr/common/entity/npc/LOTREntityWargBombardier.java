@@ -97,7 +97,7 @@ public abstract class LOTREntityWargBombardier extends LOTREntityWarg
 		super.setAttackTarget(target);
 		if (target != null)
 		{
-			worldObj.playSoundAtEntity(this, "random.fuse", 1F, 1F);
+			worldObj.playSoundAtEntity(this, "game.tnt.primed", 1F, 1F);
 		}
 	}
 }

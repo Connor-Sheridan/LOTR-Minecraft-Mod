@@ -1016,7 +1016,7 @@ public class LOTRBiome extends BiomeGenBase
 			{
 				if (special)
 				{
-					if (random.nextInt(50) == 0)
+					if (random.nextInt(200) == 0)
 					{
 						return new GrassBlockAndMeta(LOTRMod.tallGrass, 3);
 					}

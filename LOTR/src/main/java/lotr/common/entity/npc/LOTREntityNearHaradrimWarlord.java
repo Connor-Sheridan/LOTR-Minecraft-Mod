@@ -37,7 +37,7 @@ public class LOTREntityNearHaradrimWarlord extends LOTREntityNearHaradrimWarrior
     {
 		data = super.onSpawnWithEgg(data);
 		setCurrentItemOrArmor(0, new ItemStack(LOTRMod.scimitarNearHarad));
-		setCurrentItemOrArmor(4, null);
+		setCurrentItemOrArmor(4, new ItemStack(LOTRMod.helmetNearHaradWarlord));
 		return data;
 	}
 	

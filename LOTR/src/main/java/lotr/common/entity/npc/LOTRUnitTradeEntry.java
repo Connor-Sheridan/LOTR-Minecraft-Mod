@@ -198,10 +198,10 @@ public class LOTRUnitTradeEntry
 			new LOTRUnitTradeEntry(LOTREntityMordorOrc.class, LOTREntityMordorWarg.class, "MordorOrc_Warg", 20, 250).setMountArmor(LOTRMod.wargArmorMordor, 0.5F),
 			new LOTRUnitTradeEntry(LOTREntityMordorOrcArcher.class, LOTREntityMordorWarg.class, "MordorOrcArcher_Warg", 30, 300).setMountArmor(LOTRMod.wargArmorMordor, 0.5F),
 			new LOTRUnitTradeEntry(LOTREntityMordorWargBombardier.class, 25, 400),
-			new LOTRUnitTradeEntry(LOTREntityBlackUruk.class, 20, 300),
-			new LOTRUnitTradeEntry(LOTREntityBlackUrukArcher.class, 30, 350),
-			new LOTRUnitTradeEntry(LOTREntityBlackUruk.class, LOTREntityMordorWarg.class, "BlackUruk_Warg", 30, 400).setMountArmor(LOTRMod.wargArmorMordor),
-			new LOTRUnitTradeEntry(LOTREntityBlackUrukArcher.class, LOTREntityMordorWarg.class, "BlackUruk_Warg", 40, 450).setMountArmor(LOTRMod.wargArmorMordor),
+			new LOTRUnitTradeEntry(LOTREntityBlackUruk.class, 30, 400),
+			new LOTRUnitTradeEntry(LOTREntityBlackUrukArcher.class, 40, 450),
+			new LOTRUnitTradeEntry(LOTREntityBlackUruk.class, LOTREntityMordorWarg.class, "BlackUruk_Warg", 40, 500).setMountArmor(LOTRMod.wargArmorMordor),
+			new LOTRUnitTradeEntry(LOTREntityBlackUrukArcher.class, LOTREntityMordorWarg.class, "BlackUruk_Warg", 50, 550).setMountArmor(LOTRMod.wargArmorMordor),
 			new LOTRUnitTradeEntry(LOTREntityOlogHai.class, 60, 500),
 			new LOTRUnitTradeEntry(LOTREntityMordorBannerBearer.class, 40, 300)
 		};

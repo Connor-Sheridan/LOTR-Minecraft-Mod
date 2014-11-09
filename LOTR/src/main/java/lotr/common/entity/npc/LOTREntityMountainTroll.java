@@ -185,7 +185,7 @@ public class LOTREntityMountainTroll extends LOTREntityTroll implements IRangedA
 	@Override
 	protected int getExperiencePoints(EntityPlayer entityplayer)
     {
-        return 5 + rand.nextInt(6);
+        return 7 + rand.nextInt(6);
     }
 	
 	@Override

@@ -1,37 +1,17 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRFoods;
-import lotr.common.LOTRMod;
-import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
-import lotr.common.entity.ai.LOTREntityAIDrink;
-import lotr.common.entity.ai.LOTREntityAIEat;
-import lotr.common.entity.ai.LOTREntityAIFollowHiringPlayer;
-import lotr.common.entity.ai.LOTREntityAIHiredRemainStill;
-import lotr.common.entity.ai.LOTREntityAIHiringPlayerHurtByTarget;
-import lotr.common.entity.ai.LOTREntityAIHiringPlayerHurtTarget;
-import lotr.common.entity.ai.LOTREntityAINearestAttackableTargetBasic;
+import lotr.common.*;
+import lotr.common.entity.ai.*;
 import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.quest.LOTRMiniQuestFactory;
 import lotr.common.world.biome.LOTRBiomeGenDunland;
+import lotr.common.world.biome.LOTRBiomeGenEnedwaith;
 import lotr.common.world.structure.LOTRChestContents;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -216,7 +196,7 @@ public class LOTREntityDunlending extends LOTREntityNPC
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
 				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return biome instanceof LOTRBiomeGenDunland && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+				return (biome instanceof LOTRBiomeGenDunland || biome instanceof LOTRBiomeGenEnedwaith) && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;

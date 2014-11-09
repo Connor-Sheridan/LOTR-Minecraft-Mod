@@ -19,6 +19,7 @@ import lotr.common.inventory.LOTRContainerTrade;
 import lotr.common.inventory.LOTRContainerUnitTrade;
 import lotr.common.item.*;
 import lotr.common.quest.LOTRMiniQuest;
+import lotr.common.world.LOTRChunkProviderUtumno.UtumnoLevel;
 import lotr.common.world.biome.LOTRBiome;
 import lotr.common.world.structure.LOTRChestContents;
 import net.minecraft.command.IEntitySelector;
@@ -339,47 +340,41 @@ public abstract class LOTREntityNPC extends EntityCreature
 	{
 		super.setAttackTarget(target);
 		
-		if (target == null)
+		if (target != null && !target.getUniqueID().equals(prevAttackTarget))
 		{
-			prevAttackTarget = null;
-		}
-		else
-		{
-			if (!target.getUniqueID().equals(prevAttackTarget))
+			prevAttackTarget = target.getUniqueID();
+			
+			if (getAttackSound() != null)
 			{
-				prevAttackTarget = target.getUniqueID();
-				
-				if (getAttackSound() != null)
+				worldObj.playSoundAtEntity(this, getAttackSound(), getSoundVolume(), getSoundPitch());
+			}
+
+			if (target instanceof EntityPlayer)
+			{
+				final EntityPlayer entityplayer = (EntityPlayer)target;
+				String speechBank = getSpeechBank(entityplayer);
+
+				if (speechBank != null && rand.nextInt(5) == 0 && getEntitySenses().canSee(entityplayer))
 				{
-					worldObj.playSoundAtEntity(this, getAttackSound(), getSoundVolume(), getSoundPitch());
-				}
-				
-				if (target instanceof EntityPlayer)
-				{
-					final EntityPlayer entityplayer = (EntityPlayer)target;
-					String speechBank = getSpeechBank(entityplayer);
-					if (speechBank != null && rand.nextInt(5) == 0 && getEntitySenses().canSee(entityplayer) && getDistanceSqToEntity(entityplayer) <= getMaxCombatRangeSq())
+					IEntitySelector selectorAttackingNPCs = new IEntitySelector()
 					{
-						IEntitySelector selectorAttackingNPCs = new IEntitySelector()
-						{
-							@Override
-							public boolean isEntityApplicable(Entity entity)
-					        {
-								if (entity instanceof LOTREntityNPC)
-								{
-									LOTREntityNPC npc = (LOTREntityNPC)entity;
-									return npc.isAIEnabled() && npc.isEntityAlive() && npc.getAttackTarget() == entityplayer;
-								}
-					            return false;
-					        }
-						};
-						
-						double range = 16D;
-						List nearbyMobs = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(range, range, range), selectorAttackingNPCs);
-						if (nearbyMobs.size() <= 5)
-						{
-							sendSpeechBank(entityplayer, speechBank);
-						}
+						@Override
+						public boolean isEntityApplicable(Entity entity)
+				        {
+							if (entity instanceof LOTREntityNPC)
+							{
+								LOTREntityNPC npc = (LOTREntityNPC)entity;
+								return npc.isAIEnabled() && npc.isEntityAlive() && npc.getAttackTarget() == entityplayer;
+							}
+				            return false;
+				        }
+					};
+					
+					double range = 16D;
+					List nearbyMobs = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(range, range, range), selectorAttackingNPCs);
+					if (nearbyMobs.size() <= 5)
+					{
+						sendSpeechBank(entityplayer, speechBank);
 					}
 				}
 			}
@@ -464,24 +459,32 @@ public abstract class LOTREntityNPC extends EntityCreature
 		{
 			if (getAttackTarget() == null && getHealth() < getMaxHealth())
 			{
-				boolean timeHeal =  worldObj.getWorldTime() % 80L == 40L;
-				boolean bannersHeal = false;
+				float healAmount = 0F;
 				
+				if (worldObj.getWorldTime() % 40 == 0)
+				{
+					healAmount += 1F;
+				}
+
 				if (hiredNPCInfo.isActive)
 				{
 					int banners = nearbyBanners();
 					if (banners > 0)
 					{
-						bannersHeal = worldObj.getWorldTime() % (240L - (long)(banners * 40L)) == 0L;
+						int bannerInterval = 240 - (banners * 40);
+						if (worldObj.getWorldTime() % bannerInterval == 0)
+						{
+							healAmount += 1F;
+						}
 					}
 				}
 				
-				if (timeHeal || bannersHeal)
+				if (healAmount > 0F)
 				{
-					heal(1F);
+					heal(healAmount);
 					if (ridingEntity instanceof EntityLivingBase && !(ridingEntity instanceof LOTREntityNPC))
 					{
-						((EntityLivingBase)ridingEntity).heal(1F);
+						((EntityLivingBase)ridingEntity).heal(healAmount);
 					}
 				}
 			}
@@ -919,7 +922,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 				entityDropItem(keypart, 0F);
 			}
 			
-			if (canDropPouch() && rand.nextInt(100) == 0)
+			if (LOTRDimension.getCurrentDimension(worldObj) == LOTRDimension.UTUMNO && UtumnoLevel.forY((int)posY) == UtumnoLevel.FIRE && canDropPouch() && rand.nextInt(80) == 0)
 			{
 				entityDropItem(new ItemStack(LOTRMod.utumnoPickaxe), 0F);
 			}
@@ -1453,7 +1456,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		return hasSpecificLocationName;
 	}
 	
-	public int nearbyBanners()
+	public final int nearbyBanners()
 	{
 		if (getFaction() == LOTRFaction.UNALIGNED)
 		{
@@ -1461,8 +1464,8 @@ public abstract class LOTREntityNPC extends EntityCreature
 		}
 		
 		int banners = 0;
-		
-		List entities = worldObj.getEntitiesWithinAABB(LOTRBannerBearer.class, boundingBox.expand(16D, 16D, 16D));
+		double range = 16D;
+		List entities = worldObj.getEntitiesWithinAABB(LOTRBannerBearer.class, boundingBox.expand(range, range, range));
 		for (int i = 0; i < entities.size(); i++)
 		{
 			EntityLivingBase entity = (EntityLivingBase)entities.get(i);

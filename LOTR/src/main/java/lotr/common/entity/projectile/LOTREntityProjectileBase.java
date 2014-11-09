@@ -290,7 +290,7 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 				Entity hitEntity = movingobjectposition.entityHit;
 				if (hitEntity != null && hitEntity != shootingEntity)
 				{
-                   	float damage = getDamageVsEntity(hitEntity);
+                   	float damage = getImpactDamage(hitEntity);
                     if (getIsCritical())
                     {
                         damage += rand.nextFloat() * (damage / 2F + 1F);
@@ -461,7 +461,7 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 	
 	public abstract boolean isDamageable();
 	
-	private ItemStack createDropItem()
+	private ItemStack createPickupDrop()
 	{
 		ItemStack itemstack = getItem().copy();
 		if (isDamageable())
@@ -478,7 +478,7 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 		}
 		else
 		{
-			return null;
+			return itemstack;
 		}
 	}
 
@@ -487,11 +487,11 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
     {
         if (!worldObj.isRemote)
 		{
-        	ItemStack itemstack = createDropItem();
-        	if (itemstack != null)
+			boolean canPickUp = (canBePickedUp == 1 || canBePickedUp == 2 && entityplayer.capabilities.isCreativeMode);
+			if (inGround && shake <= 0 && canPickUp)
 			{
-				boolean canPickUp = (canBePickedUp == 1 || canBePickedUp == 2 && entityplayer.capabilities.isCreativeMode);
-				if (inGround && shake <= 0 && canPickUp)
+	        	ItemStack itemstack = createPickupDrop();
+	        	if (itemstack != null)
 				{
 					if (entityplayer.inventory.addItemStackToInventory(itemstack.copy()))
 					{
@@ -507,30 +507,15 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
 					}
 				}
 			}
-			else
-			{
-				setDead();
-			}
 		}
     }
 	
-    public void onCollideWithTarget(Entity entity)
+    private void onCollideWithTarget(Entity entity)
     {
     	if (!worldObj.isRemote)
     	{
-	    	ItemStack itemstack = createDropItem();
-			if (itemstack != null)
-			{
-				if (shake <= 0 && canBePickedUp == 1)
-				{
-					EntityItem entityitem = new EntityItem(worldObj, posX, posY, posZ, itemstack);
-					entityitem.delayBeforeCanPickup = 0;
-					worldObj.spawnEntityInWorld(entityitem);
-					setDead();
-				}
-			}
-			else
-			{
+	    	if (!isDamageable())
+	    	{
 				setDead();
 			}
     	}
@@ -554,7 +539,7 @@ public abstract class LOTREntityProjectileBase extends Entity implements IThrowa
         return false;
     }
 	
-	public abstract float getDamageVsEntity(Entity entity);
+	public abstract float getImpactDamage(Entity entity);
 	
 	public DamageSource getDamageSource()
 	{

@@ -100,7 +100,7 @@ public class LOTREntityBalrog extends LOTREntityNPC
 	{
 		super.onLivingUpdate();
 		
-		if (getHealth() < getMaxHealth() && worldObj.getWorldTime() % 40 == 0)
+		if (getHealth() < getMaxHealth() && worldObj.getWorldTime() % 10 == 0)
 		{
 			heal(1F);
 		}
@@ -109,7 +109,7 @@ public class LOTREntityBalrog extends LOTREntityNPC
 		{
 			if (!worldObj.isRemote && rand.nextInt(80) == 0)
 			{
-				for (int l = 0; l < 32; l++)
+				for (int l = 0; l < 24; l++)
 				{
 					int i = MathHelper.floor_double(posX);
 					int j = MathHelper.floor_double(boundingBox.minY);
@@ -119,7 +119,9 @@ public class LOTREntityBalrog extends LOTREntityNPC
 					j += MathHelper.getRandomIntegerInRange(rand, -4, 8);
 					k += MathHelper.getRandomIntegerInRange(rand, -8, 8);
 					
-					if (Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
+					Block block = worldObj.getBlock(i, j, k);
+					float maxResistance = Blocks.stone.getExplosionResistance(this);
+					if ((block.isReplaceable(worldObj, i, j, k) || block.getExplosionResistance(this) <= maxResistance) && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
 					{
 						worldObj.setBlock(i, j, k, Blocks.fire, 0, 3);
 					}
@@ -186,7 +188,7 @@ public class LOTREntityBalrog extends LOTREntityNPC
 	@Override
 	protected int getExperiencePoints(EntityPlayer entityplayer)
     {
-        return 8 + rand.nextInt(5);
+        return 15 + rand.nextInt(10);
     }
 	
 	@Override
@@ -197,6 +199,24 @@ public class LOTREntityBalrog extends LOTREntityNPC
 		{
 			dropItem(Items.coal, 1);
 		}
+		
+		super.dropFewItems(flag, i);
+	}
+	
+	@Override
+	public void dropNPCEquipment(boolean flag, int i)
+	{
+		if (flag && rand.nextInt(5) == 0)
+		{
+			ItemStack heldItem = getHeldItem();
+			if (heldItem != null)
+			{
+				entityDropItem(heldItem, 0F);
+				setCurrentItemOrArmor(0, null);
+			}
+		}
+		
+		super.dropNPCEquipment(flag, i);
 	}
 	
 	@Override

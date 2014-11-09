@@ -8,6 +8,7 @@ import lotr.common.LOTRMod;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -36,7 +37,26 @@ public class LOTRItemBalrogWhip extends LOTRItemSword
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+	public EnumAction getItemUseAction(ItemStack itemstack)
+    {
+        return EnumAction.bow;
+    }
+	
+	@Override
+    public int getMaxItemUseDuration(ItemStack itemstack)
+    {
+        return 20;
+    }
+
+	@Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+    {
+		entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+        return itemstack;
+    }
+	
+	@Override
+	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
 		entityplayer.swingItem();
 		if (!world.isRemote)
@@ -44,7 +64,7 @@ public class LOTRItemBalrogWhip extends LOTRItemSword
 			launchWhip(entityplayer);
 		}
 		itemstack.damageItem(1, entityplayer);
-        return itemstack;
+		return itemstack;
     }
 	
 	private void launchWhip(EntityLivingBase user)

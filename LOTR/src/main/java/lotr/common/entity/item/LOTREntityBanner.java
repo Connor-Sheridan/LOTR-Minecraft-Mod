@@ -362,21 +362,24 @@ public class LOTREntityBanner extends Entity
 			if (uuid != null)
 			{
 				GameProfile profile = MinecraftServer.getServer().func_152358_ax().func_152652_a(uuid);
-				if (StringUtils.isEmpty(profile.getName()))
+				if (profile != null)
 				{
-					MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
-				}
-				
-				String username = profile.getName();
-				if (!StringUtils.isEmpty(username))
-				{
-					data.writeInt(i);
-					
-					data.writeLong(uuid.getMostSignificantBits());
-					data.writeLong(uuid.getLeastSignificantBits());
-					
-					data.writeByte(username.length());
-					data.writeBytes(username.getBytes(Charsets.UTF_8));
+					if (StringUtils.isEmpty(profile.getName()))
+					{
+						MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
+					}
+
+					String username = profile.getName();
+					if (!StringUtils.isEmpty(username))
+					{
+						data.writeInt(i);
+						
+						data.writeLong(uuid.getMostSignificantBits());
+						data.writeLong(uuid.getLeastSignificantBits());
+						
+						data.writeByte(username.length());
+						data.writeBytes(username.getBytes(Charsets.UTF_8));
+					}
 				}
 			}
 		}

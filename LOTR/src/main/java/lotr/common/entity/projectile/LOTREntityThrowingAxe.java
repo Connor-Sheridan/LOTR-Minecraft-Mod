@@ -53,7 +53,7 @@ public class LOTREntityThrowingAxe extends LOTREntityProjectileBase
 	}
 	
 	@Override
-	public float getDamageVsEntity(Entity entity)
+	public float getImpactDamage(Entity entity)
 	{
 		Item item = getItem().getItem();
 		return ((LOTRItemThrowingAxe)item).getAxeMaterial().getDamageVsEntity() + 4F;

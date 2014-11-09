@@ -1,3 +1,20 @@
+Public Beta 21.1
+
++ Added an updated Spanish (Argentina) translation
+
+* Fixed banner-related crashes
+* Fixed titles not being displayed if the username is altered by something else
+* Fixed Balrogs being able to burn through any block
+* Balrogs now have a higher chance to drop their weapons
+* The Balrog Whip now has a drawback time
+* The Pickaxe of the Underworld is now only dropped on the lowest level of Utumno
+* Fixed crossbows not working
+* Thistles can now damage sprinting players
+* Thistles now drop thistles
+* Fixed Dunlendings not spawning in Enedwaith
+* Fixed NPCs playing their attack sounds too often
+* Increased the cost and required alignment to hire Black Uruks
+
 Public Beta 21
 
 + Added the pits of Utumno

@@ -40,6 +40,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -50,6 +51,7 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1647,12 +1649,12 @@ public class LOTREventHandler implements IFuelHandler
 				if (arg instanceof ChatComponentText)
 				{
 					ChatComponentText componentText = (ChatComponentText)arg;
-					if (componentText.getUnformattedText().equals(username))
+					if (componentText.getUnformattedText().contains(username))
 					{
+						IChatComponent usernameComponent = componentText;
+						
 						IChatComponent titleComponent = new ChatComponentText("[").appendSibling(new ChatComponentTranslation(title)).appendText("]").appendText(" ");
 						titleComponent.getChatStyle().setColor(titleColor);
-						
-						IChatComponent usernameComponent = componentText;
 	
 						IChatComponent fullUsernameComponent = new ChatComponentText("").appendSibling(titleComponent).appendSibling(usernameComponent);
 						newFormatArgs.add(fullUsernameComponent);
@@ -1680,7 +1682,7 @@ public class LOTREventHandler implements IFuelHandler
 	        event.component = newChatComponent;
 		}
 		
-		if (!entityplayer.capabilities.isCreativeMode && !LOTRLevelData.getData(entityplayer).getAskedForGandalf() && StringUtils.containsIgnoreCase(message, "I want Mevans to add Gandalf"))
+		if (MinecraftServer.getServer().isDedicatedServer() && !entityplayer.capabilities.isCreativeMode && !LOTRLevelData.getData(entityplayer).getAskedForGandalf() && StringUtils.containsIgnoreCase(message, "I want Mevans to add Gandalf"))
 		{
 			boolean success = false;
 			

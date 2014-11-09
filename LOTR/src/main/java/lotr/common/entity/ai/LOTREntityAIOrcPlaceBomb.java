@@ -96,7 +96,7 @@ public class LOTREntityAIOrcPlaceBomb extends EntityAIBase
 			
 			worldObj.spawnEntityInWorld(bomb);
 			attacker.setCurrentItemOrArmor(0, new ItemStack(weaponItem));
-			worldObj.playSoundAtEntity(attacker, "random.fuse", 1F, 1F);
+			worldObj.playSoundAtEntity(attacker, "game.tnt.primed", 1F, 1F);
 			worldObj.playSoundAtEntity(attacker, "lotr:orc.fire", 1F, (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F);
         }
     }

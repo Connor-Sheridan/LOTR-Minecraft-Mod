@@ -56,10 +56,10 @@ public class LOTREntityCrossbowBolt extends LOTREntityProjectileBase
 	}
 	
 	@Override
-	public float getDamageVsEntity(Entity entity)
+	public float getImpactDamage(Entity entity)
 	{
-		float momentum = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
-		return momentum * 2F * (float)boltDamageFactor;
+		float speed = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+		return speed * 2F * (float)boltDamageFactor;
 	}
 	
 	@Override
