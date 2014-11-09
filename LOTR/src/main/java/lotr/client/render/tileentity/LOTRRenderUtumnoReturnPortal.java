@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 public class LOTRRenderUtumnoReturnPortal extends TileEntitySpecialRenderer
 {
 	private static ResourceLocation lightCircle = new ResourceLocation("lotr:misc/utumnoPortal_lightCircle.png");
+	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f)
 	{

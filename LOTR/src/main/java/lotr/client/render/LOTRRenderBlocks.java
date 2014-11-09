@@ -1,5 +1,7 @@
 package lotr.client.render;
 
+import java.util.Random;
+
 import lotr.client.render.tileentity.*;
 import lotr.common.LOTRMod;
 import lotr.common.block.*;
@@ -21,6 +23,8 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class LOTRRenderBlocks implements ISimpleBlockRenderingHandler
 {
+	private static Random blockRand = new Random();
+	
 	private boolean renderInvIn3D;
 	
 	public LOTRRenderBlocks(boolean flag)
@@ -87,6 +91,11 @@ public class LOTRRenderBlocks implements ISimpleBlockRenderingHandler
 		if (id == LOTRMod.proxy.getGrassRenderID())
 		{
 			renderGrass(world, i, j, k, block, renderblocks, true);
+			return true;
+		}
+		if (id == LOTRMod.proxy.getFallenLeavesRenderID())
+		{
+			renderFallenLeaves(world, i, j, k, block, renderblocks);
 			return true;
 		}
 		
@@ -761,6 +770,74 @@ public class LOTRRenderBlocks implements ISimpleBlockRenderingHandler
 			renderblocks.drawCrossedSquares(block.getIcon(-1, meta), posX, posY, posZ, 1F);
 			renderblocks.clearOverrideBlockTexture();
 		}
+	}
+	
+	private void renderFallenLeaves(IBlockAccess world, int i, int j, int k, Block block, RenderBlocks renderblocks)
+	{
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, i, j, k));
+		
+		int meta = world.getBlockMetadata(i, j, k);
+        int color = block.colorMultiplier(world, i, j, k);
+        float r = (float)(color >> 16 & 255) / 255F;
+        float g = (float)(color >> 8 & 255) / 255F;
+        float b = (float)(color & 255) / 255F;
+        r *= 0.7F;
+        g *= 0.7F;
+        b *= 0.7F;
+        if (EntityRenderer.anaglyphEnable)
+        {
+            r = (r * 30F + g * 59F + b * 11F) / 100F;
+            g = (r * 30F + g * 70F) / 100F;
+            b = (r * 30F + b * 70F) / 100F;
+        }
+        tessellator.setColorOpaque_F(r, g, b);
+        
+        long seed = (long)(i * 237690503L) ^ (long)k * 2689286L ^ (long)j;
+        seed = seed * seed * 1732965593L + seed * 673L;
+        blockRand.setSeed(seed);
+        
+        IIcon icon = block.getIcon(world, i, j, k, 0);
+        int leaves = 6 + blockRand.nextInt(5);
+        for (int l = 0; l < leaves; l++)
+        {
+        	double posX = i + blockRand.nextFloat();
+        	double posZ = k + blockRand.nextFloat();
+        	double posY = j + 0.01F + (float)l / (float)leaves * 0.1F;
+        	float rotation = blockRand.nextFloat() * (float)Math.PI * 2F;
+        	
+        	double xSize = (2 + blockRand.nextInt(5)) / 16F;
+        	double zSize = (2 + blockRand.nextInt(5)) / 16F;
+        	double ySize = 2F / 16F;
+			
+			double minU = icon.getMinU();
+			double minV = icon.getMinV();
+			double maxU = icon.getInterpolatedU(xSize * 16F);
+			double maxV = icon.getInterpolatedV(zSize * 16F);
+
+			double x2 = xSize / 2D;
+			double z2 = zSize / 2D;
+			Vec3[] vecs = new Vec3[]
+			{
+				Vec3.createVectorHelper(-x2, 0D, -z2),
+				Vec3.createVectorHelper(-x2, 0D, z2),
+				Vec3.createVectorHelper(x2, 0D, z2),
+				Vec3.createVectorHelper(x2, 0D, -z2)
+			};
+			for (int v = 0; v < vecs.length; v++)
+			{
+				Vec3 vec = vecs[v];
+				vec.rotateAroundY(rotation);
+				vec.xCoord += posX;
+				vec.yCoord += posY;
+				vec.zCoord += posZ;
+			}
+
+			tessellator.addVertexWithUV(vecs[0].xCoord, vecs[0].yCoord, vecs[0].zCoord, minU, minV);
+			tessellator.addVertexWithUV(vecs[1].xCoord, vecs[1].yCoord, vecs[1].zCoord, minU, maxV);
+			tessellator.addVertexWithUV(vecs[2].xCoord, vecs[2].yCoord, vecs[2].zCoord, maxU, maxV);
+			tessellator.addVertexWithUV(vecs[3].xCoord, vecs[3].yCoord, vecs[3].zCoord, maxU, minV);
+        }
 	}
 	
 	private static void renderStandardInvBlock(RenderBlocks renderblocks, Block block, float f, float f1, float f2, float f3, float f4, float f5)

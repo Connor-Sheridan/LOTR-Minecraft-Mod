@@ -8,6 +8,7 @@ public class LOTREntityUtumnoFireWarg extends LOTREntityUtumnoWarg
 	public LOTREntityUtumnoFireWarg(World world)
 	{
 		super(world);
+		isImmuneToFire = true;
 	}
 
 	@Override

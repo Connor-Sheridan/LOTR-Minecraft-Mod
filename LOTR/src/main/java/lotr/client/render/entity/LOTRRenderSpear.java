@@ -17,6 +17,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class LOTRRenderSpear extends Render
 {
 	private static ModelBase boarModel = new LOTRModelBoar();
@@ -67,7 +69,7 @@ public class LOTRRenderSpear extends Render
 			}
 			else
 			{
-				System.out.println("Error rendering spear: no custom renderer for " + itemstack.toString());
+				FMLLog.severe("Error rendering spear: no custom renderer for " + itemstack.toString());
 			}
 		}
 

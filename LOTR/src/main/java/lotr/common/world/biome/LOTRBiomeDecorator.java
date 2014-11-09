@@ -234,7 +234,7 @@ public class LOTRBiomeDecorator
             treeGen.generate(worldObj, rand, i, worldObj.getHeightValue(i, k), k);
         }
         
-        int fallenLeaves = trees / 3;
+        int fallenLeaves = trees / 2;
         if (fallenLeaves <= 0 && trees > 0)
         {
         	fallenLeaves = 1;

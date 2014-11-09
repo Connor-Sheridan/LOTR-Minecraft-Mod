@@ -30,7 +30,7 @@ public enum LOTRTreeType
 		@Override
 		public WorldGenAbstractTree createTree(boolean flag)
 		{
-			return new LOTRWorldGenSimpleTrees(flag, 16, 24, Blocks.log, 0, Blocks.leaves, 0);
+			return new LOTRWorldGenSimpleTrees(flag, 12, 16, Blocks.log, 0, Blocks.leaves, 0);
 		}
 	}),
 	OAK_LARGE(new ITreeFactory()
@@ -168,15 +168,15 @@ public enum LOTRTreeType
 		@Override
 		public WorldGenAbstractTree createTree(boolean flag)
 		{
-			return new WorldGenMegaPineTree(flag, false);
+			return new WorldGenMegaPineTree(flag, true);
 		}
 	}),
-	SPRUCE_MEGA_TALL(new ITreeFactory()
+	SPRUCE_MEGA_THIN(new ITreeFactory()
 	{
 		@Override
 		public WorldGenAbstractTree createTree(boolean flag)
 		{
-			return new WorldGenMegaPineTree(flag, true);
+			return new WorldGenMegaPineTree(flag, false);
 		}
 	}),
 	SPRUCE_DEAD(new ITreeFactory()

@@ -23,7 +23,7 @@ public class LOTRBiomeGenDunlandForest extends LOTRBiomeGenDunland
 		
 		decorator.addTree(LOTRTreeType.OAK_HUGE, 100);
 		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 50);
-		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 20);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_THIN, 20);
 	}
 	
 	@Override

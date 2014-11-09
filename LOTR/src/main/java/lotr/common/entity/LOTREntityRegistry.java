@@ -9,6 +9,7 @@ import lotr.common.LOTRFaction;
 
 import org.apache.commons.io.input.BOMInputStream;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class LOTREntityRegistry
@@ -168,7 +169,7 @@ public class LOTREntityRegistry
 					bonus = Integer.parseInt(bonusString);
 					
 					registeredNPCs.put(name, new RegistryInfo(name, faction, targetEnemies, bonus));
-					System.out.println("Successfully registered entity " + name + " with the LOTR alignment system as " + line);
+					FMLLog.info("Successfully registered entity " + name + " with the LOTR alignment system as " + line);
 				}
 				
 				bufferedreader.close();

@@ -234,10 +234,10 @@ public class LOTRBiome extends BiomeGenBase
 		fangornBirchForest = new LOTRBiomeGenFangorn(58).setBirchFangorn().setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.4F).setColor(0x5EA85E).setBiomeName("fangornBirchForest");
 		mistyMountainsForest = new LOTRBiomeGenMistyMountainsForest(59).setTemperatureRainfall(0.2F, 0.6F).setMinMaxHeight(1.2F, 0.4F).setColor(0x94A69E).setBiomeName("mistyMountainsForest");
 		fangornWasteland = new LOTRBiomeGenFangornWasteland(60).setTemperatureRainfall(0.7F, 0.4F).setMinMaxHeight(0.2F, 0.4F).setColor(0x6B7738).setBiomeName("fangornWasteland");
-		rohanWoodlands = new LOTRBiomeGenRohanWoodlands(61).setTemperatureRainfall(0.9F, 0.5F).setMinMaxHeight(0.2F, 0.4F).setColor(0x839E3F).setBiomeName("rohanWoodlands");
-		gondorWoodlands = new LOTRBiomeGenGondorWoodlands(62).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.2F).setColor(0xA6C444).setBiomeName("gondorWoodlands");
+		rohanWoodlands = new LOTRBiomeGenRohanWoodlands(61).setTemperatureRainfall(0.9F, 0.5F).setMinMaxHeight(0.2F, 0.4F).setColor(0x7E8E25).setBiomeName("rohanWoodlands");
+		gondorWoodlands = new LOTRBiomeGenGondorWoodlands(62).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.2F).setColor(0x809E2D).setBiomeName("gondorWoodlands");
 		lake = new LOTRBiomeGenLake(63).setColor(0x0766B5).setBiomeName("lake");
-		beachStone = new LOTRBiomeGenBeach(64).setBeachBlock(Blocks.stone).setTemperatureRainfall(0.3F, 0.3F).setMinMaxHeight(0.1F, 0.8F).setColor(0x697382).setBiomeName("beachStone");
+		beachStone = new LOTRBiomeGenBeach(64).setBeachBlock(Blocks.stone).setTemperatureRainfall(0.3F, 0.3F).setMinMaxHeight(0.6F, 0F).setColor(0x697382).setBiomeName("beachStone");
 		barrowDowns = new LOTRBiomeGenBarrowDowns(65).setTemperatureRainfall(0.5F, 0.5F).setMinMaxHeight(0.4F, 0.6F).setColor(0x828E52).setBiomeName("barrowDowns");
 		//empty slot
 		fangornClearing = new LOTRBiomeGenFangornClearing(67).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.1F).setColor(0x3DA53D).setBiomeName("fangornClearing");
@@ -307,7 +307,7 @@ public class LOTRBiome extends BiomeGenBase
 		shireMoors = new LOTRBiomeGenShireMoors(131).setTemperatureRainfall(0.6F, 1.6F).setMinMaxHeight(0.4F, 0.6F).setColor(0x52A04B).setBiomeName("shireMoors");
 		shireMarshes = new LOTRBiomeGenShireMarshes(132).setTemperatureRainfall(0.8F, 1.2F).setMinMaxHeight(0F, 0.1F).setColor(0x37932F).setBiomeName("shireMarshes");
 		farHaradBaobab = new LOTRBiomeGenFarHaradBaobab(133).setTemperatureRainfall(1.2F, 0.4F).setMinMaxHeight(0.2F, 0.1F).setColor(0x9B955B).setBiomeName("farHaradBaobab");
-		farHaradVolcano = new LOTRBiomeGenFarHaradVolcano(134).setTemperatureRainfall(1.5F, 0F).setMinMaxHeight(0.4F, 1.2F).setColor(0x7A5A48).setBiomeName("farHaradVolcano");
+		farHaradVolcano = new LOTRBiomeGenFarHaradVolcano(134).setTemperatureRainfall(1.5F, 0F).setMinMaxHeight(0.6F, 1.2F).setColor(0x7A5A48).setBiomeName("farHaradVolcano");
 		
 		utumno = new LOTRBiomeGenUtumno(0).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0F, 0F).setColor(0x000000).setBiomeName("utumno");
 	}

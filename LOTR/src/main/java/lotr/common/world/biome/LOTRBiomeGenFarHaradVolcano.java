@@ -2,8 +2,7 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.world.feature.LOTRTreeType;
-import lotr.common.world.feature.LOTRWorldGenStreams;
+import lotr.common.world.feature.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -16,12 +15,13 @@ public class LOTRBiomeGenFarHaradVolcano extends LOTRBiomeGenFarHarad
 		
 		topBlock = Blocks.stone;
 		fillerBlock = Blocks.stone;
-		setDisableRain();
-		
+
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableMonsterList.clear();
 		spawnableLOTRAmbientList.clear();
+		spawnableGoodList.clear();
+		spawnableEvilList.clear();
 		
 		decorator.treesPerChunk = 0;
 		decorator.grassPerChunk = 0;
@@ -40,10 +40,16 @@ public class LOTRBiomeGenFarHaradVolcano extends LOTRBiomeGenFarHarad
 	}
 	
 	@Override
+	public boolean getEnableRiver()
+	{
+		return false;
+	}
+	
+	@Override
     public void decorate(World world, Random random, int i, int k)
     {
 		super.decorate(world, random, i, k);
-		
+
 		WorldGenerator lavaGen = new LOTRWorldGenStreams(Blocks.flowing_lava);
 		for (int l = 0; l < 60; l++)
 		{
@@ -51,6 +57,14 @@ public class LOTRBiomeGenFarHaradVolcano extends LOTRBiomeGenFarHarad
 			int j1 = 60 + random.nextInt(100);
 			int k1 = k + random.nextInt(16) + 8;
 			lavaGen.generate(world, random, i1, j1, k1);
+		}
+		
+		for (int l = 0; l < 30; l++)
+		{
+			int i1 = i + random.nextInt(16) + 8;
+			int k1 = k + random.nextInt(16) + 8;
+			int j1 = world.getHeightValue(i1, k1);
+			new LOTRWorldGenVolcanoCrater().generate(world, random, i1, j1, k1);
 		}
     }
 	

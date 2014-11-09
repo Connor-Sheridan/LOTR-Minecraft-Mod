@@ -23,6 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Charsets;
 import com.mojang.authlib.GameProfile;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class LOTRLevelData
 {
 	private static int FAST_TRAVEL_COOLDOWN_DEFAULT = 36000;
@@ -561,7 +563,7 @@ public class LOTRLevelData
 		}
 		catch (Exception e)
 		{
-			System.out.println("Failed to send player data to player");
+			FMLLog.severe("Failed to send player data to player " + entityplayer.getCommandSenderName());
 			e.printStackTrace();
 		}
 	}

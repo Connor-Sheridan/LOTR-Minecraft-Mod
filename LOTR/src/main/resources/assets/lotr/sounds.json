@@ -192,6 +192,15 @@
         ]
     },
     
+    "item.balrogWhip":
+    {
+        "category": "neutral",
+        "sounds":
+        [
+            "item/balrogWhip"
+        ]
+    },
+    
     "item.crossbow":
     {
         "category": "neutral",

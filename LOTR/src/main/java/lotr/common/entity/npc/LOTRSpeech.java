@@ -11,6 +11,7 @@ import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BOMInputStream;
+import org.apache.logging.log4j.Level;
 
 import scala.actors.threadpool.Arrays;
 import sun.management.FileSystem;
@@ -24,8 +25,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 
 public class LOTRSpeech
 {
@@ -61,7 +61,7 @@ public class LOTRSpeech
 						}
 						catch (Exception e)
 						{
-							System.out.println("Failed to load LOTR speech bank " + s + "from zip file");
+							FMLLog.severe("Failed to load LOTR speech bank " + s + "from zip file");
 							e.printStackTrace();
 						}
 					}
@@ -80,7 +80,7 @@ public class LOTRSpeech
 					int i = s.indexOf(".txt");
 					if (i < 0)
 					{
-						System.out.println("Failed to load LOTR speech bank " + s + " from MCP folder; speech bank files must be in .txt format");
+						FMLLog.severe("Failed to load LOTR speech bank " + s + " from MCP folder; speech bank files must be in .txt format");
 						continue;
 					}
 					try
@@ -91,7 +91,7 @@ public class LOTRSpeech
 					}
 					catch (Exception e)
 					{
-						System.out.println("Failed to load LOTR speech bank " + s + " from MCP folder");
+						FMLLog.severe("Failed to load LOTR speech bank " + s + " from MCP folder");
 						e.printStackTrace();
 					}
 				}
@@ -100,7 +100,7 @@ public class LOTRSpeech
 		}
 		catch (Exception e)
 		{
-			System.out.println("Failed to load LOTR speech banks");
+			FMLLog.severe("Failed to load LOTR speech banks");
 			e.printStackTrace();
 		}
 		
@@ -121,7 +121,7 @@ public class LOTRSpeech
 				
 				if (list.isEmpty())
 				{
-					System.out.println("LOTR speech bank " + speechBankName + " is empty!");
+					FMLLog.severe("LOTR speech bank " + speechBankName + " is empty!");
 					continue;
 				}
 				
@@ -132,11 +132,11 @@ public class LOTRSpeech
 				}
 				
 				allSpeechBanks.put(speechBankName, speechBank);
-				System.out.println("Succesfully loaded LOTR speech bank " + speechBankName);
+				FMLLog.info("Succesfully loaded LOTR speech bank " + speechBankName);
 			}
 			catch (Exception e)
 			{
-				System.out.println("Failed to load LOTR speech bank " + speechBankName);
+				FMLLog.severe("Failed to load LOTR speech bank " + speechBankName);
 				e.printStackTrace();
 			}
 		}

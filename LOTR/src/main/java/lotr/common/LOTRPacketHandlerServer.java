@@ -36,6 +36,7 @@ import net.minecraftforge.common.DimensionManager;
 
 import com.google.common.base.Charsets;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
@@ -337,13 +338,13 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 					int shieldTypeID = data.readByte();
 					if (shieldTypeID < 0 || shieldTypeID >= ShieldType.values().length)
 					{
-						System.out.println("Failed to update LOTR shield on server side: There is no shieldtype with ID " + shieldTypeID);
+						FMLLog.severe("Failed to update LOTR shield on server side: There is no shieldtype with ID " + shieldTypeID);
 						return;
 					}
 					ShieldType shieldType = ShieldType.values()[shieldTypeID];
 					if (shieldID < 0 || shieldID >= shieldType.list.size())
 					{
-						System.out.println("Failed to update LOTR shield on server side: There is no shield with ID " + shieldID + " for shieldtype " + shieldTypeID);
+						FMLLog.severe("Failed to update LOTR shield on server side: There is no shield with ID " + shieldID + " for shieldtype " + shieldTypeID);
 						return;
 					}
 					LOTRShields shield = (LOTRShields)shieldType.list.get(shieldID);
@@ -354,7 +355,7 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 					}
 					else
 					{
-						System.out.println("Failed to update LOTR shield on server side: Player " + entityplayer.getCommandSenderName() + " cannot wear shield " + shield.name());
+						FMLLog.severe("Failed to update LOTR shield on server side: Player " + entityplayer.getCommandSenderName() + " cannot wear shield " + shield.name());
 					}
 				}
 			}

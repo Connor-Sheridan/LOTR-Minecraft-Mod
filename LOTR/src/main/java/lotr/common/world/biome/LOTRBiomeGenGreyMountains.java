@@ -34,7 +34,7 @@ public class LOTRBiomeGenGreyMountains extends LOTRBiome
 		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
 		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 500);
 		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 50);
-		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 10);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_THIN, 10);
 		decorator.addTree(LOTRTreeType.LARCH, 500);
 		
 		registerMountainsFlowers();

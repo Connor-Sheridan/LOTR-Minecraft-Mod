@@ -16,12 +16,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.io.input.BOMInputStream;
+import org.apache.logging.log4j.Level;
 
 import com.google.common.base.Charsets;
 
 import lotr.common.LOTRMod;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 
 public class LOTRNames
 {
@@ -56,7 +56,7 @@ public class LOTRNames
 						}
 						catch (Exception e)
 						{
-							System.out.println("Failed to load LOTR name bank " + s + "from zip file");
+							FMLLog.severe("Failed to load LOTR name bank " + s + "from zip file");
 							e.printStackTrace();
 						}
 					}
@@ -71,7 +71,7 @@ public class LOTRNames
 					int i = s.indexOf(".txt");
 					if (i < 0)
 					{
-						System.out.println("Failed to load LOTR name bank " + s + " from MCP folder; name bank files must be in .txt format");
+						FMLLog.severe("Failed to load LOTR name bank " + s + " from MCP folder; name bank files must be in .txt format");
 						continue;
 					}
 					try
@@ -82,7 +82,7 @@ public class LOTRNames
 					}
 					catch (Exception e)
 					{
-						System.out.println("Failed to load LOTR name bank " + s + " from MCP folder");
+						FMLLog.severe("Failed to load LOTR name bank " + s + " from MCP folder");
 						e.printStackTrace();
 					}
 				}
@@ -90,7 +90,7 @@ public class LOTRNames
 		}
 		catch (Exception e)
 		{
-			System.out.println("Failed to load LOTR name banks");
+			FMLLog.severe("Failed to load LOTR name banks");
 			e.printStackTrace();
 		}
 		
@@ -111,7 +111,7 @@ public class LOTRNames
 				
 				if (list.isEmpty())
 				{
-					System.out.println("LOTR name bank " + nameBankName + " is empty!");
+					FMLLog.severe("LOTR name bank " + nameBankName + " is empty!");
 					continue;
 				}
 				
@@ -122,11 +122,11 @@ public class LOTRNames
 				}
 				
 				allNameBanks.put(nameBankName, nameBank);
-				System.out.println("Succesfully loaded LOTR name bank " + nameBankName);
+				FMLLog.info("Succesfully loaded LOTR name bank " + nameBankName);
 			}
 			catch (Exception e)
 			{
-				System.out.println("Failed to load LOTR name bank " + nameBankName);
+				FMLLog.severe("Failed to load LOTR name bank " + nameBankName);
 				e.printStackTrace();
 			}
 		}

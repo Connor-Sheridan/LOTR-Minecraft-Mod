@@ -51,6 +51,7 @@ public class LOTREntityAIAttackOnCollide extends EntityAIBase
 		{
 			return false;
 		}
+
         EntityLivingBase entity = theOwner.getAttackTarget();
         if (entity == null)
         {

@@ -50,7 +50,6 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import org.apache.commons.lang3.StringUtils;
@@ -211,6 +210,11 @@ public class LOTREventHandler implements IFuelHandler
 			if (itemstack.getItem() == Item.getItemFromBlock(LOTRMod.orcBomb))
 			{
 				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.craftOrcBomb);
+			}
+			
+			if (itemstack.getItem() == LOTRMod.utumnoKey)
+			{
+				LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.craftUtumnoKey);
 			}
 		}
 	}
@@ -552,8 +556,18 @@ public class LOTREventHandler implements IFuelHandler
 		
 		if (block instanceof LOTRWorldProviderUtumno.UtumnoBlock)
 		{
-			event.setCanceled(true);
-			return;
+			boolean canMine = false;
+			ItemStack itemstack = entityplayer.getCurrentEquippedItem();
+			if (itemstack != null && itemstack.getItem() == LOTRMod.utumnoPickaxe)
+			{
+				canMine = true;
+			}
+
+			if (!canMine)
+			{
+				event.setCanceled(true);
+				return;
+			}
 		}
 	}
 	
@@ -1564,6 +1578,46 @@ public class LOTREventHandler implements IFuelHandler
 							if (axe.getItem().getItem() == LOTRMod.throwingAxeDwarven)
 							{
 								LOTRLevelData.getData(attackingPlayer).addAchievement(LOTRAchievement.useDwarvenThrowingAxe);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if (!world.isRemote && LOTRMod.getNPCFaction(entity) == LOTRFaction.UTUMNO && LOTRDimension.getCurrentDimension(world) == LOTRDimension.UTUMNO)
+		{
+			Entity attacker = source.getEntity();
+			if (attacker instanceof EntityPlayer)
+			{
+				int i = MathHelper.floor_double(entity.posX);
+				int j = MathHelper.floor_double(entity.boundingBox.minY);
+				int k = MathHelper.floor_double(entity.posZ);
+				
+				int range = 2;
+				for (int i1 = -range; i1 <= range; i1++)
+				{
+					for (int j1 = -range; j1 <= range; j1++)
+					{
+						for (int k1 = -range; k1 <= range; k1++)
+						{
+							int i2 = i + i1;
+							int j2 = j + j1;
+							int k2 = k + k1;
+							
+							if (world.getBlock(i2, j2, k2) == LOTRMod.utumnoReturnPortalBase)
+							{
+								int meta = world.getBlockMetadata(i2, j2, k2);
+								meta++;
+								if (meta >= LOTRBlockUtumnoReturnPortalBase.MAX_SACRIFICE)
+								{
+									world.createExplosion(attacker, i2 + 0.5D, j2 + 0.5D, k2 + 0.5D, 0F, false);
+									world.setBlock(i2, j2, k2, LOTRMod.utumnoReturnPortal, 0, 3);
+								}
+								else
+								{
+									world.setBlockMetadataWithNotify(i2, j2, k2, meta, 3);
+								}
 							}
 						}
 					}

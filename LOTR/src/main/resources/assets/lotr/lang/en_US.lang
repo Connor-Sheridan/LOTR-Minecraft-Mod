@@ -531,7 +531,7 @@ item.lotr:coin.name=Silver Coin
 item.lotr:gammon.name=Gammon
 item.lotr:clayPlate.name=Clay Plate
 item.lotr:plate.name=Plate
-item.lotr:elvenBow.name=Elven Bow
+item.lotr:elvenBow.name=Galadhrim Bow
 item.lotr:wargFur.name=Warg Fur
 item.lotr:helmetWarg.name=Warg Fur Helmet
 item.lotr:bodyWarg.name=Warg Fur Chestplate
@@ -863,8 +863,14 @@ item.lotr:legsBlackUruk.name=Black Uruk Leggings
 item.lotr:bootsBlackUruk.name=Black Uruk Boots
 item.lotr:blackUrukBow.name=Black Uruk Bow
 item.lotr:helmetNearHaradWarlord.name=Near Harad Warlord Helmet
-item.lotr:utumnoKey.0.name=Icy Utumno Key
-item.lotr:utumnoKey.1.name=Obsidian Utumno Key
+item.lotr:utumnoKey.0.name=Key of Ice
+item.lotr:utumnoKey.1.name=Key of Obsidian
+item.lotr:utumnoKey.2.name=Key Handle
+item.lotr:utumnoKey.3.name=Key Shaft
+item.lotr:utumnoKey.4.name=Key Pin
+item.lotr:utumnoKey.5.name=Key Handle
+item.lotr:utumnoKey.6.name=Key Shaft
+item.lotr:utumnoKey.7.name=Key Pin
 item.lotr:swordUtumno.name=Utumno Sword
 item.lotr:daggerUtumno.name=Utumno Dagger
 item.lotr:daggerUtumnoPoisoned.name=Poisoned Utumno Dagger
@@ -876,6 +882,8 @@ item.lotr:mugCactusLiqueur.name=Cactus Liqueur
 item.lotr:rohanBow.name=Rohirric Bow
 item.lotr:gondorBow.name=Gondorian Bow
 item.lotr:highElvenBow.name=High Elven Bow
+item.lotr:utumnoPickaxe.name=Pickaxe of the Underworld
+item.lotr:balrogWhip.name=Balrog Whip
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength
@@ -2470,14 +2478,31 @@ lotr.achievement.killTormentedElf.title=The Forgotten
 lotr.achievement.killTormentedElf.desc=Kill a Tormented Elf
 lotr.achievement.killUtumnoTroll.title=Troll in the Dungeons
 lotr.achievement.killUtumnoTroll.desc=Kill a troll of Utumno
+lotr.achievement.craftUtumnoKey.title=Keys of the Deep
+lotr.achievement.craftUtumnoKey.desc=Craft a key from pieces found in Utumno
 
 lotr.waypoint.HIMLING=Himling
 lotr.waypoint.TOL_FUIN=Tol Fuin
 lotr.waypoint.TOL_MORWEN=Tol Morwen
+lotr.waypoint.MENELTARMA=Meneltarma
 
 lotr.waypoint.HOBBITON=Hobbiton
 lotr.waypoint.BRANDYWINE_BRIDGE=Brandywine Bridge
 lotr.waypoint.SARN_FORD=Sarn Ford
+lotr.waypoint.LONGBOTTOM=Longbottom
+lotr.waypoint.MICHEL_DELVING=Michel Delving
+lotr.waypoint.WILLOWBOTTOM=Willowbottom
+lotr.waypoint.BRANDY_HALL=Brandy Hall
+lotr.waypoint.WHITFURROWS=Whitfurrows
+lotr.waypoint.FROGMORTON=Frogmorton
+lotr.waypoint.OATBARTON=Oatbarton
+lotr.waypoint.SCARY=Scary
+lotr.waypoint.NEEDLEHOLE=Needlehole
+lotr.waypoint.LITTLE_DELVING=Little Delving
+lotr.waypoint.WAYMEET=Waymeet
+lotr.waypoint.TUCKBOROUGH=Tuckborough
+lotr.waypoint.NOBOTTLE=Nobottle
+lotr.waypoint.TIGHFIELD=Tighfield
 
 lotr.waypoint.WITHYWINDLE_VALLEY=Withywindle Valley
 
@@ -2512,7 +2537,8 @@ lotr.waypoint.THE_TROLLSHAWS=Trollshaws
 
 lotr.waypoint.CARN_DUM=Carn Dûm
 
-lotr.waypoint.WEST_GATE=West-gate
+lotr.waypoint.WEST_GATE=West Gate
+lotr.waypoint.OST_IN_EDHIL=Ost-in-Edhil
 
 lotr.waypoint.NORTH_DUNLAND=North Dunland
 lotr.waypoint.SOUTH_DUNLAND=South Dunland
@@ -2532,6 +2558,8 @@ lotr.waypoint.MOUNT_CARADHRAS=Mount Caradhras
 lotr.waypoint.MOUNT_CELEBDIL=Mount Celebdil
 lotr.waypoint.MOUNT_FANUIDHOL=Mount Fanuidhol
 lotr.waypoint.MOUNT_METHEDRAS=Mount Methedras
+lotr.waypoint.GOBLIN_TOWN=Goblin Town
+lotr.waypoint.EAGLES_EYRIE=Eagles' Eyrie
 
 lotr.waypoint.CARROCK=Carrock
 lotr.waypoint.OLD_FORD=Old Ford
@@ -2540,11 +2568,17 @@ lotr.waypoint.DIMRILL_DALE=Dimrill Dale
 lotr.waypoint.FIELD_OF_CELEBRANT=Field of Celebrant
 lotr.waypoint.NORTH_UNDEEP=North Undeep
 lotr.waypoint.SOUTH_UNDEEP=South Undeep
+lotr.waypoint.RAUROS=Rauros
+lotr.waypoint.BEORN=Beorn's Hall
+lotr.waypoint.FOREST_GATE=Forest Gate
+lotr.waypoint.FRAMSBURG=Framsburg
+lotr.waypoint.ARGONATH=Argonath
 
-lotr.waypoint.WOODLAND_REALM=Woodland Realm
+lotr.waypoint.THRANDUIL_HALLS=Thranduil's Halls
 
 lotr.waypoint.DOL_GULDUR=Dol Guldur
 lotr.waypoint.MIRKWOOD_MOUNTAINS=Mirkwood Mountains
+lotr.waypoint.RHOSGOBEL=Rhosgobel
 
 lotr.waypoint.EREBOR=Erebor
 lotr.waypoint.LONG_LAKE=Long Lake
@@ -2555,8 +2589,11 @@ lotr.waypoint.WEST_PEAK=West Peak
 lotr.waypoint.EAST_PEAK=East Peak
 
 lotr.waypoint.CARAS_GALADHON=Caras Galadhon
+lotr.waypoint.CERIN_AMROTH=Cerin Amroth
 
 lotr.waypoint.DERNDINGLE=Derndingle
+lotr.waypoint.WELLINGHALL=Wellinghall
+lotr.waypoint.TREEBEARD_HILL=Treebeard's Hill
 
 lotr.waypoint.WOLD=Wold
 lotr.waypoint.EDORAS=Edoras
@@ -2564,6 +2601,14 @@ lotr.waypoint.HELMS_DEEP=Helm's Deep
 lotr.waypoint.URUK_HIGHLANDS=Uruk Highlands
 lotr.waypoint.FORDS_OF_ISEN=Fords of Isen
 lotr.waypoint.MERING_STREAM=Mering Stream
+lotr.waypoint.ENTWADE=Entwade
+lotr.waypoint.EASTMARK=Eastmark
+lotr.waypoint.ALDBURG=Aldburg
+lotr.waypoint.GRIMSLADE=Grimslade
+
+lotr.waypoint.DUNHARROW=Dunharrow
+lotr.waypoint.TARLANG=Tarlang's Neck
+lotr.waypoint.RAS_MORTHIL=Ras Morthil
 
 lotr.waypoint.MINAS_TIRITH=Minas Tirith
 lotr.waypoint.OSGILIATH=Osgiliath
@@ -2575,10 +2620,24 @@ lotr.waypoint.PINNATH_GELIN=Pinnath Gelin
 lotr.waypoint.ANDUIN_MOUTH=Ethir Anduin
 lotr.waypoint.EDHELLOND=Edhellond
 lotr.waypoint.PELARGIR=Pelargir
+lotr.waypoint.CALEMBEL=Calembel
+lotr.waypoint.ETHRING=Ethring
+lotr.waypoint.HALIFIRIEN=Halifirien
+lotr.waypoint.CALENHAD=Calenhad
+lotr.waypoint.MINRIMMON=Min-Rimmon
+lotr.waypoint.ERELAS=Erelas
+lotr.waypoint.NARDOL=Nardol
+lotr.waypoint.EILENACH=Eilenach
+lotr.waypoint.AMON_DIN=Amon Dîn
+lotr.waypoint.HENNETH_ANNUN=Henneth Annûn
+lotr.waypoint.LINHIR=Linhir
+lotr.waypoint.ELENDIL=Tomb of Elendil
+lotr.waypoint.TARNOST=Tarnost
 
 lotr.waypoint.TOLFALAS_ISLAND=Tolfalas
 
-lotr.waypoint.RAUROS=Rauros
+lotr.waypoint.AMON_HEN=Amon Hen
+lotr.waypoint.AMON_LHAW=Amon Lhaw
 
 lotr.waypoint.MORANNON=Morannon
 
@@ -2586,11 +2645,21 @@ lotr.waypoint.UDUN=Udûn
 lotr.waypoint.MOUNT_DOOM=Mount Doom
 lotr.waypoint.BARAD_DUR=Barad-dûr
 lotr.waypoint.MINAS_MORGUL=Minas Morgul
+lotr.waypoint.DURTHANG=Durthang
+lotr.waypoint.CARACH_ANGREN=Carach Angren
+lotr.waypoint.CIRITH_UNGOL=Cirith Ungol
+lotr.waypoint.MORIGOST=Morigost
+lotr.waypoint.NARGROTH=Nargroth
+lotr.waypoint.AMON_ANGREN=Amon Angren
+lotr.waypoint.SEREGOST=Seregost
+lotr.waypoint.FELLBEASTS=Vale of the Fell Beasts
 
 lotr.waypoint.NURNEN_NORTHERN_SHORE=Fornúrnen
 lotr.waypoint.NURNEN_SOUTHERN_SHORE=Harnúrnen
 lotr.waypoint.NURNEN_WESTERN_SHORE=Annúrnen
 lotr.waypoint.NURNEN_EASTERN_SHORE=Rhúnúrnen
+lotr.waypoint.EASTERN_GUARD=Eastern Guard
+lotr.waypoint.THAURBAND=Thaurband
 
 lotr.waypoint.VALLEY_OF_SPIDERS=Valley of Spiders
 

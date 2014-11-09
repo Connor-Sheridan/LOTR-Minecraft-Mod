@@ -103,7 +103,7 @@ public abstract class LOTRMiniQuest implements Comparable<LOTRMiniQuest>
 		Class questType = nameToQuestMapping.get(questTypeName);
 		if (questType == null)
 		{
-			System.out.println("Could not instantiate miniquest of type " + questTypeName);
+			FMLLog.severe("Could not instantiate miniquest of type " + questTypeName);
 			return null;
 		}
 		else

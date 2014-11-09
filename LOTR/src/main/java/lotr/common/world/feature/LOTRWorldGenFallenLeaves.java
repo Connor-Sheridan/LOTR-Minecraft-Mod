@@ -18,11 +18,11 @@ public class LOTRWorldGenFallenLeaves extends WorldGenerator
 		int fallenMeta = 0;
 		
 		findLeaf:
-		for (int l = 0; l < 32; l++)
+		for (int l = 0; l < 40; l++)
 		{
-			int i1 = i - random.nextInt(4) + random.nextInt(4);
-			int j1 = j + random.nextInt(8);
-			int k1 = k - random.nextInt(4) + random.nextInt(4);
+			int i1 = i - random.nextInt(6) + random.nextInt(6);
+			int j1 = j + random.nextInt(12);
+			int k1 = k - random.nextInt(6) + random.nextInt(6);
 			
 			Block block = world.getBlock(i1, j1, k1);
 			if (block instanceof BlockLeavesBase)
@@ -44,7 +44,7 @@ public class LOTRWorldGenFallenLeaves extends WorldGenerator
 		}
 		else
 		{
-			for (int l = 0; l < 40; l++)
+			for (int l = 0; l < 64; l++)
 			{
 				int i1 = i - random.nextInt(5) + random.nextInt(5);
 				int j1 = j - random.nextInt(3) + random.nextInt(3);

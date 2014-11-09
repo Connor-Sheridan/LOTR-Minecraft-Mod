@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 
 import com.google.common.base.Charsets;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
@@ -255,13 +256,13 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 			int shieldTypeID = data.readByte();
 			if (shieldTypeID < 0 || shieldTypeID >= ShieldType.values().length)
 			{
-				System.out.println("Failed to update LOTR shield on client side: There is no shieldtype with ID " + shieldTypeID);
+				FMLLog.severe("Failed to update LOTR shield on client side: There is no shieldtype with ID " + shieldTypeID);
 				return;
 			}
 			ShieldType shieldType = ShieldType.values()[shieldTypeID];
 			if (shieldID < 0 || shieldID >= shieldType.list.size())
 			{
-				System.out.println("Failed to update LOTR shield on client side: There is no shield with ID " + shieldID + " for shieldtype " + shieldTypeID);
+				FMLLog.severe("Failed to update LOTR shield on client side: There is no shield with ID " + shieldID + " for shieldtype " + shieldTypeID);
 				return;
 			}
 			LOTRShields shield = (LOTRShields)shieldType.list.get(shieldID);
@@ -299,7 +300,7 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 			int messageID = data.readByte();
 			if (messageID < 0 || messageID >= LOTRGuiMessageTypes.values().length)
 			{
-				System.out.println("Failed to display LOTR message: There is no message with ID " + messageID);
+				FMLLog.severe("Failed to display LOTR message: There is no message with ID " + messageID);
 				return;
 			}
 			LOTRGuiMessageTypes type = LOTRGuiMessageTypes.values()[messageID];

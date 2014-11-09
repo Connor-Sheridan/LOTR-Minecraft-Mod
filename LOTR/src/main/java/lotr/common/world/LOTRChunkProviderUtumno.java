@@ -116,6 +116,7 @@ public class LOTRChunkProviderUtumno implements IChunkProvider
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoFireWarg.class, 10, 4, 4));
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityTormentedElf.class, 15, 4, 4));
 			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityUtumnoTroll.class, 15, 4, 4));
+			FIRE.npcSpawnList.add(new SpawnListEntry(LOTREntityBalrog.class, 2, 1, 1));
 		}
 	}
 	

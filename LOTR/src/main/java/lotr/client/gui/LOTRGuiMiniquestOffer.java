@@ -26,6 +26,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class LOTRGuiMiniquestOffer extends LOTRGuiScreenBase
 {
 	private static ResourceLocation guiTexture = new ResourceLocation("lotr:gui/quest/miniquest.png");
@@ -230,7 +232,7 @@ public class LOTRGuiMiniquestOffer extends LOTRGuiScreenBase
 		}
 		catch (IOException e)
 		{
-			System.out.println("Failed to write miniquest data to accept packet");
+			FMLLog.severe("Failed to write miniquest data to accept packet");
 			e.printStackTrace();
 		}
 		

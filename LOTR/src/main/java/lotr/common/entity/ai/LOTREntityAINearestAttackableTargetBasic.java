@@ -31,6 +31,10 @@ public class LOTREntityAINearestAttackableTargetBasic extends EntityAINearestAtt
 			{
 				return false;
 			}
+			if (npc.isChild())
+			{
+				return false;
+			}
 		}
 		if (taskOwner instanceof LOTREntityNPCRideable)
 		{

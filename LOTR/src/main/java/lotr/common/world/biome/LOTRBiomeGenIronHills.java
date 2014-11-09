@@ -55,7 +55,7 @@ public class LOTRBiomeGenIronHills extends LOTRBiome
 		
 		decorator.addTree(LOTRTreeType.SPRUCE, 1000);
 		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 200);
-		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 50);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_THIN, 50);
 		
 		registerMountainsFlowers();
 		addFlower(LOTRMod.dwarfHerb, 0, 1);

@@ -41,7 +41,7 @@ public class LOTRBiomeGenWhiteMountains extends LOTRBiomeGenGondor
 	@Override
 	public LOTRWaypoint.Region getBiomeWaypoints()
 	{
-		return null;
+		return LOTRWaypoint.Region.WHITE_MOUNTAINS;
 	}
 	
 	@Override

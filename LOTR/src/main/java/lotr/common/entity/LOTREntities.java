@@ -1,16 +1,11 @@
 package lotr.common.entity;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import lotr.common.LOTRMod;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class LOTREntities
@@ -109,7 +104,7 @@ public class LOTREntities
 		}
 		if (entity == null)
 		{
-			System.out.println("Skipping LOTR Entity with id " + id);
+			FMLLog.warning("Skipping LOTR Entity with id " + id);
 		}
 		return entity;
 	}
@@ -127,7 +122,7 @@ public class LOTREntities
 		}
 		if (entity == null)
 		{
-			System.out.println("Skipping LOTR Entity with class " + entityClass);
+			FMLLog.warning("Skipping LOTR Entity with class " + entityClass);
 		}
 		return entity;
 	}

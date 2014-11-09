@@ -34,6 +34,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -117,7 +118,7 @@ public class LOTRTickHandlerServer
 			if (world.getWorldInfo().getClass() != LOTRDerivedWorldInfo.class)
 			{
 				LOTRReflection.setWorldInfo((WorldServer)world, new LOTRDerivedWorldInfo(DimensionManager.getWorld(0).getWorldInfo()));
-				System.out.println("Successfully replaced LOTR world info");
+				FMLLog.info("Successfully replaced LOTR world info");
 			}
 			
 			if (world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))

@@ -2,6 +2,7 @@ package lotr.common.world;
 
 import net.minecraft.world.storage.DerivedWorldInfo;
 import net.minecraft.world.storage.WorldInfo;
+import cpw.mods.fml.common.FMLLog;
 
 public class LOTRDerivedWorldInfo extends DerivedWorldInfo
 {
@@ -21,6 +22,6 @@ public class LOTRDerivedWorldInfo extends DerivedWorldInfo
 			return;
 		}
 		parentWorldInfo.setWorldTime(time);
-		System.out.println("Set LOTR world time to " + time);
+		FMLLog.info("Set LOTR world time to " + time);
 	}
 }

@@ -10,11 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.Level;
 
 import com.google.common.base.Charsets;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 
 public class LOTRLore
 {
@@ -49,7 +49,7 @@ public class LOTRLore
 						}
 						catch (Exception e)
 						{
-							System.out.println("Failed to load LOTR lore " + s + "from zip file");
+							FMLLog.severe("Failed to load LOTR lore " + s + "from zip file");
 							e.printStackTrace();
 						}
 					}
@@ -64,7 +64,7 @@ public class LOTRLore
 					int i = s.indexOf(".txt");
 					if (i < 0)
 					{
-						System.out.println("Failed to load LOTR lore " + s + " from MCP folder; name bank files must be in .txt format");
+						FMLLog.severe("Failed to load LOTR lore " + s + " from MCP folder; name bank files must be in .txt format");
 						continue;
 					}
 					try
@@ -75,7 +75,7 @@ public class LOTRLore
 					}
 					catch (Exception e)
 					{
-						System.out.println("Failed to load LOTR lore " + s + " from MCP folder");
+						FMLLog.severe("Failed to load LOTR lore " + s + " from MCP folder");
 						e.printStackTrace();
 					}
 				}
@@ -83,7 +83,7 @@ public class LOTRLore
 		}
 		catch (Exception e)
 		{
-			System.out.println("Failed to load LOTR lore");
+			FMLLog.severe("Failed to load LOTR lore");
 			e.printStackTrace();
 		}
 		
@@ -96,11 +96,11 @@ public class LOTRLore
 			{
 				String loreText = IOUtils.toString(inputStream, Charsets.UTF_8);
 				lore.put(loreName, loreText);
-				System.out.println("Succesfully loaded LOTR lore " + loreName);
+				FMLLog.info("Succesfully loaded LOTR lore " + loreName);
 			}
 			catch (Exception e)
 			{
-				System.out.println("Failed to load LOTR lore " + loreName);
+				FMLLog.severe("Failed to load LOTR lore " + loreName);
 				e.printStackTrace();
 			}
 		}

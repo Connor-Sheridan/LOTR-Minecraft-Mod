@@ -38,9 +38,9 @@ public class LOTRBiomeGenFangornWasteland extends LOTRBiome
 		decorator.addTree(LOTRTreeType.OAK_DEAD, 300);
 		decorator.addTree(LOTRTreeType.BEECH_DEAD, 100);
 		decorator.addTree(LOTRTreeType.BIRCH_DEAD, 20);
-		decorator.addTree(LOTRTreeType.CHARRED, 50);
-		decorator.addTree(LOTRTreeType.OAK_DEAD, 30);
-		decorator.addTree(LOTRTreeType.BEECH_DEAD, 10);
+		decorator.addTree(LOTRTreeType.CHARRED_FANGORN, 50);
+		decorator.addTree(LOTRTreeType.OAK_FANGORN_DEAD, 30);
+		decorator.addTree(LOTRTreeType.BEECH_FANGORN_DEAD, 10);
 		
 		setBanditChance(LOTRBanditSpawner.UNCOMMON);
 		

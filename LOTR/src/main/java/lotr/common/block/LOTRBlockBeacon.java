@@ -111,7 +111,7 @@ public class LOTRBlockBeacon extends BlockContainer
 		ItemStack itemstack = entityplayer.getCurrentEquippedItem();
         if (canItemLightBeacon(itemstack) && !isLit(world, i, j, k) && world.getBlock(i, j + 1, k).getMaterial() != Material.water)
         {
-			world.playSoundEffect((double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, "fire.ignite", 1.0F, world.rand.nextFloat() * 0.4F + 0.8F);
+			world.playSoundEffect((double)i + 0.5D, (double)j + 0.5D, (double)k + 0.5D, "fire.ignite", 1F, world.rand.nextFloat() * 0.4F + 0.8F);
 			if (itemstack.getItem().isDamageable())
 			{
 				itemstack.damageItem(1, entityplayer);

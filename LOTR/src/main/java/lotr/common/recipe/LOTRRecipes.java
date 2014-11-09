@@ -1069,6 +1069,14 @@ public class LOTRRecipes
 		{
 			"XXX", "XXX", "XXX", 'X', blackUrukSteel
 		});
+		GameRegistry.addShapelessRecipe(new ItemStack(utumnoKey, 1, 0), new Object[]
+		{
+			new ItemStack(utumnoKey, 1, 2), new ItemStack(utumnoKey, 1, 3), new ItemStack(utumnoKey, 1, 4)
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(utumnoKey, 1, 1), new Object[]
+		{
+			new ItemStack(utumnoKey, 1, 5), new ItemStack(utumnoKey, 1, 6), new ItemStack(utumnoKey, 1, 7)
+		});
 	}
 	
 	private static void createPoisonedDaggerRecipes()

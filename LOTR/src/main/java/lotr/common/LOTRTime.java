@@ -2,6 +2,7 @@ package lotr.common;
 
 import java.io.IOException;
 
+import cpw.mods.fml.common.FMLLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -54,7 +55,7 @@ public class LOTRTime
 			ShireReckoning.currentDay++;
 			LOTRLevelData.markDirty();
 			
-			System.out.println("Updating LOTR day");
+			FMLLog.info("Updating LOTR day: " + ShireReckoning.getShireDate().getDateName(false));
 			for (Object obj : MinecraftServer.getServer().getConfigurationManager().playerEntityList)
 			{
 				EntityPlayerMP entityplayer = (EntityPlayerMP)obj;
@@ -82,7 +83,7 @@ public class LOTRTime
 		}
 		catch (IOException e)
 		{
-			System.out.println("Failed to send LOTR time info to player " + entityplayer.getCommandSenderName());
+			FMLLog.severe("Failed to send LOTR time info to player " + entityplayer.getCommandSenderName());
 			e.printStackTrace();
 		}
 	}

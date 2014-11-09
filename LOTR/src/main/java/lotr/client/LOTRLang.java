@@ -1,15 +1,7 @@
 package lotr.client;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -20,8 +12,7 @@ import org.apache.commons.io.input.BOMInputStream;
 
 import com.google.common.base.Charsets;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.*;
 
 public class LOTRLang
 {
@@ -86,7 +77,7 @@ public class LOTRLang
 				}
 				
 				String name = FilenameUtils.getName(file.getName());
-				System.out.println("Checking lang file for updates " + name);
+				FMLLog.info("Checking lang file for updates " + name);
 
 				File oldLang = File.createTempFile(name + "_old", ".lang");
 				copyZipEntryToFile(zip, file, oldLang);

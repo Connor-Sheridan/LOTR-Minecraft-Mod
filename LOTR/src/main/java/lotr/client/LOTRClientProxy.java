@@ -76,6 +76,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	private int trollTotemRenderID;
 	private int fenceRenderID;
 	private int grassRenderID;
+	private int fallenLeavesRenderID;
 	
 	@Override
 	public boolean isClient()
@@ -251,6 +252,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityUtumnoIceSpider.class, new LOTRRenderUtumnoIceSpider());
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityConker.class, new RenderSnowball(LOTRMod.chestnut));
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityUtumnoTroll.class, new LOTRRenderUtumnoTroll());
+		RenderingRegistry.registerEntityRenderingHandler(LOTREntityBalrog.class, new LOTRRenderBalrog());
 
 		beaconRenderID = RenderingRegistry.getNextAvailableRenderId();
 		barrelRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -265,6 +267,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		trollTotemRenderID = RenderingRegistry.getNextAvailableRenderId();
 		fenceRenderID = RenderingRegistry.getNextAvailableRenderId();
 		grassRenderID = RenderingRegistry.getNextAvailableRenderId();
+		fallenLeavesRenderID = RenderingRegistry.getNextAvailableRenderId();
 		
 		RenderingRegistry.registerBlockHandler(beaconRenderID, new LOTRRenderBlocks(true));
 		RenderingRegistry.registerBlockHandler(barrelRenderID, new LOTRRenderBlocks(true));
@@ -279,6 +282,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		RenderingRegistry.registerBlockHandler(trollTotemRenderID, new LOTRRenderBlocks(true));
 		RenderingRegistry.registerBlockHandler(fenceRenderID, new LOTRRenderBlocks(true));
 		RenderingRegistry.registerBlockHandler(grassRenderID, new LOTRRenderBlocks(false));
+		RenderingRegistry.registerBlockHandler(fallenLeavesRenderID, new LOTRRenderBlocks(false));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityBeacon.class, new LOTRRenderBeacon());
 		ClientRegistry.bindTileEntitySpecialRenderer(LOTRTileEntityMobSpawner.class, new LOTRTileEntityMobSpawnerRenderer());
@@ -764,5 +768,11 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	public int getGrassRenderID()
 	{
 		return grassRenderID;
+	}
+	
+	@Override
+	public int getFallenLeavesRenderID()
+	{
+		return fallenLeavesRenderID;
 	}
 }

@@ -12,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -65,6 +67,23 @@ public class LOTRBlockUtumnoBrick extends Block implements UtumnoBlock
         	return 12;
         }
         return super.getLightValue(world, i, j, k);
+    }
+	
+	@Override
+	public boolean isFireSource(World world, int i, int j, int k, ForgeDirection side)
+    {
+        return isFlammable(world, i, j, k, side);
+    }
+	
+	@Override
+	public boolean isFlammable(IBlockAccess world, int i, int j, int k, ForgeDirection side)
+    {
+		int meta = world.getBlockMetadata(i, j, k);
+        if (meta == 0 || meta == 1)
+        {
+        	return true;
+        }
+        return super.isFlammable(world, i, j, k, side);
     }
 	
 	@Override

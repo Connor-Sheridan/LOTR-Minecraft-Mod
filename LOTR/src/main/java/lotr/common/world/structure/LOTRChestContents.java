@@ -12,11 +12,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.WeightedRandom;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
+import cpw.mods.fml.common.FMLLog;
 
 public class LOTRChestContents
 {
@@ -117,7 +116,7 @@ public class LOTRChestContents
 		{
 			if (j >= 0 && j < 256)
 			{
-				System.out.println("Warning: LOTRChestContents attempted to fill a chest at " + i + ", " + j + ", " + k + " which does not exist");
+				FMLLog.warning("Warning: LOTRChestContents attempted to fill a chest at " + i + ", " + j + ", " + k + " which does not exist");
 			}
 			return;
 		}

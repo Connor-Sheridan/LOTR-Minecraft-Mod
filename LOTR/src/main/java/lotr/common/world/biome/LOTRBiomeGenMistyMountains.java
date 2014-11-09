@@ -37,7 +37,7 @@ public class LOTRBiomeGenMistyMountains extends LOTRBiome
 		decorator.addTree(LOTRTreeType.SPRUCE_THIN, 500);
 		decorator.addTree(LOTRTreeType.LARCH, 300);
 		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 100);
-		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 20);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_THIN, 20);
 		
 		registerMountainsFlowers();
 		

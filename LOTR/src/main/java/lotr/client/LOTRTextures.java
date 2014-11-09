@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import cpw.mods.fml.common.FMLLog;
 import lotr.common.LOTRConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.*;
@@ -59,7 +60,7 @@ public class LOTRTextures implements IResourceManagerReloadListener
 			}
 			catch (IOException e)
 			{
-				System.out.println("Failed to generate LOTR map display image");
+				FMLLog.severe("Failed to generate LOTR map display image");
 				e.printStackTrace();
 				mapTexture = map;
 			}
@@ -114,7 +115,7 @@ public class LOTRTextures implements IResourceManagerReloadListener
 		}
 		catch (IOException e)
 		{
-			System.out.println("Failed to replace rain particles");
+			FMLLog.severe("Failed to replace rain particles");
 			e.printStackTrace();
 		}
 	}

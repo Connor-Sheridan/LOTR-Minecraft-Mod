@@ -103,7 +103,7 @@ public class LOTRItemCommandSword extends LOTRItemSword
 
 				if (axisalignedbb.isVecInside(position))
 				{
-					if (0D < entityDist || entityDist == 0D)
+					if (entityDist >= 0D)
 					{
 						pointedEntity = entity;
 						entityDist = 0D;

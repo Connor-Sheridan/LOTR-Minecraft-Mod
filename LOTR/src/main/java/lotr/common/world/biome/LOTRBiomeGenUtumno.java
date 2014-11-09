@@ -44,6 +44,7 @@ public class LOTRBiomeGenUtumno extends LOTRBiome
 		generateBridges(world, random, i, k);
 		generateStairs(world, random, i, k);
 		generatePillars(world, random, i, k);
+		generatePortalBases(world, random, i, k);
 	}
 	
 	private void generateHoles(World world, Random random, int i, int k)
@@ -402,6 +403,37 @@ public class LOTRBiomeGenUtumno extends LOTRBiome
 	
 					world.setBlock(i1, j2, k1, LOTRMod.utumnoPillar, utumnoLevel.pillarMeta, 2);
 				}
+			}
+		}
+	}
+	
+	private void generatePortalBases(World world, Random random, int i, int k)
+	{
+		for (int l = 0; l < 1; l++)
+		{
+			int i1 = i + 8 + random.nextInt(16);
+			int k1 = k + 8 + random.nextInt(16);
+			
+			UtumnoLevel utumnoLevel;
+			float f = random.nextFloat();
+			if (f < 0.15F)
+			{
+				utumnoLevel = UtumnoLevel.ICE;
+			}
+			else if (f < 0.5F)
+			{
+				utumnoLevel = UtumnoLevel.OBSIDIAN;
+			}
+			else
+			{
+				utumnoLevel = UtumnoLevel.FIRE;
+			}
+			
+			int j1 = utumnoLevel.corridorBaseLevels[random.nextInt(utumnoLevel.corridorBaseLevels.length)];
+			
+			if (world.isAirBlock(i1, j1, k1) && World.doesBlockHaveSolidTopSurface(world, i1, j1 - 1, k1))
+			{
+				world.setBlock(i1, j1, k1, LOTRMod.utumnoReturnPortalBase, 0, 2);
 			}
 		}
 	}

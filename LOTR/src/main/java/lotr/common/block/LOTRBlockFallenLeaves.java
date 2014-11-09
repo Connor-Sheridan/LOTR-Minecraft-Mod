@@ -3,6 +3,7 @@ package lotr.common.block;
 import java.util.*;
 
 import lotr.common.LOTRCreativeTabs;
+import lotr.common.LOTRMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -28,12 +29,14 @@ public class LOTRBlockFallenLeaves extends Block implements IShearable
 	public LOTRBlockFallenLeaves(Block... blocks)
 	{
 		super(Material.vine);
+		leafBlocks = blocks;
 		allFallenLeaves.add(this);
+
+		setCreativeTab(LOTRCreativeTabs.tabDeco);
 		setHardness(0.2F);
 		setStepSound(Block.soundTypeGrass);
 		useNeighborBrightness = true;
-		leafBlocks = blocks;
-		setCreativeTab(LOTRCreativeTabs.tabDeco);
+		setBlockBounds(0F, 0F, 0F, 1F, 0.125F, 1F);
 	}
 	
 	public Object[] forFallenLeaf(int meta)
@@ -61,21 +64,6 @@ public class LOTRBlockFallenLeaves extends Block implements IShearable
 	}
 	
 	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int i, int j, int k)
-    {
-        long seed = (long)(i * 3129871) ^ (long)k * 116129781L ^ (long)j;
-        leafRand.setSeed(seed);
-        int height = 1 + leafRand.nextInt(3);
-        setBlockBounds(0F, 0F, 0F, 1F, (float)height / 16F, 1F);
-    }
-	
-	@Override
-    public void setBlockBoundsForItemRender()
-    {
-		setBlockBounds(0F, 0F, 0F, 1F, 0.125F, 1F);
-    }
-	
-	@Override
     public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB bb, List boxes, Entity entity) {}
 	
 	@Override
@@ -89,6 +77,12 @@ public class LOTRBlockFallenLeaves extends Block implements IShearable
     {
         return false;
     }
+	
+	@Override
+	public int getRenderType()
+	{
+		return LOTRMod.proxy.getFallenLeavesRenderID();
+	}
 	
 	@Override
     @SideOnly(Side.CLIENT)

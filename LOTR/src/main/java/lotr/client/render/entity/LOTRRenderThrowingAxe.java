@@ -6,14 +6,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class LOTRRenderThrowingAxe extends Render
 {
@@ -61,7 +60,7 @@ public class LOTRRenderThrowingAxe extends Render
 		IIcon icon = axeItem.getIconIndex();
 		if (icon == null)
 		{
-			System.out.println("Error rendering throwing axe: no icon for " + axeItem.toString());
+			FMLLog.severe("Error rendering throwing axe: no icon for " + axeItem.toString());
 			GL11.glPopMatrix();
 			return;
 		}

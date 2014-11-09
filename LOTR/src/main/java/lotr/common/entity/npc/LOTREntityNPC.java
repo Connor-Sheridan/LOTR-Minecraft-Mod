@@ -183,7 +183,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		}
 		catch (Exception e)
 		{
-			System.out.println("Error adding LOTR target tasks to entity " + entity.toString());
+			FMLLog.severe("Error adding LOTR target tasks to entity " + entity.toString());
 			e.printStackTrace();
 		}
 		return index;
@@ -897,6 +897,33 @@ public abstract class LOTREntityNPC extends EntityCreature
 	protected void dropFewItems(boolean flag, int i)
 	{
 		dropNPCEquipment(flag, i);
+		
+		if (flag && canDropPouch())
+		{
+			if (rand.nextInt(10) == 0)
+			{
+				int coins = MathHelper.getRandomIntegerInRange(rand, 1, 4);
+				if (rand.nextInt(3) == 0)
+				{
+					coins *= MathHelper.getRandomIntegerInRange(rand, 2, 4);
+				}
+				dropItem(LOTRMod.silverCoin, coins);
+			}
+		}
+		
+		if (getFaction() == LOTRFaction.UTUMNO)
+		{
+			if (rand.nextInt(20) == 0)
+			{
+				ItemStack keypart = LOTRItemUtumnoKey.getRandomKeyPart(rand);
+				entityDropItem(keypart, 0F);
+			}
+			
+			if (canDropPouch() && rand.nextInt(100) == 0)
+			{
+				entityDropItem(new ItemStack(LOTRMod.utumnoPickaxe), 0F);
+			}
+		}
 	}
 	
 	public void dropNPCEquipment(boolean flag, int i)
@@ -965,14 +992,14 @@ public abstract class LOTREntityNPC extends EntityCreature
 	public final void dropEquipment(boolean flag, int i) {}
 	
 	@Override
-	public EntityItem entityDropItem(ItemStack item, float offset)
+	public final EntityItem entityDropItem(ItemStack item, float offset)
     {
 		return npcDropItem(item, offset, true);
     }
 	
-	public EntityItem npcDropItem(ItemStack item, float offset, boolean flag)
+	public final EntityItem npcDropItem(ItemStack item, float offset, boolean enpouch)
 	{
-		if (flag)
+		if (enpouch)
 		{
 			if (item != null && item.getItem() != null && item.getMaxStackSize() == 1)
 			{
@@ -1005,20 +1032,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		{
 			travellingTraderInfo.onDeath();
 		}
-		
-		if (!worldObj.isRemote && recentlyHit > 0 && canDropPouch() && LOTRMod.canDropLoot(worldObj))
-		{
-			if (rand.nextInt(10) == 0)
-			{
-				int coins = MathHelper.getRandomIntegerInRange(rand, 1, 4);
-				if (rand.nextInt(3) == 0)
-				{
-					coins *= MathHelper.getRandomIntegerInRange(rand, 2, 4);
-				}
-				dropItem(LOTRMod.silverCoin, coins);
-			}
-		}
-		
+
 		super.onDeath(damagesource);
 		
 		if (!worldObj.isRemote && recentlyHit > 0 && canDropPouch() && LOTRMod.canDropLoot(worldObj))
@@ -1390,7 +1404,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		}
 		catch (IOException e)
 		{
-			System.out.println("Could not offer miniquest to player");
+			FMLLog.severe("Could not offer miniquest to player");
 			e.printStackTrace();
 			return false;
 		}

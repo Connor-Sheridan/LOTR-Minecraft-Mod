@@ -1,6 +1,7 @@
 package lotr.common.item;
 
 import java.util.List;
+import java.util.Random;
 
 import lotr.common.*;
 import lotr.common.world.LOTRChunkProviderUtumno.UtumnoLevel;
@@ -12,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,8 +21,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class LOTRItemUtumnoKey extends Item
 {
 	@SideOnly(Side.CLIENT)
-	private IIcon[] keyIcons;
-	private String[] keyTypes = {"ice", "obsidian"};
+	private static IIcon[] keyIcons;
+	private static String[] keyTypes = {"ice", "obsidian", "ice0", "ice1", "ice2", "obsidian0", "obsidian1", "obsidian2"};
 	
 	public LOTRItemUtumnoKey()
 	{
@@ -29,6 +31,13 @@ public class LOTRItemUtumnoKey extends Item
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+	}
+	
+	public static ItemStack getRandomKeyPart(Random rand)
+	{
+		ItemStack itemstack = new ItemStack(LOTRMod.utumnoKey);
+		itemstack.setItemDamage(MathHelper.getRandomIntegerInRange(rand, 2, keyTypes.length - 1));
+		return itemstack;
 	}
 	
 	@Override

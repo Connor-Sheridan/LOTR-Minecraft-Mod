@@ -35,6 +35,8 @@ import net.minecraftforge.common.util.Constants;
 
 import com.google.common.base.Charsets;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class LOTRPlayerData
 {
 	private UUID playerUUID;
@@ -1366,7 +1368,7 @@ public class LOTRPlayerData
 		}
 		else
 		{
-			System.out.println("Warning: Attempted to remove a mini-quest which does not belong to the player data");
+			FMLLog.warning("Warning: Attempted to remove a mini-quest which does not belong to the player data");
 		}
 	}
 	
@@ -1383,7 +1385,7 @@ public class LOTRPlayerData
 			}
 			catch (IOException e)
 			{
-				System.out.println("Error sending miniquest packet to player " + entityplayer.getCommandSenderName());
+				FMLLog.severe("Error sending miniquest packet to player " + entityplayer.getCommandSenderName());
 				e.printStackTrace();
 			}
 		}

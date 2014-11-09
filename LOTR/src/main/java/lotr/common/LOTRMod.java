@@ -309,6 +309,7 @@ public class LOTRMod
 	public static Block mordorGravel;
 	public static Block utumnoReturnPortal;
 	public static Block utumnoReturnLight;
+	public static Block utumnoReturnPortalBase;
 
 	public static Item goldRing;
 	public static Item pouch;
@@ -717,6 +718,8 @@ public class LOTRMod
 	public static Item rohanBow;
 	public static Item gondorBow;
 	public static Item highElvenBow;
+	public static Item utumnoPickaxe;
+	public static Item balrogWhip;
 	
 	public static List unnamedItems = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
@@ -934,6 +937,7 @@ public class LOTRMod
 		mordorGravel = new LOTRBlockGravel().setBlockName("lotr:mordorGravel");
 		utumnoReturnPortal = new LOTRBlockUtumnoReturnPortal().setBlockName("lotr:utumnoReturnPortal");
 		utumnoReturnLight = new LOTRBlockUtumnoReturnLight().setBlockName("lotr:utumnoReturnLight");
+		utumnoReturnPortalBase = new LOTRBlockUtumnoReturnPortalBase().setBlockName("lotr:utumnoReturnPortalBase");
 		
 		goldRing = new Item().setCreativeTab(LOTRCreativeTabs.tabMagic).setUnlocalizedName("lotr:goldRing");
 		pouch = new LOTRItemPouch().setUnlocalizedName("lotr:pouch");
@@ -1342,6 +1346,8 @@ public class LOTRMod
 		rohanBow = new LOTRItemBow(420, 0D, 0.2F, 3, 16).setUnlocalizedName("lotr:rohanBow");
 		gondorBow = new LOTRItemBow(420, 0.25D, 0.4F, 3, 20).setUnlocalizedName("lotr:gondorBow");
 		highElvenBow = new LOTRItemBow(500, 0.25D, 0.5F, 5, 20).setUnlocalizedName("lotr:highElvenBow");
+		utumnoPickaxe = new LOTRItemPickaxe(toolUtumno).setMaxDamage(80).setUnlocalizedName("lotr:utumnoPickaxe");
+		balrogWhip = new LOTRItemBalrogWhip().setUnlocalizedName("lotr:balrogWhip");
 		
 		try
 		{
@@ -1587,6 +1593,7 @@ public class LOTRMod
 		registerBlock(mordorGravel);
 		registerBlock(utumnoReturnPortal);
 		registerBlock(utumnoReturnLight);
+		registerBlock(utumnoReturnPortalBase);
 		
 		registerItem(goldRing);
 		registerItem(pouch);
@@ -1995,6 +2002,8 @@ public class LOTRMod
 		registerItem(rohanBow);
 		registerItem(gondorBow);
 		registerItem(highElvenBow);
+		registerItem(utumnoPickaxe);
+		registerItem(balrogWhip);
 		
 		LOTRConfig.setupAndLoad(event);
 		
@@ -2301,7 +2310,7 @@ public class LOTRMod
 		LOTREntities.registerCreature(LOTREntityUtumnoObsidianWarg.class, "UtumnoObsidianWarg", 804, 0x2D2B29, 0x191716);
 		LOTREntities.registerCreature(LOTREntityUtumnoFireWarg.class, "UtumnoFireWarg", 805, 0x6A2D1C, 0xCE7500);
 		LOTREntities.registerCreature(LOTREntityUtumnoIceSpider.class, "UtumnoIceSpider", 806, 0xEDF3FF, 0x7575FF);
-		LOTREntities.registerCreature(LOTREntityBalrog.class, "Balrog", 807, 0x6A2D1C, 0xCE7500);
+		LOTREntities.registerCreature(LOTREntityBalrog.class, "Balrog", 807, 0x1B0A05, 0xC68400);
 		LOTREntities.registerCreature(LOTREntityTormentedElf.class, "TormentedElf", 808, 0xD6D7AF, 0x42302E);
 		LOTREntities.registerCreature(LOTREntityUtumnoTroll.class, "UtumnoTroll", 809, 0xA17253, 0x714139);
 

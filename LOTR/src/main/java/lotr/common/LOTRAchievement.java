@@ -2,25 +2,16 @@ package lotr.common;
 
 import static lotr.common.LOTRAchievement.Category.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import lotr.common.entity.animal.LOTRAmbientCreature;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class LOTRAchievement implements Comparable
@@ -573,6 +564,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement killBalrog;
 	public static LOTRAchievement killTormentedElf;
 	public static LOTRAchievement killUtumnoTroll;
+	public static LOTRAchievement craftUtumnoKey;
 	
 	public static void createAchievements()
 	{
@@ -917,9 +909,10 @@ public class LOTRAchievement implements Comparable
 		wearFullUtumno = new LOTRAchievement(UTUMNO, 3, LOTRMod.bodyUtumno, "wearFullUtumno");
 		killUtumnoOrc = new LOTRAchievement(UTUMNO, 4, LOTRMod.orcBone, "killUtumnoOrc");
 		killUtumnoWarg = new LOTRAchievement(UTUMNO, 5, LOTRMod.wargBone, "killUtumnoWarg");
-		killBalrog = new LOTRAchievement(UTUMNO, 6, Blocks.fire, "killBalrog");
+		killBalrog = new LOTRAchievement(UTUMNO, 6, LOTRMod.balrogWhip, "killBalrog");
 		killTormentedElf = new LOTRAchievement(UTUMNO, 7, LOTRMod.elfBone, "killTormentedElf");
 		killUtumnoTroll = new LOTRAchievement(UTUMNO, 8, LOTRMod.trollBone, "killUtumnoTroll");
+		craftUtumnoKey = new LOTRAchievement(UTUMNO, 9, LOTRMod.utumnoKey, "craftUtumnoKey");
 	}
 	
 	public static Category categoryForName(String name)

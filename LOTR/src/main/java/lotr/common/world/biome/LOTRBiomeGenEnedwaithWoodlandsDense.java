@@ -17,8 +17,8 @@ public class LOTRBiomeGenEnedwaithWoodlandsDense extends LOTRBiomeGenEnedwaithWo
 		decorator.treesPerChunk = 12;
 		decorator.logsPerChunk = 1;
 		
-		decorator.addTree(LOTRTreeType.OAK_LARGE, 700);
-		decorator.addTree(LOTRTreeType.OAK_HUGE, 125);
-		decorator.addTree(LOTRTreeType.SPRUCE_MEGA_TALL, 125);
+		decorator.addTree(LOTRTreeType.OAK_LARGE, 600);
+		decorator.addTree(LOTRTreeType.OAK_HUGE, 200);
+		decorator.addTree(LOTRTreeType.SPRUCE_MEGA, 200);
 	}
 }
