@@ -1,9 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
 import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.quest.LOTRMiniQuestFactory;
@@ -93,6 +90,36 @@ public class LOTREntityAngmarOrc extends LOTREntityOrc
 	protected LOTRAchievement getKillAchievement()
 	{
 		return LOTRAchievement.killAngmarOrc;
+	}
+	
+	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		if (isFriendly(entityplayer))
+		{
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "angmar/orc/hired";
+			}
+			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
+			{
+				return "angmar/orc/friendly";
+			}
+			else
+			{
+				return "angmar/orc/neutral";
+			}
+		}
+		else
+		{
+			return "angmar/orc/hostile";
+		}
+	}
+	
+	@Override
+	protected String getOrcSkirmishSpeech()
+	{
+		return "angmar/orc/skirmish";
 	}
 	
 	@Override

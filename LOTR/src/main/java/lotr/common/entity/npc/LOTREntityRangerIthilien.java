@@ -65,11 +65,15 @@ public class LOTREntityRangerIthilien extends LOTREntityRanger
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "rangerIthilien_friendly";
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "gondor/ranger/hired";
+			}
+			return "gondor/ranger/friendly";
 		}
 		else
 		{
-			return "rangerIthilien_hostile";
+			return "gondor/ranger/hostile";
 		}
 	}
 }

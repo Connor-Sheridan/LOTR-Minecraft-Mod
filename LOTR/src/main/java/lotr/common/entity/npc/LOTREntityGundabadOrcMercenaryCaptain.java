@@ -71,16 +71,16 @@ public class LOTREntityGundabadOrcMercenaryCaptain extends LOTREntityGundabadOrc
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "gundabadOrcMercenaryCaptain_friendly";
+				return "gundabad/chieftain/friendly";
 			}
 			else
 			{
-				return "gundabadOrcMercenaryCaptain_neutral";
+				return "gundabad/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "gundabad/orc/hostile";
 		}
 	}
 }

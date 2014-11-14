@@ -40,6 +40,10 @@ public class LOTREntityDunlendingWarrior extends LOTREntityDunlending
 		{
 			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.spearIron));
 		}
+		else if (i == 3)
+		{
+			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.battleaxeIron));
+		}
 		
 		setCurrentItemOrArmor(1, new ItemStack(LOTRMod.bootsDunlending));
 		setCurrentItemOrArmor(2, new ItemStack(LOTRMod.legsDunlending));

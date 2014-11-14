@@ -44,7 +44,7 @@ public class LOTRMiniQuestKillEntity extends LOTRMiniQuestKill
 	@Override
 	protected String getKillTargetName()
 	{
-		String s = String.format("%s.%s", LOTRMod.getModID(), LOTREntities.getStringFromClass(entityType));
+		String s = String.format("%s.%s", LOTRModInfo.modID, LOTREntities.getStringFromClass(entityType));
 		return StatCollector.translateToLocal("entity." + s + ".name");
 	}
 	

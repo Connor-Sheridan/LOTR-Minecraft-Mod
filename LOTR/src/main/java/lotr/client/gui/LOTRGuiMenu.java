@@ -14,8 +14,8 @@ import net.minecraft.util.StatCollector;
 public abstract class LOTRGuiMenu extends LOTRGuiScreenBase
 {
 	public static int guiIndex = 0;
-	public static Class[] guiClasses = {LOTRGuiMap.class, LOTRGuiAlignment.class, LOTRGuiAchievements.class, LOTRGuiTitles.class, LOTRGuiShields.class, LOTRGuiOptions.class};
-	private static String[] guiTitles = {"map", "alignment", "achievements", "titles", "shields", "options"};
+	public static Class[] guiClasses = {LOTRGuiMap.class, LOTRGuiFactions.class, LOTRGuiAchievements.class, LOTRGuiTitles.class, LOTRGuiShields.class, LOTRGuiOptions.class};
+	private static String[] guiTitles = {"map", "factions", "achievements", "titles", "shields", "options"};
 	private static String[] guiTitlesTranslated;
 	public static RenderItem renderItem = new RenderItem();
 	

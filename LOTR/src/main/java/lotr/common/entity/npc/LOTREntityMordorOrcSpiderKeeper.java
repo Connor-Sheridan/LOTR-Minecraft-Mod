@@ -88,16 +88,16 @@ public class LOTREntityMordorOrcSpiderKeeper extends LOTREntityMordorOrc impleme
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "orcMercenaryCaptain_friendly";
+				return "mordor/chieftain/friendly";
 			}
 			else
 			{
-				return "orcMercenaryCaptain_neutral";
+				return "mordor/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "mordor/orc/hostile";
 		}
 	}
 }

@@ -3,9 +3,7 @@ package lotr.client.render.entity;
 import java.util.List;
 
 import lotr.client.model.LOTRModelBiped;
-import lotr.common.LOTRShields;
-import lotr.common.entity.npc.LOTREntityNPC;
-import lotr.common.entity.npc.LOTREntityRanger;
+import lotr.common.entity.npc.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -15,17 +13,24 @@ import org.lwjgl.opengl.GL11;
 public class LOTRRenderRanger extends LOTRRenderBiped
 {
 	private static List rangerSkins;
+	private static List ithilienSkins;
 	
 	public LOTRRenderRanger()
 	{
 		super(new LOTRModelBiped(), 0.5F);
 		rangerSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/ranger/ranger");
+		ithilienSkins = LOTRRandomSkins.loadSkinsList("lotr:mob/gondor/ranger");
 	}
 	
 	@Override
 	public ResourceLocation getEntityTexture(Entity entity)
     {
-		return LOTRRandomSkins.getRandomSkin(rangerSkins, (LOTREntityRanger)entity);
+		LOTREntityRanger ranger = (LOTREntityRanger)entity;
+		if (ranger instanceof LOTREntityRangerIthilien)
+		{
+			return LOTRRandomSkins.getRandomSkin(ithilienSkins, ranger);
+		}
+		return LOTRRandomSkins.getRandomSkin(rangerSkins, ranger);
     }
 	
 	private void doRangerInvisibility()

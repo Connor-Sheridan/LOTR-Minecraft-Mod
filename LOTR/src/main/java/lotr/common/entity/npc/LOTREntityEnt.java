@@ -188,11 +188,11 @@ public class LOTREntityEnt extends LOTREntityTree
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "ent_friendly";
+			return "ent/friendly";
 		}
 		else
 		{
-			return "ent_hostile";
+			return "ent/hostile";
 		}
 	}
 }

@@ -131,12 +131,6 @@ public abstract class LOTREntitySpiderBase extends LOTREntityNPCRideable
 	}
 	
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);

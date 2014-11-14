@@ -141,13 +141,7 @@ public abstract class LOTREntityWarg extends LOTREntityNPCRideable implements II
 	{
 		return wargInventory;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public IEntityLivingData initCreatureForHire(IEntityLivingData data)
 	{

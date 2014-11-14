@@ -1,9 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
 import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.quest.LOTRMiniQuestFactory;
@@ -102,6 +99,36 @@ public class LOTREntityMordorOrc extends LOTREntityOrc
 	protected LOTRAchievement getKillAchievement()
 	{
 		return LOTRAchievement.killMordorOrc;
+	}
+	
+	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		if (isFriendly(entityplayer))
+		{
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "mordor/orc/hired";
+			}
+			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
+			{
+				return "mordor/orc/friendly";
+			}
+			else
+			{
+				return "mordor/orc/neutral";
+			}
+		}
+		else
+		{
+			return "mordor/orc/hostile";
+		}
+	}
+	
+	@Override
+	protected String getOrcSkirmishSpeech()
+	{
+		return "mordor/orc/skirmish";
 	}
 	
 	@Override

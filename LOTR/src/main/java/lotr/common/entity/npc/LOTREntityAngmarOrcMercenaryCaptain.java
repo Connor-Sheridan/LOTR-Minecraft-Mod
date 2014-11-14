@@ -61,16 +61,16 @@ public class LOTREntityAngmarOrcMercenaryCaptain extends LOTREntityAngmarOrcWarr
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "angmarOrcMercenaryCaptain_friendly";
+				return "angmar/chieftain/friendly";
 			}
 			else
 			{
-				return "angmarOrcMercenaryCaptain_neutral";
+				return "angmar/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "angmar/orc/hostile";
 		}
 	}
 }

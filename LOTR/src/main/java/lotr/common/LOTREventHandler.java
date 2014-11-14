@@ -51,7 +51,6 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import org.apache.commons.lang3.StringUtils;
@@ -80,7 +79,7 @@ public class LOTREventHandler implements IFuelHandler
 	@SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-        if (event.modID.equals(LOTRMod.getModID()))
+        if (event.modID.equals(LOTRModInfo.modID))
         {
         	LOTRConfig.load();
         }
@@ -609,7 +608,7 @@ public class LOTREventHandler implements IFuelHandler
 					
 					if (tree instanceof LOTREntityEnt && !sentMessage)
 					{
-						tree.sendSpeechBank(entityplayer, "ent_defendTrees");
+						tree.sendSpeechBank(entityplayer, "ent/defendTrees");
 						sentMessage = true;
 					}
 					
@@ -877,7 +876,7 @@ public class LOTREventHandler implements IFuelHandler
 										if (!sentMessage && entity instanceof EntityPlayer)
 										{
 											EntityPlayer entityplayer = (EntityPlayer)entity;
-											shirriff.sendSpeechBank(entityplayer, "hobbitShirriff_hostile");
+											shirriff.sendSpeechBank(entityplayer, "hobbit/shirriff/hostile");
 											sentMessage = true;
 										}
 										if (!playedHorn)
@@ -1391,6 +1390,16 @@ public class LOTREventHandler implements IFuelHandler
 					LOTRLevelData.getData(entityplayer).addAlignment(alignmentBonus, entityFaction, entity);
 				}
 				
+				if (entityFaction.allowPlayer)
+				{
+					LOTRLevelData.getData(entityplayer).getFactionData(entityFaction).addNPCKill();
+					
+					for (LOTRFaction enemy : entityFaction.killBonuses)
+					{
+						LOTRLevelData.getData(entityplayer).getFactionData(enemy).addEnemyKill();
+					}
+				}
+				
 				if (prevAlignment >= 0 && !entityplayer.capabilities.isCreativeMode && entityFaction != LOTRFaction.UNALIGNED)
 				{
 					boolean sentChatMessage = false;
@@ -1478,7 +1487,7 @@ public class LOTREventHandler implements IFuelHandler
 							rohirrim.setAttackTarget(entityplayer);
 							if (!sentMessage)
 							{
-								rohirrim.sendSpeechBank(entityplayer, "rohirrim_avengeHorse");
+								rohirrim.sendSpeechBank(entityplayer, "rohan/rohirrim/avengeHorse");
 								sentMessage = true;
 							}
 							

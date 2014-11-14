@@ -113,13 +113,13 @@ public class LOTREntityHighElfWarrior extends LOTREntityHighElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "highElf_hired";
+				return "highElf/elf/hired";
 			}
-			return "highElfWarrior_friendly";
+			return "highElf/warrior/friendly";
 		}
 		else
 		{
-			return "highElfWarrior_hostile";
+			return "highElf/warrior/hostile";
 		}
 	}
 }

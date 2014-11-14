@@ -115,6 +115,36 @@ public class LOTREntityDolGuldurOrc extends LOTREntityOrc
 	}
 	
 	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		if (isFriendly(entityplayer))
+		{
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "dolGuldur/orc/hired";
+			}
+			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
+			{
+				return "dolGuldur/orc/friendly";
+			}
+			else
+			{
+				return "dolGuldur/orc/neutral";
+			}
+		}
+		else
+		{
+			return "dolGuldur/orc/hostile";
+		}
+	}
+	
+	@Override
+	protected String getOrcSkirmishSpeech()
+	{
+		return "dolGuldur/orc/skirmish";
+	}
+	
+	@Override
 	public LOTRMiniQuest createMiniQuest(EntityPlayer entityplayer)
 	{
 		return LOTRMiniQuestFactory.DOL_GULDUR.createQuest(entityplayer);

@@ -31,7 +31,7 @@ import com.google.common.base.Charsets;
 
 public class LOTRGuiMap extends LOTRGuiMenu
 {
-	private static ResourceLocation overlayTexture = new ResourceLocation("lotr:map/mapOverlay.png");
+	public static ResourceLocation overlayTexture = new ResourceLocation("lotr:map/mapOverlay.png");
 	private static ResourceLocation borderTexture = new ResourceLocation("lotr:map/mapScreen.png");
 	
 	public static Map playerLocations = new HashMap();
@@ -57,8 +57,12 @@ public class LOTRGuiMap extends LOTRGuiMenu
 	private static final int waypointToggleY = 6;
 	private static final int waypointToggleWidth = 10;
 	
-	private static int zoom = 0;
-	private float zoomPower;
+	private static int zoomPower = 0;
+	private static int maxZoomTicks = 5;
+	
+	private int prevZoomPower = zoomPower;
+	private int zoomTicks;
+	private float zoomScale;
 	
 	public boolean isPlayerOp = false;
 	
@@ -152,6 +156,11 @@ public class LOTRGuiMap extends LOTRGuiMenu
     {
 		super.updateScreen();
 		
+		if (zoomTicks > 0)
+		{
+			zoomTicks--;
+		}
+		
 		if (creatingWaypoint)
 		{
 			nameWaypointTextField.updateCursorCounter();
@@ -183,9 +192,15 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		drawCenteredString(StatCollector.translateToLocal("lotr.gui.map.title"), guiLeft + mapXSize / 2, guiTop - 30, 0xFFFFFF);
 		
-		zoomPower = (float)Math.pow(2, zoom);
-		int zoomScaleX = Math.round(mapXSize / zoomPower);
-		int zoomScaleY = Math.round(mapYSize / zoomPower);
+		float zoomExp = (float)zoomPower;
+		if (zoomTicks > 0)
+		{
+			float progress = (zoomPower - prevZoomPower) * (maxZoomTicks - (zoomTicks - f)) / (float)maxZoomTicks;
+			zoomExp = (float)prevZoomPower + progress;
+		}
+		zoomScale = (float)Math.pow(2, zoomExp);
+		int zoomScaleX = Math.round(mapXSize / zoomScale);
+		int zoomScaleY = Math.round(mapYSize / zoomScale);
 		
 		int i1 = guiLeft + mapBorder;
 		int i2 = guiLeft + mapXSize - mapBorder;
@@ -203,8 +218,8 @@ public class LOTRGuiMap extends LOTRGuiMenu
                 }
                 else
                 {
-                	float x = (float)(i - prevMouseX) / zoomPower;
-                	float y = (float)(j - prevMouseY) / zoomPower;
+                	float x = (float)(i - prevMouseX) / zoomScale;
+                	float y = (float)(j - prevMouseY) / zoomScale;
                     posX -= x;
 					posY -= y;
                     if (x != 0F || y != 0F)
@@ -326,8 +341,8 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		}
 		else if (!hasOverlay && isMouseWithinMap)
 		{
-			float biomePosX = posX + (((i - guiLeft) - mapXSize / 2) / zoomPower);
-			float biomePosZ = posY + (((j - guiTop) - mapYSize / 2) / zoomPower);
+			float biomePosX = posX + (((i - guiLeft) - mapXSize / 2) / zoomScale);
+			float biomePosZ = posY + (((j - guiTop) - mapYSize / 2) / zoomScale);
 			
 			int biomePosX_int = Math.round(biomePosX);
 			int biomePosZ_int = Math.round(biomePosZ);
@@ -658,8 +673,8 @@ public class LOTRGuiMap extends LOTRGuiMenu
 		z = (z / LOTRGenLayerWorld.scale) + LOTRGenLayerWorld.originZ;
 		x -= posX;
 		z -= posY;
-		x *= zoomPower;
-		z *= zoomPower;
+		x *= zoomScale;
+		z *= zoomScale;
 		x += guiLeft + mapXSize / 2;
 		z += guiTop + mapYSize / 2;
 		return new int[] {Math.round(x), Math.round(z)};
@@ -892,18 +907,25 @@ public class LOTRGuiMap extends LOTRGuiMenu
         if (!hasOverlay)
         {
 	        int i = Mouse.getEventDWheel();
-	
-			if (i < 0)
-			{
-				zoom = Math.max(zoom - 1, MIN_ZOOM);
-				selectedWaypoint = null;
-			}
-	
-			if (i > 0)
-			{
-				zoom = Math.min(zoom + 1, MAX_ZOOM);
-				selectedWaypoint = null;
-			}
+
+	        if (zoomTicks == 0)
+	        {
+				if (i < 0 && zoomPower > MIN_ZOOM)
+				{
+					prevZoomPower = zoomPower;
+					zoomPower--;
+					zoomTicks += maxZoomTicks;
+					selectedWaypoint = null;
+				}
+		
+				if (i > 0 && zoomPower < MAX_ZOOM)
+				{
+					prevZoomPower = zoomPower;
+					zoomPower++;
+					zoomTicks += maxZoomTicks;
+					selectedWaypoint = null;
+				}
+	        }
         }
     }
 	

@@ -74,13 +74,7 @@ public abstract class LOTREntityTree extends LOTREntityNPC
 		super.readEntityFromNBT(nbt);
 		setTreeType(nbt.getByte("EntType"));
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public void setAttackTarget(EntityLivingBase entity)
 	{
@@ -159,11 +153,7 @@ public abstract class LOTREntityTree extends LOTREntityNPC
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				if (j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass)
-				{
-					BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-					return isTreeHomeBiome(biome);
-				}
+				return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;

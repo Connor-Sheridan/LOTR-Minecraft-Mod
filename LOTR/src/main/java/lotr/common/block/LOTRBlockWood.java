@@ -42,7 +42,7 @@ public class LOTRBlockWood extends LOTRBlockWoodBase
 						elfWarrior.setAttackTarget(entityplayer);
 						if (!sentMessage)
 						{
-							elfWarrior.sendSpeechBank(entityplayer, "elfWarrior_defendTrees");
+							elfWarrior.sendSpeechBank(entityplayer, "galadhrim/warrior/defendTrees");
 							sentMessage = true;
 						}
 					}

@@ -89,11 +89,11 @@ public class LOTREntityHobbitFarmer extends LOTREntityHobbit implements LOTRTrad
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "hobbitFarmer_friendly";
+			return "hobbit/farmer/friendly";
 		}
 		else
 		{
-			return "hobbit_unfriendly";
+			return "hobbit/farmer/hostile";
 		}
 	}
 }

@@ -64,16 +64,16 @@ public class LOTREntityGaladhrimLord extends LOTREntityGaladhrimWarrior implemen
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "galadhrimLord_friendly";
+				return "galadhrim/lord/friendly";
 			}
 			else
 			{
-				return "galadhrimLord_neutral";
+				return "galadhrim/lord/neutral";
 			}
 		}
 		else
 		{
-			return "galadhrimWarrior_hostile";
+			return "galadhrim/warrior/hostile";
 		}
 	}
 }

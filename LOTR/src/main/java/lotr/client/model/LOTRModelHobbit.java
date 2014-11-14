@@ -108,21 +108,6 @@ public class LOTRModelHobbit extends LOTRModelBiped
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		
-        if (isSneak)
-        {
-            bipedRightLeg.rotationPointY = 11F;
-            bipedLeftLeg.rotationPointY = 11F;
-            bipedHead.rotationPointY = 5F;
-            bipedHeadwear.rotationPointY = 5F;
-        }
-        else
-        {
-            bipedRightLeg.rotationPointY = 14F;
-            bipedLeftLeg.rotationPointY = 14F;
-            bipedHead.rotationPointY = 4F;
-            bipedHeadwear.rotationPointY = 4F;
-        }
-		
 		bipedChest.rotateAngleX = bipedBody.rotateAngleX;
 		bipedChest.rotateAngleY = bipedBody.rotateAngleY;
 		bipedChest.rotateAngleZ = bipedBody.rotateAngleZ;

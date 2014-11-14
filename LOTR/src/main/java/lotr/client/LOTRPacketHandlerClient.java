@@ -82,6 +82,7 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 		NetworkRegistry.INSTANCE.newChannel("lotr.time", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.title", this);
 		NetworkRegistry.INSTANCE.newChannel("lotr.utumnoReturn", this);
+		NetworkRegistry.INSTANCE.newChannel("lotr.factionData", this);
 	}
 	
 	@Override
@@ -114,6 +115,7 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 			NBTTagCompound nbt = new PacketBuffer(data).readNBTTagCompoundFromBuffer();
 			LOTRLevelData.getData(entityplayer).load(nbt);
 			
+			LOTRTickHandlerClient.currentAlignmentFaction = LOTRLevelData.getData(entityplayer).getViewingFaction();
 			LOTRGuiMap.WaypointMode.setWaypointMode(LOTRLevelData.getData(entityplayer).getWaypointToggleMode());
 		}
 		
@@ -650,6 +652,23 @@ public class LOTRPacketHandlerClient extends SimpleChannelInboundHandler<FMLProx
 			double z = data.readDouble();
 			
 			entityplayer.setPosition(x, entityplayer.posY, z);
+		}
+		
+		else if (channel.equals("lotr.factionData"))
+		{
+			if (!mc.isSingleplayer())
+			{
+				LOTRPlayerData playerData = LOTRLevelData.getData(entityplayer);
+				
+				int factionID = data.readByte();
+				LOTRFaction faction = LOTRFaction.forID(factionID);
+				if (faction != null)
+				{
+					LOTRFactionData factionData = playerData.getFactionData(faction);
+					NBTTagCompound nbt = new PacketBuffer(data).readNBTTagCompoundFromBuffer();
+					factionData.load(nbt);
+				}
+			}
 		}
 	}
 }

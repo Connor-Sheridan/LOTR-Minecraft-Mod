@@ -76,7 +76,7 @@ public class LOTREntityHobbitFarmhand extends LOTREntityHobbit
 	{
 		if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 		{
-			return "hobbitFarmhand_hired";
+			return "hobbit/farmhand/hired";
 		}
 		else
 		{

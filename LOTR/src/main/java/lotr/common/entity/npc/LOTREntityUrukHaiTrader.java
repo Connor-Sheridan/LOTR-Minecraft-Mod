@@ -73,16 +73,16 @@ public class LOTREntityUrukHaiTrader extends LOTREntityUrukHai implements LOTRTr
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "urukHaiTrader_friendly";
+				return "uruk/trader/friendly";
 			}
 			else
 			{
-				return "urukHaiTrader_neutral";
+				return "uruk/trader/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "uruk/uruk/hostile";
 		}
 	}
 }

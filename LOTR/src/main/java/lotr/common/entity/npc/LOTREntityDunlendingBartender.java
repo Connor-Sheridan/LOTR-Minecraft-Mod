@@ -94,11 +94,11 @@ public class LOTREntityDunlendingBartender extends LOTREntityDunlending implemen
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "dunlendingBartender_friendly";
+			return "dunlending/bartender/friendly";
 		}
 		else
 		{
-			return "dunlending_hostile";
+			return "dunlending/dunlending/hostile";
 		}
 	}
 }

@@ -123,13 +123,7 @@ public abstract class LOTREntityElf extends LOTREntityNPC implements IRangedAtta
 			familyInfo.setNPCMale(nbt.getBoolean("ElfGender"));
 		}
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public String getNPCName()
 	{

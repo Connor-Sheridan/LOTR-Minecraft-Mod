@@ -105,12 +105,6 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 		dataWatcher.updateObject(19, Byte.valueOf(flag ? (byte)1 : (byte)0));
 	}
 	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt)
     {
@@ -249,11 +243,11 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 					setGollumSitting(!isGollumSitting());
 					if (isGollumSitting())
 					{
-						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum_stay", getGollumOwner()));
+						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum/stay", getGollumOwner()));
 					}
 					else
 					{
-						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum_follow", getGollumOwner()));
+						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum/follow", getGollumOwner()));
 					}
 					return true;
 				}
@@ -291,7 +285,7 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 					if (fishRequired <= 0)
 					{
 						setGollumOwnerUUID(entityplayer.getUniqueID().toString());
-						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum_tame", entityplayer));
+						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum/tame", entityplayer));
 						LOTRSpeech.messageAllPlayers(new ChatComponentTranslation("chat.lotr.tameGollum", new Object[] {entityplayer.getCommandSenderName(), getCommandSenderName()}));
 						spawnHearts();
 						
@@ -300,7 +294,7 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 					}
 					else
 					{
-						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum_tameProgress", entityplayer));
+						entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum/tameProgress", entityplayer));
 					}
 					
 					return true;
@@ -315,7 +309,7 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 	{
 		if (!isGollumFleeing())
 		{
-			return "gollum";
+			return "gollum/say";
 		}
 		return super.getSpeechBank(entityplayer);
 	}
@@ -339,7 +333,7 @@ public class LOTREntityGollum extends LOTREntityNPC implements LOTRCharacter
 			f = 0F;
 			if (!worldObj.isRemote)
 			{
-				owner.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum_hurt", owner));
+				owner.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "gollum/hurt", owner));
 			}
 		}
 		if (super.attackEntityFrom(damagesource, f))

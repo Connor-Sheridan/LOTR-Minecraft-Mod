@@ -1,6 +1,5 @@
 package lotr.common.entity.animal;
 
-import lotr.common.entity.npc.LOTREntityScorpion;
 import lotr.common.world.biome.LOTRBiomeGenNearHarad;
 import net.minecraft.world.World;
 

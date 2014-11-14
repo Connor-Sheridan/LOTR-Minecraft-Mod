@@ -126,11 +126,11 @@ public class LOTREntityRohanMeadhost extends LOTREntityRohanMan implements LOTRT
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "rohanMeadhost_friendly";
+			return "rohan/meadhost/friendly";
 		}
 		else
 		{
-			return "rohanMeadhost_unfriendly";
+			return "rohan/meadhost/hostile";
 		}
 	}
 }

@@ -78,16 +78,16 @@ public class LOTREntityNearHaradrimWarlord extends LOTREntityNearHaradrimWarrior
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "nearHaradrimWarlord_friendly";
+				return "nearHarad/warlord/friendly";
 			}
 			else
 			{
-				return "nearHaradrimWarlord_neutral";
+				return "nearHarad/warlord/neutral";
 			}
 		}
 		else
 		{
-			return "nearHaradrim_hostile";
+			return "nearHarad/warrior/hostile";
 		}
 	}
 }

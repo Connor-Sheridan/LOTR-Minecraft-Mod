@@ -22,18 +22,22 @@ public class LOTRItemCrossbow extends ItemBow
 	private double boltDamageBonus;
 	@SideOnly(Side.CLIENT)
 	private IIcon[] crossbowPullIcons;
-	private ToolMaterial repairMaterial;
-	private int enchantability;
+	private ToolMaterial crossbowMaterial;
 	
-	public LOTRItemCrossbow(int j, double d, ToolMaterial material, int k)
+	public LOTRItemCrossbow(ToolMaterial material)
 	{
 		super();
-		setMaxDamage(j);
-		setMaxStackSize(1);
 		setCreativeTab(LOTRCreativeTabs.tabCombat);
-		boltDamageBonus = d;
-		repairMaterial = material;
-		enchantability = k;
+		
+		crossbowMaterial = material;
+		setMaxDamage((int)(crossbowMaterial.getMaxUses() * 1.25F));
+		setMaxStackSize(1);
+		
+		boltDamageBonus = (crossbowMaterial.getDamageVsEntity() - 2F) * 0.2F;
+		if (boltDamageBonus < 0F)
+		{
+			boltDamageBonus = 0F;
+		}
 	}
 	
 	@Override
@@ -196,13 +200,13 @@ public class LOTRItemCrossbow extends ItemBow
 	@Override
     public int getItemEnchantability()
     {
-        return enchantability;
+        return 1 + crossbowMaterial.getEnchantability() / 5;
     }
 	
 	@Override
     public boolean getIsRepairable(ItemStack itemstack, ItemStack repairItem)
     {
-        return repairMaterial.func_150995_f() == repairItem.getItem() ? true : super.getIsRepairable(itemstack, repairItem);
+        return crossbowMaterial.func_150995_f() == repairItem.getItem() ? true : super.getIsRepairable(itemstack, repairItem);
     }
 	
 	@Override

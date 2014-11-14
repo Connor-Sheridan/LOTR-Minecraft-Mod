@@ -109,12 +109,6 @@ public class LOTREntityTroll extends LOTREntityNPC
 		return LOTRFaction.ANGMAR;
 	}
 	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
 	protected boolean hasTrollName()
 	{
 		return true;
@@ -338,7 +332,7 @@ public class LOTREntityTroll extends LOTREntityNPC
 				}
 				else
 				{
-					entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "troll_tickle", entityplayer));
+					entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "troll/tickle", entityplayer));
 					worldObj.playSoundAtEntity(this, "lotr:troll.sniff", getSoundVolume(), getSoundPitch());
 					worldObj.setEntityState(this, (byte)16);
 				}
@@ -488,16 +482,16 @@ public class LOTREntityTroll extends LOTREntityNPC
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "troll_hired";
+				return "troll/hired";
 			}
 			else
 			{
-				return "troll_friendly";
+				return "troll/friendly";
 			}
 		}
 		else
 		{
-			return "troll_hostile";
+			return "troll/hostile";
 		}
 	}
 	

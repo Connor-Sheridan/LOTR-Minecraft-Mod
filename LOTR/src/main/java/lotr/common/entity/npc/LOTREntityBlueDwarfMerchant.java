@@ -29,7 +29,7 @@ public class LOTREntityBlueDwarfMerchant extends LOTREntityBlueDwarf implements 
 	@Override
 	public String getDepartureSpeech()
 	{
-		return "blueDwarfMerchant_departure";
+		return "blueDwarf/merchant/departure";
 	}
 
 	@Override
@@ -67,11 +67,11 @@ public class LOTREntityBlueDwarfMerchant extends LOTREntityBlueDwarf implements 
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "blueDwarfMerchant_friendly";
+			return "blueDwarf/merchant/friendly";
 		}
 		else
 		{
-			return "blueDwarf_hostile";
+			return "blueDwarf/dwarf/hostile";
 		}
 	}
 }

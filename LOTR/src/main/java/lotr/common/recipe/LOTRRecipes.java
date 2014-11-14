@@ -91,10 +91,9 @@ public class LOTRRecipes
 
 	private static void registerOres()
 	{
-		Iterator<Block> blockIterator = Block.blockRegistry.iterator();
-		while (blockIterator.hasNext())
+		for (Object obj : Block.blockRegistry)
 		{
-			Block block = blockIterator.next();
+			Block block = (Block)obj;
 			
 			if (block instanceof LOTRBlockPlanksBase)
 			{
@@ -129,10 +128,9 @@ public class LOTRRecipes
 		
 		OreDictionary.registerOre("stickWood", mallornStick);
 		
-		Iterator<Item> itemIterator = Item.itemRegistry.iterator();
-		while (itemIterator.hasNext())
+		for (Object obj : Item.itemRegistry)
 		{
-			Item item = itemIterator.next();
+			Item item = (Item)obj;
 			
 			if (item == Items.bone || item instanceof LOTRItemBone)
 			{
@@ -1077,6 +1075,18 @@ public class LOTRRecipes
 		{
 			new ItemStack(utumnoKey, 1, 5), new ItemStack(utumnoKey, 1, 6), new ItemStack(utumnoKey, 1, 7)
 		});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(battleaxeIron), new Object[]
+		{
+			"XXX", "XYX", " Y ", 'X', Items.iron_ingot, 'Y', "stickWood"
+		}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(battleaxeBronze), new Object[]
+		{
+			"XXX", "XYX", " Y ", 'X', bronze, 'Y', "stickWood"
+		}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(bronzeCrossbow), new Object[]
+		{
+			"XXY", "ZYX", "YZX", 'X', bronze, 'Y', "stickWood", 'Z', Items.string
+		}));
 	}
 	
 	private static void createPoisonedDaggerRecipes()
@@ -1226,10 +1236,15 @@ public class LOTRRecipes
 	
 	private static void createSmeltingRecipes()
 	{
-		GameRegistry.addSmelting(wood, new ItemStack(Items.coal, 1, 1), 0.15F);
-		GameRegistry.addSmelting(fruitWood, new ItemStack(Items.coal, 1, 1), 0.15F);
-		GameRegistry.addSmelting(wood2, new ItemStack(Items.coal, 1, 1), 0.15F);
-		GameRegistry.addSmelting(wood3, new ItemStack(Items.coal, 1, 1), 0.15F);
+		for (Object obj : Block.blockRegistry)
+		{
+			Block block = (Block)obj;
+
+			if (block instanceof LOTRBlockWoodBase)
+			{
+				GameRegistry.addSmelting(block, new ItemStack(Items.coal, 1, 1), 0.15F);
+			}
+		}
 		
 		GameRegistry.addSmelting(oreCopper, new ItemStack(copper), 0.35F);
 		GameRegistry.addSmelting(oreTin, new ItemStack(tin), 0.35F);

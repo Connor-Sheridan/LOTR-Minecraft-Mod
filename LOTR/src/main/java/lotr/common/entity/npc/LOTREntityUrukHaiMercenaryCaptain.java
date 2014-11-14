@@ -72,16 +72,16 @@ public class LOTREntityUrukHaiMercenaryCaptain extends LOTREntityUrukHai impleme
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "urukHaiMercenaryCaptain_friendly";
+				return "uruk/chieftain/friendly";
 			}
 			else
 			{
-				return "urukHaiMercenaryCaptain_neutral";
+				return "uruk/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "uruk/uruk/hostile";
 		}
 	}
 }

@@ -86,12 +86,6 @@ public abstract class LOTREntityRohanMan extends LOTREntityNPC
 	}
 	
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public String getNPCName()
 	{
 		return getRohanName();

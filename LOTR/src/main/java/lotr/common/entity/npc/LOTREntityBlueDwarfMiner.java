@@ -94,16 +94,16 @@ public class LOTREntityBlueDwarfMiner extends LOTREntityBlueDwarf implements LOT
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "blueDwarfMiner_friendly";
+				return "blueDwarf/miner/friendly";
 			}
 			else
 			{
-				return "blueDwarfMiner_neutral";
+				return "blueDwarf/miner/neutral";
 			}
 		}
 		else
 		{
-			return "blueDwarf_hostile";
+			return "blueDwarf/dwarf/hostile";
 		}
 	}
 }

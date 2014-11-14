@@ -71,16 +71,16 @@ public class LOTREntityHobbitShirriffChief extends LOTREntityHobbitShirriff impl
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "hobbitShirriffChief_friendly";
+				return "hobbit/shirriffChief/friendly";
 			}
 			else
 			{
-				return "hobbitShirriffChief_neutral";
+				return "hobbit/shirriffChief/neutral";
 			}
 		}
 		else
 		{
-			return "hobbitShirriff_hostile";
+			return "hobbit/shirriff/hostile";
 		}
 	}
 }

@@ -81,16 +81,16 @@ public class LOTREntityGondorianCaptain extends LOTREntityGondorSoldier implemen
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "gondorianCaptain_friendly";
+				return "gondor/captain/friendly";
 			}
 			else
 			{
-				return "gondorianCaptain_neutral";
+				return "gondor/captain/neutral";
 			}
 		}
 		else
 		{
-			return "gondorSoldier_hostile";
+			return "gondor/soldier/hostile";
 		}
 	}
 }

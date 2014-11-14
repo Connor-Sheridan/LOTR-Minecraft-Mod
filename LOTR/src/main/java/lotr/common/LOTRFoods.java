@@ -195,6 +195,16 @@ public class LOTRFoods
 	{
 		new ItemStack(LOTRMod.maggotyBread)
 	});
+	
+	public static LOTRFoods HALF_TROLL = new LOTRFoods(new ItemStack[]
+	{
+		new ItemStack(LOTRMod.maggotyBread)
+	});
+	
+	public static LOTRFoods HALF_TROLL_DRINK = new LOTRFoods(new ItemStack[]
+	{
+		new ItemStack(LOTRMod.mugOrcDraught)
+	});
 				
 	private ItemStack[] foodList;
 	

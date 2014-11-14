@@ -130,6 +130,30 @@ public class LOTREntityUrukHai extends LOTREntityOrc
 	}
 	
 	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		if (isFriendly(entityplayer))
+		{
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "uruk/uruk/hired";
+			}
+			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
+			{
+				return "uruk/uruk/friendly";
+			}
+			else
+			{
+				return "uruk/uruk/neutral";
+			}
+		}
+		else
+		{
+			return "uruk/uruk/hostile";
+		}
+	}
+	
+	@Override
 	public LOTRMiniQuest createMiniQuest(EntityPlayer entityplayer)
 	{
 		return LOTRMiniQuestFactory.URUK.createQuest(entityplayer);

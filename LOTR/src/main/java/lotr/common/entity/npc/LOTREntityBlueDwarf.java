@@ -1,9 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRAlignmentValues;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.quest.LOTRMiniQuestFactory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -57,13 +54,13 @@ public class LOTREntityBlueDwarf extends LOTREntityDwarf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "blueDwarf_hired";
+				return "blueDwarf/dwarf/hired";
 			}
-			return isChild() ? "blueDwarfChild_friendly" : "blueDwarf_friendly";
+			return isChild() ? "blueDwarf/child/friendly" : "blueDwarf/dwarf/friendly";
 		}
 		else
 		{
-			return isChild() ? "blueDwarfChild_unfriendly" : "blueDwarf_hostile";
+			return isChild() ? "blueDwarf/child/hostile" : "blueDwarf/dwarf/hostile";
 		}
 	}
 	

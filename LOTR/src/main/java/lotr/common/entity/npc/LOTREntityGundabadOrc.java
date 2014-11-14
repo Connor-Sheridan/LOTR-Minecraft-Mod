@@ -24,12 +24,14 @@ public class LOTREntityGundabadOrc extends LOTREntityOrc
 		new ItemStack(LOTRMod.daggerIron),
 		new ItemStack(LOTRMod.daggerIronPoisoned),
 		new ItemStack(LOTRMod.spearIron),
+		new ItemStack(LOTRMod.battleaxeIron),
 		new ItemStack(LOTRMod.swordBronze),
 		new ItemStack(LOTRMod.axeBronze),
 		new ItemStack(LOTRMod.pickaxeBronze),
 		new ItemStack(LOTRMod.daggerBronze),
 		new ItemStack(LOTRMod.daggerBronzePoisoned),
 		new ItemStack(LOTRMod.spearBronze),
+		new ItemStack(LOTRMod.battleaxeBronze),
 		new ItemStack(LOTRMod.swordAngmar),
 		new ItemStack(LOTRMod.axeAngmar),
 		new ItemStack(LOTRMod.pickaxeAngmar),
@@ -131,6 +133,36 @@ public class LOTREntityGundabadOrc extends LOTREntityOrc
 	public int getAlignmentBonus()
 	{
 		return LOTRAlignmentValues.Bonuses.GUNDABAD_ORC;
+	}
+	
+	@Override
+	public String getSpeechBank(EntityPlayer entityplayer)
+	{
+		if (isFriendly(entityplayer))
+		{
+			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
+			{
+				return "gundabad/orc/hired";
+			}
+			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
+			{
+				return "gundabad/orc/friendly";
+			}
+			else
+			{
+				return "gundabad/orc/neutral";
+			}
+		}
+		else
+		{
+			return "gundabad/orc/hostile";
+		}
+	}
+	
+	@Override
+	protected String getOrcSkirmishSpeech()
+	{
+		return "gundabad/orc/skirmish";
 	}
 	
 	@Override

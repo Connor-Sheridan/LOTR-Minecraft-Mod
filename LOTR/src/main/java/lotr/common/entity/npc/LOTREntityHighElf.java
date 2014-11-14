@@ -80,8 +80,7 @@ public class LOTREntityHighElf extends LOTREntityElf
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(boundingBox.minY);
 		int k = MathHelper.floor_double(posZ);
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-		return biome instanceof LOTRBiomeGenLindon && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+		return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 	}
 	
 	@Override
@@ -103,16 +102,16 @@ public class LOTREntityHighElf extends LOTREntityElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "highElf_hired";
+				return "highElf/elf/hired";
 			}
 			else
 			{
-				return "highElf_friendly";
+				return "highElf/elf/friendly";
 			}
 		}
 		else
 		{
-			return "highElf_hostile";
+			return "highElf/elf/hostile";
 		}
 	}
 	

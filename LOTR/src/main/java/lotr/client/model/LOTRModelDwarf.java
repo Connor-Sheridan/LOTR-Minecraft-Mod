@@ -111,21 +111,6 @@ public class LOTRModelDwarf extends LOTRModelBiped
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-			
-        if (isSneak)
-        {
-            bipedRightLeg.rotationPointY = 10F;
-            bipedLeftLeg.rotationPointY = 10F;
-            bipedHead.rotationPointY = 3F;
-            bipedHeadwear.rotationPointY = 3F;
-        }
-        else
-        {
-            bipedRightLeg.rotationPointY = 13F;
-            bipedLeftLeg.rotationPointY = 13F;
-            bipedHead.rotationPointY = 2F;
-            bipedHeadwear.rotationPointY = 2F;
-        }
 		
 		bipedChest.rotateAngleX = bipedBody.rotateAngleX;
 		bipedChest.rotateAngleY = bipedBody.rotateAngleY;

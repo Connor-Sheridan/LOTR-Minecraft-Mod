@@ -1,8 +1,28 @@
+Public Beta 22
+
++ Added a new factions menu with faction information and statistics
++ Added smooth zoom to the Middle-earth map
++ Added the Half-trolls
++ Added Ithilien Ranger Captains, hireable Rangers of Ithilien, and Ithilien banner bearers
++ Added iron and bronze battleaxes
++ Added bronze crossbows
+
+* Improved speech bank directory structure and corrected all lowercase race names to uppercase
+
+Public Beta 21.3
+
+* Fixed dik-diks spawning endlessly
+* Fixed new wood blocks not being smeltable into charcoal
+
+Public Beta 21.2
+
+* Fixed another banner-related crash
+
 Public Beta 21.1
 
 + Added an updated Spanish (Argentina) translation
 
-* Fixed banner-related crashes
+* Fixed a banner-related crash
 * Fixed titles not being displayed if the username is altered by something else
 * Fixed Balrogs being able to burn through any block
 * Balrogs now have a higher chance to drop their weapons

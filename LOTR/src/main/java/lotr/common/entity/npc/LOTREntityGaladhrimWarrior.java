@@ -138,13 +138,13 @@ public class LOTREntityGaladhrimWarrior extends LOTREntityGaladhrimElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "galadhrim_hired";
+				return "galadhrim/elf/hired";
 			}
-			return "galadhrimWarrior_friendly";
+			return "galadhrim/warrior/friendly";
 		}
 		else
 		{
-			return "galadhrimWarrior_hostile";
+			return "galadhrim/warrior/hostile";
 		}
 	}
 }

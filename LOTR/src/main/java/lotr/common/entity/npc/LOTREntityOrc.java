@@ -99,13 +99,7 @@ public abstract class LOTREntityOrc extends LOTREntityNPC
 		}
 		return super.getTotalArmorValue();
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public String getNPCName()
 	{
@@ -169,11 +163,16 @@ public abstract class LOTREntityOrc extends LOTREntityNPC
 			for (int i = 0; i < nearbyPlayers.size(); i++)
 			{
 				EntityPlayer entityplayer = (EntityPlayer)nearbyPlayers.get(i);
-				entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, "orc_skirmish", entityplayer));
+				entityplayer.addChatMessage(LOTRSpeech.getNamedSpeechForPlayer(this, getOrcSkirmishSpeech(), entityplayer));
 			}
 		}
 	}
 	
+	protected String getOrcSkirmishSpeech()
+	{
+		return "";
+	}
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
@@ -303,30 +302,6 @@ public abstract class LOTREntityOrc extends LOTREntityNPC
     {
         return "lotr:orc.death";
     }
-	
-	@Override
-	public String getSpeechBank(EntityPlayer entityplayer)
-	{
-		if (isFriendly(entityplayer))
-		{
-			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
-			{
-				return "orc_hired";
-			}
-			else if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.ORC_FRIENDLY)
-			{
-				return "orc_friendly";
-			}
-			else
-			{
-				return "orc_neutral";
-			}
-		}
-		else
-		{
-			return "orc_hostile";
-		}
-	}
 	
 	@Override
 	public ItemStack getHeldItemLeft()

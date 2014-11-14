@@ -36,7 +36,7 @@ public class LOTREntityElvenTrader extends LOTREntityGaladhrimElf implements LOT
 	@Override
 	public String getDepartureSpeech()
 	{
-		return "elvenTrader_departure";
+		return "galadhrim/trader/departure";
 	}
 
 	@Override
@@ -147,16 +147,16 @@ public class LOTREntityElvenTrader extends LOTREntityGaladhrimElf implements LOT
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "elvenTrader_friendly";
+				return "galadhrim/trader/friendly";
 			}
 			else
 			{
-				return "elvenTrader_neutral";
+				return "galadhrim/trader/neutral";
 			}
 		}
 		else
 		{
-			return "elvenTrader_hostile";
+			return "galadhrim/trader/hostile";
 		}
 	}
 }

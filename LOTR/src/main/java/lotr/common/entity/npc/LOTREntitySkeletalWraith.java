@@ -48,13 +48,7 @@ public abstract class LOTREntitySkeletalWraith extends LOTREntityNPC
 	{
 		return LOTRFaction.HOSTILE;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
     public void onLivingUpdate()
     {

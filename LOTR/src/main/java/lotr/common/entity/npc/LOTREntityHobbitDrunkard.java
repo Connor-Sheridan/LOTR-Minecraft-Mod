@@ -66,7 +66,7 @@ public class LOTREntityHobbitDrunkard extends LOTREntityHobbit
 	@Override
 	public String getSpeechBank(EntityPlayer entityplayer)
 	{
-		return "hobbitDrunkard";
+		return "hobbit/drunkard/neutral";
 	}
 	
 	@Override

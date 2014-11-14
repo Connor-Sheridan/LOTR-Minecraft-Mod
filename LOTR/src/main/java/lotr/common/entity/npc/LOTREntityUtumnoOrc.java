@@ -117,6 +117,6 @@ public class LOTREntityUtumnoOrc extends LOTREntityOrc
 	@Override
 	public String getSpeechBank(EntityPlayer entityplayer)
 	{
-		return "utumnoOrc_hostile";
+		return "utumno/orc/hostile";
 	}
 }

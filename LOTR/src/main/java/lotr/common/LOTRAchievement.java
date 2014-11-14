@@ -490,6 +490,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement enterTolfalas;
 	public static LOTRAchievement enterLebennin;
 	public static LOTRAchievement doMiniquestGondor;
+	public static LOTRAchievement tradeRangerIthilienCaptain;
 	
 	public static LOTRAchievement mineRemains;
 	public static LOTRAchievement craftAncientItem;
@@ -550,6 +551,7 @@ public class LOTRAchievement implements Comparable
 	public static LOTRAchievement alignmentGood10_HALF_TROLL;
 	public static LOTRAchievement alignmentGood100_HALF_TROLL;
 	public static LOTRAchievement alignmentGood1000_HALF_TROLL;
+	public static LOTRAchievement killHalfTroll;
 	
 	public static LOTRAchievement enterRhun;
 	
@@ -838,6 +840,7 @@ public class LOTRAchievement implements Comparable
 		enterTolfalas = new LOTRAchievement(GONDOR, 13, Blocks.stone, "enterTolfalas").setBiomeAchievement();
 		enterLebennin = new LOTRAchievement(GONDOR, 14, Blocks.grass, "enterLebennin").setBiomeAchievement();
 		doMiniquestGondor = new LOTRAchievement(GONDOR, 15, LOTRMod.redBook, "doMiniquestGondor").setRequiresAlly(LOTRFaction.GONDOR);
+		tradeRangerIthilienCaptain = new LOTRAchievement(GONDOR, 16, LOTRMod.silverCoin, "tradeRangerIthilienCaptain").setRequiresAlly(LOTRFaction.GONDOR);
 
 		mineRemains = new LOTRAchievement(NINDALF, 0, LOTRMod.remains, "mineRemains");
 		craftAncientItem = new LOTRAchievement(NINDALF, 1, LOTRMod.ancientItem, "craftAncientItem");
@@ -898,6 +901,7 @@ public class LOTRAchievement implements Comparable
 		alignmentGood10_HALF_TROLL = new LOTRAchievement(PERTOROGWAITH, 1, LOTRMod.goldRing, "alignmentGood10_HALF_TROLL").setRequiresAlly(LOTRFaction.HALF_TROLL).setSpecial();
 		alignmentGood100_HALF_TROLL = new LOTRAchievement(PERTOROGWAITH, 2, LOTRMod.goldRing, "alignmentGood100_HALF_TROLL").setRequiresAlly(LOTRFaction.HALF_TROLL).setSpecial();
 		alignmentGood1000_HALF_TROLL = new LOTRAchievement(PERTOROGWAITH, 3, LOTRMod.goldRing, "alignmentGood1000_HALF_TROLL").setRequiresAlly(LOTRFaction.HALF_TROLL).setSpecial();
+		killHalfTroll = new LOTRAchievement(PERTOROGWAITH, 4, LOTRMod.trollBone, "killHalfTroll").setRequiresEnemy(LOTRFaction.HALF_TROLL);
 		
 		enterRhun = new LOTRAchievement(RHUN, 0, Blocks.grass, "enterRhun").setBiomeAchievement();
 		

@@ -117,13 +117,7 @@ public class LOTREntityDunlending extends LOTREntityNPC
 	{
 		return LOTRFaction.DUNLAND;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public String getNPCName()
 	{
@@ -195,8 +189,7 @@ public class LOTREntityDunlending extends LOTREntityNPC
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return (biome instanceof LOTRBiomeGenDunland || biome instanceof LOTRBiomeGenEnedwaith) && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+				return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;
@@ -221,13 +214,13 @@ public class LOTREntityDunlending extends LOTREntityNPC
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "dunlending_hired";
+				return "dunlending/dunlending/hired";
 			}
-			return "dunlending_friendly";
+			return "dunlending/dunlending/friendly";
 		}
 		else
 		{
-			return "dunlending_hostile";
+			return "dunlending/dunlending/hostile";
 		}
 	}
 	

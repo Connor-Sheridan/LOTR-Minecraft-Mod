@@ -70,16 +70,16 @@ public class LOTREntityRangerNorthCaptain extends LOTREntityRangerNorth implemen
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "rangerNorthCaptain_friendly";
+				return "rangerNorth/captain/friendly";
 			}
 			else
 			{
-				return "rangerNorthCaptain_neutral";
+				return "rangerNorth/captain/neutral";
 			}
 		}
 		else
 		{
-			return "rangerNorth_hostile";
+			return "rangerNorth/ranger/hostile";
 		}
 	}
 }

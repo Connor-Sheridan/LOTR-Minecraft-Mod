@@ -95,11 +95,11 @@ public class LOTREntityHobbitOrcharder extends LOTREntityHobbit implements LOTRT
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "hobbitOrcharder_friendly";
+			return "hobbit/orcharder/friendly";
 		}
 		else
 		{
-			return "hobbit_unfriendly";
+			return "hobbit/hobbit/hostile";
 		}
 	}
 }

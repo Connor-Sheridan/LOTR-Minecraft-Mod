@@ -71,16 +71,16 @@ public class LOTREntityDolGuldurOrcChieftain extends LOTREntityDolGuldurOrc impl
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "dolGuldurCaptain_friendly";
+				return "dolGuldur/chieftain/friendly";
 			}
 			else
 			{
-				return "dolGuldurCaptain_neutral";
+				return "dolGuldur/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "dolGuldur/orc/hostile";
 		}
 	}
 }

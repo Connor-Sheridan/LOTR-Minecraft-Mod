@@ -94,16 +94,16 @@ public class LOTREntityDwarfMiner extends LOTREntityDwarf implements LOTRTradeab
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "dwarfMiner_friendly";
+				return "dwarf/miner/friendly";
 			}
 			else
 			{
-				return "dwarfMiner_neutral";
+				return "dwarf/miner/neutral";
 			}
 		}
 		else
 		{
-			return "dwarf_hostile";
+			return "dwarf/dwarf/hostile";
 		}
 	}
 }

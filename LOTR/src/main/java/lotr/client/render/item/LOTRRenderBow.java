@@ -5,6 +5,7 @@ import java.util.Map;
 
 import lotr.client.LOTRClientProxy;
 import lotr.common.LOTRMod;
+import lotr.common.LOTRModInfo;
 import lotr.common.item.LOTRItemBow;
 import lotr.common.item.LOTRItemBow.BowState;
 import net.minecraft.client.Minecraft;
@@ -32,7 +33,7 @@ public class LOTRRenderBow implements IItemRenderer
 		ResourceLocation texture = largeBowTextures.get(pair);
 		if (texture == null)
 		{
-			String prefix = LOTRMod.getModID() + ":";
+			String prefix = LOTRModInfo.modID + ":";
 			String itemName = item.getUnlocalizedName();
 			itemName = itemName.substring(itemName.indexOf(prefix) + prefix.length());
 			String s = prefix + "textures/items/large/" + itemName + bowState.iconName + ".png";

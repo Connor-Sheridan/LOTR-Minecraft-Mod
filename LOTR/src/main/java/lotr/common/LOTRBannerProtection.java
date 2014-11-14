@@ -74,12 +74,20 @@ public class LOTRBannerProtection
 					{
 						UUID placingPlayer = banner.getPlacingPlayer();
 						GameProfile profile = MinecraftServer.getServer().func_152358_ax().func_152652_a(placingPlayer);
-						if (StringUtils.isEmpty(profile.getName()))
+						if (profile != null)
 						{
-							MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
+							if (StringUtils.isEmpty(profile.getName()))
+							{
+								MinecraftServer.getServer().func_147130_as().fillProfileProperties(profile, true);
+							}
+							protectorName = profile.getName();
+							break bannerSearch;
 						}
-						protectorName = profile.getName();
-						break bannerSearch;
+						else
+						{
+							protectorName = "?";
+							break bannerSearch;
+						}
 					}
 				}
 			}

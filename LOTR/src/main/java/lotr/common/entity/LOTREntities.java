@@ -3,6 +3,7 @@ package lotr.common.entity;
 import java.util.*;
 
 import lotr.common.LOTRMod;
+import lotr.common.LOTRModInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.*;
@@ -36,7 +37,7 @@ public class LOTREntities
 	
 	public static String getFullEntityName(String name)
 	{
-		return String.format("%s.%s", LOTRMod.getModID(), name);
+		return String.format("%s.%s", LOTRModInfo.modID, name);
 	}
 	
 	public static int getEntityID(Entity entity)

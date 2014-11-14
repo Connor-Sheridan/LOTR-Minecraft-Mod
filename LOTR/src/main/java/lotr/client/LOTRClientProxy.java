@@ -166,7 +166,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 	@Override
 	public void onLoad()
 	{
-		FMLEventChannel channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(LOTRMod.getModID());
+		FMLEventChannel channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(LOTRModInfo.modID);
 		channel.register(new LOTRPacketHandlerClient(this));
 
 		customEffectRenderer = new LOTREffectRenderer(Minecraft.getMinecraft());
@@ -253,6 +253,7 @@ public class LOTRClientProxy extends LOTRCommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityConker.class, new RenderSnowball(LOTRMod.chestnut));
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityUtumnoTroll.class, new LOTRRenderUtumnoTroll());
 		RenderingRegistry.registerEntityRenderingHandler(LOTREntityBalrog.class, new LOTRRenderBalrog());
+		RenderingRegistry.registerEntityRenderingHandler(LOTREntityHalfTroll.class, new LOTRRenderHalfTroll());
 
 		beaconRenderID = RenderingRegistry.getNextAvailableRenderId();
 		barrelRenderID = RenderingRegistry.getNextAvailableRenderId();

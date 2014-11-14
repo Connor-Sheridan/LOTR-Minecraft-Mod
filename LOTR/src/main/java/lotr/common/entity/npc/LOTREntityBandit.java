@@ -93,12 +93,6 @@ public class LOTREntityBandit extends LOTREntityNPC
 	}
 	
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public LOTRFaction getFaction()
 	{
 		return LOTRFaction.HOSTILE;
@@ -156,7 +150,7 @@ public class LOTREntityBandit extends LOTREntityNPC
 	@Override
 	public String getSpeechBank(EntityPlayer entityplayer)
 	{
-		return "bandit";
+		return "bandit/hostile";
 	}
 	
 	public boolean canStealFromPlayerInv(EntityPlayer entityplayer)

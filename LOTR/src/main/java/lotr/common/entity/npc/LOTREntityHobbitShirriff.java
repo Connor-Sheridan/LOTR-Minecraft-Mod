@@ -173,13 +173,13 @@ public class LOTREntityHobbitShirriff extends LOTREntityHobbit implements IRange
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "hobbitShirriff_hired";
+				return "hobbit/shirriff/hired";
 			}
-			return "hobbitShirriff_friendly";
+			return "hobbit/shirriff/friendly";
 		}
 		else
 		{
-			return "hobbitShirriff_hostile";
+			return "hobbit/shirriff/hostile";
 		}
 	}
 }

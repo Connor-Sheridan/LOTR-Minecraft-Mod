@@ -51,7 +51,7 @@ public class LOTREntityDunlendingDrunkard extends LOTREntityDunlending
 	@Override
 	public String getSpeechBank(EntityPlayer entityplayer)
 	{
-		return "dunlendingDrunkard";
+		return "dunlending/drunkard/neutral";
 	}
 	
 	@Override

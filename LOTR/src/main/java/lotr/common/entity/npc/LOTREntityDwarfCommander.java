@@ -76,16 +76,16 @@ public class LOTREntityDwarfCommander extends LOTREntityDwarf implements LOTRUni
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "dwarfCommander_friendly";
+				return "dwarf/commander/friendly";
 			}
 			else
 			{
-				return "dwarfCommander_neutral";
+				return "dwarf/commander/neutral";
 			}
 		}
 		else
 		{
-			return "dwarf_hostile";
+			return "dwarf/dwarf/hostile";
 		}
 	}
 }

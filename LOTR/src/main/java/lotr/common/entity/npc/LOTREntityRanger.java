@@ -128,12 +128,6 @@ public abstract class LOTREntityRanger extends LOTREntityNPC implements IRangedA
     }
 	
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public String getNPCName()
 	{
 		return getRangerName();

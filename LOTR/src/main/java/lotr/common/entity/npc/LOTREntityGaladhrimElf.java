@@ -83,8 +83,7 @@ public class LOTREntityGaladhrimElf extends LOTREntityElf
 		int k = MathHelper.floor_double(posZ);
 		if (j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass)
 		{
-			BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-			return biome instanceof LOTRBiomeGenLothlorien;
+			return true;
 		}
 		return false;
 	}
@@ -108,13 +107,13 @@ public class LOTREntityGaladhrimElf extends LOTREntityElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "galadhrim_hired";
+				return "galadhrim/elf/hired";
 			}
-			return "galadhrim_friendly";
+			return "galadhrim/elf/friendly";
 		}
 		else
 		{
-			return "galadhrim_hostile";
+			return "galadhrim/elf/hostile";
 		}
 	}
 	

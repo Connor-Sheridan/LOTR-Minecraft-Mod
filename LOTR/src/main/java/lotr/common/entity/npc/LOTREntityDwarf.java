@@ -106,13 +106,7 @@ public class LOTREntityDwarf extends LOTREntityNPC
 	{
 		return LOTRMod.dwarfSteel;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public String getNPCName()
 	{
@@ -253,8 +247,7 @@ public class LOTREntityDwarf extends LOTREntityNPC
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return (biome instanceof LOTRBiomeGenIronHills || biome instanceof LOTRBiomeGenBlueMountains || biome instanceof LOTRBiomeGenRedMountains) && j < 60 && worldObj.getBlock(i, j - 1, k).getMaterial() == Material.rock && !worldObj.canBlockSeeTheSky(i, j, k) && worldObj.getSavedLightValue(EnumSkyBlock.Block, i, j, k) >= 10;
+				return j < 60 && worldObj.getBlock(i, j - 1, k).getMaterial() == Material.rock && !worldObj.canBlockSeeTheSky(i, j, k) && worldObj.getSavedLightValue(EnumSkyBlock.Block, i, j, k) >= 10;
 			}
 		}
 		return false;
@@ -331,13 +324,13 @@ public class LOTREntityDwarf extends LOTREntityNPC
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "dwarf_hired";
+				return "dwarf/dwarf/hired";
 			}
-			return isChild() ? "dwarfChild_friendly" : "dwarf_friendly";
+			return isChild() ? "dwarf/child/friendly" : "dwarf/dwarf/friendly";
 		}
 		else
 		{
-			return isChild() ? "dwarfChild_unfriendly" : "dwarf_hostile";
+			return isChild() ? "dwarf/child/hostile" : "dwarf/dwarf/hostile";
 		}
 	}
 	

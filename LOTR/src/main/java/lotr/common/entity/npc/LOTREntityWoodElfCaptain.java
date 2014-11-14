@@ -66,16 +66,16 @@ public class LOTREntityWoodElfCaptain extends LOTREntityWoodElfWarrior implement
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "woodElfCaptain_friendly";
+				return "woodElf/captain/friendly";
 			}
 			else
 			{
-				return "woodElfCaptain_neutral";
+				return "woodElf/captain/neutral";
 			}
 		}
 		else
 		{
-			return "woodElfWarrior_hostile";
+			return "woodElf/warrior/hostile";
 		}
 	}
 }

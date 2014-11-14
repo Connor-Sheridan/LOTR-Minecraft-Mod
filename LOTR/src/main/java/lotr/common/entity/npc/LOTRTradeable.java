@@ -1,13 +1,16 @@
 package lotr.common.entity.npc;
 
+import lotr.common.LOTRFaction;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public interface LOTRTradeable
 {
-	public boolean canTradeWith(EntityPlayer entityplayer);
-	
 	public String getNPCName();
+	
+	public LOTRFaction getFaction();
+	
+	public boolean canTradeWith(EntityPlayer entityplayer);
 	
 	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack);
 	

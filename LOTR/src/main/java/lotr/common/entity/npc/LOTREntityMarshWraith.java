@@ -106,13 +106,7 @@ public class LOTREntityMarshWraith extends LOTREntityNPC implements IRangedAttac
 			attackTargetUUID = new UUID(nbt.getLong("TargetUUIDMost"), nbt.getLong("TargetUUIDLeast"));
 		}
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
     @Override
     public void setInWeb() {}
 	

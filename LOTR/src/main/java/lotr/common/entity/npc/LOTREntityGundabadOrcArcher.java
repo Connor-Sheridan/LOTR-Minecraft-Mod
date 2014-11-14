@@ -32,7 +32,14 @@ public class LOTREntityGundabadOrcArcher extends LOTREntityGundabadOrc implement
 		
 		if (rand.nextInt(4) == 0)
 		{
-			setCurrentItemOrArmor(0, new ItemStack(LOTRMod.ironCrossbow));
+			if (rand.nextBoolean())
+			{
+				setCurrentItemOrArmor(0, new ItemStack(LOTRMod.ironCrossbow));
+			}
+			else
+			{
+				setCurrentItemOrArmor(0, new ItemStack(LOTRMod.bronzeCrossbow));
+			}
 			isCrossbower = true;
 		}
 		else

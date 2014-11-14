@@ -1,5 +1,6 @@
 package lotr.common.inventory;
 
+import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
 import lotr.common.entity.npc.LOTREntityNPC;
 import lotr.common.entity.npc.LOTRTradeEntry;
@@ -44,12 +45,16 @@ public class LOTRSlotTrade extends LOTRSlotProtected
 		{
 			entityplayer.inventory.consumeInventoryItem(LOTRMod.silverCoin);
 		}
+		
 		super.onPickupFromSlot(entityplayer, itemstack);
+		
 		if (!entityplayer.worldObj.isRemote && theTrade() != null)
 		{
 			putStack(theTrade().item.copy());
 			((EntityPlayerMP)entityplayer).sendContainerToPlayer(theContainer);
+			
 			theContainer.theTrader.onPlayerBuyItem(entityplayer, theTrade().item.copy());
+			LOTRLevelData.getData(entityplayer).getFactionData(theEntity.getFaction()).addTrade();
 		}
     }
 }

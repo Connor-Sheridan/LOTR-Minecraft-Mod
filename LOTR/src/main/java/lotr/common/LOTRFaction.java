@@ -12,32 +12,34 @@ import net.minecraft.util.StatCollector;
 
 public enum LOTRFaction
 {
-	HOBBIT(0x59CE4E),
-	RANGER_NORTH(0x40703A),
-	BLUE_MOUNTAINS(0x648DBC),
-	HIGH_ELF(0x49C2FF),
-	GUNDABAD(0x966C54),
-	ANGMAR(0x779177),
-	WOOD_ELF(0x39964E),
-	DOL_GULDUR(0x353B44),
-	DWARF(0x4B6182),
-	GALADHRIM(0xE5D180),
-	DUNLAND(0xA8948F),
-	URUK_HAI(0x738970),
-	FANGORN(0x49B752),
-	ROHAN(0xCC986C),
-	GONDOR(0x00D8FF),
-	MORDOR(0xC11D15),
-	NEAR_HARAD(0xEAAB5D),
-	FAR_HARAD(0x2E6342),
-	HALF_TROLL(0x9E8373),
+	HOBBIT(0x59CE4E, new FactionMapInfo(830, 745, 100)),
+	RANGER_NORTH(0x40703A, new FactionMapInfo(920, 720, 200)),
+	BLUE_MOUNTAINS(0x648DBC, new FactionMapInfo(650, 600, 125)),
+	HIGH_ELF(0x49C2FF, new FactionMapInfo(570, 770, 200)),
+	GUNDABAD(0x966C54, new FactionMapInfo(1160, 670, 150)),
+	ANGMAR(0x779177, new FactionMapInfo(1080, 600, 125)),
+	WOOD_ELF(0x39964E, new FactionMapInfo(1420, 640, 50)),
+	DOL_GULDUR(0x353B44, new FactionMapInfo(1380, 870, 100)),
+	DWARF(0x4B6182, new FactionMapInfo(1650, 650, 125)),
+	GALADHRIM(0xE5D180, new FactionMapInfo(1230, 900, 75)),
+	DUNLAND(0xA8948F, new FactionMapInfo(1030, 980, 125)),
+	URUK_HAI(0x738970, new FactionMapInfo(1110, 1070, 50)),
+	FANGORN(0x49B752, new FactionMapInfo(1200, 1000, 75)),
+	ROHAN(0xCC986C, new FactionMapInfo(1230, 1080, 150)),
+	GONDOR(0x00D8FF, new FactionMapInfo(1280, 1280, 200)),
+	MORDOR(0xC11D15, new FactionMapInfo(1600, 1240, 200)),
+	NEAR_HARAD(0xEAAB5D, new FactionMapInfo(1450, 1720, 250)),
+	FAR_HARAD(0x2E6342, new FactionMapInfo(0, 0, 0)),
+	HALF_TROLL(0x9E8373, new FactionMapInfo(1900, 2500, 200)),
 	
-	DARK_HUORN(0, null, true, true, -1),
+	DARK_HUORN(0, null, true, true, -1, null),
 	
 	UTUMNO(0x330500, LOTRDimension.UTUMNO, -66666),
 	
 	HOSTILE(true, -1),
 	UNALIGNED(false, 0);
+	
+	private static Random factionRand = new Random();
 
 	public LOTRDimension factionDimension;
 	private String factionName;
@@ -49,38 +51,38 @@ public enum LOTRFaction
 	public boolean hasFixedAlignment;
 	public int fixedAlignment;
 	
-	private Set enemies = new HashSet();
-	public Set killBonuses = new HashSet();
-	public Set killPenalties = new HashSet();
+	private Set<LOTRFaction> enemies = new HashSet();
+	public Set<LOTRFaction> killBonuses = new HashSet();
+	public Set<LOTRFaction> killPenalties = new HashSet();
 
 	public List<InvasionSpawnEntry> invasionMobs = new ArrayList<InvasionSpawnEntry>();
 	
 	private Map<Integer, LOTRAchievement> alignmentAchievements = new HashMap();
 	private LOTRAchievement miniquestAchievement;
 	
-	private static Random factionRand = new Random();
-	
-	private LOTRFaction(int color)
+	public FactionMapInfo factionMapInfo;
+
+	private LOTRFaction(int color, FactionMapInfo mapInfo)
 	{
-		this(color, LOTRDimension.MIDDLE_EARTH);
+		this(color, LOTRDimension.MIDDLE_EARTH, mapInfo);
 	}
 	
-	private LOTRFaction(int color, LOTRDimension dim)
+	private LOTRFaction(int color, LOTRDimension dim, FactionMapInfo mapInfo)
 	{
-		this(color, dim, true, true, Integer.MIN_VALUE);
+		this(color, dim, true, true, Integer.MIN_VALUE, mapInfo);
 	}
 	
 	private LOTRFaction(int color, LOTRDimension dim, int alignment)
 	{
-		this(color, dim, true, true, alignment);
+		this(color, dim, true, true, alignment, null);
 	}
 	
 	private LOTRFaction(boolean registry, int alignment)
 	{
-		this(0, null, false, registry, alignment);
+		this(0, null, false, registry, alignment, null);
 	}
 	
-	private LOTRFaction(int color, LOTRDimension dim, boolean player, boolean registry, int alignment)
+	private LOTRFaction(int color, LOTRDimension dim, boolean player, boolean registry, int alignment, FactionMapInfo mapInfo)
 	{
 		allowPlayer = player;
 		allowEntityRegistry = registry;
@@ -96,6 +98,11 @@ public enum LOTRFaction
 		if (alignment != Integer.MIN_VALUE)
 		{
 			setFixedAlignment(alignment);
+		}
+		
+		if (mapInfo != null)
+		{
+			factionMapInfo = mapInfo;
 		}
 	}
 	
@@ -641,7 +648,7 @@ public enum LOTRFaction
 		
 		HALF_TROLL.addKillBonus(GONDOR);
 		
-		// No Half-troll invasion mobs yet
+		HALF_TROLL.invasionMobs.add(new InvasionSpawnEntry(LOTREntityHalfTroll.class, 10));
 		
 		DARK_HUORN.addEnemy(LOTRFaction.HOBBIT);
 		DARK_HUORN.addEnemy(LOTRFaction.RANGER_NORTH);
@@ -696,7 +703,7 @@ public enum LOTRFaction
 	{
 		if (LOTRMod.isAprilFools())
 		{
-			String[] names = {"9GAG", "Yes Scotland", "No Scotland", "Empire of Great Britain", "Gondor", "Detroit", "faction.Formatting error %1$s#@%3$s#!#%.2f.name", "House Baratheon", "Kentucky Fried Chicken"};
+			String[] names = {"9GAG", "Yes Scotland", "No Scotland", "Empire of Great Britain", "Detroit", "Kentucky Fried Chicken"};
 			
 			int i = ordinal();
 			i = (int)(i + (i ^ 62341L) + 28703L * (i * i ^ 3195015L));
@@ -712,6 +719,11 @@ public enum LOTRFaction
 	public String factionEntityName()
 	{
 		return StatCollector.translateToLocal("lotr.faction." + codeName() + ".entity");
+	}
+	
+	public String factionSubtitle()
+	{
+		return StatCollector.translateToLocal("lotr.faction." + codeName() + ".subtitle");
 	}
 	
 	public boolean isAllied(LOTRFaction f)
@@ -734,6 +746,11 @@ public enum LOTRFaction
 	public ItemStack createAlignmentReward()
 	{
 		return null;
+	}
+	
+	public Map<Integer, LOTRAchievement> getAlignmentAchievements()
+	{
+		return alignmentAchievements;
 	}
 	
 	public static LOTRFaction forName(String factionName)
@@ -772,5 +789,19 @@ public enum LOTRFaction
 			list.add(f.codeName());
 		}
 		return list;
+	}
+	
+	public static class FactionMapInfo
+	{
+		public final int posX;
+		public final int posY;
+		public final int radius;
+		
+		public FactionMapInfo(int x, int y, int r)
+		{
+			posX = x;
+			posY = y;
+			radius = r;
+		}
 	}
 }

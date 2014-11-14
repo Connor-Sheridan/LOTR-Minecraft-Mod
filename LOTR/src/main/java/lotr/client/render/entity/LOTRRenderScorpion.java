@@ -2,7 +2,7 @@ package lotr.client.render.entity;
 
 import lotr.client.model.LOTRModelScorpion;
 import lotr.common.entity.animal.LOTREntityDesertScorpion;
-import lotr.common.entity.npc.LOTREntityScorpion;
+import lotr.common.entity.animal.LOTREntityScorpion;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

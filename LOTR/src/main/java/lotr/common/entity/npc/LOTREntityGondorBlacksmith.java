@@ -102,16 +102,16 @@ public class LOTREntityGondorBlacksmith extends LOTREntityGondorMan implements L
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "gondorBlacksmith_friendly";
+				return "gondor/blacksmith/friendly";
 			}
 			else
 			{
-				return "gondorBlacksmith_neutral";
+				return "gondor/blacksmith/neutral";
 			}
 		}
 		else
 		{
-			return "gondorBlacksmith_hostile";
+			return "gondor/blacksmith/hostile";
 		}
 	}
 }

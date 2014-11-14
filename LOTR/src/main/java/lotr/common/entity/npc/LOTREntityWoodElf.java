@@ -96,8 +96,7 @@ public class LOTREntityWoodElf extends LOTREntityElf
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(boundingBox.minY);
 		int k = MathHelper.floor_double(posZ);
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-		return biome == LOTRBiome.mirkwood && j > 62 && (worldObj.getBlock(i, j - 1, k) == Blocks.grass || (worldObj.getBlock(i, j - 1, k) == LOTRMod.planks && worldObj.getBlockMetadata(i, j - 1, k) == 2));
+		return j > 62 && (worldObj.getBlock(i, j - 1, k) == Blocks.grass || (worldObj.getBlock(i, j - 1, k) == LOTRMod.planks && worldObj.getBlockMetadata(i, j - 1, k) == 2));
 	}
 	
 	@Override
@@ -119,23 +118,23 @@ public class LOTREntityWoodElf extends LOTREntityElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "woodElf_hired";
+				return "woodElf/elf/hired";
 			}
 			else
 			{
 				if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.WOOD_ELF_TRUST)
 				{
-					return "woodElf_friendly";
+					return "woodElf/elf/friendly";
 				}
 				else
 				{
-					return "woodElf_neutral";
+					return "woodElf/elf/neutral";
 				}
 			}
 		}
 		else
 		{
-			return "woodElf_hostile";
+			return "woodElf/elf/hostile";
 		}
 	}
 	

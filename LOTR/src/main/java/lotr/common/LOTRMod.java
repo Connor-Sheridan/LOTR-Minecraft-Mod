@@ -46,13 +46,13 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "lotr", name = "The Lord of the Rings Mod", version = "Beta v21.1 for Minecraft 1.7.10", guiFactory = "lotr.client.gui.config.LOTRGuiFactory")
+@Mod(modid = LOTRModInfo.modID, name = LOTRModInfo.modName, version = LOTRModInfo.version, guiFactory = "lotr.client.gui.config.LOTRGuiFactory")
 public class LOTRMod
 {
 	@SidedProxy(clientSide = "lotr.client.LOTRClientProxy", serverSide = "lotr.common.LOTRCommonProxy")
 	public static LOTRCommonProxy proxy;
 	
-	@Mod.Instance("lotr")
+	@Mod.Instance(LOTRModInfo.modID)
 	public static LOTRMod instance;
 	
 	public static ToolMaterial toolBronze = EnumHelper.addToolMaterial("LOTR_BRONZE", 2, 220, 5F, 1.5F, 10);
@@ -720,6 +720,9 @@ public class LOTRMod
 	public static Item highElvenBow;
 	public static Item utumnoPickaxe;
 	public static Item balrogWhip;
+	public static Item battleaxeIron;
+	public static Item battleaxeBronze;
+	public static Item bronzeCrossbow;
 	
 	public static List unnamedItems = new ArrayList();
 	private LOTRTickHandlerServer serverTickHandler = new LOTRTickHandlerServer();
@@ -1023,7 +1026,7 @@ public class LOTRMod
 		swordElven = new LOTRItemSword(toolElven).setIsElvenBlade().setUnlocalizedName("lotr:swordElven");
 		hoeElven = new LOTRItemHoe(toolElven).setUnlocalizedName("lotr:hoeElven");
 		spearElven = new LOTRItemSpear(toolElven, swordElven).setUnlocalizedName("lotr:spearElven");
-		mallornBow = new LOTRItemBow(416, 0, 0.15F, 3, 20).setUnlocalizedName("lotr:mallornBow");
+		mallornBow = new LOTRItemBow(toolMallorn, 0, 0.15F).setUnlocalizedName("lotr:mallornBow");
 		helmetElven = new LOTRItemArmor(armorElven, 0).setUnlocalizedName("lotr:helmetElven");
 		bodyElven = new LOTRItemArmor(armorElven, 1).setUnlocalizedName("lotr:bodyElven");
 		legsElven = new LOTRItemArmor(armorElven, 2).setUnlocalizedName("lotr:legsElven");
@@ -1032,13 +1035,13 @@ public class LOTRMod
 		gammon = new LOTRItemFood(8, 0.8F, true).setUnlocalizedName("lotr:gammon");
 		clayPlate = new Item().setCreativeTab(LOTRCreativeTabs.tabFood).setUnlocalizedName("lotr:clayPlate");
 		plate = new LOTRItemPlate().setUnlocalizedName("lotr:plate");
-		elvenBow = new LOTRItemBow(500, 0.25D, 0.5F, 5, 20).setUnlocalizedName("lotr:elvenBow");
+		elvenBow = new LOTRItemBow(toolElven, 0.25D, 0.5F).setDrawTime(16).setUnlocalizedName("lotr:elvenBow");
 		wargFur = new Item().setCreativeTab(LOTRCreativeTabs.tabMaterials).setUnlocalizedName("lotr:wargFur");
 		helmetWarg = new LOTRItemArmor(armorWarg, 0).setUnlocalizedName("lotr:helmetWarg");
 		bodyWarg = new LOTRItemArmor(armorWarg, 1).setUnlocalizedName("lotr:bodyWarg");
 		legsWarg = new LOTRItemArmor(armorWarg, 2).setUnlocalizedName("lotr:legsWarg");
 		bootsWarg = new LOTRItemArmor(armorWarg, 3).setUnlocalizedName("lotr:bootsWarg");
-		orcBow = new LOTRItemBow(440, 0.25D, 0F, 1, 20).setUnlocalizedName("lotr:orcBow");
+		orcBow = new LOTRItemBow(toolOrc, 0.25D, 0F).setUnlocalizedName("lotr:orcBow");
 		mugMead = new LOTRItemMugBrewable(0.6F).setDrinkStats(4, 0.4F).setUnlocalizedName("lotr:mugMead");
 		wargskinRug = new LOTRItemWargskinRug().setUnlocalizedName("lotr:wargskinRug");
 		quenditeCrystal = new LOTRItemQuenditeCrystal().setUnlocalizedName("lotr:quenditeCrystal");
@@ -1102,18 +1105,18 @@ public class LOTRMod
 		legsUruk = new LOTRItemArmor(armorUruk, 2).setUnlocalizedName("lotr:legsUruk");
 		bootsUruk = new LOTRItemArmor(armorUruk, 3).setUnlocalizedName("lotr:bootsUruk");
 		crossbowBolt = new Item().setCreativeTab(LOTRCreativeTabs.tabCombat).setUnlocalizedName("lotr:crossbowBolt");
-		urukCrossbow = new LOTRItemCrossbow(470, 0.4D, toolUruk, 1).setUnlocalizedName("lotr:urukCrossbow");
+		urukCrossbow = new LOTRItemCrossbow(toolUruk).setUnlocalizedName("lotr:urukCrossbow");
 		cherryPieItem = new LOTRItemPlaceableFood(cherryPie).setUnlocalizedName("lotr:cherryPie");
 		trollBone = new LOTRItemBone().setUnlocalizedName("lotr:trollBone");
 		trollStatue = new LOTRItemTrollStatue().setUnlocalizedName("lotr:trollStatue");
-		ironCrossbow = new LOTRItemCrossbow(356, 0D, ToolMaterial.IRON, 3).setUnlocalizedName("lotr:ironCrossbow");
-		mithrilCrossbow = new LOTRItemCrossbow(1760, 0.5D, toolMithril, 6).setUnlocalizedName("lotr:mithrilCrossbow");
+		ironCrossbow = new LOTRItemCrossbow(ToolMaterial.IRON).setUnlocalizedName("lotr:ironCrossbow");
+		mithrilCrossbow = new LOTRItemCrossbow(toolMithril).setUnlocalizedName("lotr:mithrilCrossbow");
 		woodElvenBedItem = new LOTRItemBed(woodElvenBed).setUnlocalizedName("lotr:woodElvenBed");
 		helmetWoodElvenScout = new LOTRItemArmor(armorWoodElvenScout, 0).setUnlocalizedName("lotr:helmetWoodElvenScout");
 		bodyWoodElvenScout = new LOTRItemArmor(armorWoodElvenScout, 1).setUnlocalizedName("lotr:bodyWoodElvenScout");
 		legsWoodElvenScout = new LOTRItemArmor(armorWoodElvenScout, 2).setUnlocalizedName("lotr:legsWoodElvenScout");
 		bootsWoodElvenScout = new LOTRItemArmor(armorWoodElvenScout, 3).setUnlocalizedName("lotr:bootsWoodElvenScout");
-		mirkwoodBow = new LOTRItemBow(426, 0D, 0.25F, 10, 15).setUnlocalizedName("lotr:mirkwoodBow");
+		mirkwoodBow = new LOTRItemBow(toolWoodElven, 0D, 0.25F).setDrawTime(14).setUnlocalizedName("lotr:mirkwoodBow");
 		mugRedWine = new LOTRItemMugBrewable(0.9F).setDrinkStats(4, 0.4F).setUnlocalizedName("lotr:mugRedWine");
 		ancientItemParts = new LOTRItemAncientItemParts().setUnlocalizedName("lotr:ancientParts");
 		ancientItem = new LOTRItemAncientItem().setUnlocalizedName("lotr:ancient");
@@ -1251,7 +1254,7 @@ public class LOTRMod
 		daggerNearHarad = new LOTRItemDagger(toolNearHarad, 0).setUnlocalizedName("lotr:daggerNearHarad");
 		daggerNearHaradPoisoned = new LOTRItemDagger(toolNearHarad, 1).setUnlocalizedName("lotr:daggerNearHaradPoisoned");
 		spearNearHarad = new LOTRItemSpear(toolNearHarad, scimitarNearHarad).setUnlocalizedName("lotr:spearNearHarad");
-		nearHaradBow = new LOTRItemBow(460, 0.4D, 0.5F, 3, 30).setUnlocalizedName("lotr:nearHaradBow");
+		nearHaradBow = new LOTRItemBow(toolNearHarad, 0.4D, 0.5F).setDrawTime(30).setUnlocalizedName("lotr:nearHaradBow");
 		date = new LOTRItemHangingFruit(2, 0.3F, false, dateBlock).setUnlocalizedName("lotr:date");
 		mugAraq = new LOTRItemMugBrewable(1.4F).setDrinkStats(4, 0.4F).setUnlocalizedName("lotr:mugAraq");
 		blueDwarfSteel = new Item().setCreativeTab(LOTRCreativeTabs.tabMaterials).setUnlocalizedName("lotr:blueDwarfSteel");
@@ -1332,7 +1335,7 @@ public class LOTRMod
 		bodyBlackUruk = new LOTRItemArmor(armorBlackUruk, 1).setUnlocalizedName("lotr:bodyBlackUruk");
 		legsBlackUruk = new LOTRItemArmor(armorBlackUruk, 2).setUnlocalizedName("lotr:legsBlackUruk");
 		bootsBlackUruk = new LOTRItemArmor(armorBlackUruk, 3).setUnlocalizedName("lotr:bootsBlackUruk");
-		blackUrukBow = new LOTRItemBow(500, 0.5D, 0.2F, 3, 20).setUnlocalizedName("lotr:blackUrukBow");
+		blackUrukBow = new LOTRItemBow(toolBlackUruk, 0.5D, 0.2F).setUnlocalizedName("lotr:blackUrukBow");
 		helmetNearHaradWarlord = new LOTRItemArmor(armorNearHarad, 0).setUnlocalizedName("lotr:helmetNearHaradWarlord");
 		utumnoKey = new LOTRItemUtumnoKey().setUnlocalizedName("lotr:utumnoKey");
 		swordUtumno = new LOTRItemSword(toolUtumno).setUnlocalizedName("lotr:swordUtumno");
@@ -1341,17 +1344,20 @@ public class LOTRMod
 		spearUtumno = new LOTRItemSpear(toolUtumno, swordUtumno).setUnlocalizedName("lotr:spearUtumno");
 		battleaxeUtumno = new LOTRItemBattleaxe(toolUtumno).setUnlocalizedName("lotr:battleaxeUtumno");
 		hammerUtumno = new LOTRItemHammer(toolUtumno).setUnlocalizedName("lotr:hammerUtumno");
-		utumnoBow = new LOTRItemBow(400, 0.5D, 0.2F, 2, 20).setUnlocalizedName("lotr:utumnoBow");
+		utumnoBow = new LOTRItemBow(toolUtumno, 0.5D, 0.2F).setUnlocalizedName("lotr:utumnoBow");
 		mugCactusLiqueur = new LOTRItemMugBrewable(0.8F).setDrinkStats(2, 0.3F).setUnlocalizedName("lotr:mugCactusLiqueur");
-		rohanBow = new LOTRItemBow(420, 0D, 0.2F, 3, 16).setUnlocalizedName("lotr:rohanBow");
-		gondorBow = new LOTRItemBow(420, 0.25D, 0.4F, 3, 20).setUnlocalizedName("lotr:gondorBow");
-		highElvenBow = new LOTRItemBow(500, 0.25D, 0.5F, 5, 20).setUnlocalizedName("lotr:highElvenBow");
+		rohanBow = new LOTRItemBow(toolRohan, 0D, 0.2F).setDrawTime(16).setUnlocalizedName("lotr:rohanBow");
+		gondorBow = new LOTRItemBow(toolGondor, 0.25D, 0.4F).setUnlocalizedName("lotr:gondorBow");
+		highElvenBow = new LOTRItemBow(toolHighElven, 0.25D, 0.5F).setDrawTime(16).setUnlocalizedName("lotr:highElvenBow");
 		utumnoPickaxe = new LOTRItemPickaxe(toolUtumno).setMaxDamage(80).setUnlocalizedName("lotr:utumnoPickaxe");
 		balrogWhip = new LOTRItemBalrogWhip().setUnlocalizedName("lotr:balrogWhip");
+		battleaxeIron = new LOTRItemBattleaxe(ToolMaterial.IRON).setUnlocalizedName("lotr:battleaxeIron");
+		battleaxeBronze = new LOTRItemBattleaxe(toolBronze).setUnlocalizedName("lotr:battleaxeBronze");
+		bronzeCrossbow = new LOTRItemCrossbow(toolBronze).setUnlocalizedName("lotr:bronzeCrossbow");
 		
 		try
 		{
-			String prefix = getModID() + ":";
+			String prefix = LOTRModInfo.modID + ":";
 			for (Field field : LOTRMod.class.getFields())
 			{
 				if (field.get(null) instanceof Block)
@@ -2004,6 +2010,9 @@ public class LOTRMod
 		registerItem(highElvenBow);
 		registerItem(utumnoPickaxe);
 		registerItem(balrogWhip);
+		registerItem(battleaxeIron);
+		registerItem(battleaxeBronze);
+		registerItem(bronzeCrossbow);
 		
 		LOTRConfig.setupAndLoad(event);
 		
@@ -2068,10 +2077,9 @@ public class LOTRMod
 
 		LOTRRecipes.createAllRecipes();
 		
-		Iterator<Block> blockIterator = Block.blockRegistry.iterator();
-		while (blockIterator.hasNext())
+		for (Object obj : Block.blockRegistry)
 		{
-			Block block = blockIterator.next();
+			Block block = (Block)obj;
 			
 			if (block instanceof LOTRBlockWoodBase)
 			{
@@ -2302,6 +2310,9 @@ public class LOTRMod
 		LOTREntities.registerCreature(LOTREntityDikDik.class, "DikDik", 143, 0xB7783B, 0x684729);
 		LOTREntities.registerCreature(LOTREntityBlackUruk.class, "BlackUruk", 144, 0x0F150E, 0x2B3128);
 		LOTREntities.registerCreature(LOTREntityBlackUrukArcher.class, "BlackUrukArcher", 145, 0x0F150E, 0x2B3128);
+		LOTREntities.registerCreature(LOTREntityHalfTroll.class, "HalfTroll", 146, 0x0F150E, 0x2B3128);
+		LOTREntities.registerCreature(LOTREntityRangerIthilienCaptain.class, "RangerIthilienCaptain", 147, 0x3D4425, 0x15190D);
+		LOTREntities.registerCreature(LOTREntityRangerIthilienBannerBearer.class, "RangerIthilienBannerBearer", 148, 0x3D4425, 0x15190D);
 		
 		LOTREntities.registerCreature(LOTREntityUtumnoOrc.class, "UtumnoOrc", 800, 0x291F27, 0x9E5811);
 		LOTREntities.registerCreature(LOTREntityUtumnoOrcArcher.class, "UtumnoOrcArcher", 801, 0x291F27, 0x9E5811);
@@ -2435,12 +2446,6 @@ public class LOTRMod
 	private void registerItem(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName());
-	}
-	
-	public static String getModID()
-	{
-		ModContainer container = FMLCommonHandler.instance().findContainerFor(instance);
-		return container.getModId();
 	}
 	
 	public static LOTRFaction getNPCFaction(Entity entity)

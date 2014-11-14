@@ -73,16 +73,16 @@ public class LOTREntityMordorOrcTrader extends LOTREntityMordorOrc implements LO
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "orcTrader_friendly";
+				return "mordor/trader/friendly";
 			}
 			else
 			{
-				return "orcTrader_neutral";
+				return "mordor/trader/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "mordor/orc/hostile";
 		}
 	}
 }

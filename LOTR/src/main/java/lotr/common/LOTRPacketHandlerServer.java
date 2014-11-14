@@ -92,6 +92,8 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 					Container container = entityplayer.openContainer;
 					if (container != null && container instanceof LOTRContainerTrade)
 					{
+						LOTRContainerTrade tradeContainer = (LOTRContainerTrade)container;
+						
 						int totalCoins = 0;
 						for (int i = 9; i < 18; i++)
 						{
@@ -99,7 +101,7 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 							ItemStack itemstack = slot.getStack();
 							if (itemstack != null)
 							{
-								int[] ints = LOTRTradeEntry.getSellPrice_TradeCount_SellAmount(itemstack, ((LOTRContainerTrade)container).theEntity);
+								int[] ints = LOTRTradeEntry.getSellPrice_TradeCount_SellAmount(itemstack, tradeContainer.theEntity);
 								int sellPrice = ints[0];
 								int tradeCount = ints[1];
 								int sellAmount = ints[2];
@@ -107,6 +109,7 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 								{
 									totalCoins += sellPrice * tradeCount;
 									((LOTRContainerTrade)container).theTrader.onPlayerSellItem(entityplayer, itemstack);
+									LOTRLevelData.getData(entityplayer).getFactionData(tradeContainer.theTrader.getFaction()).addTrade();
 									
 									itemstack.stackSize -= sellAmount;
 									if (itemstack.stackSize <= 0)
@@ -187,9 +190,11 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 					Container container = entityplayer.openContainer;
 					if (container != null && container instanceof LOTRContainerUnitTrade)
 					{
-						LOTRUnitTradeable unitTrader = ((LOTRContainerUnitTrade)container).theUnitTrader;
+						LOTRContainerUnitTrade tradeContainer = ((LOTRContainerUnitTrade)container);
+						
+						LOTRUnitTradeable unitTrader = tradeContainer.theUnitTrader;
 						int tradeIndex = data.readByte();
-						LOTRUnitTradeEntry trade = ((LOTRContainerUnitTrade)container).theUnitTrader.getUnits()[tradeIndex];
+						LOTRUnitTradeEntry trade = unitTrader.getUnits()[tradeIndex];
 						if (trade.hasRequiredCostAndAlignment(entityplayer, unitTrader))
 						{
 							unitTrader.onUnitTrade(entityplayer);
@@ -198,6 +203,8 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 							{
 								entityplayer.inventory.consumeInventoryItem(LOTRMod.silverCoin);
 							}
+							
+							LOTRLevelData.getData(entityplayer).getFactionData(unitTrader.getFaction()).addHire();
 							
 							EntityLiving hiredEntity = trade.createHiredNPC(world);
 							if (hiredEntity != null)

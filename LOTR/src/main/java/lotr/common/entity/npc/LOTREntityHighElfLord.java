@@ -66,16 +66,16 @@ public class LOTREntityHighElfLord extends LOTREntityHighElfWarrior implements L
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "highElfLord_friendly";
+				return "highElf/lord/friendly";
 			}
 			else
 			{
-				return "highElfLord_neutral";
+				return "highElf/lord/neutral";
 			}
 		}
 		else
 		{
-			return "highElfWarrior_hostile";
+			return "highElf/warrior/hostile";
 		}
 	}
 }

@@ -31,7 +31,7 @@ public class LOTREntityNearHaradMerchant extends LOTREntityNearHaradrim implemen
 	@Override
 	public String getDepartureSpeech()
 	{
-		return "nearHaradMerchant_departure";
+		return "nearHarad/merchant/departure";
 	}
 	
 	@Override
@@ -90,11 +90,11 @@ public class LOTREntityNearHaradMerchant extends LOTREntityNearHaradrim implemen
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "nearHaradMerchant_friendly";
+			return "nearHarad/merchant/friendly";
 		}
 		else
 		{
-			return "nearHaradMerchant_hostile";
+			return "nearHarad/merchant/hostile";
 		}
 	}
 }

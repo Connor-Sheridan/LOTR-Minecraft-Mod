@@ -86,11 +86,11 @@ public class LOTREntityNearHaradBazaarTrader extends LOTREntityNearHaradrim impl
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "nearHaradrimBazaarTrader_friendly";
+			return "nearHarad/bazaarTrader/friendly";
 		}
 		else
 		{
-			return "nearHaradrimBazaarTrader_unfriendly";
+			return "nearHarad/bazaarTrader/hostile";
 		}
 	}
 }

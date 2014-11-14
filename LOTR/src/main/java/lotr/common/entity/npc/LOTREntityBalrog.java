@@ -88,13 +88,7 @@ public class LOTREntityBalrog extends LOTREntityNPC
 	{
 		return LOTRFaction.UTUMNO;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public void onLivingUpdate()
 	{

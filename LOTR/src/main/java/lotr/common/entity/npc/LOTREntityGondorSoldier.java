@@ -99,8 +99,7 @@ public class LOTREntityGondorSoldier extends LOTREntityGondorMan
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return biome instanceof LOTRBiomeGenGondor && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+				return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;
@@ -113,13 +112,13 @@ public class LOTREntityGondorSoldier extends LOTREntityGondorMan
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "gondorSoldier_hired";
+				return "gondor/soldier/hired";
 			}
-			return "gondorSoldier_friendly";
+			return "gondor/soldier/friendly";
 		}
 		else
 		{
-			return "gondorSoldier_hostile";
+			return "gondor/soldier/hostile";
 		}
 	}
 }

@@ -42,6 +42,7 @@ public class LOTRPlayerData
 	private UUID playerUUID;
 	
 	private Map<LOTRFaction, Integer> alignments = new HashMap();
+	private Map<LOTRFaction, LOTRFactionData> factionDataMap = new HashMap();
 	private LOTRFaction viewingFaction;
 	private boolean checkedAlignments = false;
 	private boolean hideAlignment = false;
@@ -65,7 +66,6 @@ public class LOTRPlayerData
 	private int alcoholTolerance;
 	
 	private List<LOTRMiniQuest> miniQuests = new ArrayList();
-	private Map<LOTRFaction, Integer> completedMiniQuests = new HashMap();
 	
 	private Map<LOTRGuiMessageTypes, Boolean> sentMessageTypes = new HashMap();
 	
@@ -122,6 +122,19 @@ public class LOTRPlayerData
 			alignmentTags.appendTag(nbt);
 		}
 		playerData.setTag("AlignmentMap", alignmentTags);
+		
+		NBTTagList factionDataTags = new NBTTagList();
+		for (Entry<LOTRFaction, LOTRFactionData> entry : factionDataMap.entrySet())
+		{
+			LOTRFaction faction = entry.getKey();
+			LOTRFactionData data = entry.getValue();
+			
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setString("Faction", faction.codeName());
+			data.save(nbt);
+			factionDataTags.appendTag(nbt);
+		}
+		playerData.setTag("FactionData", factionDataTags);
 		
 		if (viewingFaction != null)
 		{
@@ -182,19 +195,6 @@ public class LOTRPlayerData
 		}
 		playerData.setTag("MiniQuests", miniquestTags);
 		
-		NBTTagList completedMiniquestTags = new NBTTagList();
-		for (Entry<LOTRFaction, Integer> entry : completedMiniQuests.entrySet())
-		{
-			LOTRFaction faction = entry.getKey();
-			int completed = entry.getValue();
-			
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setString("Faction", faction.codeName());
-			nbt.setInteger("Completed", completed);
-			completedMiniquestTags.appendTag(nbt);
-		}
-		playerData.setTag("CompletedMiniQuests", completedMiniquestTags);
-		
 		NBTTagList sentMessageTags = new NBTTagList();
 		for (Entry<LOTRGuiMessageTypes, Boolean> entry : sentMessageTypes.entrySet())
 		{
@@ -238,6 +238,19 @@ public class LOTRPlayerData
 			{
 				int alignment = nbt.getInteger("Alignment");
 				alignments.put(faction, alignment);
+			}
+		}
+		
+		NBTTagList factionDataTags = playerData.getTagList("FactionData", Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < factionDataTags.tagCount(); i++)
+		{
+			NBTTagCompound nbt = factionDataTags.getCompoundTagAt(i);
+			LOTRFaction faction = LOTRFaction.forName(nbt.getString("Faction"));
+			if (faction != null)
+			{
+				LOTRFactionData data = new LOTRFactionData(this, faction);
+				data.load(nbt);
+				factionDataMap.put(faction, data);
 			}
 		}
 		
@@ -310,18 +323,6 @@ public class LOTRPlayerData
 			if (quest != null)
 			{
 				miniQuests.add(quest);
-			}
-		}
-		
-		NBTTagList completedMiniquestTags = playerData.getTagList("CompletedMiniQuests", Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < completedMiniquestTags.tagCount(); i++)
-		{
-			NBTTagCompound nbt = completedMiniquestTags.getCompoundTagAt(i);
-			LOTRFaction faction = LOTRFaction.forName(nbt.getString("Faction"));
-			if (faction != null)
-			{
-				int completed = nbt.getInteger("Completed");
-				completedMiniQuests.put(faction, completed);
 			}
 		}
 		
@@ -533,10 +534,8 @@ public class LOTRPlayerData
 		
 		if (alignmentSource.isKill)
 		{
-			Iterator it = faction.killBonuses.iterator();
-			while (it.hasNext())
+			for (LOTRFaction nextFaction : faction.killBonuses)
 			{
-				LOTRFaction nextFaction = (LOTRFaction)it.next();
 				int alignment = getAlignment(nextFaction);
 				int factionBonus = Math.abs(bonus);
 				
@@ -546,10 +545,8 @@ public class LOTRPlayerData
 				sendAlignmentBonusPacket(alignmentSource, factionBonus, nextFaction, posX, posY, posZ);
 			}
 			
-			it = faction.killPenalties.iterator();
-			while (it.hasNext())
+			for (LOTRFaction nextFaction : faction.killPenalties)
 			{
-				LOTRFaction nextFaction = (LOTRFaction)it.next();
 				int alignment = getAlignment(nextFaction);
 				int factionBonus = -Math.abs(bonus);
 				
@@ -618,6 +615,44 @@ public class LOTRPlayerData
 		}
 		
 		faction.checkAlignmentAchievements(this, alignment);
+	}
+	
+	public LOTRFactionData getFactionData(LOTRFaction faction)
+	{
+		LOTRFactionData data = factionDataMap.get(faction);
+		if (data == null)
+		{
+			data = new LOTRFactionData(this, faction);
+			factionDataMap.put(faction, data);
+		}
+		return data;
+	}
+	
+	public void updateFactionData(LOTRFaction faction, LOTRFactionData factionData)
+	{
+		EntityPlayer entityplayer = getPlayer();
+		if (entityplayer != null && !entityplayer.worldObj.isRemote)
+		{
+			LOTRLevelData.markDirty();
+			
+			try
+			{
+				ByteBuf data = Unpooled.buffer();
+				
+				data.writeByte(faction.ordinal());
+				NBTTagCompound nbt = new NBTTagCompound();
+				factionData.save(nbt);
+				new PacketBuffer(data).writeNBTTagCompoundToBuffer(nbt);
+	
+				S3FPacketCustomPayload packet = new S3FPacketCustomPayload("lotr.factionData", data);
+				((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(packet);
+			}
+			catch (IOException e)
+			{
+				FMLLog.severe("Error sending faction data " + faction.codeName() + " to player " + entityplayer.getCommandSenderName());
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public boolean hasTakenAlignmentReward(LOTRFaction faction)
@@ -1465,25 +1500,18 @@ public class LOTRPlayerData
 	public int getCompletedMiniQuestsTotal()
 	{
 		int i = 0;
-		for (int completed : completedMiniQuests.values())
+		for (LOTRFactionData factionData : factionDataMap.values())
 		{
+			int completed = factionData.getMiniQuestsCompleted();
 			i += completed;
 		}
 		return i;
 	}
 	
-	public int getCompletedMiniQuests(LOTRFaction faction)
-	{
-		Integer completed = completedMiniQuests.get(faction);
-		return completed != null ? completed.intValue() : 0;
-	}
-	
 	private void completeMiniQuest(LOTRMiniQuest quest)
 	{
 		LOTRFaction faction = quest.entityFaction;
-		int completed = getCompletedMiniQuests(faction);
-		completed++;
-		completedMiniQuests.put(faction, completed);
+		getFactionData(faction).completeMiniQuest();
 	}
 	
 	public void sendMessageIfNotReceived(LOTRGuiMessageTypes message)

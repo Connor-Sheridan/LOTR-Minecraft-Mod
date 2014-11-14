@@ -97,6 +97,7 @@ public class LOTRAlignmentValues
 		public static int GONDOR_CAPTAIN = 5;
 		public static int GONDOR_BLACKSMITH = 2;
 		public static int RANGER_ITHILIEN = 2;
+		public static int RANGER_ITHILIEN_CAPTAIN = 5;
 		
 		public static int MORDOR_ORC = 1;
 		public static int MORDOR_ORC_MERCENARY_CAPTAIN = 5;
@@ -113,6 +114,8 @@ public class LOTRAlignmentValues
 		public static int NEAR_HARADRIM_WARRIOR = 2;
 		public static int NEAR_HARADRIM_WARLORD = 5;
 		public static int NEAR_HARADRIM_TRADER = 5;
+		
+		public static int HALF_TROLL = 1;
 	}
 	
 	public static class Levels
@@ -155,6 +158,7 @@ public class LOTRAlignmentValues
 		
 		public static int GONDOR_BLACKSMITH_TRADE = 50;
 		public static int GONDORIAN_CAPTAIN_TRADE = 100;
+		public static int RANGER_ITHILIEN_CAPTAIN_TRADE = 300;
 		
 		public static int ORC_FLEE = -500;
 		public static int ORC_FRIENDLY = 100;

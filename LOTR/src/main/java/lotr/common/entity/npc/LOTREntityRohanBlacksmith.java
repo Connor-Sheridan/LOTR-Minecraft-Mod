@@ -102,16 +102,16 @@ public class LOTREntityRohanBlacksmith extends LOTREntityRohanMan implements LOT
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "rohanBlacksmith_friendly";
+				return "rohan/blacksmith/friendly";
 			}
 			else
 			{
-				return "rohanBlacksmith_neutral";
+				return "rohan/blacksmith/neutral";
 			}
 		}
 		else
 		{
-			return "rohanBlacksmith_hostile";
+			return "rohan/blacksmith/hostile";
 		}
 	}
 }

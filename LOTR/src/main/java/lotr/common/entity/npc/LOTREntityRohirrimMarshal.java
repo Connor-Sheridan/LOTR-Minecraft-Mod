@@ -80,16 +80,16 @@ public class LOTREntityRohirrimMarshal extends LOTREntityRohirrim implements LOT
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "rohirrimMarshal_friendly";
+				return "rohan/marshal/friendly";
 			}
 			else
 			{
-				return "rohirrimMarshal_neutral";
+				return "rohan/marshal/neutral";
 			}
 		}
 		else
 		{
-			return "rohirrim_hostile";
+			return "rohan/rohirrim/hostile";
 		}
 	}
 }

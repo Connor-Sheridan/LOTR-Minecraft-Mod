@@ -76,16 +76,16 @@ public class LOTREntityBlueDwarfCommander extends LOTREntityBlueDwarf implements
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "blueDwarfCommander_friendly";
+				return "blueDwarf/commander/friendly";
 			}
 			else
 			{
-				return "blueDwarfCommander_neutral";
+				return "blueDwarf/commander/neutral";
 			}
 		}
 		else
 		{
-			return "blueDwarf_hostile";
+			return "blueDwarf/dwarf/hostile";
 		}
 	}
 }

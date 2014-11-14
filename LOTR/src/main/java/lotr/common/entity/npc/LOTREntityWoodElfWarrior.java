@@ -117,23 +117,23 @@ public class LOTREntityWoodElfWarrior extends LOTREntityWoodElf
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "woodElf_hired";
+				return "woodElf/elf/hired";
 			}
 			else
 			{
 				if (LOTRLevelData.getData(entityplayer).getAlignment(getFaction()) >= LOTRAlignmentValues.Levels.WOOD_ELF_TRUST)
 				{
-					return "woodElfWarrior_friendly";
+					return "woodElf/warrior/friendly";
 				}
 				else
 				{
-					return "woodElf_neutral";
+					return "woodElf/elf/neutral";
 				}
 			}
 		}
 		else
 		{
-			return "woodElfWarrior_hostile";
+			return "woodElf/warrior/hostile";
 		}
 	}
 }

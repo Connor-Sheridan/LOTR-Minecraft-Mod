@@ -285,6 +285,12 @@ public abstract class LOTREntityNPC extends EntityCreature
 	}
 	
 	@Override
+    public boolean isAIEnabled()
+    {
+        return true;
+    }
+	
+	@Override
 	public String getCommandSenderName()
 	{
 		String entityName = getEntityClassName();

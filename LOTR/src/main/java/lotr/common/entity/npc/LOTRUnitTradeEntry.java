@@ -1,7 +1,6 @@
 package lotr.common.entity.npc;
 
-import lotr.common.LOTRLevelData;
-import lotr.common.LOTRMod;
+import lotr.common.*;
 import lotr.common.entity.LOTREntities;
 import lotr.common.entity.animal.*;
 import lotr.common.entity.npc.LOTRHiredNPCInfo.Task;
@@ -53,6 +52,8 @@ public class LOTRUnitTradeEntry
 	public static LOTRUnitTradeEntry[] BLUE_DWARF_COMMANDER;
 	
 	public static LOTRUnitTradeEntry[] DOL_GULDUR_CAPTAIN;
+	
+	public static LOTRUnitTradeEntry[] RANGER_ITHILIEN_CAPTAIN;
 	
 	public Class entityClass;
 	public Class mountClass;
@@ -139,7 +140,7 @@ public class LOTRUnitTradeEntry
 	{
 		if (mountClass == null)
 		{
-			String s = String.format("%s.%s", LOTRMod.getModID(), LOTREntities.getStringFromClass(entityClass));
+			String s = String.format("%s.%s", LOTRModInfo.modID, LOTREntities.getStringFromClass(entityClass));
 			return StatCollector.translateToLocal("entity." + s + ".name");
 		}
 		else
@@ -364,6 +365,12 @@ public class LOTRUnitTradeEntry
 			new LOTRUnitTradeEntry(LOTREntityDolGuldurOrcArcher.class, LOTREntityMirkwoodSpider.class, "DolGuldurOrcArcher_Spider", 30, 300),
 			new LOTRUnitTradeEntry(LOTREntityMirkTroll.class, 50, 400),
 			new LOTRUnitTradeEntry(LOTREntityDolGuldurBannerBearer.class, 40, 300)
+		};
+		
+		RANGER_ITHILIEN_CAPTAIN = new LOTRUnitTradeEntry[]
+		{
+			new LOTRUnitTradeEntry(LOTREntityRangerIthilien.class, 30, 300),
+			new LOTRUnitTradeEntry(LOTREntityRangerIthilienBannerBearer.class, 40, 450)
 		};
 	}
 }

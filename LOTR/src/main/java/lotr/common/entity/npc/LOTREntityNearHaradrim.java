@@ -114,12 +114,6 @@ public class LOTREntityNearHaradrim extends LOTREntityNPC implements ImmuneToHea
 	}
 
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public String getNPCName()
 	{
 		return getHaradName();
@@ -242,11 +236,11 @@ public class LOTREntityNearHaradrim extends LOTREntityNPC implements ImmuneToHea
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "nearHaradrim_friendly";
+			return "nearHarad/haradrim/friendly";
 		}
 		else
 		{
-			return "nearHaradrim_hostile";
+			return "nearHarad/haradrim/friendly";
 		}
 	}
 	

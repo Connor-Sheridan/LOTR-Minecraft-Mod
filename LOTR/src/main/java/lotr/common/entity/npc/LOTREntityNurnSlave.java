@@ -73,13 +73,7 @@ public class LOTREntityNurnSlave extends LOTREntityNPC
 	{
 		return LOTRFaction.MORDOR;
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	@Override
 	public String getNPCName()
 	{
@@ -132,11 +126,11 @@ public class LOTREntityNurnSlave extends LOTREntityNPC
 	{
 		if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 		{
-			return "nurnSlave_hired";
+			return "mordor/nurnSlave/hired";
 		}
 		else
 		{
-			return "nurnSlave";
+			return "mordor/nurnSlave/neutral";
 		}
 	}
 }

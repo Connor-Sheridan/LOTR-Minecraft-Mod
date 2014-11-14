@@ -67,16 +67,16 @@ public class LOTREntityDunlendingWarlord extends LOTREntityDunlendingWarrior imp
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "dunlendingWarlord_friendly";
+				return "dunlending/warlord/friendly";
 			}
 			else
 			{
-				return "dunlendingWarlord_neutral";
+				return "dunlending/warlord/neutral";
 			}
 		}
 		else
 		{
-			return "dunlending_hostile";
+			return "dunlending/dunlending/hostile";
 		}
 	}
 }

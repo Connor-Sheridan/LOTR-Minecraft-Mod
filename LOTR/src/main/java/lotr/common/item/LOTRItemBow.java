@@ -24,22 +24,28 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class LOTRItemBow extends ItemBow
 {
+	private ToolMaterial bowMaterial;
 	private double arrowDamageBonus;
 	private float arrowRangeBonus;
-	private int enchantability;
 	@SideOnly(Side.CLIENT)
 	private IIcon[] bowPullIcons;
 	private int bowPullTime;
 	
-	public LOTRItemBow(int j, double d, float f, int k, int l)
+	public LOTRItemBow(ToolMaterial material, double d, float f)
 	{
 		super();
-		setMaxDamage(j);
+		bowMaterial = material;
+		setMaxDamage((int)(material.getMaxUses() * 1.5F));
 		setCreativeTab(LOTRCreativeTabs.tabCombat);
 		arrowDamageBonus = d;
 		arrowRangeBonus = f;
-		enchantability = k;
-		bowPullTime = l;
+		bowPullTime = 20;
+	}
+	
+	public LOTRItemBow setDrawTime(int i)
+	{
+		bowPullTime = i;
+		return this;
 	}
 	
 	@Override
@@ -129,7 +135,7 @@ public class LOTRItemBow extends ItemBow
     @Override
     public int getItemEnchantability()
     {
-        return enchantability;
+        return 1 + bowMaterial.getEnchantability() / 5;
     }
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lotr.common.LOTRMod;
+import lotr.common.LOTRModInfo;
 import lotr.common.item.LOTRItemArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
@@ -63,7 +64,7 @@ public class LOTRArmorModels
 			registerModels();
 		}
 		
-		String prefix = armor.getArmorMaterial().name().substring(LOTRMod.getModID().length() + 1).toLowerCase();
+		String prefix = armor.getArmorMaterial().name().substring(LOTRModInfo.modID.length() + 1).toLowerCase();
 		String suffix = specialArmorNames.get(armor);
 		if (suffix == null)
 		{

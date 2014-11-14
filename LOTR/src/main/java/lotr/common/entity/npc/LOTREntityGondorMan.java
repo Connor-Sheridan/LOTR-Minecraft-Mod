@@ -71,12 +71,6 @@ public abstract class LOTREntityGondorMan extends LOTREntityNPC
 	}
 	
 	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
-	@Override
 	public String getNPCName()
 	{
 		return getGondorianName();

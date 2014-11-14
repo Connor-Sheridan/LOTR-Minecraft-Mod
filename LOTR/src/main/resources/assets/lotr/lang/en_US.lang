@@ -884,6 +884,9 @@ item.lotr:gondorBow.name=Gondorian Bow
 item.lotr:highElvenBow.name=High Elven Bow
 item.lotr:utumnoPickaxe.name=Pickaxe of the Underworld
 item.lotr:balrogWhip.name=Balrog Whip
+item.lotr:battleaxeIron.name=Iron Battleaxe
+item.lotr:battleaxeBronze.name=Bronze Battleaxe
+item.lotr:bronzeCrossbow.name=Bronze Crossbow
 
 item.lotr.orcBomb.fire=Fire
 item.lotr.orcBomb.doubleStrength=Double Strength
@@ -1004,7 +1007,7 @@ lotr.gui.menuPrompt=Press '%s' to view the Middle-earth menu
 lotr.gui.alignmentPrompt=Use the keys '%s' and '%s' to cycle between alignments
 
 lotr.gui.map=Map
-lotr.gui.alignment=Alignment
+lotr.gui.factions=Factions
 lotr.gui.achievements=Achievements
 lotr.gui.titles=Titles
 lotr.gui.shields=Shields
@@ -1035,7 +1038,17 @@ lotr.gui.map.customWaypoint.delete.3=Press %s to delete waypoint
 lotr.gui.map.customWaypoint.protected.1=%s
 lotr.gui.map.customWaypoint.protected.2=You cannot create a custom waypoint here
 
-lotr.gui.alignment.title=%s Alignment
+lotr.gui.factions.title=%s Factions
+lotr.gui.factions.alignment=Alignment:
+lotr.gui.factions.alignment.state=(%s)
+lotr.gui.factions.alignment.ally=Ally
+lotr.gui.factions.alignment.neutral=Neutral
+lotr.gui.factions.alignment.enemy=Enemy
+lotr.gui.factions.data.enemiesKilled=Enemies Slain: %d
+lotr.gui.factions.data.trades=Trades Made: %d
+lotr.gui.factions.data.hires=Units Hired: %d
+lotr.gui.factions.data.miniquests=Mini-Quests Completed: %d
+lotr.gui.factions.data.npcsKilled=NPCs Slain: %d
 
 lotr.gui.achievements.title=%s Achievements (%d/%d)
 lotr.gui.achievements.category=%s (%d/%d)
@@ -1407,6 +1420,9 @@ entity.lotr.Termite.name=Exploding Termite
 entity.lotr.DikDik.name=Dik-dik
 entity.lotr.BlackUruk.name=Black Uruk
 entity.lotr.BlackUrukArcher.name=Black Uruk Archer
+entity.lotr.HalfTroll.name=Half-troll
+entity.lotr.RangerIthilienCaptain.name=Ithilien Ranger Captain
+entity.lotr.RangerIthilienBannerBearer.name=Ithilien Banner Bearer
 
 entity.lotr.UtumnoOrc.name=Utumno Orc
 entity.lotr.UtumnoOrcArcher.name=Utumno Orc Archer
@@ -1473,45 +1489,83 @@ lotr.unit.DolGuldurOrcArcher_Spider=Spider Archer Rider
 
 lotr.faction.HOBBIT.name=Hobbits
 lotr.faction.HOBBIT.entity=Hobbits
+lotr.faction.HOBBIT.subtitle=The little folk of the Shire
+
 lotr.faction.RANGER_NORTH.name=Rangers of the North
 lotr.faction.RANGER_NORTH.entity=Rangers of the North
+lotr.faction.RANGER_NORTH.subtitle=The scattered Dúnedain of the North
+
 lotr.faction.BLUE_MOUNTAINS.name=Blue Mountains
 lotr.faction.BLUE_MOUNTAINS.entity=Dwarves of the Blue Mountains
+lotr.faction.BLUE_MOUNTAINS.subtitle=The Dwarves of the Ered Luin
+
 lotr.faction.HIGH_ELF.name=High Elves
 lotr.faction.HIGH_ELF.entity=High Elves
+lotr.faction.HIGH_ELF.subtitle=The Noldorin Elves of Lindon
+
 lotr.faction.GUNDABAD.name=Gundabad
 lotr.faction.GUNDABAD.entity=Spawn of Gundabad
+lotr.faction.GUNDABAD.subtitle=The leaderless Orc-hordes of the North
+
 lotr.faction.ANGMAR.name=Angmar
 lotr.faction.ANGMAR.entity=Spawn of Angmar
+lotr.faction.ANGMAR.subtitle=The dark forces of Angmar
+
 lotr.faction.WOOD_ELF.name=Woodland Realm
 lotr.faction.WOOD_ELF.entity=Wood-elves
+lotr.faction.WOOD_ELF.subtitle=The Silvan Elves of Mirkwood
+
 lotr.faction.DOL_GULDUR.name=Dol Guldur
 lotr.faction.DOL_GULDUR.entity=Spawn of Dol Guldur
+lotr.faction.DOL_GULDUR.subtitle=The hideous spawn of Dol Guldur
+
 lotr.faction.DWARF.name=Durin's Folk
 lotr.faction.DWARF.entity=Dwarves of Durin's Folk
+lotr.faction.DWARF.subtitle=The Longbeard Dwarves of Khazad-dûm
+
 lotr.faction.GALADHRIM.name=Lothlórien
 lotr.faction.GALADHRIM.entity=Elves of Lothlórien
+lotr.faction.GALADHRIM.subtitle=The Galadhrim Elves of the Golden Wood
+
 lotr.faction.DUNLAND.name=Dunland
 lotr.faction.DUNLAND.entity=Dunlendings
+lotr.faction.DUNLAND.subtitle=The savage Dunlending hill-tribes
+
 lotr.faction.URUK_HAI.name=Uruk-hai
 lotr.faction.URUK_HAI.entity=Spawn of Isengard
+lotr.faction.URUK_HAI.subtitle=The fearsome armies of Isengard
+
 lotr.faction.FANGORN.name=Fangorn
 lotr.faction.FANGORN.entity=Fangorn
+lotr.faction.FANGORN.subtitle=The ancient forest of the Ents
+
 lotr.faction.ROHAN.name=Rohan
 lotr.faction.ROHAN.entity=Men of Rohan
+lotr.faction.ROHAN.subtitle=The kingdom of the Rohirrim
+
 lotr.faction.GONDOR.name=Gondor
 lotr.faction.GONDOR.entity=Men of Gondor
+lotr.faction.GONDOR.subtitle=The last great kingdom of Men
+
 lotr.faction.MORDOR.name=Mordor
 lotr.faction.MORDOR.entity=Spawn of Mordor
+lotr.faction.MORDOR.subtitle=The legions of the Black Land
+
 lotr.faction.NEAR_HARAD.name=Near Harad
 lotr.faction.NEAR_HARAD.entity=Near Haradrim
+lotr.faction.NEAR_HARAD.subtitle=The Southrons of the Great Desert
+
 lotr.faction.FAR_HARAD.name=Far Harad
 lotr.faction.FAR_HARAD.entity=Far Haradrim
+lotr.faction.FAR_HARAD.subtitle=
+
 lotr.faction.HALF_TROLL.name=Half-trolls
 lotr.faction.HALF_TROLL.entity=Half-trolls
+lotr.faction.HALF_TROLL.subtitle=The monstrous Troll-folk of Far Harad
 
 lotr.faction.UTUMNO.name=Utumno
 lotr.faction.UTUMNO.entity=Spawn of Utumno
+lotr.faction.UTUMNO.subtitle=The oldest and foulest creatures
 
 lotr.dimension.MiddleEarth=Middle-earth
 lotr.dimension.Utumno=Utumno
@@ -2339,6 +2393,8 @@ lotr.achievement.enterLebennin.title=Land of Five Streams
 lotr.achievement.enterLebennin.desc=Enter the province of Lebennin
 lotr.achievement.doMiniquestGondor.title=In Aid of Gondor
 lotr.achievement.doMiniquestGondor.desc=Complete a Gondor mini-quest
+lotr.achievement.tradeRangerIthilienCaptain.title=Windows on the West
+lotr.achievement.tradeRangerIthilienCaptain.desc=Hire a unit from an Ithilien Ranger Captain
 
 lotr.achievement.mineRemains.title=Worth the Risk?
 lotr.achievement.mineRemains.desc=Dig up a block of remains

@@ -108,8 +108,7 @@ public class LOTREntityRohirrim extends LOTREntityRohanMan
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return biome instanceof LOTRBiomeGenRohan && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+				return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;
@@ -122,13 +121,13 @@ public class LOTREntityRohirrim extends LOTREntityRohanMan
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "rohirrim_hired";
+				return "rohan/rohirrim/hired";
 			}
-			return "rohirrim_friendly";
+			return "rohan/rohirrim/friendly";
 		}
 		else
 		{
-			return "rohirrim_hostile";
+			return "rohan/rohirrim/hostile";
 		}
 	}
 }

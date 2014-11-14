@@ -69,12 +69,6 @@ public class LOTREntitySauron extends LOTREntityNPC
     {
         return 10;
     }
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
 
 	@Override
     public void onLivingUpdate()

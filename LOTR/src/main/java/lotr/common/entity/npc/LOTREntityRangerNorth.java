@@ -55,13 +55,13 @@ public class LOTREntityRangerNorth extends LOTREntityRanger
 		{
 			if (hiredNPCInfo.getHiringPlayer() == entityplayer)
 			{
-				return "rangerNorth_hired";
+				return "rangerNorth/ranger/hired";
 			}
-			return "rangerNorth_friendly";
+			return "rangerNorth/ranger/friendly";
 		}
 		else
 		{
-			return "rangerNorth_hostile";
+			return "rangerNorth/ranger/hostile";
 		}
 	}
 	

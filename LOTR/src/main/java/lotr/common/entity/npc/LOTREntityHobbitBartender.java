@@ -100,11 +100,11 @@ public class LOTREntityHobbitBartender extends LOTREntityHobbit implements LOTRT
 	{
 		if (isFriendly(entityplayer))
 		{
-			return "hobbitBartender_friendly";
+			return "hobbit/bartender/friendly";
 		}
 		else
 		{
-			return "hobbitBartender_unfriendly";
+			return "hobbit/bartender/hostile";
 		}
 	}
 }

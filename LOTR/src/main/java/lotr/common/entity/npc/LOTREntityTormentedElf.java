@@ -73,7 +73,7 @@ public class LOTREntityTormentedElf extends LOTREntityElf
 	@Override
 	public String getSpeechBank(EntityPlayer entityplayer)
 	{
-		return "tormentedElf_hostile";
+		return "utumno/elf/hostile";
 	}
 	
 	@Override

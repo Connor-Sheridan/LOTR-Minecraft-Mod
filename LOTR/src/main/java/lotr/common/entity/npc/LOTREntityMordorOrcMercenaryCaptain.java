@@ -74,16 +74,16 @@ public class LOTREntityMordorOrcMercenaryCaptain extends LOTREntityMordorOrc imp
 		{
 			if (canTradeWith(entityplayer))
 			{
-				return "orcMercenaryCaptain_friendly";
+				return "mordor/chieftain/friendly";
 			}
 			else
 			{
-				return "orcMercenaryCaptain_neutral";
+				return "mordor/chieftain/neutral";
 			}
 		}
 		else
 		{
-			return "orc_hostile";
+			return "mordor/orc/hostile";
 		}
 	}
 }

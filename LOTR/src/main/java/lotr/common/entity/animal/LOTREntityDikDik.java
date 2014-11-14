@@ -11,10 +11,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class LOTREntityDikDik extends EntityCreature
+public class LOTREntityDikDik extends EntityCreature implements LOTRAmbientCreature
 {
 	public LOTREntityDikDik(World world)
 	{
@@ -76,15 +77,21 @@ public class LOTREntityDikDik extends EntityCreature
 	}
 	
 	@Override
+	protected boolean canDespawn()
+    {
+        return true;
+    }
+	
+	@Override
     public float getBlockPathWeight(int i, int j, int k)
     {
-		float f = -0.5F + worldObj.getLightBrightness(i, j, k);
 		Block block = worldObj.getBlock(i, j - 1, k);
 		if (block == Blocks.grass || block == Blocks.dirt)
 		{
-			f *= 2F;
+			float f = -0.5F + worldObj.getLightBrightness(i, j, k);
+			return f;
 		}
-		return f;
+		return -10F;
     }
 	
 	@Override

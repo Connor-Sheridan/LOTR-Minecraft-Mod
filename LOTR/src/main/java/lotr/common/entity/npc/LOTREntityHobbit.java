@@ -100,13 +100,7 @@ public class LOTREntityHobbit extends LOTREntityNPC
 	{
 		return getHobbitName();
 	}
-	
-	@Override
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-	
+
 	public String getHobbitName()
 	{
 		return dataWatcher.getWatchableObjectString(19);
@@ -230,8 +224,7 @@ public class LOTREntityHobbit extends LOTREntityNPC
 				int i = MathHelper.floor_double(posX);
 				int j = MathHelper.floor_double(boundingBox.minY);
 				int k = MathHelper.floor_double(posZ);
-				BiomeGenBase biome = worldObj.getBiomeGenForCoords(i, k);
-				return biome instanceof LOTRBiomeGenShire && j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
+				return j > 62 && worldObj.getBlock(i, j - 1, k) == Blocks.grass;
 			}
 		}
 		return false;
@@ -254,11 +247,11 @@ public class LOTREntityHobbit extends LOTREntityNPC
 	{
 		if (isFriendly(entityplayer))
 		{
-			return isChild() ? "hobbitChild_friendly" : "hobbit_friendly";
+			return isChild() ? "hobbit/child/friendly" : "hobbit/hobbit/friendly";
 		}
 		else
 		{
-			return isChild() ? "hobbitChild_unfriendly" : "hobbit_unfriendly";
+			return isChild() ? "hobbit/child/hostile" : "hobbit/hobbit/hostile";
 		}
 	}
 	
