@@ -560,7 +560,7 @@ public abstract class LOTRWorldGenStructureBase2 extends WorldGenerator
 			LOTRTileEntityArmorStand armorStand = (LOTRTileEntityArmorStand)tileentity;
 			for (int l = 0; l < armor.length; l++)
 			{
-				armorStand.setInventorySlotContents(l, armor[l]);
+				armorStand.setInventorySlotContents(l, armor[l].copy());
 			}
 		}
 	}

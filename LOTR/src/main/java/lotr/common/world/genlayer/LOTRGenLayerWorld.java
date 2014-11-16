@@ -60,11 +60,12 @@ public class LOTRGenLayerWorld extends GenLayer
 		biomeVariants = GenLayerZoom.magnify(3000L, biomeVariants, 2);
 		
 		GenLayer biomes = new LOTRGenLayerWorld();
-		biomes = new LOTRGenLayerBeach(1000L, biomes);
 		biomes = new LOTRGenLayerBiomeVariants(1000L, biomes, biomeVariants);
 		biomes = new LOTRGenLayerBiomeVariantsSmall(500L, biomes);
 		
-		biomes = GenLayerZoom.magnify(1000L, biomes, 2);
+		biomes = GenLayerZoom.magnify(1000L, biomes, 1);
+		biomes = new LOTRGenLayerBeach(1000L, biomes);
+		biomes = GenLayerZoom.magnify(1000L, biomes, 1);
 		biomes = new LOTRGenLayerBiomeFeatures(1000L, biomes);
 
         for (int i = 0; i < scale; i++)

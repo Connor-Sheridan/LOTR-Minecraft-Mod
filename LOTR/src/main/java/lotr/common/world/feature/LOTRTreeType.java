@@ -33,6 +33,14 @@ public enum LOTRTreeType
 			return new LOTRWorldGenSimpleTrees(flag, 12, 16, Blocks.log, 0, Blocks.leaves, 0);
 		}
 	}),
+	OAK_ITHILIEN_HIDEOUT(new ITreeFactory()
+	{
+		@Override
+		public WorldGenAbstractTree createTree(boolean flag)
+		{
+			return new LOTRWorldGenSimpleTrees(flag, 6, 6, Blocks.log, 0, Blocks.leaves, 0);
+		}
+	}),
 	OAK_LARGE(new ITreeFactory()
 	{
 		@Override

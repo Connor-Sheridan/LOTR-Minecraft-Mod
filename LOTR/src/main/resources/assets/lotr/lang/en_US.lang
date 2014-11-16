@@ -1772,6 +1772,7 @@ lotr.structure.BeaconTower.name=Gondor Beacon Tower
 lotr.structure.GondorFortress.name=Gondor Fortress
 lotr.structure.GondorSmithy.name=Gondor Smithy
 lotr.structure.GondorTurret.name=Gondor Turret
+lotr.structure.IthilienHideout.name=Ithilien Hideout
 
 lotr.structure.RuinedBeaconTower.name=Ruined Gondor Beacon Tower
 lotr.structure.RuinedGondorTower.name=Ruined Gondor Watchtower

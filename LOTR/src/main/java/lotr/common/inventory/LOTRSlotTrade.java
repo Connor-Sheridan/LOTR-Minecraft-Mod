@@ -2,8 +2,8 @@ package lotr.common.inventory;
 
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
-import lotr.common.entity.npc.LOTREntityNPC;
-import lotr.common.entity.npc.LOTRTradeEntry;
+import lotr.common.entity.npc.*;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
@@ -52,9 +52,8 @@ public class LOTRSlotTrade extends LOTRSlotProtected
 		{
 			putStack(theTrade().item.copy());
 			((EntityPlayerMP)entityplayer).sendContainerToPlayer(theContainer);
-			
-			theContainer.theTrader.onPlayerBuyItem(entityplayer, theTrade().item.copy());
-			LOTRLevelData.getData(entityplayer).getFactionData(theEntity.getFaction()).addTrade();
+
+			theEntity.traderNPCInfo.onTrade(entityplayer, Trade.BUY, theTrade().item.copy());
 		}
     }
 }

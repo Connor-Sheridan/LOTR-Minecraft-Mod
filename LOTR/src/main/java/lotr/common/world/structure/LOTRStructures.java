@@ -107,6 +107,7 @@ public class LOTRStructures
 		registerStructure(401, LOTRWorldGenGondorFortress.class, "GondorFortress", 0xDBDBDB, 0xAFAFAF);
 		registerStructure(402, LOTRWorldGenGondorSmithy.class, "GondorSmithy", 0xDBDBDB, 0xAFAFAF);
 		registerStructure(403, LOTRWorldGenGondorTurret.class, "GondorTurret", 0xDBDBDB, 0xAFAFAF);
+		registerStructure(404, LOTRWorldGenIthilienHideout.class, "IthilienHideout", 0x878787, 0x706358);
 		
 		registerStructure(420, LOTRWorldGenRuinedBeaconTower.class, "RuinedBeaconTower", 0xDBDBDB, 0xAFAFAF);
 		registerStructure(421, LOTRWorldGenRuinedGondorTower.class, "RuinedGondorTower", 0xDBDBDB, 0xAFAFAF);

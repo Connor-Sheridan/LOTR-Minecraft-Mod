@@ -2,33 +2,17 @@ package lotr.common.world.biome;
 
 import java.util.Random;
 
-import lotr.common.LOTRAchievement;
-import lotr.common.LOTRFaction;
-import lotr.common.LOTRMod;
-import lotr.common.LOTRWaypoint;
-import lotr.common.entity.animal.LOTREntityBird;
-import lotr.common.entity.animal.LOTREntityButterfly;
-import lotr.common.entity.animal.LOTREntityHorse;
-import lotr.common.entity.animal.LOTREntityRabbit;
+import lotr.common.*;
+import lotr.common.entity.animal.*;
 import lotr.common.entity.npc.*;
-import lotr.common.world.LOTRBanditSpawner;
-import lotr.common.world.LOTRInvasionSpawner;
+import lotr.common.world.*;
 import lotr.common.world.LOTRInvasionSpawner.BiomeInvasionListEntry;
-import lotr.common.world.feature.*;
-import lotr.common.world.structure.LOTRWorldGenGondorObelisk;
-import lotr.common.world.structure.LOTRWorldGenGondorRuins;
-import lotr.common.world.structure.LOTRWorldGenRuinedBeaconTower;
-import lotr.common.world.structure.LOTRWorldGenRuinedGondorTower;
+import lotr.common.world.feature.LOTRTreeType;
+import lotr.common.world.structure.*;
+import lotr.common.world.structure2.LOTRWorldGenIthilienHideout;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigTree;
-import net.minecraft.world.gen.feature.WorldGenDoublePlant;
-import net.minecraft.world.gen.feature.WorldGenForest;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
 
 public class LOTRBiomeGenIthilien extends LOTRBiome
 {
@@ -65,13 +49,15 @@ public class LOTRBiomeGenIthilien extends LOTRBiome
 		
 		decorator.addTree(LOTRTreeType.OAK_TALL, 500);
 		decorator.addTree(LOTRTreeType.OAK_LARGE, 200);
-		decorator.addTree(LOTRTreeType.LEBETHRON, 150);
-		decorator.addTree(LOTRTreeType.LEBETHRON_LARGE, 15);
-		decorator.addTree(LOTRTreeType.BIRCH, 100);
+		decorator.addTree(LOTRTreeType.LEBETHRON, 200);
+		decorator.addTree(LOTRTreeType.LEBETHRON_LARGE, 50);
+		decorator.addTree(LOTRTreeType.BIRCH, 150);
 		decorator.addTree(LOTRTreeType.BIRCH_LARGE, 50);
-		decorator.addTree(LOTRTreeType.CEDAR, 200);
-		decorator.addTree(LOTRTreeType.APPLE, 3);
-		decorator.addTree(LOTRTreeType.PEAR, 3);
+		decorator.addTree(LOTRTreeType.CEDAR, 300);
+		decorator.addTree(LOTRTreeType.CHESTNUT, 100);
+		decorator.addTree(LOTRTreeType.CHESTNUT_LARGE, 50);
+		decorator.addTree(LOTRTreeType.APPLE, 5);
+		decorator.addTree(LOTRTreeType.PEAR, 5);
 		
 		registerForestFlowers();
 		addFlower(LOTRMod.asphodel, 0, 10);
@@ -83,6 +69,7 @@ public class LOTRBiomeGenIthilien extends LOTRBiome
 		decorator.addRandomStructure(new LOTRWorldGenGondorRuins(), 500);
 		decorator.addRandomStructure(new LOTRWorldGenRuinedGondorTower(false), 500);
 		decorator.addRandomStructure(new LOTRWorldGenGondorObelisk(false), 800);
+		decorator.addRandomStructure(new LOTRWorldGenIthilienHideout(false), 50);
 		
 		registerTravellingTrader(LOTREntityElvenTrader.class);
 		

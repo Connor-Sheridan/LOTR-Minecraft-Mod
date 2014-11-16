@@ -5,6 +5,7 @@ import lotr.common.LOTRAlignmentValues;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
 import lotr.common.entity.npc.LOTREntityNPC.AttackMode;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import lotr.common.world.structure.LOTRChestContents;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,13 +52,7 @@ public class LOTREntityBlueDwarfMiner extends LOTREntityBlueDwarf implements LOT
 	}
 	
 	@Override
-	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack)
-	{
-		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeBlueDwarfMiner);
-	}
-	
-	@Override
-	public void onPlayerSellItem(EntityPlayer entityplayer, ItemStack itemstack)
+	public void onPlayerTrade(EntityPlayer entityplayer, Trade type, ItemStack itemstack)
 	{
 		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeBlueDwarfMiner);
 	}

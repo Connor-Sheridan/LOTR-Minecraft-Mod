@@ -42,6 +42,9 @@ public class LOTRChunkProvider implements IChunkProvider
 	private static double UPPER_LIMIT_SCALE = 512D;
 	private static double LOWER_LIMIT_SCALE = 512D;
 	
+	private int noiseRadius = 10;
+	private int noiseWidth = 2 * noiseRadius + 1;
+	
     private NoiseGeneratorOctaves noiseGen1;
     private NoiseGeneratorOctaves noiseGen2;
     private NoiseGeneratorOctaves noiseGen3;
@@ -82,7 +85,7 @@ public class LOTRChunkProvider implements IChunkProvider
         int k = byte0 + 1;
         byte byte3 = 33;
         int l = byte0 + 1;
-        biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, i * 4 - 2, j * 4 - 2, k + 5, l + 5);
+        biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, i * 4 - noiseRadius, j * 4 - noiseRadius, k + noiseWidth, l + noiseWidth);
         heightNoise = initializeHeightNoise(heightNoise, i * byte0, 0, j * byte0, k, byte3, l);
 
         for (int i1 = 0; i1 < byte0; i1++)
@@ -149,7 +152,7 @@ public class LOTRChunkProvider implements IChunkProvider
 
     private void replaceBlocksForBiome(int i, int j, Block[] blocks, byte[] metadata, BiomeGenBase[] biomeArray)
     {
-        double d = 0.03125D;
+        double d = 1D / 32D;
         stoneNoise = stoneNoiseGen.generateNoiseOctaves(stoneNoise, i * 16, j * 16, 0, 16, 16, 1, d * 2D, d * 2D, d * 2D);
         for (int k = 0; k < 16; k++)
         {
@@ -223,68 +226,72 @@ public class LOTRChunkProvider implements IChunkProvider
         return chunk;
     }
 
-    private double[] initializeHeightNoise(double[] noise, int par2, int par3, int par4, int par5, int par6, int par7)
+	private double[] initializeHeightNoise(double[] noise, int i, int j, int k, int xSize, int ySize, int zSize)
     {
         if (noise == null)
         {
-            noise = new double[par5 * par6 * par7];
+            noise = new double[xSize * ySize * zSize];
         }
+        
         if (biomeHeightNoise == null)
         {
-            biomeHeightNoise = new float[25];
+            biomeHeightNoise = new float[noiseWidth * noiseWidth];
 
-            for (int var8 = -2; var8 <= 2; ++var8)
+            for (int i1 = -noiseRadius; i1 <= noiseRadius; i1++)
             {
-                for (int var9 = -2; var9 <= 2; ++var9)
+                for (int k1 = -noiseRadius; k1 <= noiseRadius; k1++)
                 {
-                    float var10 = 10F / MathHelper.sqrt_float((float)(var8 * var8 + var9 * var9) + 0.2F);
-                    biomeHeightNoise[var8 + 2 + (var9 + 2) * 5] = var10;
+                    float var10 = 10F / MathHelper.sqrt_float(i1 * i1 + k1 * k1 + 0.2F);
+                    biomeHeightNoise[i1 + noiseRadius + (k1 + noiseRadius) * noiseWidth] = var10;
                 }
             }
         }
 
-        noise5 = noiseGen5.generateNoiseOctaves(noise5, par2, par4, par5, par7, 1.121D, 1.121D, DEPTH_NOISE_EXP);
-        noise6 = noiseGen6.generateNoiseOctaves(noise6, par2, par4, par5, par7, DEPTH_NOISE_SCALE, DEPTH_NOISE_SCALE, DEPTH_NOISE_EXP);
-        noise3 = noiseGen3.generateNoiseOctaves(noise3, par2, par3, par4, par5, par6, par7, COORDINATE_SCALE / MAIN_NOISE_SCALE_XZ, HEIGHT_SCALE / MAIN_NOISE_SCALE_Y, COORDINATE_SCALE / MAIN_NOISE_SCALE_XZ);
-        noise1 = noiseGen1.generateNoiseOctaves(noise1, par2, par3, par4, par5, par6, par7, COORDINATE_SCALE, HEIGHT_SCALE, COORDINATE_SCALE);
-        noise2 = noiseGen2.generateNoiseOctaves(noise2, par2, par3, par4, par5, par6, par7, COORDINATE_SCALE, HEIGHT_SCALE, COORDINATE_SCALE);
-        boolean var43 = false;
-        boolean var42 = false;
-        int var12 = 0;
-        int var13 = 0;
+        noise5 = noiseGen5.generateNoiseOctaves(noise5, i, k, xSize, zSize, 1.121D, 1.121D, DEPTH_NOISE_EXP);
+        noise6 = noiseGen6.generateNoiseOctaves(noise6, i, k, xSize, zSize, DEPTH_NOISE_SCALE, DEPTH_NOISE_SCALE, DEPTH_NOISE_EXP);
+        noise3 = noiseGen3.generateNoiseOctaves(noise3, i, j, k, xSize, ySize, zSize, COORDINATE_SCALE / MAIN_NOISE_SCALE_XZ, HEIGHT_SCALE / MAIN_NOISE_SCALE_Y, COORDINATE_SCALE / MAIN_NOISE_SCALE_XZ);
+        noise1 = noiseGen1.generateNoiseOctaves(noise1, i, j, k, xSize, ySize, zSize, COORDINATE_SCALE, HEIGHT_SCALE, COORDINATE_SCALE);
+        noise2 = noiseGen2.generateNoiseOctaves(noise2, i, j, k, xSize, ySize, zSize, COORDINATE_SCALE, HEIGHT_SCALE, COORDINATE_SCALE);
 
-        for (int var14 = 0; var14 < par5; ++var14)
+        int xzPass = 0;
+        int yPass = 0;  
+
+        for (int i1 = 0; i1 < xSize; i1++)
         {
-            for (int var15 = 0; var15 < par7; ++var15)
+            for (int k1 = 0; k1 < zSize; k1++)
             {
-                float var16 = 0F;
-                float var17 = 0F;
-                float var18 = 0F;
-                byte var19 = 2;
-                BiomeGenBase var20 = biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
+                float totalBaseHeight = 0F;
+                float totalHeightVariation = 0F;
+                float totalHeightNoise = 0F;
 
-                for (int var21 = -var19; var21 <= var19; ++var21)
+                BiomeGenBase centreBiome = biomesForGeneration[i1 + noiseRadius + (k1 + noiseRadius) * (xSize + noiseWidth)];
+
+                for (int i2 = -noiseRadius; i2 <= noiseRadius; i2++)
                 {
-                    for (int var22 = -var19; var22 <= var19; ++var22)
+                    for (int k2 = -noiseRadius; k2 <= noiseRadius; k2++)
                     {
-                        BiomeGenBase var23 = biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
-                        float var24 = biomeHeightNoise[var21 + 2 + (var22 + 2) * 5] / (var23.rootHeight + 2F) / 2F;
-						var24 = Math.abs(var24);
-                        if (var23.rootHeight > var20.rootHeight)
+                        BiomeGenBase biome = biomesForGeneration[i1 + i2 + noiseRadius + (k1 + k2 + noiseRadius) * (xSize + noiseWidth)];
+                        float heightNoise = biomeHeightNoise[i2 + noiseRadius + (k2 + noiseRadius) * noiseWidth] / (biome.rootHeight + 2F) / 2F;
+                        heightNoise = Math.abs(heightNoise);
+						
+                        if (biome.rootHeight > centreBiome.rootHeight)
                         {
-                            var24 /= 2F;
+                        	heightNoise /= 2F;
                         }
 
-                        var16 += var23.heightVariation * var24;
-                        var17 += var23.rootHeight * var24;
-                        var18 += var24;
+                        totalBaseHeight += biome.rootHeight * heightNoise;
+                        totalHeightVariation += biome.heightVariation * heightNoise;
+                        totalHeightNoise += heightNoise;
                     }
                 }
-                var16 /= var18;
-                var17 /= var18;
-                var16 = var16 * 0.9F + 0.1F;
-                var17 = (var17 * 4F - 1F) / 8F;
-                double var47 = noise6[var13] / 8000D;
+                
+                float avgBaseHeight = totalBaseHeight / totalHeightNoise;
+                float avgHeightVariation = totalHeightVariation / totalHeightNoise;
+                
+                avgBaseHeight = (avgBaseHeight * 4F - 1F) / 8F;
+                avgHeightVariation = avgHeightVariation * 0.9F + 0.1F;
+                
+                double var47 = noise6[xzPass] / 8000D;
                 if (var47 < 0D)
                 {
                     var47 = -var47 * 0.3D;
@@ -308,23 +315,26 @@ public class LOTRChunkProvider implements IChunkProvider
                     }
                     var47 /= 8D;
                 }
-                ++var13;
-                for (int var46 = 0; var46 < par6; ++var46)
+                ++xzPass;
+                
+                for (int j1 = 0; j1 < ySize; j1++)
                 {
-                    double var48 = (double)var17;
-                    double var26 = (double)var16;
-                    var48 += var47 * 0.2D;
-                    var48 = var48 * (double)par6 / 16D;
-                    double var28 = (double)par6 / 2D + var48 * 4D;
+                    double baseHeight = (double)avgBaseHeight;
+                    double heightVariation = (double)avgHeightVariation;
+                    
+                    baseHeight += var47 * 0.2D;
+                    baseHeight = baseHeight * (double)ySize / 16D;
+                    double var28 = (double)ySize / 2D + baseHeight * 4D;
                     double var30 = 0D;
-                    double var32 = ((double)var46 - var28) * HEIGHT_STRETCH * 128D / 256D / var26;
+                    double var32 = ((double)j1 - var28) * HEIGHT_STRETCH * 128D / 256D / heightVariation;
                     if (var32 < 0D)
                     {
                         var32 *= 4D;
                     }
-                    double var34 = noise1[var12] / UPPER_LIMIT_SCALE;
-                    double var36 = noise2[var12] / LOWER_LIMIT_SCALE;
-                    double var38 = (noise3[var12] / 10D + 1D) / 2D;
+                    
+                    double var34 = noise1[yPass] / UPPER_LIMIT_SCALE;
+                    double var36 = noise2[yPass] / LOWER_LIMIT_SCALE;
+                    double var38 = (noise3[yPass] / 10D + 1D) / 2D;
                     if (var38 < 0D)
                     {
                         var30 = var34;
@@ -338,13 +348,15 @@ public class LOTRChunkProvider implements IChunkProvider
                         var30 = var34 + (var36 - var34) * var38;
                     }
                     var30 -= var32;
-                    if (var46 > par6 - 4)
+                    
+                    if (j1 > ySize - 4)
                     {
-                        double var40 = (double)((float)(var46 - (par6 - 4)) / 3F);
+                        double var40 = (double)((float)(j1 - (ySize - 4)) / 3F);
                         var30 = var30 * (1D - var40) + -10D * var40;
                     }
-                    noise[var12] = var30;
-                    ++var12;
+                    
+                    noise[yPass] = var30;
+                    yPass++;
                 }
             }
         }

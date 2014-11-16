@@ -99,11 +99,11 @@ public class LOTREntityGundabadOrcArcher extends LOTREntityGundabadOrc implement
 			{
 				if (isCrossbower)
 				{
-					dropItem(Items.arrow, 1);
+					dropItem(LOTRMod.crossbowBolt, 1);
 				}
 				else
 				{
-					dropItem(LOTRMod.crossbowBolt, 1);
+					dropItem(Items.arrow, 1);
 				}
 			}
 		}

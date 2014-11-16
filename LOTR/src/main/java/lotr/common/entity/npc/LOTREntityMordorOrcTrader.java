@@ -4,6 +4,7 @@ import lotr.common.LOTRAchievement;
 import lotr.common.LOTRAlignmentValues;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,13 +50,7 @@ public class LOTREntityMordorOrcTrader extends LOTREntityMordorOrc implements LO
 	}
 	
 	@Override
-	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack)
-	{
-		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeOrcTrader);
-	}
-	
-	@Override
-	public void onPlayerSellItem(EntityPlayer entityplayer, ItemStack itemstack)
+	public void onPlayerTrade(EntityPlayer entityplayer, Trade type, ItemStack itemstack)
 	{
 		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeOrcTrader);
 	}

@@ -6,6 +6,7 @@ import lotr.common.LOTRFoods;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -104,16 +105,13 @@ public class LOTREntityRohanMeadhost extends LOTREntityRohanMan implements LOTRT
 	}
 	
 	@Override
-	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack)
+	public void onPlayerTrade(EntityPlayer entityplayer, Trade type, ItemStack itemstack)
 	{
-		if (itemstack.getItem() == LOTRMod.mugMead)
+		if (type == Trade.BUY && itemstack.getItem() == LOTRMod.mugMead)
 		{
 			LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.buyRohanMead);
 		}
 	}
-	
-	@Override
-	public void onPlayerSellItem(EntityPlayer entityplayer, ItemStack itemstack) {}
 	
 	@Override
 	public boolean shouldTraderRespawn()

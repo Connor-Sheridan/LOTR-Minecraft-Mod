@@ -5,6 +5,7 @@ import lotr.common.LOTRAlignmentValues;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
 import lotr.common.entity.ai.LOTREntityAIAttackOnCollide;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import lotr.common.item.LOTRItemLeatherHat;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -58,16 +59,13 @@ public class LOTREntityHobbitFarmer extends LOTREntityHobbit implements LOTRTrad
 	}
 	
 	@Override
-	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack)
+	public void onPlayerTrade(EntityPlayer entityplayer, Trade type, ItemStack itemstack)
 	{
-		if (itemstack.getItem() == Items.potato)
+		if (type == Trade.BUY && itemstack.getItem() == Items.potato)
 		{
 			LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.buyPotatoHobbitFarmer);
 		}
 	}
-	
-	@Override
-	public void onPlayerSellItem(EntityPlayer entityplayer, ItemStack itemstack) {}
 	
 	@Override
 	public LOTRUnitTradeEntry[] getUnits()

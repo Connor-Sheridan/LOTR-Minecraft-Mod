@@ -5,6 +5,7 @@ import lotr.common.LOTRAlignmentValues;
 import lotr.common.LOTRFoods;
 import lotr.common.LOTRLevelData;
 import lotr.common.LOTRMod;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -74,16 +75,11 @@ public class LOTREntityHobbitBartender extends LOTREntityHobbit implements LOTRT
 	}
 	
 	@Override
-	public void onPlayerBuyItem(EntityPlayer entityplayer, ItemStack itemstack)
+	public void onPlayerTrade(EntityPlayer entityplayer, Trade type, ItemStack itemstack)
 	{
 		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeBartender);
-	}
-	
-	@Override
-	public void onPlayerSellItem(EntityPlayer entityplayer, ItemStack itemstack)
-	{
-		LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.tradeBartender);
-		if (itemstack.getItem() == LOTRMod.pipeweedLeaf)
+		
+		if (type == Trade.SELL && itemstack.getItem() == LOTRMod.pipeweedLeaf)
 		{
 			LOTRLevelData.getData(entityplayer).addAchievement(LOTRAchievement.sellPipeweedLeaf);
 		}

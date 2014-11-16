@@ -455,6 +455,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 		
 		familyInfo.onUpdate();
 		hiredNPCInfo.onUpdate();
+		traderNPCInfo.onUpdate();
 		
 		if (travellingTraderInfo != null)
 		{
@@ -1214,7 +1215,7 @@ public abstract class LOTREntityNPC extends EntityCreature
 			return 0.5F - worldObj.getLightBrightness(i, j, k);
 		}
 		
-		return super.getBlockPathWeight(i, j, k);
+		return 0F;
     }
 
     protected boolean isValidLightLevel()

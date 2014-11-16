@@ -51,6 +51,7 @@ public class LOTRWorldGenBDBarrow extends LOTRWorldGenStructureBase2
 		}
 		
 		setOrigin(i, j, k);
+		setRotationMode(rotation);
 		
 		if (restrictions)
 		{

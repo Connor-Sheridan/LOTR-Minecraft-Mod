@@ -63,8 +63,7 @@ public class LOTRWorldGenSimpleTrees extends WorldGenAbstractTree
                     {
                         if (j1 >= 0 && j1 < 256)
                         {
-                        	Block block = world.getBlock(i1, j1, k1);
-                            if (block.getMaterial() != Material.air && !block.isLeaves(world, i1, j1, k1) && block != Blocks.grass && block != Blocks.dirt && !block.isWood(world, i1, j1, k1))
+                        	if (!isReplaceable(world, i1, j1, k1))
                             {
                                 flag = false;
                             }

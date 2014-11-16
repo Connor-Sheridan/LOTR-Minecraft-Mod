@@ -177,7 +177,7 @@ public class LOTRBiome extends BiomeGenBase
 		rohan = new LOTRBiomeGenRohan(1, false).setTemperatureRainfall(1F, 0.2F).setMinMaxHeight(0.2F, 0.3F).setColor(0x9DA152).setBiomeName("rohan");
 		mistyMountains = new LOTRBiomeGenMistyMountains(2).setTemperatureRainfall(0.2F, 0.5F).setMinMaxHeight(2F, 2F).setColor(0xB8BCC1).setBiomeName("mistyMountains");
 		shire = new LOTRBiomeGenShire(3).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.3F).setColor(0x419E22).setBiomeName("shire");
-		shireWoodlands = new LOTRBiomeGenShireWoodlands(4).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.3F, 0.5F).setColor(0x2B631F).setBiomeName("shireWoodlands");
+		shireWoodlands = new LOTRBiomeGenShireWoodlands(4).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.3F, 0.5F).setColor(0x39682C).setBiomeName("shireWoodlands");
 		mordor = new LOTRBiomeGenMordor(5).setTemperatureRainfall(2F, 0F).setMinMaxHeight(0.3F, 0.6F).setColor(0x000000).setBiomeName("mordor");
 		mordorMountains = new LOTRBiomeGenMordorMountains(6).setTemperatureRainfall(2F, 0F).setMinMaxHeight(2F, 3F).setColor(0x444444).setBiomeName("mordorMountains");
 		gondor = new LOTRBiomeGenGondor(7).setTemperatureRainfall(0.8F, 0.8F).setMinMaxHeight(0.1F, 0.12F).setColor(0xC5CC53).setBiomeName("gondor");
@@ -259,10 +259,10 @@ public class LOTRBiome extends BiomeGenBase
 		island = new LOTRBiomeGenOcean(83).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0F, 0.3F).setColor(0x39B57B).setBiomeName("island");
 		forodwaithMountains = new LOTRBiomeGenForodwaithMountains(84).setTemperatureRainfall(0F, 0.2F).setMinMaxHeight(2F, 2F).setColor(0xD4EDF4).setBiomeName("forodwaithMountains");
 		mistyMountainsFoothills = new LOTRBiomeGenMistyMountains(85).setTemperatureRainfall(0.25F, 0.6F).setMinMaxHeight(0.7F, 0.9F).setColor(0x8DB59D).setBiomeName("mistyMountainsFoothills");
-		greyMountainsFoothills = new LOTRBiomeGenGreyMountains(86).setTemperatureRainfall(0.5F, 0.7F).setMinMaxHeight(0.5F, 0.9F).setColor(0x659165).setBiomeName("greyMountainsFoothills");
+		greyMountainsFoothills = new LOTRBiomeGenGreyMountains(86).setTemperatureRainfall(0.5F, 0.7F).setMinMaxHeight(0.5F, 0.9F).setColor(0x6C896C).setBiomeName("greyMountainsFoothills");
 		blueMountainsFoothills = new LOTRBiomeGenBlueMountainsFoothills(87).setTemperatureRainfall(0.5F, 0.8F).setMinMaxHeight(0.5F, 0.9F).setColor(0x60B395).setBiomeName("blueMountainsFoothills");
 		tundra = new LOTRBiomeGenTundra(88).setTemperatureRainfall(0.1F, 0.3F).setMinMaxHeight(0.1F, 0.2F).setColor(0xA5C9AA).setBiomeName("tundra");
-		taiga = new LOTRBiomeGenTaiga(89).setTemperatureRainfall(0.1F, 0.7F).setMinMaxHeight(0.1F, 0.5F).setColor(0x5A8E4B).setBiomeName("taiga");
+		taiga = new LOTRBiomeGenTaiga(89).setTemperatureRainfall(0.1F, 0.7F).setMinMaxHeight(0.1F, 0.5F).setColor(0x619951).setBiomeName("taiga");
 		breeland = new LOTRBiomeGenBreeland(90).setTemperatureRainfall(0.8F, 0.7F).setMinMaxHeight(0.1F, 0.2F).setColor(0x74B747).setBiomeName("breeland");
 		chetwood = new LOTRBiomeGenChetwood(91).setTemperatureRainfall(0.8F, 0.9F).setMinMaxHeight(0.2F, 0.5F).setColor(0x78A02E).setBiomeName("chetwood");
 		forodwaithGlacier = new LOTRBiomeGenForodwaithGlacier(92).setTemperatureRainfall(0F, 0.1F).setMinMaxHeight(1F, 0.1F).setColor(0x8FCCE0).setBiomeName("forodwaithGlacier");

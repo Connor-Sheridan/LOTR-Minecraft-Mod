@@ -97,7 +97,7 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 	@Override
     public void decorate(World world, Random random, int i, int k)
     {
-		genStandardOre(world, random, i, k, 20, mordorDirtVeins, 0, 60);
+		genStandardOre(world, random, i, k, 10, mordorDirtVeins, 0, 60);
 		genStandardOre(world, random, i, k, 10, mordorGravelVeins, 0, 60);
 		genStandardOre(world, random, i, k, 20, nauriteGen, 0, 64);
         genStandardOre(world, random, i, k, 20, morgulIronGen, 0, 64);
@@ -107,7 +107,7 @@ public class LOTRBiomeGenMordor extends LOTRBiome
 		
 		if (isGorgoroth())
 		{
-			genStandardOre(world, random, i, k, 3, mordorDirtGen, 60, 90);
+			genStandardOre(world, random, i, k, 1, mordorDirtGen, 60, 90);
 			genStandardOre(world, random, i, k, 2, mordorGravelGen, 60, 90);
 			
 			if (random.nextInt(24) == 0)

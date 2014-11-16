@@ -5,13 +5,15 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 import lotr.common.LOTRShields.ShieldType;
 import lotr.common.entity.LOTRMountFunctions;
 import lotr.common.entity.item.LOTREntityBanner;
 import lotr.common.entity.npc.*;
 import lotr.common.entity.npc.LOTRHiredNPCInfo.Task;
+import lotr.common.entity.npc.LOTRTraderNPCInfo.Trade;
 import lotr.common.inventory.*;
 import lotr.common.quest.LOTRMiniQuest;
 import lotr.common.tileentity.LOTRTileEntityMobSpawner;
@@ -108,8 +110,7 @@ public class LOTRPacketHandlerServer extends SimpleChannelInboundHandler<FMLProx
 								if (sellPrice > 0)
 								{
 									totalCoins += sellPrice * tradeCount;
-									((LOTRContainerTrade)container).theTrader.onPlayerSellItem(entityplayer, itemstack);
-									LOTRLevelData.getData(entityplayer).getFactionData(tradeContainer.theTrader.getFaction()).addTrade();
+									tradeContainer.theEntity.traderNPCInfo.onTrade(entityplayer, Trade.SELL, itemstack.copy());
 									
 									itemstack.stackSize -= sellAmount;
 									if (itemstack.stackSize <= 0)

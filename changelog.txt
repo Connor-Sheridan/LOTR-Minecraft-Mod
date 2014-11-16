@@ -4,10 +4,18 @@ Public Beta 22
 + Added smooth zoom to the Middle-earth map
 + Added the Half-trolls
 + Added Ithilien Ranger Captains, hireable Rangers of Ithilien, and Ithilien banner bearers
++ Added Ithilien hideouts
 + Added iron and bronze battleaxes
 + Added bronze crossbows
++ Added occasional trader speech advertisements when players are nearby
++ Added Shire Woodlands biomes to the map
++ Added taiga regions to the map
 
 * Improved speech bank directory structure and corrected all lowercase race names to uppercase
+* Beaches are now smaller
+* Improved the height transitions between biomes
+* Fixed Gundabad Orc archers and crossbowers dropping the wrong ammunition
+* Reduced the spawn rate of Mordor dirt
 
 Public Beta 21.3
 
