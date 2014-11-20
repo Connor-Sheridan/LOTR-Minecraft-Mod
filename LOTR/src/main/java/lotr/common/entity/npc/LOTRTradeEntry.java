@@ -345,6 +345,13 @@ public class LOTRTradeEntry
 			new LOTRTradeEntry(new ItemStack(Items.flint), 2),
 			new LOTRTradeEntry(new ItemStack(LOTRMod.sulfur), 6),
 			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
+			new LOTRTradeEntry(new ItemStack(LOTRMod.saltpeter), 6)
 		};
 		
 		DWARF_MINER_SELL = new LOTRTradeEntry[]
